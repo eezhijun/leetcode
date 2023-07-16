@@ -1,23 +1,7 @@
 #include "common.h"
 
+/* https://leetcode.cn/problems/median-of-two-sorted-arrays/ */
 
-void bubbleSort (int arr[], int len)
-{
-    int i, j,temp;
-    _Bool exchanged = true;
-
-    for (i=0; exchanged && i<len-1; i++){
-        exchanged = false;
-        for (j=0; j<len-1-i; j++) {
-            if (arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-                exchanged = true;
-            }
-        }
-    }
-}
 
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
 

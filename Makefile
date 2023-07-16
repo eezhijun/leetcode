@@ -10,17 +10,20 @@ BUILD_DIR                             := $(ROOT_DIR)/output
 BUILD_ABS_DIR                         := $(abspath $(BUILD_DIR))
 DEMO_DIR                              := $(ROOT_DIR)/demo
 SRC_DIR                               := $(ROOT_DIR)/src
+LIB_DIR                               := $(ROOT_DIR)/src/lib
 
 
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
 INCLUDE_DIRS          += -I$(SRC_DIR)
+INCLUDE_DIRS          += -I$(LIB_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
 SOURCE_FILES          += $(wildcard demo/*.c)
 SOURCE_FILES          += $(wildcard src/array/*.c)
+SOURCE_FILES          += $(wildcard src/lib/*.c)
 
 
 CFLAGS                := -ggdb3
@@ -31,6 +34,9 @@ CPPFLAGS              += -D_WINDOWS_
 # gcc 32bit
 CFLAGS                += -m32
 LDFLAGS               += -m32
+
+# to link againt the math library (libm)
+LDFLAGS               += -lm
 
 ifdef SANITIZE_ADDRESS
   CFLAGS              += -fsanitize=address -fsanitize=alignment
