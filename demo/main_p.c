@@ -11,5 +11,6 @@ int main_p(void)
     // findMedianSortedArraysTest();
     // maxAreaTest();
     // threeSumTest();
+    maxProfitTest();
     return 0;
 }

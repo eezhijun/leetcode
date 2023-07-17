@@ -7,5 +7,6 @@ void findMedianSortedArraysTest(void);
 void maxAreaTest(void);
 void threeSumTest(void);
 void removeDulicatesTest(void);
+void maxProfitTest(void);
 
 #endif

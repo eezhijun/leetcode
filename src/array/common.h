@@ -6,7 +6,7 @@
 #include "stdint.h"
 #include "limits.h"
 #include "stdbool.h"
-#include <math.h>
+#include "math.h"
 #include "string.h"
 #include "sort.h"
 
