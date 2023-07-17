@@ -20,15 +20,22 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
     *returnColumnSizes = malloc(sizeof(int) * (numsSize + 1) * 6);
     ret[*returnSize] = malloc(sizeof(int) * 3);
 
-    while (left + 1 < right) {
+    while (left + 1 < right)
+    {
         int i = left + 1;
         int j = right;
-        while (i < j) {
-            if (nums[i] + nums[j] + nums[left] < 0) {
+        while (i < j)
+        {
+            if (nums[i] + nums[j] + nums[left] < 0)
+            {
                 i++;
-            } else if (nums[i] + nums[j] + nums[left] > 0) {
+            }
+            else if (nums[i] + nums[j] + nums[left] > 0)
+            {
                 j--;
-            } else {
+            }
+            else
+            {
                 ret[*returnSize][0] = nums[left];
                 ret[*returnSize][1] = nums[i];
                 ret[*returnSize][2] = nums[j];
@@ -36,17 +43,31 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
                 (*returnSize)++;
                 ret[*returnSize] = malloc(sizeof(int) * 3);
 
-                while(nums[i] == nums[++i] && i < j)
+                do
                 {
+                    if (nums[i] == nums[i + 1])
+                    {
+                        i++;
+                    }
+                } while (i < j);
 
-                }
-                while(nums[j] == nums[--j] && i < j)
+                do
                 {
-
-                }
+                    if (nums[j] == nums[j - 1])
+                    {
+                        j--;
+                    }
+                } while (i < j);
             }
         }
-        while(nums[left] == nums[++left] && left + 1 < right) {}
+
+        do
+        {
+            if (nums[left] == nums[left + 1])
+            {
+                left++;
+            }
+        } while (left + 1 < right);
     }
 
     return ret;
@@ -54,11 +75,5 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
 
 void threeSumTest(void)
 {
-    int nums[] = {-1,0,1,2,-1,-4};
-    int numsSize = sizeof(nums) / sizeof(int);
-    int returnSize;
-    int *returnColumnSizes;
-
-    int **ans = threeSum(nums, numsSize, &returnSize, &returnColumnSizes);
 
 }
