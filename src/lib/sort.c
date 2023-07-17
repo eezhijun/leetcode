@@ -2,7 +2,7 @@
 #include "stdbool.h"
 
 
-void bubbleSort (int arr[], int len)
+void bubbleSort(int arr[], int len)
 {
     int i, j,temp;
     _Bool exchanged = true;

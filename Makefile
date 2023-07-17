@@ -31,12 +31,13 @@ LDFLAGS               := -ggdb3 -pthread
 CPPFLAGS              := $(INCLUDE_DIRS) -DBUILD_DIR=\"$(BUILD_ABS_DIR)\"
 CPPFLAGS              += -D_WINDOWS_
 
-# gcc 32bit
-CFLAGS                += -m32
+
+CFLAGS                += -m32 # gcc 32bit
 LDFLAGS               += -m32
 
-# to link againt the math library (libm)
-LDFLAGS               += -lm
+LDFLAGS               += -lm # to link againt the math library (libm)
+CPPFLAGS              += -Wall
+
 
 ifdef SANITIZE_ADDRESS
   CFLAGS              += -fsanitize=address -fsanitize=alignment

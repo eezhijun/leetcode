@@ -36,8 +36,14 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
                 (*returnSize)++;
                 ret[*returnSize] = malloc(sizeof(int) * 3);
 
-                while(nums[i] == nums[++i] && i < j) {}
-                while(nums[j] == nums[--j] && i < j) {}
+                while(nums[i] == nums[++i] && i < j)
+                {
+
+                }
+                while(nums[j] == nums[--j] && i < j)
+                {
+
+                }
             }
         }
         while(nums[left] == nums[++left] && left + 1 < right) {}
