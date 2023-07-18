@@ -1,0 +1,87 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "demo/**",
+                "src/**"
+            ],
+            "defines": [
+                "__riscv",
+                "BUILD_CORE_CORE0",
+                "LOW_POWER_ENABLE",
+                "BUILD_OS_FREERTOS",
+            ],
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath": "/usr/bin/gcc",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "demo",
+                    "src"
+                ],
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"
+            },
+            "compilerArgs": [
+                "-march=rv32imafc",
+                "-mabi=ilp32f",
+                "-fno-strict-aliasing",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-fno-omit-frame-pointer",
+                "-fno-builtin",
+                "-nostdlib",
+                "-pipe",
+                "-g3",
+                "-Wall",
+                "-Werror",
+                "-Wextra"
+            ]
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "src/**",
+                "tools/**",
+                "build/**",
+                "prebuild/**"
+            ],
+            "defines": [
+                "BUILD_CORE_CORE0",
+                "BUILD_OS_FREERTOS"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath": "riscv-none-embed-gcc.exe",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "build",
+                    "prebuild",
+                    "src",
+                    "tools"
+                ],
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"
+            },
+            "compilerArgs": [
+                "-march=rv32imafc",
+                "-mabi=ilp32f",
+                "-fno-strict-aliasing",
+                "-ffunction-sections",
+                "-fdata-sections",
+                "-fno-omit-frame-pointer",
+                "-fno-builtin",
+                "-nostdlib",
+                "-pipe",
+                "-g3",
+                "-Wall",
+                "-Werror",
+                "-Wextra"
+            ]
+        }
+    ],
+    "version": 4
+}
