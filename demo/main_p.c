@@ -12,7 +12,8 @@ int main_p(void)
     // maxAreaTest();
     // threeSumTest();
     // maxProfitTest();
-    majorityElementTest();
+    // majorityElementTest();
 
+    threeSumClosestTest();
     return 0;
 }

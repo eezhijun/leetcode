@@ -9,5 +9,6 @@ void threeSumTest(void);
 void removeDulicatesTest(void);
 void maxProfitTest(void);
 void majorityElementTest(void);
+void threeSumClosestTest(void);
 
 #endif
