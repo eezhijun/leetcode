@@ -16,14 +16,14 @@ LIB_DIR                               := $(ROOT_DIR)/src/lib
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
-INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(LIB_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
 SOURCE_FILES          += $(wildcard demo/*.c)
-SOURCE_FILES          += $(wildcard src/array/*.c)
 SOURCE_FILES          += $(wildcard src/lib/*.c)
+SOURCE_FILES          += $(wildcard src/array/*.c)
+SOURCE_FILES          += $(wildcard src/string/*.c)
 
 
 CFLAGS                := -ggdb3

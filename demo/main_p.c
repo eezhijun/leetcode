@@ -13,7 +13,20 @@ int main_p(void)
     // threeSumTest();
     // maxProfitTest();
     // majorityElementTest();
+    // threeSumClosestTest();
 
-    threeSumClosestTest();
+    // longestPalindromeTest();
+    // myAtoiTest();
+    // longestCommonPrefixTest();
+    // strStrTest();
+    // countAndSayTest();
+    // addBinaryTest();
+    // isPalindromeTest();
+    // reverseWordsTest();
+    // isAnagramTest();
+    // reverseStringTest();
+    // firstUniqCharTest();
+    reverseWordsTest3();
+
     return 0;
 }

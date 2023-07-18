@@ -27,11 +27,6 @@ void rotate_image(int** matrix, int matrixSize, int* matrixColSize){
 
 /* https://leetcode.cn/problems/rotate-matrix-lcci/submissions/ */
 
-void swap(int* a, int* b) {
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
 
 void rotate(int** matrix, int matrixSize, int* matrixColSize) {
     // 水平翻转
