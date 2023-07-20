@@ -2,9 +2,9 @@
 #include "external.h"
 
 
-int main_p(void)
+int main_lc(void)
 {
-    printf("MAIN PRACTIS ENTRY\n");
+    printf("MAIN LC ENTRY\n");
 
     // twoSumTest();
     // divideTest();
@@ -26,7 +26,7 @@ int main_p(void)
     // isAnagramTest();
     // reverseStringTest();
     // firstUniqCharTest();
-    reverseWordsTest3();
+    // reverseWordsTest3();
 
     return 0;
 }

@@ -24,6 +24,7 @@ SOURCE_FILES          += $(wildcard demo/*.c)
 SOURCE_FILES          += $(wildcard src/lib/*.c)
 SOURCE_FILES          += $(wildcard src/array/*.c)
 SOURCE_FILES          += $(wildcard src/string/*.c)
+SOURCE_FILES          += $(wildcard src/test/*.c)
 
 
 CFLAGS                := -ggdb3
@@ -49,11 +50,11 @@ ifdef SANITIZE_LEAK
 endif
 
 # user choose demo
-ifeq ($(USER_DEMO),TEST_DEMO)
+ifeq ($(demo),tt)
   CPPFLAGS            += -DUSER_DEMO=0
 endif
 
-ifeq ($(USER_DEMO),P_DEMO)
+ifeq ($(demo),lc)
   CPPFLAGS            += -DUSER_DEMO=1
 endif
 

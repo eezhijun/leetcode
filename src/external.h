@@ -1,6 +1,9 @@
 #ifndef _EXTERNAL_H_
 #define _EXTERNAL_H_
 
+/* test */
+void test(void);
+
 /* array */
 void twoSumTest(void);
 void divideTest(void);
