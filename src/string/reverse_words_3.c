@@ -17,7 +17,7 @@ char * reverseWords3(char *s)
         if (s[i] == ' ' || s[i] == '\0') {
             r = i - 1;
             while (l < r ) {
-                swap2(&s[l], &s[r]);
+                swap_char2(&s[l], &s[r]);
                 l++;
                 r--;
             }

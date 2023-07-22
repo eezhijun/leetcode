@@ -1,13 +1,20 @@
 #include "stdio.h"
 
-void swap(int* a, int* b)
+void swap_char(char *a, char *b)
+{
+    char t = *a;
+    *a = *b;
+    *b = t;
+}
+
+void swap_int(int* a, int* b)
 {
     int t = *a;
     *a = *b;
     *b = t;
 }
 
-void swap2(char *a, char *b)
+void swap_char2(char *a, char *b)
 {
     if (a == NULL || b == NULL) {
         return;

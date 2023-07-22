@@ -16,7 +16,7 @@ void reverseString(char *s, int sSize)
     uint16_t l = 0, r = sSize - 1;
     while (l < r) {
         // printf("l=%d, r=%d\n", l, r);
-        swap2(&s[l], &s[r]);
+        swap_char2(&s[l], &s[r]);
         l++;
         r--;
     }
