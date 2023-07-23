@@ -16,7 +16,7 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
         }
     }
 
-    bubbleSort(arr, size);
+    bubble_sort(arr, size);
 
     if (size % 2 != 0) {
         return (double)arr[(size - 1) / 2];

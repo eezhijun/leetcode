@@ -7,7 +7,7 @@ int majorityElement(int* nums, int numsSize){
     {
         return nums[0];
     }
-    bubbleSort(nums, numsSize);
+    bubble_sort(nums, numsSize);
 
     int count = 1;
     int i;

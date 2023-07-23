@@ -10,7 +10,7 @@
  */
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
 
-    bubbleSort(nums, numsSize);
+    bubble_sort(nums, numsSize);
 
     *returnSize = 0;
     short left = 0;

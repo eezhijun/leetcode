@@ -4,8 +4,8 @@
 
 
 int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize){
-    bubbleSort(nums1, nums1Size);
-    bubbleSort(nums2, nums2Size);
+    bubble_sort(nums1, nums1Size);
+    bubble_sort(nums2, nums2Size);
 
     int minLen = nums1Size > nums2Size ? nums2Size : nums1Size;
     int *ans = (int *)malloc(sizeof(int) * minLen);

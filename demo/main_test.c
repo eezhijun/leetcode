@@ -6,6 +6,7 @@ int main_test(void)
 {
     printf("MAIN TEST ENTRY\n");
 
-    test();
+    // test();
+    swap_test();
     return 0;
 }

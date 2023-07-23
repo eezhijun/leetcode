@@ -32,13 +32,13 @@ void rotate(int** matrix, int matrixSize, int* matrixColSize) {
     // 水平翻转
     for (int i = 0; i < matrixSize / 2; ++i) {
         for (int j = 0; j < matrixSize; ++j) {
-            swap_int(&matrix[i][j], &matrix[matrixSize - i - 1][j]);
+            swap(&matrix[i][j], &matrix[matrixSize - i - 1][j], sizeof(int));
         }
     }
     // 主对角线翻转
     for (int i = 0; i < matrixSize; ++i) {
         for (int j = 0; j < i; ++j) {
-            swap_int(&matrix[i][j], &matrix[j][i]);
+            swap(&matrix[i][j], &matrix[j][i], sizeof(int));
         }
     }
 }
