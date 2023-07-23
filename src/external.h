@@ -1,9 +1,6 @@
 #ifndef _EXTERNAL_H_
 #define _EXTERNAL_H_
 
-/* lib */
-#include "swap.h"
-
 /* test */
 void test(void);
 

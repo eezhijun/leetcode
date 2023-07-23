@@ -1,4 +1,4 @@
-#include "common.h"
+#include "internal.h"
 
 /* https://leetcode.cn/problems/search-insert-position/ */
 

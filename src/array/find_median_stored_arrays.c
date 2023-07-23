@@ -1,4 +1,4 @@
-#include "common.h"
+#include "internal.h"
 
 /* https://leetcode.cn/problems/median-of-two-sorted-arrays/ */
 
