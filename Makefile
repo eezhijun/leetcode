@@ -10,13 +10,13 @@ BUILD_DIR                             := $(ROOT_DIR)/output
 BUILD_ABS_DIR                         := $(abspath $(BUILD_DIR))
 DEMO_DIR                              := $(ROOT_DIR)/demo
 SRC_DIR                               := $(ROOT_DIR)/src
-LIB_DIR                               := $(ROOT_DIR)/src/lib
+SRC_LIB_DIR                           := $(ROOT_DIR)/src/lib
 
 
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
-INCLUDE_DIRS          += -I$(LIB_DIR)
+INCLUDE_DIRS          += -I$(SRC_LIB_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
@@ -25,6 +25,7 @@ SOURCE_FILES          += $(wildcard src/lib/*.c)
 SOURCE_FILES          += $(wildcard src/array/*.c)
 SOURCE_FILES          += $(wildcard src/string/*.c)
 SOURCE_FILES          += $(wildcard src/test/*.c)
+SOURCE_FILES          += $(wildcard src/lib/tlsf/*.c)
 
 
 CFLAGS                := -ggdb3
