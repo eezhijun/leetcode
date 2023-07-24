@@ -10,5 +10,6 @@
 #include "string.h"
 #include "sort.h"
 #include "swap.h"
+#include "max.h"
 
 #endif

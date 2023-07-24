@@ -2,23 +2,13 @@
 
 /* https://leetcode.cn/problems/container-with-most-water/ */
 
-int Min(int a, int b)
-{
-    return (a > b) ? b : a;
-}
-
-int Max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
-
 int maxArea(int* height, int heightSize){
     int l = 0, r = heightSize - 1;
     int maxA = 0;
 
     while (l < r) {
-        int temp = Min(height[l], height[r]) * (r - l);
-        maxA = Max(temp, maxA);
+        int temp = min(height[l], height[r]) * (r - l);
+        maxA = max(temp, maxA);
         if (height[l] <= height[r]) {
             ++l;
         } else {

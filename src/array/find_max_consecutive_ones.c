@@ -2,8 +2,6 @@
 
 /* https://leetcode.cn/problems/max-consecutive-ones/ */
 
-#define MAX(a, b) (((a) > (b)) ? (a) : (b))
-
 int findMaxConsecutiveOnes(int *nums, int numsSize)
 {
     if (nums == NULL) {

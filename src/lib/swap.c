@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "swap.h"
 
 typedef struct {
   char c;
@@ -76,7 +77,7 @@ void swap_test(void)
     swap(&a, &b, sizeof(int));
     swap(&c, &d, sizeof(float));
     swap(&pos1, &pos2, sizeof(coordinate_t));
-    // // SWAP(char a, b);
+    // SWAP(int, a, b);
     // // swap_by_sum(&a, &b);
     // // swap_by_xor(&a, &b);
 

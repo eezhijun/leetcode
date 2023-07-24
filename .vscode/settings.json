@@ -2,7 +2,14 @@
     "files.associations": {
         "*.h": "c",
         "*.s": "c",
-        "random": "c"
+        "random": "c",
+        "array": "c",
+        "functional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     },
     "search.exclude": {
         "output/": true
