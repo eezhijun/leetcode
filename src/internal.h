@@ -11,5 +11,6 @@
 #include "sort.h"
 #include "swap.h"
 #include "max.h"
+#include "tlsf.h"
 
 #endif

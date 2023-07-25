@@ -11,12 +11,14 @@ BUILD_ABS_DIR                         := $(abspath $(BUILD_DIR))
 DEMO_DIR                              := $(ROOT_DIR)/demo
 SRC_DIR                               := $(ROOT_DIR)/src
 SRC_LIB_DIR                           := $(ROOT_DIR)/src/lib
+SRC_LIB_TLSF_DIR                      := $(ROOT_DIR)/src/lib/tlsf
 
 
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_DIR)
+INCLUDE_DIRS          += -I$(SRC_LIB_TLSF_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
