@@ -12,5 +12,6 @@
 #include "swap.h"
 #include "max.h"
 #include "tlsf.h"
+#include "cJSON.h"
 
 #endif

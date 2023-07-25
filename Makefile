@@ -12,6 +12,7 @@ DEMO_DIR                              := $(ROOT_DIR)/demo
 SRC_DIR                               := $(ROOT_DIR)/src
 SRC_LIB_DIR                           := $(ROOT_DIR)/src/lib
 SRC_LIB_TLSF_DIR                      := $(ROOT_DIR)/src/lib/tlsf
+SRC_LIB_CJSON_DIR                     := $(ROOT_DIR)/src/lib/cjson
 
 
 INCLUDE_DIRS          := -I.
@@ -19,6 +20,7 @@ INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_TLSF_DIR)
+INCLUDE_DIRS          += -I$(SRC_LIB_CJSON_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
@@ -28,6 +30,7 @@ SOURCE_FILES          += $(wildcard src/array/*.c)
 SOURCE_FILES          += $(wildcard src/string/*.c)
 SOURCE_FILES          += $(wildcard src/test/*.c)
 SOURCE_FILES          += $(wildcard src/lib/tlsf/*.c)
+SOURCE_FILES          += $(wildcard src/lib/cjson/*.c)
 
 
 CFLAGS                := -ggdb3
