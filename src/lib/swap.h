@@ -13,6 +13,5 @@ void swap(void* lhs, void* rhs, size_t size);
 void swap_by_temp(int* lhs, int *rhs);
 void swap_by_sum(int* lhs, int* rhs);
 void swap_by_xor(int *lhs, int *rhs);
-void swap_test(void);
 
 #endif

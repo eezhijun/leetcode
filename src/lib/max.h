@@ -1,7 +1,6 @@
 #ifndef _MAX_H_
 #define _MAX_H_
 
-/* https://zh.wikipedia.org/zh-hk/Typeof */
 #define MAX(a, b) \
 ({ \
     typeof(a) _a = (a); \
@@ -21,6 +20,5 @@
 
 int max(int a, int b);
 int min(int a, int b);
-void max_test(void);
 
 #endif
