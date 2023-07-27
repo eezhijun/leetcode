@@ -1,5 +1,5 @@
 # only test demo
-$(info "MAKE START")
+$(info MAKE START)
 
 CC                := gcc
 BIN               := main
@@ -81,6 +81,7 @@ ${BUILD_DIR}/${BIN} : ${OBJ_FILES}
 	@-mkdir -p ${@D}
 	@$(CC) $^ ${LDFLAGS} -o $@
 	@echo "BIN $@"
+	@echo "MAKE DONE!"
 
 -include ${DEP_FILE}
 
