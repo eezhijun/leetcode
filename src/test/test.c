@@ -1,5 +1,4 @@
 #include "internal.h"
-#include "test.h"
 
 #define TEST_BUFF_SIZE 100
 #define MEM_RESERVED_SIZE 32U * 1024U       /* 32KB */

@@ -1,6 +1,5 @@
 #include "stdio.h"
 #include "stdbool.h"
-#include "sort.h"
 
 void print_array(int arr[], int len)
 {

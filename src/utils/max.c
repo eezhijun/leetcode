@@ -1,5 +1,7 @@
 #include "stdio.h"
-#include "max.h"
+
+/* function template */
+// #define MAXT(T) T max_##T(T a, T b) {return (a > b) ? a : b;}
 
 // MAXT(int)
 // MAXT(float)

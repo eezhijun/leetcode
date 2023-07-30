@@ -1,7 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "swap.h"
 
 void swap(void* lhs, void* rhs, size_t size)
 {

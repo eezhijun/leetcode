@@ -15,7 +15,6 @@ SRC_UTILS_DIR                         := $(SRC_DIR)/utils
 SRC_LIB_TLSF_DIR                      := $(SRC_LIB_DIR)/tlsf
 SRC_LIB_CJSON_DIR                     := $(SRC_LIB_DIR)/cjson
 SRC_LIB_LOG_DIR                       := $(SRC_LIB_DIR)/log
-SRC_UTILS_COMMMON_DIR                 := $(SRC_UTILS_DIR)/common
 
 
 INCLUDE_DIRS          := -I.
@@ -25,7 +24,7 @@ INCLUDE_DIRS          += -I$(SRC_LIB_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_TLSF_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_CJSON_DIR)
 INCLUDE_DIRS          += -I$(SRC_LIB_LOG_DIR)
-INCLUDE_DIRS          += -I$(SRC_UTILS_COMMMON_DIR)
+INCLUDE_DIRS          += -I$(SRC_UTILS_DIR)
 
 
 SOURCE_FILES          := $(wildcard *.c)
@@ -36,7 +35,7 @@ SOURCE_FILES          += $(wildcard src/test/*.c)
 SOURCE_FILES          += $(wildcard src/lib/tlsf/*.c)
 SOURCE_FILES          += $(wildcard src/lib/cjson/*.c)
 SOURCE_FILES          += $(wildcard src/lib/log/*.c)
-SOURCE_FILES          += $(wildcard src/utils/common/*.c)
+SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 
 CFLAGS                := -ggdb3
