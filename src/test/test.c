@@ -1,4 +1,7 @@
-#include "internal.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "common.h"
+#include "tlsf.h"
 
 #define TEST_BUFF_SIZE 100
 #define MEM_RESERVED_SIZE 32U * 1024U       /* 32KB */
