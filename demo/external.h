@@ -1,7 +1,7 @@
 #ifndef _EXTERNAL_H_
 #define _EXTERNAL_H_
 
-/* test */
+/* internal test */
 void test(void);
 
 /* array */
