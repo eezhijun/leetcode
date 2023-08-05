@@ -2,7 +2,6 @@
 #include "stdlib.h"
 #include "string.h"
 
-
 /* https://leetcode.cn/problems/add-binary/ */
 
 void reverse2(char *s, int len)
@@ -14,7 +13,8 @@ void reverse2(char *s, int len)
     }
 }
 
-char * addBinary(char * a, char * b){
+char *addBinary(char *a, char *b)
+{
     int la = (int)strlen(a);
     int lb = (int)strlen(b);
     reverse2(a, la);
@@ -47,7 +47,7 @@ void addBinaryTest(void)
     char a[] = "11";
     char b[] = "1";
 
-    char* ans = addBinary(a, b);
+    char *ans = addBinary(a, b);
 
     printf("output: ans=%s\n", ans);
     free(ans);
