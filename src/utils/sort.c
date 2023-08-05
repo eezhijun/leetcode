@@ -12,7 +12,6 @@ void print_array(int arr[], int len)
 void bubble_sort(int arr[], int len)
 {
     int i, j, temp;
-    int k;
     bool exchanged = true;
 
     for (i = 0; exchanged && i < len - 1; i++) {
