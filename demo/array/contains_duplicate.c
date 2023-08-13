@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdbool.h"
-#include "common.h"
+#include "utils.h"
 
 /* https://leetcode.cn/problems/contains-duplicate/ */
 

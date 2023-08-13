@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "string.h"
-#include "common.h"
+#include "utils.h"
 #include "stdint.h"
 
 /* https://leetcode.cn/problems/reverse-string/ */

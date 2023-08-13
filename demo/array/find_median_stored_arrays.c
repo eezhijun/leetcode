@@ -1,5 +1,5 @@
 #include "stdio.h"
-#include "common.h"
+#include "utils.h"
 
 /* https://leetcode.cn/problems/median-of-two-sorted-arrays/ */
 
