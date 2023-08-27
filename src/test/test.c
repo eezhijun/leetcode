@@ -45,11 +45,11 @@ void sort_test(void)
     int arr[] = { 1, 3, 7, 10, 2, 3, 5, 8 };
     int len = sizeof(arr) / sizeof(int);
 
-    print_array(arr, len);
+    PRINT_ARRAY(arr, len, "%d ");
     bubble_sort(arr, len);
 
     printf("after sort\n");
-    print_array(arr, len);
+    PRINT_ARRAY(arr, len, "%d ");
 }
 
 void max_test(void)

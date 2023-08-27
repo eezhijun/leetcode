@@ -16,7 +16,7 @@ int threeSumClosest(int* nums, int numsSize, int target){
     int flag = false;
 
     qsort(nums, numsSize, sizeof(int), cmp);
-    print_array(nums, numsSize);
+    PRINT_ARRAY(nums, numsSize, "%d ");
 
     for (i = 0; i < numsSize - 2; i++)
     {

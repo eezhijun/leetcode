@@ -1,3 +1,14 @@
+/**
+ * @file utils.h
+ * @author eehongzhijun (eehongzhijun@outlook.com)
+ * @brief 
+ * @version 0.0.1
+ * @date 2023-08-24
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
@@ -38,6 +49,16 @@
 
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0])
+#endif
+
+#ifndef PRINT_ARRAY
+#define PRINT_ARRAY(arr, size, format)      \
+    do {                                    \
+        for (size_t i = 0; i < size; i++) { \
+            printf(format, arr[i]);         \
+        }                                   \
+        printf("\n");                       \
+    } while (0)
 #endif
 
 #ifndef CLAMP
@@ -289,18 +310,20 @@ int cmp(const void *pa, const void *pb);
 /**
  * @brief
  *
- * @param arr
- * @param len
- */
-void print_array(int arr[], int len);
-
-/**
- * @brief
- *
  * @param data
  * @param len
  */
 void dump_x(const uint8_t *data, size_t len);
+
+/**
+ * @brief 
+ * 
+ * @param elem 
+ */
+void print_int(void *elem);
+void print_float(void *elem);
+void print_string(void *elem);
+void print_arr(void *arr, size_t size, size_t elem_size, void (*print_elem(void *)));
 
 /**
  * @brief Find First One, used to find the position (index) of
