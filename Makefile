@@ -10,20 +10,13 @@ BUILD_DIR                             := $(ROOT_DIR)/output
 BUILD_ABS_DIR                         := $(abspath $(BUILD_DIR))
 DEMO_DIR                              := $(ROOT_DIR)/demo
 SRC_DIR                               := $(ROOT_DIR)/src
-SRC_LIB_DIR                           := $(SRC_DIR)/lib
 SRC_UTILS_DIR                         := $(SRC_DIR)/utils
-SRC_LIB_TLSF_DIR                      := $(SRC_LIB_DIR)/tlsf
-SRC_LIB_CJSON_DIR                     := $(SRC_LIB_DIR)/cjson
-SRC_LIB_LOG_DIR                       := $(SRC_LIB_DIR)/log
+
 
 
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(SRC_DIR)
 INCLUDE_DIRS          += -I$(DEMO_DIR)
-INCLUDE_DIRS          += -I$(SRC_LIB_DIR)
-INCLUDE_DIRS          += -I$(SRC_LIB_TLSF_DIR)
-INCLUDE_DIRS          += -I$(SRC_LIB_CJSON_DIR)
-INCLUDE_DIRS          += -I$(SRC_LIB_LOG_DIR)
 INCLUDE_DIRS          += -I$(SRC_UTILS_DIR)
 
 
@@ -32,9 +25,6 @@ SOURCE_FILES          += $(wildcard demo/*.c)
 SOURCE_FILES          += $(wildcard demo/array/*.c)
 SOURCE_FILES          += $(wildcard demo/string/*.c)
 SOURCE_FILES          += $(wildcard src/test/*.c)
-SOURCE_FILES          += $(wildcard src/lib/tlsf/*.c)
-SOURCE_FILES          += $(wildcard src/lib/cjson/*.c)
-SOURCE_FILES          += $(wildcard src/lib/log/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 
