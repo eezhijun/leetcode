@@ -1,6 +1,4 @@
 # only test demo
-$(info MAKE START)
-
 CC                := gcc
 BIN               := main
 
@@ -8,24 +6,21 @@ MAKEFIILE_PATH                        := $(abspath $(lastword $(MAKEFILE_LIST)))
 ROOT_DIR                              := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 BUILD_DIR                             := $(ROOT_DIR)/output
 BUILD_ABS_DIR                         := $(abspath $(BUILD_DIR))
-DEMO_DIR                              := $(ROOT_DIR)/demo
-SRC_DIR                               := $(ROOT_DIR)/src
-SRC_UTILS_DIR                         := $(SRC_DIR)/utils
 
 
 
 INCLUDE_DIRS          := -I.
-INCLUDE_DIRS          += -I$(SRC_DIR)
-INCLUDE_DIRS          += -I$(DEMO_DIR)
-INCLUDE_DIRS          += -I$(SRC_UTILS_DIR)
+INCLUDE_DIRS          += -I$(ROOT_DIR)/demo
+INCLUDE_DIRS          += -I$(ROOT_DIR)/src
+INCLUDE_DIRS          += -I$(ROOT_DIR)/src/utils
 
 
 SOURCE_FILES          := $(wildcard *.c)
 SOURCE_FILES          += $(wildcard demo/*.c)
 SOURCE_FILES          += $(wildcard demo/array/*.c)
 SOURCE_FILES          += $(wildcard demo/string/*.c)
-SOURCE_FILES          += $(wildcard src/test/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
+SOURCE_FILES          += $(wildcard src/test/*.c)
 
 
 CFLAGS                += -m32 # gcc 32bit
@@ -51,7 +46,7 @@ endif
 
 ifeq ($(demo),tt)
   CPPFLAGS            += -DUSER_DEMO=0
-else ($(demo),lc)
+else ifeq ($(demo),lc)
   CPPFLAGS            += -DUSER_DEMO=1
 endif
 
