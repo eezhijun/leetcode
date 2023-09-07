@@ -2,7 +2,7 @@
 #include "stdlib.h"
 #include "utils.h"
 
-void test(void)
+void main_test(void)
 {
     printf("TEST ENTRY\n");
 }

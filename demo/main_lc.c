@@ -1,10 +1,9 @@
 #include "stdio.h"
-#include "external.h"
 
 
 int main_lc(void)
 {
-    printf("MAIN LC ENTRY\n");
+    printf("LEETCODE ENTRY\n");
 
     // twoSumTest();
     // divideTest();

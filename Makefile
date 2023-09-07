@@ -28,27 +28,17 @@ SOURCE_FILES          += $(wildcard src/test/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 
-CFLAGS                := -ggdb3
-LDFLAGS               := -ggdb3 -pthread
-CPPFLAGS              := $(INCLUDE_DIRS) -DBUILD_DIR=\"$(BUILD_ABS_DIR)\"
-CPPFLAGS              += -D_WINDOWS_
-
-
 CFLAGS                += -m32 # gcc 32bit
+
+CPPFLAGS              := $(INCLUDE_DIRS) -DBUILD_DIR=\"$(BUILD_ABS_DIR)\"
+
+LDFLAGS               := -pthread
+LDFLAGS               += -lm # to link againt the math library (libm)
 LDFLAGS               += -m32
 
-LDFLAGS               += -lm # to link againt the math library (libm)
-CPPFLAGS              += -Wall
 
 
-ifdef SANITIZE_ADDRESS
-  CFLAGS              += -fsanitize=address -fsanitize=alignment
-  LDFLAGS             += -fsanitize=address -fsanitize=alignment
-endif
 
-ifdef SANITIZE_LEAK
-  LDFLAGS             += -fsanitize=leak
-endif
 
 # user choose demo
 
@@ -61,9 +51,7 @@ endif
 
 ifeq ($(demo),tt)
   CPPFLAGS            += -DUSER_DEMO=0
-endif
-
-ifeq ($(demo),lc)
+else ($(demo),lc)
   CPPFLAGS            += -DUSER_DEMO=1
 endif
 
