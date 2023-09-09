@@ -2,6 +2,7 @@
 
 
 extern void lengthOfLongestSubstringTest(void);
+void romanToIntTest(void);
 int main_lc(void)
 {
     printf("LEETCODE ENTRY\n");
@@ -27,7 +28,8 @@ int main_lc(void)
     // reverseStringTest();
     // firstUniqCharTest();
     // reverseWordsTest3();
-    lengthOfLongestSubstringTest();
+    // lengthOfLongestSubstringTest();
+    romanToIntTest();
 
     return 0;
 }
