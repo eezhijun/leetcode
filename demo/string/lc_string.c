@@ -38,33 +38,34 @@
 0 <= s.length <= 5 * 104
 s 由英文字母、数字、符号和空格组成 */
 
+
 int lengthOfLongestSubstring(char * s)
 {
-    size_t len = strlen(s);
-    int count = 0;
-    int max_count = 0;
+    if (!s[0]) {
+        return 0;
+    }
+    int max = 1, n = 0;
 
-    printf("len=%d\n", len);
-
-    for (int i = 0; i < len; i++) {
-        for (int j = i + 1; j < len; j++) {
-            count++;
-            if (s[i] == s[j]) {
+    for (int i = 1; s[i] != 0; i++) {
+        int tmp = 1;
+        for (int j = n; j < i; j++) {
+            if (s[j] == s[i]) {
+                n = j + 1;
                 break;
+            } else {
+                tmp++;
             }
         }
-        max_count = count;
-        count = 0;
-        printf("max_count=%d, i=%d\n", max_count, i);
+        max = tmp > max ? tmp : max;
     }
 
-    return max_count;
+    return max;
 
 }
 
 void lengthOfLongestSubstringTest(void)
 {
-    char s[] = "abcabcbb";
+    char s[] = "abcdaxx";
 
     int ret = lengthOfLongestSubstring(s);
 
