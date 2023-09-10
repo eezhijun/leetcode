@@ -2,8 +2,9 @@
 
 
 extern void lengthOfLongestSubstringTest(void);
-void romanToIntTest(void);
-void isValidTest(void);
+extern void romanToIntTest(void);
+extern void isValidTest(void);
+extern void lengthOfLastWordTest(void);
 
 int main_lc(void)
 {
@@ -32,7 +33,8 @@ int main_lc(void)
     // reverseWordsTest3();
     // lengthOfLongestSubstringTest();
     // romanToIntTest();
-    isValidTest();
+    // isValidTest();
+    lengthOfLastWordTest();
 
     return 0;
 }
