@@ -4,7 +4,7 @@
 #include "gnu/libc-version.h"
 
 int g_m, g_n; // 表示定义该文件全局变量
-extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其引用
+extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
 
 void main_test(void)
 {
@@ -12,7 +12,7 @@ void main_test(void)
     printf("GNU libc version: %s\n", gnu_get_libc_version());
 
     /* int g_x, g_y; 定义局部变量*/
-    extern int g_x, g_y;
+    extern int g_x, g_y; // 声明外部全局变量，下面才可以使用
     printf("g_x=%d, g_y=%d\n", g_x, g_y);
 }
 
