@@ -1,13 +1,13 @@
 #include "stdio.h"
 #include "errno.h"
 
-#define TEST_DEMO       0
-#define LC_DEMO         1
 
-#ifdef USER_DEMO
-    #define MAIN_SELECTED_APP    USER_DEMO
-#else
-    #define MAIN_SELECTED_APP    LC_DEMO
+#ifdef LC_DEMO
+#define MAIN_SELECTED_APP LC_DEMO
+#endif
+
+#ifdef TEST_DEMO
+#define MAIN_SELECTED_APP TEST_DEMO
 #endif
 
 extern int main_lc(void);

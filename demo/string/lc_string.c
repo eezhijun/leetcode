@@ -7,16 +7,6 @@
 #include "utils.h"
 
 
-void lengthOfLongestSubstringTest(void)
-{
-    char s[] = "abcdaxx";
-
-    int ret = lengthOfLongestSubstring(s);
-
-    printf("ret=%d\n", ret);
-}
-
-
 /* https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/ */
 
 int strStr(char * haystack, char * needle){

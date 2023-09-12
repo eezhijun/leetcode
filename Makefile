@@ -45,9 +45,9 @@ run:
 endif
 
 ifeq ($(demo),tt)
-  CPPFLAGS            += -DUSER_DEMO=0
+  CPPFLAGS            += -DTEST_DEMO
 else ifeq ($(demo),lc)
-  CPPFLAGS            += -DUSER_DEMO=1
+  CPPFLAGS            += -DLC_DEMO
 endif
 
 
