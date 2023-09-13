@@ -26,7 +26,7 @@ void test(void)
 }
 
 
-/* memeory layout test */
+/* memory layout test */
 static int u_s_g_var_a; /* 未初始化静态全局变量a 存放在bss段 */
 static int i_s_g_var_b = 10; /* 已初始化静态全局变量b 存在在data段 */
 
