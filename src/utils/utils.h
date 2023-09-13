@@ -1,12 +1,12 @@
 /**
  * @file utils.h
  * @author eehongzhijun (eehongzhijun@outlook.com)
- * @brief 
+ * @brief
  * @version 0.0.1
  * @date 2023-08-24
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #ifndef _UTILS_H_
@@ -19,6 +19,8 @@
 #ifndef UNUSED
 #define UNUSED(x) (void)(x)
 #endif
+
+#define STR(s) #s
 
 #ifndef FFS
 #define FFS(x) ((x) ? __builtin_ffs(x) : 0)
@@ -316,9 +318,9 @@ int cmp(const void *pa, const void *pb);
 void dump_x(const uint8_t *data, size_t len);
 
 /**
- * @brief 
- * 
- * @param elem 
+ * @brief
+ *
+ * @param elem
  */
 void print_int(void *elem);
 void print_float(void *elem);
