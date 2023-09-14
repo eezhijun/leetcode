@@ -1,10 +1,10 @@
 #include "stdio.h"
 
 
-extern void lengthOfLongestSubstringTest(void);
 extern void romanToIntTest(void);
 extern void isValidTest(void);
 extern void lengthOfLastWordTest(void);
+extern void titleToNumberTest(void);
 
 int main_lc(void)
 {
@@ -31,10 +31,11 @@ int main_lc(void)
     // reverseStringTest();
     // firstUniqCharTest();
     // reverseWordsTest3();
-    // lengthOfLongestSubstringTest();
     // romanToIntTest();
     // isValidTest();
-    lengthOfLastWordTest();
+    // lengthOfLastWordTest();
+    titleToNumberTest();
+
 
     return 0;
 }
