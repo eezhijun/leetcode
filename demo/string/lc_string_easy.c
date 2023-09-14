@@ -2,6 +2,7 @@
 #include "string.h"
 #include "stdbool.h"
 #include "math.h"
+#include "stdlib.h"
 
 #include "utils.h"
 
@@ -76,9 +77,8 @@ pattern 只包含小写英文字母
 s 只包含小写英文字母和 ' '
 s 不包含 任何前导或尾随对空格
 s 中每个单词都被 单个空格 分隔 */
-bool wordPattern(char * pattern, char * s)
+bool wordPattern(char *pattern, char *s)
 {
-
 }
 
 /* https://leetcode.cn/problems/isomorphic-strings/ */
@@ -110,7 +110,7 @@ bool wordPattern(char * pattern, char * s)
 1 <= s.length <= 5 * 104
 t.length == s.length
 s 和 t 由任意有效的 ASCII 字符组成 */
-bool isIsomorphic(char * s, char * t)
+bool isIsomorphic(char *s, char *t)
 {
     size_t len = strlen(s);
 
@@ -135,7 +135,6 @@ void isIsomorphicTest(void)
 
 /* https://leetcode.cn/problems/excel-sheet-column-number/ */
 /* 给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回 该列名称对应的列序号 。
-
 例如：
 
 A -> 1
@@ -146,7 +145,6 @@ Z -> 26
 AA -> 27
 AB -> 28
 ...
-
 
 示例 1:
 
@@ -181,9 +179,8 @@ int find_index_by_table(char ch)
     return 0;
 }
 
-int titleToNumber(char * columnTitle)
+int titleToNumber(char *columnTitle)
 {
-
     int len = strlen(columnTitle);
     int n = 0;
 
@@ -203,6 +200,68 @@ void titleToNumberTest(void)
     int ret = titleToNumber(s);
 
     printf("output:%d\n", ret);
+}
+
+/* https://leetcode.cn/problems/excel-sheet-column-title/ */
+/* 给你一个整数 columnNumber ，返回它在 Excel 表中相对应的列名称。
+例如：
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28
+...
+
+示例 1：
+
+输入：columnNumber = 1
+输出："A"
+示例 2：
+
+输入：columnNumber = 28
+输出："AB"
+示例 3：
+
+输入：columnNumber = 701
+输出："ZY"
+示例 4：
+
+输入：columnNumber = 2147483647
+输出："FXSHRXW"
+
+1 <= columnNumber <= 231 - 1 */
+char *convertToTitle(int columnNumber)
+{
+    /* 1-26 26+1-26x26+26 26x26+26+1-26x26x26+26x26+26
+        1    2             3
+    */
+    char *table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    size_t size = 1;
+    int n = 0, m = 0, sum = 26;
+
+    while (columnNumber > sum) {
+        size++;
+        sum += pow(26, size - 1) * 26;
+    }
+    char *s = (char *)malloc(sizeof(char) * (size + 1));
+    s[size] = '\0';
+    return s;
+}
+
+void convertToTitleTest(void)
+{
+    int columNumber = 703;
+
+    printf("input:%d\n", columNumber);
+
+    char *res = convertToTitle(columNumber);
+
+    printf("output:%s\n", res);
+
+    free(res);
 }
 
 /* https://leetcode.cn/problems/length-of-last-word/ */
@@ -234,7 +293,7 @@ void titleToNumberTest(void)
 1 <= s.length <= 104
 s 仅有英文字母和空格 ' ' 组成
 s 中至少存在一个单词 */
-int lengthOfLastWord(char * s)
+int lengthOfLastWord(char *s)
 {
     size_t len = strlen(s);
 
@@ -245,7 +304,6 @@ int lengthOfLastWord(char * s)
         } else if (n != 0) {
             break;
         }
-
     }
     return n;
 }
@@ -289,10 +347,14 @@ void lengthOfLastWordTest(void)
 
 1 <= s.length <= 104
 s 仅由括号 '()[]{}' 组成 */
-char pairs(char a) {
-    if (a == '}') return '{';
-    if (a == ']') return '[';
-    if (a == ')') return '(';
+char pairs(char a)
+{
+    if (a == '}')
+        return '{';
+    if (a == ']')
+        return '[';
+    if (a == ')')
+        return '(';
     return 0;
 }
 

@@ -8,6 +8,7 @@ extern void titleToNumberTest(void);
 extern void isIsomorphicTest(void);
 extern void nextGreaterElementTest(void);
 extern void reverseStringTest(void);
+extern void convertToTitleTest(void);
 
 int main_lc(void)
 {
@@ -33,7 +34,7 @@ int main_lc(void)
     // isPalindromeTest();
     // reverseWordsTest();
     // isAnagramTest();
-    reverseStringTest();
+    // reverseStringTest();
     // firstUniqCharTest();
     // reverseWordsTest3();
     // romanToIntTest();
@@ -41,6 +42,7 @@ int main_lc(void)
     // lengthOfLastWordTest();
     // titleToNumberTest();
     // isIsomorphicTest();
+    convertToTitleTest();
 
     /* stack */
 
