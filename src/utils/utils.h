@@ -191,9 +191,9 @@ int clamp(int value, int min, int max);
 #ifndef SWAP
 #define SWAP(type, lhs, rhs) \
     do {                     \
-        type temp = lhs;     \
-        lhs = rhs;           \
-        rhs = temp;          \
+        type temp = *lhs;     \
+        *lhs = *rhs;           \
+        *rhs = temp;          \
     } while (0)
 #endif
 
