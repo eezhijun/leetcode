@@ -1,9 +1,11 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "string.h"
+
+#include "gnu/libc-version.h"
+
 #include "utils.h"
 
-// #include <malloc.h>
-#include "gnu/libc-version.h"
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
@@ -111,9 +113,26 @@ int memory_layout_test(void)
 
 }
 
+/* string.h */
+void memxxx_test(void)
+{
+    int arr[10];
+    int len = 10;
+
+    /* wrong */
+    memset(arr, 0, len);
+    PRINT_ARRAY(arr, len, "%d ");
+
+    /* right */
+    memset(arr, 0, len * sizeof(int));
+    PRINT_ARRAY(arr, len, "%d ");
+
+}
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
-    printf("GNU libc version: %s\n", gnu_get_libc_version());
-    memory_layout_test();
+    printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+    // memory_layout_test();
+    memxxx_test();
 }
