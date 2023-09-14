@@ -8,6 +8,7 @@
 #include "utils.h"
 
 extern void stack_test(void);
+extern void queue_test(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
@@ -133,8 +134,6 @@ void memxxx_test(void)
 
 
 
-
-
 void main_test(void)
 {
     printf("TEST ENTRY\n");
@@ -142,6 +141,7 @@ void main_test(void)
     // memory_layout_test();
     // memxxx_test();
 
-    stack_test();
+    // stack_test();
+    queue_test();
 
 }

@@ -17,51 +17,51 @@ typedef struct {
     int top;
 } stack_t;
 
-void stack_init(stack_t *stack)
+void stack_init(stack_t *s)
 {
-    memset(stack->data, 0, sizeof(int) * STACK_SIZE);
-    stack->top = 0;
+    memset(s->data, 0, sizeof(int) * STACK_SIZE);
+    s->top = 0;
 }
 
-bool stack_is_full(stack_t *stack)
+bool stack_is_full(stack_t *s)
 {
-    return (stack->top == STACK_SIZE - 1);
+    return (s->top == STACK_SIZE - 1);
 }
 
-bool stack_is_empty(stack_t *stack)
+bool stack_is_empty(stack_t *s)
 {
-    return (stack->top == 0);
+    return (s->top == 0);
 }
 
-void stack_push(stack_t *stack, int val)
+void stack_push(stack_t *s, int val)
 {
-    if (stack_is_full(stack)) {
+    if (stack_is_full(s)) {
         printf("stack is full\n");
         return;
     }
-    stack->data[stack->top] = val;
-    stack->top++;
+    s->data[s->top] = val;
+    s->top++;
 }
 
-int stack_pop(stack_t *stack)
+int stack_pop(stack_t *s)
 {
-    if (stack_is_empty(stack)) {
+    if (stack_is_empty(s)) {
         printf("stack is empty\n");
         return -1;
     }
 
-    int val = stack->data[stack->top - 1];
-    stack->top--;
+    int val = s->data[s->top - 1];
+    s->top--;
     return val;
 }
 
-int stack_top(stack_t *stack)
+int stack_top(stack_t *s)
 {
-    if (stack_is_empty(stack)) {
+    if (stack_is_empty(s)) {
         printf("stack is empty\n");
         return -1;
     }
-    return stack->data[stack->top - 1];
+    return s->data[s->top - 1];
 }
 
 void stack_test(void)
