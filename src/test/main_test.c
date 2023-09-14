@@ -1,11 +1,13 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "stdbool.h"
 
 #include "gnu/libc-version.h"
 
 #include "utils.h"
 
+extern void stack_test(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
@@ -129,10 +131,17 @@ void memxxx_test(void)
 
 }
 
+
+
+
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
     // memory_layout_test();
-    memxxx_test();
+    // memxxx_test();
+
+    stack_test();
+
 }
