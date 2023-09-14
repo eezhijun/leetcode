@@ -3,6 +3,136 @@
 #include "stdbool.h"
 #include "math.h"
 
+#include "utils.h"
+
+/* https://leetcode.cn/problems/reverse-string/ */
+/* 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+
+
+示例 1：
+
+输入：s = ["h","e","l","l","o"]
+输出：["o","l","l","e","h"]
+示例 2：
+
+输入：s = ["H","a","n","n","a","h"]
+输出：["h","a","n","n","a","H"]
+
+
+提示：
+
+1 <= s.length <= 105
+s[i] 都是 ASCII 码表中的可打印字符 */
+void reverseString(char *s, int sSize)
+{
+    int l = 0, r = sSize - 1;
+    while (l < r) {
+        SWAP(char, &s[l], &s[r]);
+        l++;
+        r--;
+    }
+}
+
+void reverseStringTest(void)
+{
+    char s[] = "hello";
+    int sSize = strlen(s);
+
+    printf("input:%s, %d\n", s, sSize);
+    reverseString(s, sSize);
+
+    printf("output:%s\n", s);
+}
+
+/* https://leetcode.cn/problems/word-pattern/ */
+/* 给定一种规律 pattern 和一个字符串 s ，判断 s 是否遵循相同的规律。
+
+这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 s 中的每个非空单词之间存在着双向连接的对应规律。
+
+
+
+示例1:
+
+输入: pattern = "abba", s = "dog cat cat dog"
+输出: true
+示例 2:
+
+输入:pattern = "abba", s = "dog cat cat fish"
+输出: false
+示例 3:
+
+输入: pattern = "aaaa", s = "dog cat cat dog"
+输出: false
+
+
+提示:
+
+1 <= pattern.length <= 300
+pattern 只包含小写英文字母
+1 <= s.length <= 3000
+s 只包含小写英文字母和 ' '
+s 不包含 任何前导或尾随对空格
+s 中每个单词都被 单个空格 分隔 */
+bool wordPattern(char * pattern, char * s)
+{
+
+}
+
+/* https://leetcode.cn/problems/isomorphic-strings/ */
+/* 给定两个字符串 s 和 t ，判断它们是否是同构的。
+
+如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。
+
+每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，相同字符只能映射到同一个字符上，
+字符可以映射到自己本身。
+
+
+
+示例 1:
+
+输入：s = "egg", t = "add"
+输出：true
+示例 2：
+
+输入：s = "foo", t = "bar"
+输出：false
+示例 3：
+
+输入：s = "paper", t = "title"
+输出：true
+
+
+提示：
+
+1 <= s.length <= 5 * 104
+t.length == s.length
+s 和 t 由任意有效的 ASCII 字符组成 */
+bool isIsomorphic(char * s, char * t)
+{
+    size_t len = strlen(s);
+
+    if (len == 1) {
+        return true;
+    }
+
+    return true;
+}
+
+void isIsomorphicTest(void)
+{
+    char *s = "badc";
+    char *t = "baba";
+
+    printf("intput:s=%s, t=%s\n", s, t);
+
+    bool ret = isIsomorphic(s, t);
+
+    (ret == 1) ? printf("output:true\n") : printf("output:false\n");
+}
+
 /* https://leetcode.cn/problems/excel-sheet-column-number/ */
 /* 给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回 该列名称对应的列序号 。
 
@@ -50,6 +180,7 @@ int find_index_by_table(char ch)
     }
     return 0;
 }
+
 int titleToNumber(char * columnTitle)
 {
 

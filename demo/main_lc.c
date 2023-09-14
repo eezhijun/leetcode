@@ -5,11 +5,15 @@ extern void romanToIntTest(void);
 extern void isValidTest(void);
 extern void lengthOfLastWordTest(void);
 extern void titleToNumberTest(void);
+extern void isIsomorphicTest(void);
+extern void nextGreaterElementTest(void);
+extern void reverseStringTest(void);
 
 int main_lc(void)
 {
     printf("LEETCODE ENTRY\n");
 
+    /* array */
     // twoSumTest();
     // divideTest();
     // findMedianSortedArraysTest();
@@ -19,6 +23,7 @@ int main_lc(void)
     // majorityElementTest();
     // threeSumClosestTest();
 
+    /* string */
     // longestPalindromeTest();
     // myAtoiTest();
     // longestCommonPrefixTest();
@@ -28,14 +33,16 @@ int main_lc(void)
     // isPalindromeTest();
     // reverseWordsTest();
     // isAnagramTest();
-    // reverseStringTest();
+    reverseStringTest();
     // firstUniqCharTest();
     // reverseWordsTest3();
     // romanToIntTest();
     // isValidTest();
     // lengthOfLastWordTest();
-    titleToNumberTest();
+    // titleToNumberTest();
+    // isIsomorphicTest();
 
+    /* stack */
 
     return 0;
 }
