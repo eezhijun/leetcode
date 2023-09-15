@@ -384,4 +384,13 @@ int clz(int x);
  */
 int ctz(int x);
 
+/**
+ * @brief reverse string
+ *
+ * @param s source string
+ * @param l left char postion
+ * @param r right char postion
+ */
+void reverse(char* s, int l, int r);
+
 #endif

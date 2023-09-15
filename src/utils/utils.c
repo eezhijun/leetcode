@@ -1,12 +1,12 @@
 /**
  * @file utils.c
  * @author eehongzhijun (eehongzhijun@outlook.com)
- * @brief 
+ * @brief
  * @version 0.0.1
  * @date 2023-08-24
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "stdio.h"
@@ -310,5 +310,11 @@ void print_arr(void *arr, size_t size, size_t elem_size, void (*print_elem(void 
     printf("\n");
 }
 
-
-
+void reverse(char* s, int l, int r)
+{
+    while (l < r) {
+        SWAP(char, &s[l], &s[r]);
+        l++;
+        r--;
+    }
+}
