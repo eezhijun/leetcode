@@ -6,6 +6,174 @@
 
 #include "utils.h"
 
+
+/* https://leetcode.cn/problems/reverse-vowels-of-a-string/ */
+/* 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
+
+元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现不止一次。
+
+
+
+示例 1：
+
+输入：s = "hello"
+输出："holle"
+示例 2：
+
+输入：s = "leetcode"
+输出："leotcede"
+
+
+提示：
+
+1 <= s.length <= 3 * 105
+s 由 可打印的 ASCII 字符组成 */
+char * reverseVowels(char * s)
+{
+
+}
+
+void reverseVowelsTest(void)
+{
+
+}
+
+/* https://leetcode.cn/problems/reverse-words-in-a-string/ */
+/* 给你一个字符串 s ，请你反转字符串中 单词 的顺序。
+
+单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。
+
+返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
+
+注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。
+
+
+
+示例 1：
+
+输入：s = "the sky is blue"
+输出："blue is sky the"
+示例 2：
+
+输入：s = "  hello world  "
+输出："world hello"
+解释：反转后的字符串中不能存在前导空格和尾随空格。
+示例 3：
+
+输入：s = "a good   example"
+输出："example good a"
+解释：如果两个单词间有多余的空格，反转后的字符串需要将单词间的空格减少到仅有一个。
+
+
+提示：
+
+1 <= s.length <= 104
+s 包含英文大小写字母、数字和空格 ' '
+s 中 至少存在一个 单词
+
+
+进阶：如果字符串在你使用的编程语言中是一种可变数据类型，请尝试使用 O(1) 额外空间复杂度的 原地 解法。*/
+char * reverseWords(char * s)
+{
+    int l = 0, t = 0, r = strlen(s) - 1;
+    int offset = 0;
+    char *ans = (char* )malloc(sizeof(char) * (strlen(s) + 1));
+    if (ans == NULL) {
+        printf("ans malloc fail\n");
+        return NULL;
+    }
+    memset(ans, 0, sizeof(char) * (strlen(s) + 1));
+
+    while (s[l] == ' ') {
+        l++;
+    }
+
+    while( s[r] == ' ') {
+        r--;
+    }
+
+    t = l;
+    while (1) {
+        while (t <= r && s[t + 1] !=' ' && s[t + 1] != '\0') {
+            t++;
+        }
+        memcpy(ans + offset, s + l, (t - l + 1));
+        reverse(ans, offset, offset + (t - l));
+        *(ans + offset + (t - l + 1)) = ' ';
+        offset += (t - l + 1) + 1;
+        if (t < r) {
+            l = t + 1;
+            while (s[l] == ' ') {
+                l++;
+            }
+            t = l;
+        } else {
+            break;
+        }
+    }
+    ans[offset - 1] = '\0';
+    reverse(ans, 0, offset - 2);
+    return ans;
+}
+
+void reverseWordsTest(void)
+{
+    char s[] = "the sky is blue";
+
+    printf("input:%s\n", s);
+    char *ans = reverseWords(s);
+
+    printf("output:%s\n", ans);
+    free(ans);
+}
+
+/* https://leetcode.cn/problems/reverse-words-in-a-string-iii/ */
+/* 给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+
+
+
+示例 1：
+
+输入：s = "Let's take LeetCode contest"
+输出："s'teL ekat edoCteeL tsetnoc"
+示例 2:
+
+输入： s = "God Ding"
+输出："doG gniD"
+
+
+提示：
+
+1 <= s.length <= 5 * 104
+s 包含可打印的 ASCII 字符。
+s 不包含任何开头或结尾空格。
+s 里 至少 有一个词。
+s 中的所有单词都用一个空格隔开。*/
+char * reverseWords3(char *s)
+{
+    int len = strlen(s);
+    int l = 0, r = 0;
+
+    for (int i = 0; i < len + 1; i++) {
+        if (s[i] == ' ' || s[i] == '\0') {
+            r = i - 1;
+            reverse(s, l, r);
+            l = i + 1;
+        }
+    }
+    return s;
+}
+
+void reverseWordsTest3(void)
+{
+    char s[] = "Let's take LeetCode contest";
+
+    printf("input:%s\n", s);
+    char *ans = reverseWords3(s);
+
+    printf("output:%s\n", ans);
+}
+
 /* https://leetcode.cn/problems/reverse-string/ */
 /* 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
 
@@ -30,11 +198,7 @@ s[i] 都是 ASCII 码表中的可打印字符 */
 void reverseString(char *s, int sSize)
 {
     int l = 0, r = sSize - 1;
-    while (l < r) {
-        SWAP(char, &s[l], &s[r]);
-        l++;
-        r--;
-    }
+    reverse(s, l, r);
 }
 
 void reverseStringTest(void)
