@@ -318,3 +318,75 @@ void reverse(char* s, int l, int r)
         r--;
     }
 }
+
+int hex2dec(char hex[])
+{
+    if (hex == NULL) {
+        return -1;
+    }
+
+    int dec = 0;
+    int len = strlen(hex);
+
+    for (int i = 0; hex[i] != '\0'; i++) {
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            dec += pow(16, len - i - 1) * (hex[i] - '0');
+        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            dec += pow(16, len - i - 1) * (hex[i] - 'A' + 10);
+        } else if (hex[i] >= 'a' && hex[i] <= 'f') {
+            dec += pow(16, len - i - 1) * (hex[i] - 'a' + 10);
+        } else {
+            printf("invalid char %c\n", hex[i]);
+            return -1;
+        }
+    }
+    return dec;
+}
+
+char *dec2hex(int dec)
+{
+    char *s;
+    int q, r;
+    int i = 0;
+    int len = 0;
+    int temp = dec;
+
+    if (dec < 0) {
+        return NULL;
+    }
+
+    while (temp > 0) {
+        temp = temp / 16;
+        len++;
+    }
+
+    if (dec == 0) {
+        len++;
+    }
+    s = (char *)malloc(sizeof(char) * (len + 1));
+    if (s == NULL) {
+        printf("malloc fail/n");
+        return NULL;
+    }
+    s[len] = '\0';
+
+    if (dec == 0) {
+        s[0] = '0';
+        return s;
+    }
+    while (dec > 0) {
+        r = dec % 16;
+
+        if (r < 10) {
+            s[i] = r + '0';
+        } else {
+            s[i] = r - 10 + 'A';
+        }
+
+        i++;
+        dec /= 16;
+    }
+
+    reverse(s, 0, len - 1);
+    return s;
+}

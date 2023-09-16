@@ -1,3 +1,13 @@
+/**
+ * @file lc_string_easy.c
+ * @author eehongzhijun (eehongzhijun@outlook.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-09-15
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include "stdio.h"
 #include "string.h"
 #include "stdbool.h"

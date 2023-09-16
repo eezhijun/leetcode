@@ -1,7 +1,18 @@
+/**
+ * @file main_test.c
+ * @author eehongzhijun (eehongzhijun@outlook.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-09-16
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
 #include "stdbool.h"
+#include "math.h"
 
 #include "gnu/libc-version.h"
 
@@ -132,7 +143,31 @@ void memxxx_test(void)
 
 }
 
+void hex2dec_test(void)
+{
+    char hex[128] = {0};
 
+    printf("please input hex:\n");
+    scanf("%s", hex);
+
+    // PRINT_ARRAY(hex, 128, "%d ");
+    int ret = hex2dec(hex);
+
+    printf("output:%d\n", ret);
+}
+
+void dec2hex_test(void)
+{
+    int dec;
+
+    printf("please input dec:\n");
+    scanf("%d", &dec);
+
+    char *ret = dec2hex(dec);
+
+    printf("output:%s\n", ret);
+    free(ret);
+}
 
 void main_test(void)
 {
@@ -142,6 +177,9 @@ void main_test(void)
     // memxxx_test();
 
     // stack_test();
-    queue_test();
+    // queue_test();
+
+    // hex2dec_test();
+    dec2hex_test();
 
 }

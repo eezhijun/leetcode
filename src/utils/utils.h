@@ -393,4 +393,20 @@ int ctz(int x);
  */
 void reverse(char* s, int l, int r);
 
+/**
+ * @brief hex to dec
+ *
+ * @param hex
+ * @return int
+ */
+int hex2dec(char hex[]);
+
+/**
+ * @brief dec to hex
+ *
+ * @param dec
+ * @return char*
+ */
+char *dec2hex(int dec);
+
 #endif
