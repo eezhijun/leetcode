@@ -22,6 +22,7 @@ extern void convertToTitleTest(void);
 extern void reverseWordsTest3(void);
 extern void reverseVowelsTest(void);
 extern void reverseWordsTest(void);
+extern void canConstructTest(void);
 
 int main_lc(void)
 {
@@ -56,7 +57,8 @@ int main_lc(void)
     // titleToNumberTest();
     // isIsomorphicTest();
     // convertToTitleTest();
-    reverseVowelsTest();
+    // reverseVowelsTest();
+    canConstructTest();
 
     /* stack */
 

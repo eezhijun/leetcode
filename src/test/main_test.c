@@ -128,7 +128,7 @@ int memory_layout_test(void)
 }
 
 /* string.h */
-void memxxx_test(void)
+void memset_test(void)
 {
     int arr[10];
     int len = 10;
@@ -137,10 +137,22 @@ void memxxx_test(void)
     memset(arr, 0, len);
     PRINT_ARRAY(arr, len, "%d ");
 
+    /* wrong */
+    /*  预期初始化数组每个元素为1，
+        实际确是这样0b 00000001 00000001 00000001 00000001
+        如果想初始化数组元素要用循环语句来初始化 */
+    memset(arr, 1, len * sizeof(int));
+    PRINT_ARRAY(arr, len, "%d ");
+    PRINT_ARRAY(arr, len, "%08x ");
+
     /* right */
     memset(arr, 0, len * sizeof(int));
     PRINT_ARRAY(arr, len, "%d ");
 
+    for (int i = 0; i < len; i++) {
+        arr[i] = 1;
+    }
+    PRINT_ARRAY(arr, len, "%d ");
 }
 
 void hex2dec_test(void)
@@ -174,12 +186,12 @@ void main_test(void)
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
     // memory_layout_test();
-    // memxxx_test();
+    memset_test();
 
     // stack_test();
     // queue_test();
 
     // hex2dec_test();
-    dec2hex_test();
+    // dec2hex_test();
 
 }

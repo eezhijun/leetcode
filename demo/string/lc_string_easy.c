@@ -17,6 +17,74 @@
 #include "utils.h"
 
 
+/* https://leetcode.cn/problems/ransom-note/ */
+/* 给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
+
+如果可以，返回 true ；否则返回 false 。
+
+magazine 中的每个字符只能在 ransomNote 中使用一次。
+
+
+
+示例 1：
+
+输入：ransomNote = "a", magazine = "b"
+输出：false
+示例 2：
+
+输入：ransomNote = "aa", magazine = "ab"
+输出：false
+示例 3：
+
+输入：ransomNote = "aa", magazine = "aab"
+输出：true
+
+
+提示：
+
+1 <= ransomNote.length, magazine.length <= 105
+ransomNote 和 magazine 由小写英文字母组成 */
+bool canConstruct(char * ransomNote, char * magazine)
+{
+    size_t len = strlen(magazine);
+    bool is_used[len];
+    bool is_found = 0;
+
+    memset(is_used, 0, sizeof(char) * len);
+
+    for (int i = 0; ransomNote[i] != '\0'; i++) {
+        for (int j = 0; magazine[j] != '\0'; j++) {
+            if (is_used[j]) {
+                continue;
+            } else {
+                if (ransomNote[i] == magazine[j]) {
+                    is_used[j] = true;
+                    is_found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!is_found) {
+            return false;
+        }
+        is_found = false;
+    }
+    return true;
+}
+
+void canConstructTest(void)
+{
+    char s1[128], s2[128];
+
+    printf("please string s1 and s2:\n");
+    scanf("%s %s", s1, s2);
+
+    bool ret = canConstruct(s1, s2);
+
+    (ret == true) ? printf("output:true\n") : printf("output:false\n");
+}
+
 /* https://leetcode.cn/problems/reverse-vowels-of-a-string/ */
 /* 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
 
@@ -451,10 +519,12 @@ AB -> 28
 1 <= columnNumber <= 231 - 1 */
 char *convertToTitle(int columnNumber)
 {
-    /* 1-26 26+1-26x26+26 26x26+26+1-26x26x26+26x26+26
-        1    2             3
+    /*  ZY=26^1*26+26^0*25 ZZ=26^1*26+26^0*26
+        26^0*1 -                26^0*26
+        26^1+26^0 -             26^1*26+26^0*26
+        26^2+26^1+26^0 -        26^2*26+26^1*26+26^0*26
     */
-    char *table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char *table = "ZABCDEFGHIJKLMNOPQRSTUVWXY";
     size_t size = 1;
     int n = 0, m = 0, sum = 26;
 
@@ -464,14 +534,16 @@ char *convertToTitle(int columnNumber)
     }
     char *s = (char *)malloc(sizeof(char) * (size + 1));
     s[size] = '\0';
+
     return s;
 }
 
 void convertToTitleTest(void)
 {
-    int columNumber = 703;
+    int columNumber;
 
-    printf("input:%d\n", columNumber);
+    printf("please input integer:\n");
+    scanf("%d", &columNumber);
 
     char *res = convertToTitle(columNumber);
 
