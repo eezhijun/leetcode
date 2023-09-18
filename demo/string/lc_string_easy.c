@@ -38,14 +38,56 @@
 
 1 <= s.length <= 3 * 105
 s 由 可打印的 ASCII 字符组成 */
+
+bool is_vowels(char c)
+{
+    char s[] = "aeiouAEIOU";
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] == c) {
+            return  true;
+        }
+    }
+    return false;
+}
+
 char * reverseVowels(char * s)
 {
+    int l = 0, r = strlen(s) - 1;
 
+    if (r == 1) {
+        if (is_vowels(s[l]) && is_vowels(s[r])) {
+            SWAP(char, &s[l], &s[r]);
+        }
+    }
+
+    while (l + 1 < r) {
+        while (l < r && !is_vowels(s[l])) {
+            l++;
+        }
+
+        while (r > l && !is_vowels(s[r])) {
+            r--;
+        }
+
+        SWAP(char, &s[l], &s[r]);
+        l++;
+        r--;
+    }
+
+    return s;
 }
 
 void reverseVowelsTest(void)
 {
+    char s[128];
 
+    printf("please input string:\n");
+    scanf("%s", s);
+
+    char *ret = reverseVowels(s);
+
+    printf("output:%s\n", ret);
 }
 
 /* https://leetcode.cn/problems/reverse-words-in-a-string/ */

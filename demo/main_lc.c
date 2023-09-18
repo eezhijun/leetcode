@@ -56,7 +56,7 @@ int main_lc(void)
     // titleToNumberTest();
     // isIsomorphicTest();
     // convertToTitleTest();
-    // reverseVowelsTest();
+    reverseVowelsTest();
 
     /* stack */
 
