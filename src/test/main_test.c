@@ -13,6 +13,7 @@
 #include "string.h"
 #include "stdbool.h"
 #include "math.h"
+#include "float.h"
 
 #include "gnu/libc-version.h"
 
@@ -183,11 +184,59 @@ void dec2hex_test(void)
 
 void sprintf_test(void)
 {
-    char *s = (char *)malloc(sizeof(char) * 5);
+    char *s = (char *)malloc(sizeof(char) * (4 + 1));
 
     sprintf(s, "%d", 1234);
 
     PRINT_ARRAY(s, 5, "%d ");
+}
+
+void limits_test(void)
+{
+    /* limits.h */
+    /* bit */
+    printf("%s=\t+%d\n", STR(CHAR_BIT), CHAR_BIT);
+
+    /* char */
+    printf("%s=\t%d\n", STR(SCHAR_MIN), SCHAR_MIN);
+    printf("%s=\t+%u\n", STR(UCHAR_MAX), UCHAR_MAX);
+    printf("%s=\t%d\n", STR(CHAR_MIN), CHAR_MIN);
+    printf("%s=\t+%d\n", STR(CHAR_MAX), CHAR_MAX);
+
+    /* short */
+    printf("%s=\t%d\n", STR(SHRT_MIN), SHRT_MIN);
+    printf("%s=\t+%d\n", STR(SHRT_MAX), SHRT_MAX);
+    printf("%s=\t+%u\n", STR(USHRT_MAX), USHRT_MAX);
+
+    /* int */
+    printf("%s=\t%d\n", STR(INT_MIN), INT_MIN);
+    printf("%s=\t+%d\n", STR(INT_MAX), INT_MAX);
+    printf("%s=\t+%u\n", STR(UINT_MAX), UINT_MAX);
+
+    /* long */
+    printf("%s=\t%ld\n", STR(LONG_MIN), LONG_MIN);
+    printf("%s=\t+%ld\n", STR(LONG_MAX), LONG_MAX);
+    printf("%s=\t+%lu\n", STR(ULONG_MAX), ULONG_MAX);
+
+    /* long long */
+    printf("%s=\t%lld\n", STR(LLONG_MIN), LLONG_MIN);
+    printf("%s=\t+%lld\n", STR(LLONG_MAX), LLONG_MAX);
+    printf("%s=\t+%llu\n", STR(ULLONG_MAX), ULLONG_MAX);
+
+    /* float.h */
+    /* float double */
+
+    printf("%s=\t+%d\n", STR(FLT_DIG), FLT_DIG);
+    printf("%s=\t+%d\n", STR(DBL_DIG), DBL_DIG);
+    printf("%s=\t+%d\n", STR(LDBL_DIG), LDBL_DIG);
+
+    printf("%s=\t+%f\n", STR(FLT_MAX), FLT_MAX);
+    printf("%s=\t+%f\n", STR(DBL_MAX), DBL_MAX);
+    printf("%s=\t+%Lf\n", STR(LDBL_MAX), LDBL_MAX);
+
+    printf("%s=\t+%f\n", STR(FLT_MIN), FLT_MIN);
+    printf("%s=\t+%f\n", STR(DBL_MIN), DBL_MIN);
+    printf("%s=\t+%f\n", STR(DBL_MIN), DBL_MIN);
 }
 
 void main_test(void)
@@ -202,6 +251,8 @@ void main_test(void)
 
     // hex2dec_test();
     // dec2hex_test();
-    sprintf_test();
+    // sprintf_test();
+    limits_test();
+
 
 }

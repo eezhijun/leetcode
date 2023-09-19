@@ -321,19 +321,19 @@ char *int2string(int num, char *str)
 
 int string2int(char *str)
 {
-    char flag = '+';
-    long res = 0;
+    char sign = '+';
+    long n = 0;
 
     if (*str == '-') {
         ++str;
-        flag = '-';
+        sign = '-';
     }
 
-    sscanf(str, "%ld", &res);
-    if (flag == '-') {
-        res = -res;
+    sscanf(str, "%ld", &n);
+    if (sign == '-') {
+        n = -n;
     }
-    return (int)res;
+    return (int)n;
 }
 
 void reverse(char *s, int l, int r)

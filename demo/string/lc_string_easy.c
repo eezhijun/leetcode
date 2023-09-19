@@ -18,6 +18,62 @@
 
 #include "utils.h"
 
+/* https://leetcode.cn/problems/add-strings/ */
+/* 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。
+
+你不能使用任何內建的用于处理大整数的库（比如 BigInteger）， 也不能直接将输入的字符串转换为整数形式。
+
+
+
+示例 1：
+
+输入：num1 = "11", num2 = "123"
+输出："134"
+示例 2：
+
+输入：num1 = "456", num2 = "77"
+输出："533"
+示例 3：
+
+输入：num1 = "0", num2 = "0"
+输出："0"
+
+
+
+
+提示：
+
+1 <= num1.length, num2.length <= 104
+num1 和num2 都只包含数字 0-9
+num1 和num2 都不包含任何前导零 */
+char * addStrings(char * num1, char * num2)
+{
+    int n = string2int(num1) + string2int(num2);
+
+    size_t size = COUNT_DIGITS(n);
+
+    char *s = (char *)malloc(sizeof(char) * (size + 1));
+    memset(s, 0, sizeof(char) * (size + 1));
+
+    sprintf(s, "%d", n);
+
+    return s;
+}
+
+void addStringsTest(void)
+{
+    char num1[128], num2[128];
+
+    printf("please input string num1 and num2:\n");
+    scanf("%s\n%s", num1, num2);
+
+    char *ret = addStrings(num1, num2);
+
+    printf("output:%s\n", ret);
+    free(ret);
+    ret = NULL;
+}
+
 /* https://leetcode.cn/problems/fizz-buzz/ */
 /* 给你一个整数 n ，找出从 1 到 n 各个整数的 Fizz Buzz 表示，并用字符串数组 answer（下标从 1 开始）返回结果，其中：
 
