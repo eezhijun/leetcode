@@ -23,6 +23,7 @@ extern void reverseWordsTest3(void);
 extern void reverseVowelsTest(void);
 extern void reverseWordsTest(void);
 extern void canConstructTest(void);
+extern void findTheDifferenceTest(void);
 
 int main_lc(void)
 {
@@ -58,7 +59,8 @@ int main_lc(void)
     // isIsomorphicTest();
     // convertToTitleTest();
     // reverseVowelsTest();
-    canConstructTest();
+    // canConstructTest();
+    findTheDifferenceTest();
 
     /* stack */
 

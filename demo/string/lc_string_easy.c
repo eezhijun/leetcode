@@ -16,6 +16,114 @@
 
 #include "utils.h"
 
+/* https://leetcode.cn/problems/find-the-difference/ */
+/* 给定两个字符串 s 和 t ，它们只包含小写字母。
+
+字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
+
+请找出在 t 中被添加的字母。
+
+
+
+示例 1：
+
+输入：s = "abcd", t = "abcde"
+输出："e"
+解释：'e' 是那个被添加的字母。
+示例 2：
+
+输入：s = "", t = "y"
+输出："y"
+
+
+提示：
+
+0 <= s.length <= 1000
+t.length == s.length + 1
+s 和 t 只包含小写字母 */
+#define WAYS 1
+#if (WAYS == 1)
+/* 计数 */
+char findTheDifference(char* s, char* t)
+{
+    int cnt[26];
+    memset(cnt, 0, sizeof(cnt));
+    int n = strlen(s), m = strlen(t);
+    for (int i = 0; i < n; i++) {
+        cnt[s[i] - 'a']++;
+    }
+    for (int i = 0; i < m; i++) {
+        cnt[t[i] - 'a']--;
+        if (cnt[t[i] - 'a'] < 0) {
+            return t[i];
+        }
+    }
+    return ' ';
+}
+#elif (WAYS == 2)
+/* 求和 */
+char findTheDifference(char* s, char* t) {
+    int n = strlen(s), m = strlen(t);
+    int as = 0, at = 0;
+    for (int i = 0; i < n; i++) {
+        as += s[i];
+    }
+    for (int i = 0; i < m; i++) {
+        at += t[i];
+    }
+    return at - as;
+}
+#elif (WAYS == 3)
+/* 位运算 */
+char findTheDifference(char* s, char* t) {
+    int n = strlen(s), m = strlen(t);
+    int ret = 0;
+    for (int i = 0; i < n; i++) {
+        ret ^= s[i];
+    }
+    for (int i = 0; i < m; i++) {
+        ret ^= t[i];
+    }
+    return ret;
+}
+#else
+char findTheDifference(char *s, char *t)
+{
+    int a[26] = {0};
+    int b[26] = {0};
+    size_t ls = strlen(s);
+    size_t lt = strlen(t);
+
+    for (int i = 0; i < ls; i++) {
+        a[s[i] - 'a']++;
+    }
+
+    for (int i = 0; i < lt; i++) {
+        b[t[i] - 'a']++;
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (b[i] > a[i]) {
+            return i + 'a';
+        }
+    }
+
+    return 0;
+}
+#endif
+
+void findTheDifferenceTest(void)
+{
+    char s[128], t[128];
+    // char s[] = "", t[] = "y";
+
+    printf("please input string s and t\n");
+    scanf("%s %s", s, t);
+
+    char ret = findTheDifference(s, t);
+
+    printf("output:%c\n", ret);
+}
 
 /* https://leetcode.cn/problems/ransom-note/ */
 /* 给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
@@ -44,13 +152,38 @@ magazine 中的每个字符只能在 ransomNote 中使用一次。
 
 1 <= ransomNote.length, magazine.length <= 105
 ransomNote 和 magazine 由小写英文字母组成 */
-bool canConstruct(char * ransomNote, char * magazine)
+#if 1
+bool canConstruct(char *ransomNote, char *magazine)
+{
+    int a[26] = {0};
+    int b[26] = {0};
+    size_t lr = strlen(ransomNote);
+    size_t lm = strlen(magazine);
+
+    for (int i = 0; i < lr; i++) {
+        a[ransomNote[i] - 'a']++;
+    }
+
+    for (int i = 0; i < lm; i++) {
+        b[magazine[i] - 'a']++;
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (a[i] > b[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+#else
+bool canConstruct(char *ransomNote, char *magazine)
 {
     size_t len = strlen(magazine);
     bool is_used[len];
     bool is_found = 0;
 
-    memset(is_used, 0, sizeof(char) * len);
+    memset(is_used, 0, sizeof(bool) * len);
 
     for (int i = 0; ransomNote[i] != '\0'; i++) {
         for (int j = 0; magazine[j] != '\0'; j++) {
@@ -72,6 +205,7 @@ bool canConstruct(char * ransomNote, char * magazine)
     }
     return true;
 }
+#endif
 
 void canConstructTest(void)
 {
@@ -113,13 +247,13 @@ bool is_vowels(char c)
 
     for (int i = 0; s[i] != '\0'; i++) {
         if (s[i] == c) {
-            return  true;
+            return true;
         }
     }
     return false;
 }
 
-char * reverseVowels(char * s)
+char *reverseVowels(char *s)
 {
     int l = 0, r = strlen(s) - 1;
 
@@ -193,11 +327,11 @@ s 中 至少存在一个 单词
 
 
 进阶：如果字符串在你使用的编程语言中是一种可变数据类型，请尝试使用 O(1) 额外空间复杂度的 原地 解法。*/
-char * reverseWords(char * s)
+char *reverseWords(char *s)
 {
     int l = 0, t = 0, r = strlen(s) - 1;
     int offset = 0;
-    char *ans = (char* )malloc(sizeof(char) * (strlen(s) + 1));
+    char *ans = (char *)malloc(sizeof(char) * (strlen(s) + 1));
     if (ans == NULL) {
         printf("ans malloc fail\n");
         return NULL;
@@ -208,13 +342,13 @@ char * reverseWords(char * s)
         l++;
     }
 
-    while( s[r] == ' ') {
+    while (s[r] == ' ') {
         r--;
     }
 
     t = l;
     while (1) {
-        while (t <= r && s[t + 1] !=' ' && s[t + 1] != '\0') {
+        while (t <= r && s[t + 1] != ' ' && s[t + 1] != '\0') {
             t++;
         }
         memcpy(ans + offset, s + l, (t - l + 1));
@@ -269,7 +403,7 @@ s 包含可打印的 ASCII 字符。
 s 不包含任何开头或结尾空格。
 s 里 至少 有一个词。
 s 中的所有单词都用一个空格隔开。*/
-char * reverseWords3(char *s)
+char *reverseWords3(char *s)
 {
     int len = strlen(s);
     int l = 0, r = 0;
