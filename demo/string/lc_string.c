@@ -107,55 +107,6 @@ void myAtoiTest(void)
     printf("output: ans=%d\n", ans);
 }
 
-/* https://leetcode.cn/problems/longest-palindromic-substring/ */
-
-bool IsPalindrome(char *s, int left, int right)
-{
-    while (left < right) {
-        if (s[left] != s[right]) {
-            return false;
-        }
-        left++;
-        right--;
-    }
-    return true;
-}
-
-char * longestPalindrome(char * s){
-
-    if (s == NULL) {
-        return NULL;
-    }
-    int len = strlen(s);
-    int i, j;
-    for (i = len; i > 0; i--) {
-        for (j = 0; j <= len - i; j++) {
-            if (IsPalindrome(s, j, i + j - 1)) {
-                char *ans = (char *)malloc(sizeof(char) * (i + 1)); // +1预留字符串末尾字符'\0'
-                if (ans == NULL) {
-                    printf("malloc fail");
-                    return NULL;
-                }
-                memset(ans, 0, sizeof(char) * (i + 1));
-                memcpy(ans, &s[j], i);
-                printf("find i=%d, j=%d\n", i, j);
-                return ans;
-            }
-        }
-    }
-    return NULL;
-
-}
-
-void longestPalindromeTest(void)
-{
-    char s[] = "babad";
-
-    char *ans = longestPalindrome(s);
-
-    printf("output: ans=%s\n", ans);
-    free(ans);
-}
 
 /* https://leetcode.cn/problems/longest-common-prefix/ */
 
@@ -196,56 +147,6 @@ void longestCommonPrefixTest(void)
     free(ans);
 }
 
-/* https://leetcode.cn/problems/valid-palindrome/ */
-
-bool IsLegalCharater(char c) {
-    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-        || (c >= 'a' && c <= 'z')) {
-        return true;
-    }
-    return false;
-}
-
-char ConvertUpper2Lower(char c) {
-    if ((c >= 'A') && (c <= 'Z')) {
-        return c + 32;
-    }
-    return c;
-}
-
-bool isPalindrome(char * s){
-    if (s == NULL || strlen(s) == 0) {
-        return true;
-    }
-
-    int ls = strlen(s);
-    int left = 0, right = ls - 1;
-
-    while (left < right) {
-        while (left < right && !IsLegalCharater(s[left])) {
-            left++;
-        }
-        while (left < right && !IsLegalCharater(s[right])) {
-            right--;
-        }
-        if (ConvertUpper2Lower(s[left]) != ConvertUpper2Lower(s[right])) {
-            printf("left=%d, right=%d\n", left, right);
-            return false;
-        }
-        left++;
-        right--;
-    }
-    return true;
-}
-
-void isPalindromeTest(void)
-{
-    char s[] = "A man, a plan, a canal: Panama";
-
-    bool ans = isPalindrome(s);
-
-    printf("output: ans=%d\n", ans);
-}
 
 /* https://leetcode.cn/problems/valid-anagram/ */
 

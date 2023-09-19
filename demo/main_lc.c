@@ -25,6 +25,8 @@ extern void reverseWordsTest(void);
 extern void canConstructTest(void);
 extern void findTheDifferenceTest(void);
 extern void isSubsequenceTest(void);
+extern void longestPalindromexTest(void);
+extern void fizzBuzzTest(void);
 
 int main_lc(void)
 {
@@ -62,7 +64,8 @@ int main_lc(void)
     // reverseVowelsTest();
     // canConstructTest();
     // findTheDifferenceTest();
-    isSubsequenceTest();
+    // isSubsequenceTest();
+    fizzBuzzTest();
 
     /* stack */
 

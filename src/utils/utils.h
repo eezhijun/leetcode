@@ -40,6 +40,21 @@
 #endif
 #endif
 
+#define COUNT_DIGITS(num)       \
+    ({                          \
+        int count = 0;          \
+        int temp = num;         \
+        if (temp == 0) {        \
+            count = 1;          \
+        } else {                \
+            while (temp != 0) { \
+                temp /= 10;     \
+                count++;        \
+            }                   \
+        }                       \
+        count;                  \
+    })
+
 #ifndef FFS
 #define FFS(x) ((x) ? __builtin_ffs(x) : 0)
 #endif
@@ -385,13 +400,30 @@ int clz(int x);
 int ctz(int x);
 
 /**
+ * @brief int to string
+ *
+ * @param num
+ * @param str
+ * @return char*
+ */
+char *int2string(int num, char *str);
+
+/**
+ * @brief string to int
+ *
+ * @param str
+ * @return int
+ */
+int string2int(char *str);
+
+/**
  * @brief reverse string
  *
  * @param s source string
  * @param l left char postion
  * @param r right char postion
  */
-void reverse(char* s, int l, int r);
+void reverse(char *s, int l, int r);
 
 /**
  * @brief hex to dec
@@ -408,5 +440,13 @@ int hex2dec(char hex[]);
  * @return char*
  */
 char *dec2hex(int dec);
+
+/**
+ * @brief
+ *
+ * @param num
+ * @return int
+ */
+int count_digits(int num);
 
 #endif

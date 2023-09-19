@@ -13,8 +13,287 @@
 #include "stdbool.h"
 #include "math.h"
 #include "stdlib.h"
+#include "ctype.h"
+#include "stdlib.h"
 
 #include "utils.h"
+
+/* https://leetcode.cn/problems/fizz-buzz/ */
+/* 给你一个整数 n ，找出从 1 到 n 各个整数的 Fizz Buzz 表示，并用字符串数组 answer（下标从 1 开始）返回结果，其中：
+
+answer[i] == "FizzBuzz" 如果 i 同时是 3 和 5 的倍数。
+answer[i] == "Fizz" 如果 i 是 3 的倍数。
+answer[i] == "Buzz" 如果 i 是 5 的倍数。
+answer[i] == i （以字符串形式）如果上述条件全不满足。
+
+
+示例 1：
+
+输入：n = 3
+输出：["1","2","Fizz"]
+示例 2：
+
+输入：n = 5
+输出：["1","2","Fizz","4","Buzz"]
+示例 3：
+
+输入：n = 15
+输出：["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+
+
+提示：
+
+1 <= n <= 104 */
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char **fizzBuzz(int n, int *returnSize)
+{
+    int i;
+    int size = 0;
+
+    char **s = (char **)malloc(sizeof(char *) * n);
+    if (s == NULL) {
+        return NULL;
+    }
+    memset(s, 0, sizeof(char *) * n);
+    *returnSize = n;
+
+#if define(WAYS)
+    for (i = 0; i < n; i++) {
+        s[i] = (char *)malloc(sizeof(char) * 9);
+        memset(s[i], 0, sizeof(char) * 9);
+    }
+
+    for (i = 1; i <= n; i++) {
+        if (i % 15 == 0) {
+            strcpy(s[i - 1], "FizzBuzz");
+        } else if (i % 3 == 0) {
+            strcpy(s[i - 1], "Fizz");
+        } else if (i % 5 == 0) {
+            strcpy(s[i - 1], "Buzz");
+        } else {
+            sprintf(s[i - 1], "%d", i);
+        }
+    }
+#else
+    for (i = 1; i <= n; i++) {
+        if (i % 15 == 0) {
+            s[i - 1] = (char *)malloc(sizeof(char) * 9);
+            strncpy(s[i - 1], "FizzBuzz", 9);
+        } else if (i % 3 == 0) {
+            s[i - 1] = (char *)malloc(sizeof(char) * 5);
+            strncpy(s[i - 1], "Fizz", 5);
+        } else if (i % 5 == 0) {
+            s[i - 1] = (char *)malloc(sizeof(char) * 5);
+            strncpy(s[i - 1], "Buzz", 5);
+        } else {
+            size = COUNT_DIGITS(i);
+            s[i  - 1] = (char *)malloc(sizeof(char) * (size + 1));
+            sprintf(s[i - 1], "%d", i);
+        }
+    }
+#endif
+    return s;
+}
+
+void fizzBuzzTest(void)
+{
+    int n;
+    int returnSize = 0;
+
+    printf("please input integer:\n");
+    scanf("%d", &n);
+
+    char **ret = fizzBuzz(n, &returnSize);
+
+    for (int i = 0; i < returnSize; i++) {
+        printf("%s ", ret[i]);
+    }
+
+    for (int i = 0; i < returnSize; i++) {
+        free(ret[i]);
+        ret[i] = NULL;
+    }
+
+    free(ret);
+    ret = NULL;
+}
+
+/* https://leetcode.cn/problems/longest-palindrome/ */
+/* 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
+
+在构造过程中，请注意 区分大小写 。比如 "Aa" 不能当做一个回文字符串。
+
+
+
+示例 1:
+
+输入:s = "abccccdd"
+输出:7
+解释:
+我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
+示例 2:
+
+输入:s = "a"
+输出:1
+示例 3：
+
+输入:s = "aaaaaccc"
+输出:7
+
+
+提示:
+
+1 <= s.length <= 2000
+s 只由小写 和/或 大写英文字母组成 */
+int longestPalindromex(char *s)
+{
+}
+
+void longestPalindromexTest(void)
+{
+}
+
+/* https://leetcode.cn/problems/longest-palindromic-substring/ */
+/* 给你一个字符串 s，找到 s 中最长的回文子串。
+
+如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
+
+
+
+示例 1：
+
+输入：s = "babad"
+输出："bab"
+解释："aba" 同样是符合题意的答案。
+示例 2：
+
+输入：s = "cbbd"
+输出："bb"
+
+
+提示：
+
+1 <= s.length <= 1000
+s 仅由数字和英文字母组成 */
+bool IsPalindrome(char *s, int left, int right)
+{
+    while (left < right) {
+        if (s[left] != s[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+char *longestPalindrome(char *s)
+{
+    int len = strlen(s);
+    int i, j;
+    for (i = len; i > 0; i--) {
+        for (j = 0; j <= len - i; j++) {
+            if (IsPalindrome(s, j, i + j - 1)) {
+                char *ans = (char *)malloc(sizeof(char) *
+                                           (i + 1)); // +1预留字符串末尾字符'\0'
+                if (ans == NULL) {
+                    printf("malloc fail");
+                    return NULL;
+                }
+                memset(ans, 0, sizeof(char) * (i + 1));
+                memcpy(ans, &s[j], i);
+                printf("find i=%d, j=%d\n", i, j);
+                return ans;
+            }
+        }
+    }
+    return NULL;
+}
+
+void longestPalindromeTest(void)
+{
+    char s[] = "babad";
+
+    char *ans = longestPalindrome(s);
+
+    printf("output: ans=%s\n", ans);
+    free(ans);
+}
+
+/* https://leetcode.cn/problems/valid-palindrome/ */
+/* 如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。则可以认为该短语是一个 回文串 。
+
+字母和数字都属于字母数字字符。
+
+给你一个字符串 s，如果它是 回文串 ，返回 true ；否则，返回 false 。
+
+
+
+示例 1：
+
+输入: s = "A man, a plan, a canal: Panama"
+输出：true
+解释："amanaplanacanalpanama" 是回文串。
+示例 2：
+
+输入：s = "race a car"
+输出：false
+解释："raceacar" 不是回文串。
+示例 3：
+
+输入：s = " "
+输出：true
+解释：在移除非字母数字字符之后，s 是一个空字符串 "" 。
+由于空字符串正着反着读都一样，所以是回文串。
+
+
+提示：
+
+1 <= s.length <= 2 * 105
+s 仅由可打印的 ASCII 字符组成 */
+
+bool IsLegalCharater(char c)
+{
+    if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') ||
+        (c >= 'a' && c <= 'z')) {
+        return true;
+    }
+    return false;
+}
+
+bool isPalindrome(char *s)
+{
+    int ls = strlen(s);
+    int left = 0, right = ls - 1;
+
+    while (left < right) {
+        while (left < right && !IsLegalCharater(s[left])) {
+            left++;
+        }
+        while (left < right && !IsLegalCharater(s[right])) {
+            right--;
+        }
+        if (tolower(s[left]) != tolower(s[right])) {
+            printf("left=%d, right=%d\n", left, right);
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+void isPalindromeTest(void)
+{
+    char s[] = "A man, a plan, a canal: Panama";
+
+    bool ans = isPalindrome(s);
+
+    (ans == true) ? printf("output:true\n") : printf("output:false\n");
+}
 
 /* https://leetcode.cn/problems/is-subsequence/ */
 /* 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
@@ -46,7 +325,7 @@
 0 <= s.length <= 100
 0 <= t.length <= 10^4
 两个字符串都只由小写字符组成。*/
-bool isSubsequence(char * s, char * t)
+bool isSubsequence(char *s, char *t)
 {
     int i, j, index = 0;
     size_t lt = strlen(t);
@@ -105,7 +384,7 @@ s 和 t 只包含小写字母 */
 #define WAYS 1
 #if (WAYS == 1)
 /* 计数 */
-char findTheDifference(char* s, char* t)
+char findTheDifference(char *s, char *t)
 {
     int cnt[26];
     memset(cnt, 0, sizeof(cnt));
@@ -123,7 +402,8 @@ char findTheDifference(char* s, char* t)
 }
 #elif (WAYS == 2)
 /* 求和 */
-char findTheDifference(char* s, char* t) {
+char findTheDifference(char *s, char *t)
+{
     int n = strlen(s), m = strlen(t);
     int as = 0, at = 0;
     for (int i = 0; i < n; i++) {
@@ -136,7 +416,8 @@ char findTheDifference(char* s, char* t) {
 }
 #elif (WAYS == 3)
 /* 位运算 */
-char findTheDifference(char* s, char* t) {
+char findTheDifference(char *s, char *t)
+{
     int n = strlen(s), m = strlen(t);
     int ret = 0;
     for (int i = 0; i < n; i++) {
@@ -150,8 +431,8 @@ char findTheDifference(char* s, char* t) {
 #else
 char findTheDifference(char *s, char *t)
 {
-    int a[26] = {0};
-    int b[26] = {0};
+    int a[26] = { 0 };
+    int b[26] = { 0 };
     size_t ls = strlen(s);
     size_t lt = strlen(t);
 
@@ -216,8 +497,8 @@ ransomNote 和 magazine 由小写英文字母组成 */
 #if 1
 bool canConstruct(char *ransomNote, char *magazine)
 {
-    int a[26] = {0};
-    int b[26] = {0};
+    int a[26] = { 0 };
+    int b[26] = { 0 };
     size_t lr = strlen(ransomNote);
     size_t lm = strlen(magazine);
 
