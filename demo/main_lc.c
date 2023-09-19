@@ -24,6 +24,7 @@ extern void reverseVowelsTest(void);
 extern void reverseWordsTest(void);
 extern void canConstructTest(void);
 extern void findTheDifferenceTest(void);
+extern void isSubsequenceTest(void);
 
 int main_lc(void)
 {
@@ -60,7 +61,8 @@ int main_lc(void)
     // convertToTitleTest();
     // reverseVowelsTest();
     // canConstructTest();
-    findTheDifferenceTest();
+    // findTheDifferenceTest();
+    isSubsequenceTest();
 
     /* stack */
 
