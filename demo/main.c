@@ -12,11 +12,9 @@
 #include "errno.h"
 
 
-#ifdef LC_DEMO
+#if defined(LC_DEMO)
 #define MAIN_SELECTED_APP LC_DEMO
-#endif
-
-#ifdef TEST_DEMO
+#elif defined(TEST_DEMO)
 #define MAIN_SELECTED_APP TEST_DEMO
 #endif
 
