@@ -181,17 +181,27 @@ void dec2hex_test(void)
     free(ret);
 }
 
+void sprintf_test(void)
+{
+    char *s = (char *)malloc(sizeof(char) * 5);
+
+    sprintf(s, "%d", 1234);
+
+    PRINT_ARRAY(s, 5, "%d ");
+}
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
     // memory_layout_test();
-    memset_test();
+    // memset_test();
 
     // stack_test();
     // queue_test();
 
     // hex2dec_test();
     // dec2hex_test();
+    sprintf_test();
 
 }

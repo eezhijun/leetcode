@@ -60,7 +60,7 @@ char **fizzBuzz(int n, int *returnSize)
     memset(s, 0, sizeof(char *) * n);
     *returnSize = n;
 
-#if define(WAYS)
+#if defined(WAY1)
     for (i = 0; i < n; i++) {
         s[i] = (char *)malloc(sizeof(char) * 9);
         memset(s[i], 0, sizeof(char) * 9);
