@@ -59,15 +59,15 @@ DEP_FILE              = $(OBJ_FILES:%.o=%.d)
 
 ${BIN} : $(BUILD_DIR)/$(BIN)
 
-${BUILD_DIR}/${BIN} : ${OBJ_FILES}
-	@-mkdir -p ${@D}
-	@$(CC) $^ ${LDFLAGS} -o $@
+$(BUILD_DIR)/$(BIN) : $(OBJ_FILES)
+	@-mkdir -p $(@D)
+	@$(CC) $^ $(LDFLAGS) -o $@
 	@echo "BIN $@"
 	@echo "MAKE DONE!"
 
--include ${DEP_FILE}
+-include $(DEP_FILE)
 
-${BUILD_DIR}/%.o : %.c Makefile
+$(BUILD_DIR)/%.o : %.c Makefile
 	@-mkdir -p $(@D)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -c $< -o $@
 	@echo "CC $<"
