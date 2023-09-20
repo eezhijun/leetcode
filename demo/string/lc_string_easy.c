@@ -18,6 +18,297 @@
 
 #include "utils.h"
 
+/* https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/ */
+/* 给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回  -1 。
+
+示例 1：
+
+输入：haystack = "sadbutsad", needle = "sad"
+输出：0
+解释："sad" 在下标 0 和 6 处匹配。
+第一个匹配项的下标是 0 ，所以返回 0 。
+示例 2：
+
+输入：haystack = "leetcode", needle = "leeto"
+输出：-1
+解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1 。
+
+
+提示：
+
+1 <= haystack.length, needle.length <= 104
+haystack 和 needle 仅由小写英文字符组成 */
+int strStr(char * haystack, char * needle)
+{
+    int i = 0, j = 0;
+    int lh = strlen(haystack);
+    int ln = strlen(needle);
+
+    while (i < lh && j < ln) {
+        if (haystack[i] == needle[j]) {
+            i++;
+            j++;
+        } else {
+            i = i - j + 1;
+            j = 0;
+        }
+        if (j == ln) {
+            return i - j;
+        }
+    }
+    return -1;
+}
+
+void strStrTest(void)
+{
+    char haystack[] = "sadbutsad";
+    char needle[] = "sad";
+
+    int ans = strStr(haystack, needle);
+
+    printf("output: ans=%d\n", ans);
+}
+
+/* https://leetcode.cn/problems/longest-common-prefix/ */
+/* 编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 ""。
+
+
+
+示例 1：
+
+输入：strs = ["flower","flow","flight"]
+输出："fl"
+示例 2：
+
+输入：strs = ["dog","racecar","car"]
+输出：""
+解释：输入不存在公共前缀。
+
+
+提示：
+
+1 <= strs.length <= 200
+0 <= strs[i].length <= 200
+strs[i] 仅由小写英文字母组成 */
+char *longestCommonPrefix(char ** strs, int strsSize)
+{
+    if (strsSize == 0) {
+        return "";
+    }
+
+    char cmp;
+    bool ifNeed = true;
+    int i;
+    for (i = 0; ifNeed && strs[0][i] != '\0'; i++) {
+        cmp = strs[0][i];
+        for (int j = 1; j < strsSize; j++) {
+            if (strs[j][i] != cmp) {
+                ifNeed = false;
+                i--;
+                break;
+            }
+        }
+    }
+    char *ret;
+    ret = (char *)malloc(sizeof(char) * (i + 1));
+    memcpy(ret, strs[0], i);
+    ret[i] = '\0';
+    return ret;
+}
+
+void longestCommonPrefixTest(void)
+{
+    char *s[] = {"flower","flow","flight"};
+    int strsSize = sizeof(s) / sizeof(char *);
+
+    printf("%d\n", strsSize);
+    char *ans = longestCommonPrefix(s, strsSize);
+
+    printf("output: ans=%s\n", ans);
+    free(ans);
+}
+
+/* https://leetcode.cn/problems/valid-anagram/ */
+/* 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+
+
+
+示例 1:
+
+输入: s = "anagram", t = "nagaram"
+输出: true
+示例 2:
+
+输入: s = "rat", t = "car"
+输出: false
+
+
+提示:
+
+1 <= s.length, t.length <= 5 * 104
+s 和 t 仅包含小写字母
+
+
+进阶: 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？ */
+bool isAnagram(char * s, char * t)
+{
+    int *ss = (int *)malloc(sizeof(int) * 26);
+    memset(ss, 0, sizeof(int) * 26);
+
+    int i;
+    int ls = strlen(s);
+    int lt = strlen(t);
+    int count = 0;
+
+    if (ls != lt) {
+        return false;
+    }
+    for (i = 0; i < ls; i++) {
+        ss[s[i] - 'a']++;
+        ss[t[i] - 'a']--;
+    }
+    for (i = 0; i < 26; i++) {
+        if (ss[i] != 0) {
+            count++;
+        }
+    }
+    return (count == 0) ? true : false;
+
+}
+
+void isAnagramTest(void)
+{
+    char s[] = "anagram";
+    char t[] = "nagaram";
+
+    bool ans = isAnagram(s, t);
+
+    printf("output: ans=%d\n", ans);
+}
+
+/* https://leetcode.cn/problems/first-unique-character-in-a-string/ */
+/* 给定一个字符串 s ，找到 它的第一个不重复的字符，并返回它的索引 。如果不存在，则返回 -1 。
+
+
+
+示例 1：
+
+输入: s = "leetcode"
+输出: 0
+示例 2:
+
+输入: s = "loveleetcode"
+输出: 2
+示例 3:
+
+输入: s = "aabb"
+输出: -1
+
+
+提示:
+
+1 <= s.length <= 105
+s 只包含小写字母 */
+int firstUniqChar(char * s)
+{
+    int *st = (int *)malloc(sizeof(int) * 26);
+    memset(st, 0, sizeof(int) * 26);
+    int i;
+    int len = strlen(s);
+
+    for (i = 0; i < len; i++) {
+        st[s[i] - 'a']++;
+    }
+    for (i = 0; i < len; i++) {
+        if (st[s[i] - 'a'] == 1) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void firstUniqCharTest(void)
+{
+    char s[] = "loveleetcode";
+
+    int ans = firstUniqChar(s);
+
+    printf("output: ans=%d\n", ans);
+}
+
+/* https://leetcode.cn/problems/add-binary/ */
+/* 给你两个二进制字符串 a 和 b ，以二进制字符串的形式返回它们的和。
+
+
+
+示例 1：
+
+输入:a = "11", b = "1"
+输出："100"
+示例 2：
+
+输入：a = "1010", b = "1011"
+输出："10101"
+
+
+提示：
+
+1 <= a.length, b.length <= 104
+a 和 b 仅由字符 '0' 或 '1' 组成
+字符串如果不是 "0" ，就不含前导零 */
+void reverse2(char *s, int len)
+{
+    for (int i = 0; i < len / 2; i++) {
+        char tmp = s[len - i - 1];
+        s[len - i - 1] = s[i];
+        s[i] = tmp;
+    }
+}
+
+char *addBinary(char *a, char *b)
+{
+    int la = (int)strlen(a);
+    int lb = (int)strlen(b);
+    reverse2(a, la);
+    reverse2(b, lb);
+    int ln = (la > lb) ? (la) : (lb);
+    char *res = (char *)malloc(sizeof(char) * (ln + 2));
+    if (res == NULL) {
+        return NULL;
+    }
+    memset(res, 0, sizeof(char) * (ln + 2));
+    int carry = 0, len = 0;
+    for (int i = 0; i < ln; i++) {
+        carry += (i < la) ? (a[i] == '1') : 0;
+        carry += (i < lb) ? (b[i] == '1') : 0;
+        res[len] = (carry % 2) + '0';
+        len++;
+        carry /= 2;
+    }
+    if (carry) {
+        res[len] = '1';
+        len++;
+    }
+    res[len] = '\0';
+    reverse2(res, strlen(res));
+    return res;
+}
+
+void addBinaryTest(void)
+{
+    char a[] = "11";
+    char b[] = "1";
+
+    char *ans = addBinary(a, b);
+
+    printf("output: ans=%s\n", ans);
+    free(ans);
+}
+
 /* https://leetcode.cn/problems/add-strings/ */
 /* 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。
 
@@ -38,14 +329,13 @@
 输入：num1 = "0", num2 = "0"
 输出："0"
 
-
-
-
 提示：
 
 1 <= num1.length, num2.length <= 104
 num1 和num2 都只包含数字 0-9
 num1 和num2 都不包含任何前导零 */
+
+
 char * addStrings(char * num1, char * num2)
 {
     int n = string2int(num1) + string2int(num2);
