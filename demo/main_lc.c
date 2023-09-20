@@ -60,14 +60,14 @@ int main_lc(void)
     // isValidTest();
     // lengthOfLastWordTest();
     // titleToNumberTest();
-    // isIsomorphicTest();
+    isIsomorphicTest();
     // convertToTitleTest();
     // reverseVowelsTest();
     // canConstructTest();
     // findTheDifferenceTest();
     // isSubsequenceTest();
     // fizzBuzzTest();
-    addStringsTest();
+    // addStringsTest();
 
     /* stack */
 

@@ -1216,23 +1216,80 @@ bool wordPattern(char *pattern, char *s)
 1 <= s.length <= 5 * 104
 t.length == s.length
 s 和 t 由任意有效的 ASCII 字符组成 */
+
+#if 0
+struct HashTable {
+    char key;
+    char val;
+    UT_hash_handle hh;
+};
+
+bool isIsomorphic(char* s, char* t) {
+    struct HashTable* s2t = NULL;
+    struct HashTable* t2s = NULL;
+    int len = strlen(s);
+    for (int i = 0; i < len; ++i) {
+        char x = s[i], y = t[i];
+        struct HashTable *tmp1, *tmp2;
+        HASH_FIND(hh, s2t, &x, sizeof(char), tmp1);
+        HASH_FIND(hh, t2s, &y, sizeof(char), tmp2);
+        if (tmp1 != NULL) {
+            if (tmp1->val != y) {
+                return false;
+            }
+        } else {
+            tmp1 = malloc(sizeof(struct HashTable));
+            tmp1->key = x;
+            tmp1->val = y;
+            HASH_ADD(hh, s2t, key, sizeof(char), tmp1);
+        }
+        if (tmp2 != NULL) {
+            if (tmp2->val != x) {
+                return false;
+            }
+        } else {
+            tmp2 = malloc(sizeof(struct HashTable));
+            tmp2->key = y;
+            tmp2->val = x;
+            HASH_ADD(hh, t2s, key, sizeof(char), tmp2);
+        }
+    }
+    return true;
+}
+#else
 bool isIsomorphic(char *s, char *t)
 {
-    size_t len = strlen(s);
+    char mapping_s2t[128] = {0}; /* 用于存储字符映射关系 s->t */
+    char mapping_t2s[128] = {0}; /* 用于存储字符映射关系 t->s */
 
-    if (len == 1) {
-        return true;
+    for (int i = 0; s[i] != '\0'; i++) {
+
+        /* check s->t */
+        if (mapping_s2t[s[i]] == 0) {
+            mapping_s2t[s[i]] = t[i];
+        } else if (mapping_s2t[s[i]] != t[i]) {
+            return false;
+        }
+
+        /* check t->s */
+        if (mapping_t2s[t[i]] == 0) {
+            mapping_t2s[t[i]] = s[i];
+        } else if (mapping_t2s[t[i]] != s[i]) {
+            return false;
+        }
     }
 
     return true;
 }
+#endif
 
 void isIsomorphicTest(void)
 {
-    char *s = "badc";
-    char *t = "baba";
+    char s[128];
+    char t[128];
 
-    printf("intput:s=%s, t=%s\n", s, t);
+    printf("please input string s and t:\n");
+    scanf("%s\n%s", s, t);
 
     bool ret = isIsomorphic(s, t);
 
