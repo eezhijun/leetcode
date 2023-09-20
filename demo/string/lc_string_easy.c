@@ -16,6 +16,7 @@
 #include "ctype.h"
 #include "stdlib.h"
 
+#include "uthash.h"
 #include "utils.h"
 
 /* https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/ */
@@ -1217,14 +1218,15 @@ bool wordPattern(char *pattern, char *s)
 t.length == s.length
 s 和 t 由任意有效的 ASCII 字符组成 */
 
-#if 0
+#if 1
 struct HashTable {
     char key;
     char val;
     UT_hash_handle hh;
 };
 
-bool isIsomorphic(char* s, char* t) {
+bool isIsomorphic(char* s, char* t)
+{
     struct HashTable* s2t = NULL;
     struct HashTable* t2s = NULL;
     int len = strlen(s);

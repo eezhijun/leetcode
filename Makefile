@@ -13,6 +13,7 @@ INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(ROOT_DIR)/demo
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src/utils
+INCLUDE_DIRS          += -I$(ROOT_DIR)/src/lib/uthash/include
 
 
 SOURCE_FILES          := $(wildcard *.c)
