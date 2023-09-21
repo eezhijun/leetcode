@@ -191,6 +191,31 @@ void sizeof_test(void)
 
 }
 
+void scanf_gets_fgets_test(void)
+{
+    // char s[128];
+
+    // printf("please input string s:\n");
+    // scanf("%s", s);
+
+    // printf("output:\n");
+    // printf("%s\n", s);
+
+    // char t[128];
+    // printf("please input string t:\n");
+    // gets(t);
+
+    // printf("output:\n");
+    // printf("%s\n", t);
+
+    char k[128];
+    printf("please input string k:\n");
+    fgets(k, 128, stdin);
+
+    printf("output:\n");
+    printf("%s\n", k);
+}
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
@@ -206,6 +231,7 @@ void main_test(void)
     // sprintf_test();
     // limits_test();
     // sizeof_test();
-    hash_table_test();
+    // hash_table_test();
+    // scanf_gets_fgets_test();
 
 }

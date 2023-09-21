@@ -39,7 +39,7 @@
 
 1 <= haystack.length, needle.length <= 104
 haystack 和 needle 仅由小写英文字符组成 */
-int strStr(char * haystack, char * needle)
+int strStr(char *haystack, char *needle)
 {
     int i = 0, j = 0;
     int lh = strlen(haystack);
@@ -93,7 +93,7 @@ void strStrTest(void)
 1 <= strs.length <= 200
 0 <= strs[i].length <= 200
 strs[i] 仅由小写英文字母组成 */
-char *longestCommonPrefix(char ** strs, int strsSize)
+char *longestCommonPrefix(char **strs, int strsSize)
 {
     if (strsSize == 0) {
         return "";
@@ -121,7 +121,7 @@ char *longestCommonPrefix(char ** strs, int strsSize)
 
 void longestCommonPrefixTest(void)
 {
-    char *s[] = {"flower","flow","flight"};
+    char *s[] = { "flower", "flow", "flight" };
     int strsSize = sizeof(s) / sizeof(char *);
 
     printf("%d\n", strsSize);
@@ -155,7 +155,7 @@ s 和 t 仅包含小写字母
 
 
 进阶: 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？ */
-bool isAnagram(char * s, char * t)
+bool isAnagram(char *s, char *t)
 {
     int *ss = (int *)malloc(sizeof(int) * 26);
     memset(ss, 0, sizeof(int) * 26);
@@ -178,7 +178,6 @@ bool isAnagram(char * s, char * t)
         }
     }
     return (count == 0) ? true : false;
-
 }
 
 void isAnagramTest(void)
@@ -214,7 +213,7 @@ void isAnagramTest(void)
 
 1 <= s.length <= 105
 s 只包含小写字母 */
-int firstUniqChar(char * s)
+int firstUniqChar(char *s)
 {
     int *st = (int *)malloc(sizeof(int) * 26);
     memset(st, 0, sizeof(int) * 26);
@@ -336,8 +335,7 @@ void addBinaryTest(void)
 num1 和num2 都只包含数字 0-9
 num1 和num2 都不包含任何前导零 */
 
-
-char * addStrings(char * num1, char * num2)
+char *addStrings(char *num1, char *num2)
 {
     int n = string2int(num1) + string2int(num2);
 
@@ -437,7 +435,7 @@ char **fizzBuzz(int n, int *returnSize)
             strncpy(s[i - 1], "Buzz", 5);
         } else {
             size = COUNT_DIGITS(i);
-            s[i  - 1] = (char *)malloc(sizeof(char) * (size + 1));
+            s[i - 1] = (char *)malloc(sizeof(char) * (size + 1));
             sprintf(s[i - 1], "%d", i);
         }
     }
@@ -1184,8 +1182,78 @@ pattern 只包含小写英文字母
 s 只包含小写英文字母和 ' '
 s 不包含 任何前导或尾随对空格
 s 中每个单词都被 单个空格 分隔 */
+
+/* abac dog cat dog cat */
 bool wordPattern(char *pattern, char *s)
 {
+    char *hash_set_str[26]; //字母映射字符串
+
+    memset(hash_set_str, 0, sizeof(char *) * 26);
+
+    const char target[2] = " ";
+    int len = strlen(pattern);
+    char *token = NULL;
+    for (int i = 0; i < len; i++) {
+        if (token == NULL) {
+            token = strtok(s, target);
+        } else {
+            token = strtok(NULL, target);
+            if (token == NULL) {
+                return false;
+            }
+        }
+
+        if (hash_set_str[pattern[i] - 'a'] == NULL) {
+            hash_set_str[pattern[i] - 'a'] = token;
+        } else {
+            if (strcmp(hash_set_str[pattern[i] - 'a'], token) != 0) {
+                return false;
+            }
+        }
+    }
+    token = strtok(NULL, target);
+    if (token != NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (hash_set_str[i] != NULL) {
+            for (int j = i + 1; j < 26; j++) {
+                if (hash_set_str[j] != NULL) {
+                    if (strcmp(hash_set_str[i], hash_set_str[j]) == 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+void wordPatternTest(void)
+{
+    char pattern[128] = { 0 };
+    char s[128] = { 0 };
+    int len = 0;
+
+    printf("please input string pattern:\n");
+    fgets(pattern, 128, stdin);
+    len = strlen(pattern);
+    if (len > 0 && pattern[len - 1] == '\n') {
+        pattern[len - 1] = '\0';
+    }
+
+    printf("please input string s:\n");
+    fgets(s, 128, stdin);
+    len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
+    }
+
+    bool ret = wordPattern(pattern, s);
+
+    (ret == true) ? printf("output:true\n") : printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/isomorphic-strings/ */
@@ -1225,10 +1293,10 @@ struct HashTable {
     UT_hash_handle hh;
 };
 
-bool isIsomorphic(char* s, char* t)
+bool isIsomorphic(char *s, char *t)
 {
-    struct HashTable* s2t = NULL;
-    struct HashTable* t2s = NULL;
+    struct HashTable *s2t = NULL;
+    struct HashTable *t2s = NULL;
     int len = strlen(s);
     for (int i = 0; i < len; ++i) {
         char x = s[i], y = t[i];
@@ -1261,11 +1329,10 @@ bool isIsomorphic(char* s, char* t)
 #else
 bool isIsomorphic(char *s, char *t)
 {
-    char mapping_s2t[128] = {0}; /* 用于存储字符映射关系 s->t */
-    char mapping_t2s[128] = {0}; /* 用于存储字符映射关系 t->s */
+    char mapping_s2t[128] = { 0 }; /* 用于存储字符映射关系 s->t */
+    char mapping_t2s[128] = { 0 }; /* 用于存储字符映射关系 t->s */
 
     for (int i = 0; s[i] != '\0'; i++) {
-
         /* check s->t */
         if (mapping_s2t[s[i]] == 0) {
             mapping_s2t[s[i]] = t[i];
