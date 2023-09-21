@@ -32,6 +32,7 @@
 /* 全是空格 */
 int countSegments(char * s)
 {
+#if 0
     size_t len = strlen(s);
     if (s == NULL || len == 0) {
         return 0;
@@ -67,6 +68,13 @@ int countSegments(char * s)
         cnt++;
     }
 
+#else
+    int cnt = 0, i, len = strlen(s);
+    for(i = 0; i < len; i++) {
+        if((i == 0 || s[i-1] == ' ') && s[i] != ' ')
+            cnt++;
+    }
+#endif
     return cnt;
 }
 
