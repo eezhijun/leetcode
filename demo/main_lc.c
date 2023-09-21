@@ -29,6 +29,7 @@ extern void longestPalindromexTest(void);
 extern void fizzBuzzTest(void);
 extern void addStringsTest(void);
 extern void wordPatternTest(void);
+extern void countSegmentsTest(void);
 
 int main_lc(void)
 {
@@ -69,7 +70,8 @@ int main_lc(void)
     // isSubsequenceTest();
     // fizzBuzzTest();
     // addStringsTest();
-    wordPatternTest();
+    // wordPatternTest();
+    countSegmentsTest();
 
     /* stack */
 

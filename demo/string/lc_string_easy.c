@@ -19,6 +19,74 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/number-of-segments-in-a-string/ */
+/* 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+
+请注意，你可以假定字符串里不包括任何不可打印的字符。
+
+示例:
+
+输入: "Hello, my name is John"
+输出: 5
+解释: 这里的单词是指连续的不是空格的字符，所以 "Hello," 算作 1 个单词。*/
+/* 全是空格 */
+int countSegments(char * s)
+{
+    size_t len = strlen(s);
+    if (s == NULL || len == 0) {
+        return 0;
+    }
+
+    int l = 0, r = len - 1;
+    int cnt = 0;
+    bool is_space = false;
+    while (s[l] == ' ') { /* 前导空格 */
+        l++;
+    }
+
+    while (r >= 0 && s[r] == ' ') { /* 尾随空格 */
+        r--;
+    }
+
+    if (l > r) {
+        return 0;
+    }
+    while (l < r) {
+        l++;
+        while (s[l] == ' ') {
+            is_space = true;
+            l++;
+        }
+        if (is_space) {
+            is_space = false;
+            cnt++;
+        }
+    }
+
+    if (len) {
+        cnt++;
+    }
+
+    return cnt;
+}
+
+void countSegmentsTest(void)
+{
+    char s[128];
+
+    printf("please input string s:\n");
+    fgets(s, 128, stdin);
+
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
+    }
+
+    int ret = countSegments(s);
+
+    printf("output:%d\n", ret);
+}
+
 /* https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/ */
 /* 给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回  -1 。
 
