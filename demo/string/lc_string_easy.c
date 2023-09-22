@@ -19,6 +19,81 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/keyboard-row/ */
+/* 给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。
+
+美式键盘 中：
+
+第一行由字符 "qwertyuiop" 组成。
+第二行由字符 "asdfghjkl" 组成。
+第三行由字符 "zxcvbnm" 组成。
+American keyboard
+
+示例 1：
+
+输入：words = ["Hello","Alaska","Dad","Peace"]
+输出：["Alaska","Dad"]
+示例 2：
+
+输入：words = ["omk"]
+输出：[]
+示例 3：
+
+输入：words = ["adsdf","sfd"]
+输出：["adsdf","sfd"]
+
+
+提示：
+
+1 <= words.length <= 20
+1 <= words[i].length <= 100
+wordis_keyboard_row_wordss[i] 由英文字母（小写和大写字母）组成
+*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+bool is_keyboard_row_words(char *s)
+{
+    char *table[] = {"qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL", "zxcvbnmZXCVBNM"};
+    size_t len = ARRAY_SIZE(table);
+    size_t lt[len];
+    size_t ls = strlen(s);
+    int i, j;
+
+    for (i = 0; i < len; i++) {
+        lt[i] = strlen(table[i]);
+    }
+    return true;
+}
+
+char ** findWords(char ** words, int wordsSize, int* returnSize)
+{
+    char **ret = (char **)malloc(sizeof(char *) * wordsSize);
+    memset(ret, 0, sizeof(char *) * wordsSize);
+}
+
+void findWordsTest(void)
+{
+    char *s[] = {"Hello","Alaska","Dad","Peace"};
+    size_t len = ARRAY_SIZE(s);
+    int return_size = 0;
+
+    printf("iuput:\n");
+    PRINT_ARRAY(s, len, "%s ");
+
+    char **ret = findWords(s, len, &return_size);
+
+    PRINT_ARRAY(ret, return_size, "%s ");
+
+    for (int i = 0; i < return_size; i++) {
+        free(ret[i]);
+        ret[i] = NULL;
+    }
+    free(ret);
+    ret = NULL;
+}
+
 /* https://leetcode.cn/problems/license-key-formatting/ */
 /* 给定一个许可密钥字符串 s，仅由字母、数字字符和破折号组成。字符串由 n 个破折号分成 n + 1 组。你也会得到一个整数 k 。
 

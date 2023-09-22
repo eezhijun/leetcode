@@ -14,6 +14,7 @@
 #include "stdbool.h"
 #include "math.h"
 #include "float.h"
+#include "ctype.h"
 
 #include "gnu/libc-version.h"
 
@@ -216,6 +217,25 @@ void scanf_gets_fgets_test(void)
     printf("%s\n", k);
 }
 
+void toupper_tolower_test(void)
+{
+    char table[] = "asdfghjkl";
+    size_t len = strlen(table);
+
+    printf("init:%s\n", table);
+    printf("toupper:\n");
+    for (int i = 0; i < len; i++) {
+        table[i] = toupper(table[i]);
+    }
+    printf("%s\n", table);
+
+    printf("tolower:\n");
+    for (int i = 0; i < len; i++) {
+        table[i] = tolower(table[i]);
+    }
+    printf("%s\n", table);
+}
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
@@ -233,5 +253,6 @@ void main_test(void)
     // sizeof_test();
     // hash_table_test();
     // scanf_gets_fgets_test();
+    toupper_tolower_test();
 
 }
