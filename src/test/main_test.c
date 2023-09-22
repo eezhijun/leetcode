@@ -213,8 +213,14 @@ void scanf_gets_fgets_test(void)
     printf("please input string k:\n");
     fgets(k, 128, stdin);
 
+    size_t len = strlen(k);
+    if (len > 0 && k[len - 1] == '\n') {
+        k[len - 1] = '\0';
+    }
+
     printf("output:\n");
     printf("%s\n", k);
+    PRINT_ARRAY(k, len, "%d ");
 }
 
 void toupper_tolower_test(void)
@@ -252,7 +258,7 @@ void main_test(void)
     // limits_test();
     // sizeof_test();
     // hash_table_test();
-    // scanf_gets_fgets_test();
-    toupper_tolower_test();
+    scanf_gets_fgets_test();
+    // toupper_tolower_test();
 
 }
