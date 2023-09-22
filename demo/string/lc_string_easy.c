@@ -19,6 +19,133 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/license-key-formatting/ */
+/* 给定一个许可密钥字符串 s，仅由字母、数字字符和破折号组成。字符串由 n 个破折号分成 n + 1 组。你也会得到一个整数 k 。
+
+我们想要重新格式化字符串 s，使每一组包含 k 个字符，除了第一组，它可以比 k 短，但仍然必须包含至少一个字符。
+此外，两组之间必须插入破折号，并且应该将所有小写字母转换为大写字母。
+
+返回 重新格式化的许可密钥 。
+
+示例 1：
+
+输入：S = "5F3Z-2e-9-w", k = 4
+输出："5F3Z-2E9W"
+解释：字符串 S 被分成了两个部分，每部分 4 个字符；
+     注意，两个额外的破折号需要删掉。
+示例 2：
+
+输入：S = "2-5g-3-J", k = 2
+输出："2-5G-3J"
+解释：字符串 S 被分成了 3 个部分，按照前面的规则描述，第一部分的字符可以少于给定的数量，其余部分皆为 2 个字符。
+
+
+提示:
+
+1 <= s.length <= 105
+s 只包含字母、数字和破折号 '-'.
+1 <= k <= 104 */
+/* "2-4A0r7-4k" k=4 k=3 "--a-a-a-a--" k=2 "0123456789" k=1*/
+char * licenseKeyFormatting(char * s, int k)
+{
+    size_t len = strlen(s);
+
+    char *ret = (char *)malloc(sizeof(char) * (len * 2));
+    memset(ret, 0, sizeof(char) * (len * 2));
+
+    int i = len - 1, j = 0;
+    int idx = 0;
+    int cnt = 0;
+
+    for (; s[j] == '-'; j++);
+    for (; i >= j; i--) {
+        if (s[i] != '-') {
+            ret[idx++] = s[i];
+            cnt++;
+            if (cnt % k == 0 && i != j) {
+                ret[idx++] = '-';
+            }
+        }
+    }
+    reverse(ret, 0, idx - 1);
+
+    for (i = 0; i < idx; i++) {
+        ret[i] = toupper(ret[i]);
+    }
+
+    return ret;
+}
+
+void licenseKeyFormattingTest(void)
+{
+    char s[128];
+    int k;
+
+    printf("please input string s:\n");
+    fgets(s, 128, stdin);
+
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
+    }
+
+    printf("please input integer k:\n");
+    scanf("%d", &k);
+
+    char *ret = licenseKeyFormatting(s, k);
+
+    printf("output:%s\n", ret);
+    free(ret);
+    ret = NULL;
+}
+
+/* https://leetcode.cn/problems/repeated-substring-pattern/ */
+/* 给定一个非空的字符串 s ，检查是否可以通过由它的一个子串重复多次构成。
+
+
+
+示例 1:
+
+输入: s = "abab"
+输出: true
+解释: 可由子串 "ab" 重复两次构成。
+示例 2:
+
+输入: s = "aba"
+输出: false
+示例 3:
+
+输入: s = "abcabcabcabc"
+输出: true
+解释: 可由子串 "abc" 重复四次构成。 (或子串 "abcabc" 重复两次构成。)
+
+
+提示：
+
+1 <= s.length <= 104
+s 由小写英文字母组成 */
+bool repeatedSubstringPattern(char * s)
+{
+
+}
+
+void repeatedSubstringPatternTest(void)
+{
+    char s[128];
+
+    printf("please input string s:\n");
+    fgets(s, 128, stdin);
+
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
+    }
+
+    bool ret = repeatedSubstringPattern(s);
+
+    (ret == true) ? printf("output:true\n") : printf("output:false\n");
+}
+
 /* https://leetcode.cn/problems/number-of-segments-in-a-string/ */
 /* 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
 

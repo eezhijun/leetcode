@@ -30,6 +30,8 @@ extern void fizzBuzzTest(void);
 extern void addStringsTest(void);
 extern void wordPatternTest(void);
 extern void countSegmentsTest(void);
+extern void repeatedSubstringPatternTest(void);
+extern void licenseKeyFormattingTest(void);
 
 int main_lc(void)
 {
@@ -71,7 +73,9 @@ int main_lc(void)
     // fizzBuzzTest();
     // addStringsTest();
     // wordPatternTest();
-    countSegmentsTest();
+    // countSegmentsTest();
+    // repeatedSubstringPatternTest();
+    licenseKeyFormattingTest();
 
     /* stack */
 
