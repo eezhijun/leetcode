@@ -19,6 +19,63 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/detect-capital/ */
+/* 我们定义，在以下情况时，单词的大写用法是正确的：
+
+全部字母都是大写，比如 "USA" 。
+单词中所有字母都不是大写，比如 "leetcode" 。
+如果单词不只含有一个字母，只有首字母大写， 比如 "Google" 。
+给你一个字符串 word 。如果大写用法正确，返回 true ；否则，返回 false 。
+
+示例 1：
+
+输入：word = "USA"
+输出：true
+示例 2：
+
+输入：word = "FlaG"
+输出：false
+
+
+提示：
+
+1 <= word.length <= 100
+word 由小写和大写英文字母组成 */
+bool detectCapitalUse(char * word)
+{
+    int i;
+    int flag1 = 0, flag2 = 0;
+    for (i = 0; word[i] != '\0'; i++) {
+        if (flag1 == 1) {
+            if (flag2 == 1) {
+                if (!islower(word[i])) {
+                    return false;
+                }
+            } else if (i == 1 && islower(word[i])) {
+                flag2 = 1;
+            } else if (islower(word[i])) {
+                return false;
+            }
+        } else if (i == 0 && isupper(word[i])) {
+            flag1 = 1;
+        } else if (!islower(word[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void detectCapitalUseTest(void)
+{
+    char word[128] = {0};
+
+    printf("please input string word by scanf:\n");
+    scanf("%s", word);
+
+    (detectCapitalUse(word) == true) ? printf("output:true\n") : printf("output:false\n");
+
+}
+
 /* https://leetcode.cn/problems/keyboard-row/ */
 /* 给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。
 

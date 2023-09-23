@@ -33,6 +33,7 @@ extern void countSegmentsTest(void);
 extern void repeatedSubstringPatternTest(void);
 extern void licenseKeyFormattingTest(void);
 extern void findWordsTest(void);
+extern void detectCapitalUseTest(void);
 
 int main_lc(void)
 {
@@ -77,7 +78,8 @@ int main_lc(void)
     // countSegmentsTest();
     // repeatedSubstringPatternTest();
     // licenseKeyFormattingTest();
-    findWordsTest();
+    // findWordsTest();
+    detectCapitalUseTest();
 
     /* stack */
 
