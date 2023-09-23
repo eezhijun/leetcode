@@ -194,33 +194,30 @@ void sizeof_test(void)
 
 void scanf_gets_fgets_test(void)
 {
-    // char s[128];
+    char s[128];
+    size_t len = 0;
 
-    // printf("please input string s:\n");
-    // scanf("%s", s);
-
-    // printf("output:\n");
-    // printf("%s\n", s);
-
-    // char t[128];
-    // printf("please input string t:\n");
-    // gets(t);
-
-    // printf("output:\n");
-    // printf("%s\n", t);
-
-    char k[128];
-    printf("please input string k:\n");
-    fgets(k, 128, stdin);
-
-    size_t len = strlen(k);
-    if (len > 0 && k[len - 1] == '\n') {
-        k[len - 1] = '\0';
+#define FGETS_TEST
+#if defined(SCANF_TEST)
+    printf("please input string s by scanf:\n");
+    scanf("%s", s);
+    len = strlen(s);
+#elif defined(GETS_TEST)
+    printf("please input string s by gets:\n");
+    gets(s);
+    len = strlen(s);
+#elif defined(FGETS_TEST)
+    printf("please input string s by fgets:\n");
+    fgets(s, 128, stdin);
+    len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
     }
+#endif
 
     printf("output:\n");
-    printf("%s\n", k);
-    PRINT_ARRAY(k, len, "%d ");
+    printf("%s\n", s);
+    PRINT_ARRAY(s, len, "%d ");
 }
 
 void toupper_tolower_test(void)
