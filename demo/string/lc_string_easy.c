@@ -60,9 +60,49 @@ bool is_keyboard_row_words(char *s)
     size_t lt[len];
     size_t ls = strlen(s);
     int i, j;
+    int row = 0;
+    bool is_found = false;
 
     for (i = 0; i < len; i++) {
         lt[i] = strlen(table[i]);
+    }
+
+    for (i = 0; i < ls; i++) {
+
+        if (row == 0 || row == 1) {
+            for (j = 0; j < lt[0]; j++) {
+                if (s[i] == table[0][j]) {
+                    row = 1;
+                    is_found = true;
+                    break;
+                }
+            }
+        }
+
+        if (row == 0 || row == 2) {
+            for (j = 0; j < lt[1]; j++) {
+                if (s[i] == table[1][j]) {
+                    row = 2;
+                    is_found = true;
+                    break;
+                }
+            }
+        }
+
+        if (row == 0 || row == 3) {
+            for (j = 0; j < lt[2]; j++) {
+                if (s[i] == table[2][j]) {
+                    row = 3;
+                    is_found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!is_found) {
+            return false;
+        }
+        is_found = false;
     }
     return true;
 }
@@ -71,13 +111,34 @@ char ** findWords(char ** words, int wordsSize, int* returnSize)
 {
     char **ret = (char **)malloc(sizeof(char *) * wordsSize);
     memset(ret, 0, sizeof(char *) * wordsSize);
+
+    *returnSize = 0;
+    for (int i = 0; i < wordsSize; i++) {
+        if (is_keyboard_row_words(words[i])) {
+            size_t len = strlen(words[i]) + 1;
+            ret[*returnSize] = (char *)malloc(len);
+            strncpy(ret[*returnSize], words[i], len);
+            (*returnSize)++;
+        }
+    }
+
+    return ret;
 }
 
+#define STR0 "Hello","Alaska","Dad","Peace"
+#define STR1 "omk"
+#define STR2 "adsdf","sfd"
 void findWordsTest(void)
 {
-    char *s[] = {"Hello","Alaska","Dad","Peace"};
+    char *s[] = {STR2};
+
     size_t len = ARRAY_SIZE(s);
     int return_size = 0;
+
+    char buf[100] = {0};
+
+    strncpy(buf, s[0], 3);
+    PRINT_ARRAY(buf, 10, "%d ");
 
     printf("iuput:\n");
     PRINT_ARRAY(s, len, "%s ");
