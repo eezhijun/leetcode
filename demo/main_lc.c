@@ -35,6 +35,7 @@ extern void licenseKeyFormattingTest(void);
 extern void findWordsTest(void);
 extern void detectCapitalUseTest(void);
 extern void findLUSlengthTest(void);
+extern void reverseStrTest(void);
 
 int main_lc(void)
 {
@@ -81,7 +82,8 @@ int main_lc(void)
     // licenseKeyFormattingTest();
     // findWordsTest();
     // detectCapitalUseTest();
-    findLUSlengthTest();
+    // findLUSlengthTest();
+    reverseStrTest();
 
     /* stack */
 

@@ -19,6 +19,68 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/reverse-string-ii/ */
+/* 给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
+
+如果剩余字符少于 k 个，则将剩余字符全部反转。
+如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
+
+
+示例 1：
+
+输入：s = "abcdefg", k = 2
+输出："bacdfeg"
+示例 2：
+
+输入：s = "abcd", k = 2
+输出："bacd"
+
+
+提示：
+
+1 <= s.length <= 104
+s 仅由小写英文组成
+1 <= k <= 104 */
+char * reverseStr(char * s, int k)
+{
+    size_t rlen = strlen(s);
+    size_t idx = 0;
+
+    while (rlen) {
+        if (rlen < k) {
+            reverse(s + idx, 0, rlen - 1);
+            rlen = 0;
+        } else if (rlen < 2 * k) {
+            reverse(s + idx, 0, k - 1);
+            rlen = 0;
+        } else {
+            reverse(s + idx, 0, k - 1);
+            rlen -= 2 * k;
+            idx += 2 * k;
+        }
+    }
+    return s;
+}
+
+void reverseStrTest(void)
+{
+    char s[128];
+    int k;
+
+    /* "abcdefg" k=1 */
+    printf("please input string s:\n");
+    fgets(s, 128, stdin);
+    size_t len = strlen(s);
+    if (len > 0 && s[len - 1] == '\n') {
+        s[len - 1] = '\0';
+    }
+    printf("please input integer k:\n");
+    scanf("%d", &k);
+
+    char *ret = reverseStr(s, k);
+    printf("output=%s\n", ret);
+}
+
 /* https://leetcode.cn/problems/longest-uncommon-subsequence-i/ */
 /* 给你两个字符串 a 和 b，请返回 这两个字符串中 最长的特殊序列  的长度。如果不存在，则返回 -1 。
 
