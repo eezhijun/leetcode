@@ -36,6 +36,7 @@ extern void findWordsTest(void);
 extern void detectCapitalUseTest(void);
 extern void findLUSlengthTest(void);
 extern void reverseStrTest(void);
+extern void checkRecordTest(void);
 
 int main_lc(void)
 {
@@ -83,7 +84,8 @@ int main_lc(void)
     // findWordsTest();
     // detectCapitalUseTest();
     // findLUSlengthTest();
-    reverseStrTest();
+    // reverseStrTest();
+    checkRecordTest();
 
     /* stack */
 
