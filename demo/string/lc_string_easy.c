@@ -64,25 +64,10 @@ char **findRestaurant(char **list1, int list1Size, char **list2, int list2Size,
                 if (tmp_idx < min_idx) {
                     min_idx = tmp_idx;
                     *returnSize = 0;
-#if defined(WAY1)
-                    size_t tmp_len = strlen(list1[i]) + 1;
-                    char *new_arr = (char *)realloc(ret[*returnSize], tmp_len);
-                    new_arr[tmp_len - 1] = '\0';
-                    strncpy(new_arr, list1[i], tmp_len);
-                    ret[*returnSize] = new_arr;
-#else
                     ret[*returnSize] = list1[i];
-#endif
                     (*returnSize)++;
                 } else if (tmp_idx == min_idx) {
-#if defined(WAY1)
-                    size_t tmp_len = strlen(list1[i]) + 1;
-                    ret[*returnSize] = (char *)malloc(tmp_len);
-                    ret[*returnSize][tmp_len - 1] = '\0';
-                    strncpy(ret[*returnSize], list1[i], tmp_len);
-#else
                     ret[*returnSize] = list1[i];
-#endif
                     (*returnSize)++;
                 }
             }
@@ -139,12 +124,6 @@ void findRestaurantTest(void)
 
     printf("output: returnSize=%d\n", returnSize);
     PRINT_ARRAY(ret, returnSize, "%s ");
-#if defined(WAY1)
-    for (int i = 0; i < returnSize; i++) {
-        free(ret[i]);
-        ret[i] = NULL;
-    }
-#endif
     free(ret);
 }
 
