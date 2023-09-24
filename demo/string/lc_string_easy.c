@@ -19,6 +19,135 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/minimum-index-sum-of-two-lists/ */
+/* 假设 Andy 和 Doris 想在晚餐时选择一家餐厅，并且他们都有一个表示最喜爱餐厅的列表，每个餐厅的名字用字符串表示。
+
+你需要帮助他们用最少的索引和找出他们共同喜爱的餐厅。 如果答案不止一个，则输出所有答案并且不考虑顺序。 你可以假设答案总是存在。
+
+示例 1:
+
+输入: list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]，list2 = ["Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"]
+输出: ["Shogun"]
+解释: 他们唯一共同喜爱的餐厅是“Shogun”。
+示例 2:
+
+输入:list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]，list2 = ["KFC", "Shogun", "Burger King"]
+输出: ["Shogun"]
+解释: 他们共同喜爱且具有最小索引和的餐厅是“Shogun”，它有最小的索引和1(0+1)。
+
+
+提示:
+
+1 <= list1.length, list2.length <= 1000
+1 <= list1[i].length, list2[i].length <= 30
+list1[i] 和 list2[i] 由空格 ' ' 和英文字母组成。
+list1 的所有字符串都是 唯一 的。
+list2 中的所有字符串都是 唯一 的。*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char **findRestaurant(char **list1, int list1Size, char **list2, int list2Size,
+                      int *returnSize)
+{
+    int i, j;
+    int min_idx = list1Size + list2Size - 2;
+    size_t size = sizeof(char *) * (min(list1Size, list2Size));
+    char **ret = (char **)malloc(size);
+    memset(ret, 0, size);
+
+    *returnSize = 0;
+
+    for (i = 0; i < list1Size; i++) {
+        for (j = 0; j < list2Size; j++) {
+            if (strcmp(list1[i], list2[j]) == 0) {
+                int tmp_idx = i + j;
+                if (tmp_idx < min_idx) {
+                    min_idx = tmp_idx;
+                    *returnSize = 0;
+#if defined(WAY1)
+                    size_t tmp_len = strlen(list1[i]) + 1;
+                    char *new_arr = (char *)realloc(ret[*returnSize], tmp_len);
+                    new_arr[tmp_len - 1] = '\0';
+                    strncpy(new_arr, list1[i], tmp_len);
+                    ret[*returnSize] = new_arr;
+#else
+                    ret[*returnSize] = list1[i];
+#endif
+                    (*returnSize)++;
+                } else if (tmp_idx == min_idx) {
+#if defined(WAY1)
+                    size_t tmp_len = strlen(list1[i]) + 1;
+                    ret[*returnSize] = (char *)malloc(tmp_len);
+                    ret[*returnSize][tmp_len - 1] = '\0';
+                    strncpy(ret[*returnSize], list1[i], tmp_len);
+#else
+                    ret[*returnSize] = list1[i];
+#endif
+                    (*returnSize)++;
+                }
+            }
+        }
+    }
+    return ret;
+}
+
+void findRestaurantTest(void)
+{
+    char *list1[] = {
+#if defined(FINDR1)
+        "Shogun",
+        "Tapioca Express",
+        "Burger King",
+        "KFC"
+#elif defined(FINDR2)
+        "Shogun",
+        "Tapioca Express",
+        "Burger King",
+        "KFC"
+#else
+        "happy",
+        "sad",
+        "good"
+#endif
+    };
+    char *list2[] = {
+#if defined(FINDR1)
+        "Piatti",
+        "The Grill at Torrey Pines",
+        "Hungry Hunter Steakhouse",
+        "Shogun"
+#elif defined(FINDR2)
+        "KFC",
+        "Shogun",
+        "Burger King"
+#else
+        "sad",
+        "happy",
+        "good"
+#endif
+    };
+
+    int list1Size = ARRAY_SIZE(list1);
+    int list2Size = ARRAY_SIZE(list2);
+    int returnSize = 0;
+
+    printf("input list1 and list2:\n");
+    PRINT_ARRAY(list1, list1Size, "%s,");
+    PRINT_ARRAY(list2, list2Size, "%s,");
+    char **ret =
+        findRestaurant(list1, list1Size, list2, list2Size, &returnSize);
+
+    printf("output: returnSize=%d\n", returnSize);
+    PRINT_ARRAY(ret, returnSize, "%s ");
+#if defined(WAY1)
+    for (int i = 0; i < returnSize; i++) {
+        free(ret[i]);
+        ret[i] = NULL;
+    }
+#endif
+    free(ret);
+}
+
 /* https://leetcode.cn/problems/student-attendance-record-i/ */
 /* 给你一个字符串 s 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：
 
@@ -47,7 +176,7 @@
 
 1 <= s.length <= 1000
 s[i] 为 'A'、'L' 或 'P' */
-bool checkRecord(char * s)
+bool checkRecord(char *s)
 {
     size_t cnt_a = 0;
 #if defined(WAY1)
@@ -94,7 +223,8 @@ void checkRecordTest(void)
     if (len > 0 && s[len - 1] == '\n') {
         s[len - 1] = '\0';
     }
-    (checkRecord(s) == true) ? printf("output:true\n") : printf("output:false\n");
+    (checkRecord(s) == true) ? printf("output:true\n") :
+                               printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/reverse-string-ii/ */
@@ -119,7 +249,7 @@ void checkRecordTest(void)
 1 <= s.length <= 104
 s 仅由小写英文组成
 1 <= k <= 104 */
-char * reverseStr(char * s, int k)
+char *reverseStr(char *s, int k)
 {
     size_t rlen = strlen(s);
     size_t idx = 0;
@@ -191,7 +321,7 @@ void reverseStrTest(void)
 1 <= a.length, b.length <= 100
 a 和 b 由小写英文字母组成 */
 
-int findLUSlength(char * a, char * b)
+int findLUSlength(char *a, char *b)
 {
 #if defined(WAY1)
     size_t la = strlen(a);
@@ -217,8 +347,8 @@ int findLUSlength(char * a, char * b)
 
 void findLUSlengthTest(void)
 {
-    char a[128] = {0};
-    char b[128] = {0};
+    char a[128] = { 0 };
+    char b[128] = { 0 };
 
     /*"aaaabcd" "aaaaacd"*/
     printf("please input string a:\n");
@@ -253,7 +383,7 @@ void findLUSlengthTest(void)
 
 1 <= word.length <= 100
 word 由小写和大写英文字母组成 */
-bool detectCapitalUse(char * word)
+bool detectCapitalUse(char *word)
 {
     int i;
     int flag1 = 0, flag2 = 0;
@@ -279,13 +409,13 @@ bool detectCapitalUse(char * word)
 
 void detectCapitalUseTest(void)
 {
-    char word[128] = {0};
+    char word[128] = { 0 };
 
     printf("please input string word by scanf:\n");
     scanf("%s", word);
 
-    (detectCapitalUse(word) == true) ? printf("output:true\n") : printf("output:false\n");
-
+    (detectCapitalUse(word) == true) ? printf("output:true\n") :
+                                       printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/keyboard-row/ */
@@ -324,7 +454,8 @@ wordis_keyboard_row_wordss[i] 由英文字母（小写和大写字母）组成
 
 bool is_keyboard_row_words(char *s)
 {
-    char *table[] = {"qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL", "zxcvbnmZXCVBNM"};
+    char *table[] = { "qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL",
+                      "zxcvbnmZXCVBNM" };
     size_t len = ARRAY_SIZE(table);
     size_t lt[len];
     size_t ls = strlen(s);
@@ -337,7 +468,6 @@ bool is_keyboard_row_words(char *s)
     }
 
     for (i = 0; i < ls; i++) {
-
         if (row == 0 || row == 1) {
             for (j = 0; j < lt[0]; j++) {
                 if (s[i] == table[0][j]) {
@@ -376,7 +506,7 @@ bool is_keyboard_row_words(char *s)
     return true;
 }
 
-char ** findWords(char ** words, int wordsSize, int* returnSize)
+char **findWords(char **words, int wordsSize, int *returnSize)
 {
     char **ret = (char **)malloc(sizeof(char *) * wordsSize);
     memset(ret, 0, sizeof(char *) * wordsSize);
@@ -394,17 +524,17 @@ char ** findWords(char ** words, int wordsSize, int* returnSize)
     return ret;
 }
 
-#define STR0 "Hello","Alaska","Dad","Peace"
+#define STR0 "Hello", "Alaska", "Dad", "Peace"
 #define STR1 "omk"
-#define STR2 "adsdf","sfd"
+#define STR2 "adsdf", "sfd"
 void findWordsTest(void)
 {
-    char *s[] = {STR2};
+    char *s[] = { STR2 };
 
     size_t len = ARRAY_SIZE(s);
     int return_size = 0;
 
-    char buf[100] = {0};
+    char buf[100] = { 0 };
 
     strncpy(buf, s[0], 3);
     PRINT_ARRAY(buf, 10, "%d ");
@@ -451,7 +581,7 @@ void findWordsTest(void)
 s 只包含字母、数字和破折号 '-'.
 1 <= k <= 104 */
 /* "2-4A0r7-4k" k=4 k=3 "--a-a-a-a--" k=2 "0123456789" k=1*/
-char * licenseKeyFormatting(char * s, int k)
+char *licenseKeyFormatting(char *s, int k)
 {
     size_t len = strlen(s);
 
@@ -462,7 +592,8 @@ char * licenseKeyFormatting(char * s, int k)
     int idx = 0;
     int cnt = 0;
 
-    for (; s[j] == '-'; j++);
+    for (; s[j] == '-'; j++)
+        ;
     for (; i >= j; i--) {
         if (s[i] != '-') {
             ret[idx++] = s[i];
@@ -529,9 +660,8 @@ void licenseKeyFormattingTest(void)
 
 1 <= s.length <= 104
 s 由小写英文字母组成 */
-bool repeatedSubstringPattern(char * s)
+bool repeatedSubstringPattern(char *s)
 {
-
 }
 
 void repeatedSubstringPatternTest(void)
@@ -562,7 +692,7 @@ void repeatedSubstringPatternTest(void)
 输出: 5
 解释: 这里的单词是指连续的不是空格的字符，所以 "Hello," 算作 1 个单词。*/
 /* 全是空格 */
-int countSegments(char * s)
+int countSegments(char *s)
 {
 #if 0
     size_t len = strlen(s);
@@ -602,8 +732,8 @@ int countSegments(char * s)
 
 #else
     int cnt = 0, i, len = strlen(s);
-    for(i = 0; i < len; i++) {
-        if((i == 0 || s[i-1] == ' ') && s[i] != ' ')
+    for (i = 0; i < len; i++) {
+        if ((i == 0 || s[i - 1] == ' ') && s[i] != ' ')
             cnt++;
     }
 #endif
