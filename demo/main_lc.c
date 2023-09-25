@@ -39,6 +39,7 @@ extern void reverseStrTest(void);
 extern void checkRecordTest(void);
 extern void findRestaurantTest(void);
 extern void judgeCircleTest(void);
+extern void validPalindromeTest(void);
 
 int main_lc(void)
 {
@@ -89,7 +90,8 @@ int main_lc(void)
     // reverseStrTest();
     // checkRecordTest();
     // findRestaurantTest();
-    judgeCircleTest();
+    // judgeCircleTest();
+    validPalindromeTest();
 
     /* stack */
 

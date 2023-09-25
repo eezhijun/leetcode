@@ -19,6 +19,7 @@
 #include "uthash.h"
 #include "utils.h"
 
+
 /* https://leetcode.cn/problems/robot-return-to-origin/ */
 /* 在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。
 
@@ -1308,6 +1309,93 @@ void fizzBuzzTest(void)
     ret = NULL;
 }
 
+/* https://leetcode.cn/problems/valid-palindrome-ii/ */
+/* 给你一个字符串 s，最多 可以从中删除一个字符。
+
+请你判断 s 是否能成为回文字符串：如果能，返回 true ；否则，返回 false 。
+
+示例 1：
+
+输入：s = "aba"
+输出：true
+示例 2：
+
+输入：s = "abca"
+输出：true
+解释：你可以删除字符 'c' 。
+示例 3：
+
+输入：s = "abc"
+输出：false
+
+
+提示：
+
+1 <= s.length <= 105
+s 由小写英文字母组成 */
+bool validPalindrome(char * s)
+{
+    /* abcxnyynmxcbea axbccbea */
+    int l = 0, r = strlen(s) - 1;
+
+    // printf("l=%d, r=%d\n", l, r);
+    while (l < r) {
+        if (r - l == 1) {
+            return true;
+        }
+        if (s[l] != s[r]) {
+            int tmpl = l + 1;
+            int tmpr = r;
+            while (tmpl < tmpr) {
+                if (s[tmpl] != s[tmpr]) {
+                    break;
+                }
+                tmpl++;
+                tmpr--;
+            }
+            if (tmpl >= tmpr) {
+                break;
+            }
+
+            tmpl = l;
+            tmpr = r - 1;
+            while (tmpl < tmpr) {
+                if (s[tmpl] != s[tmpr]) {
+                    break;
+                }
+                tmpl++;
+                tmpr--;
+            }
+            if (tmpl >= tmpr) {
+                break;
+            }
+            // printf("tmpl=%d, tmpr=%d\n", tmpl, tmpr);
+            // printf("line:%d, l=%d, r=%d\n", __LINE__, l, r);
+            return false;
+        }
+        l++;
+        r--;
+    }
+    return true;
+}
+
+/* mlcupuufxxfuupuculm */
+/* uupucxxucupuu */
+void validPalindromeTest(void)
+{
+    char s[128] = {0};
+
+    printf("please input string <s>:\n");
+
+    fgets(s, 128, stdin);
+    size_t size = strlen(s);
+    if (size > 0 && s[size - 1] == '\n') {
+        s[size - 1] = '\0';
+    }
+    printf("size=%d\n", size - 1);
+    validPalindrome(s) == true ? printf("output:true\n") : printf("output:false\n");
+}
+
 /* https://leetcode.cn/problems/longest-palindrome/ */
 /* 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
 
@@ -1457,12 +1545,21 @@ bool isPalindrome(char *s)
     int left = 0, right = ls - 1;
 
     while (left < right) {
+#if defined(CTYPEFUNC)
+        while (left < right && !isalnum(s[left])) {
+            left++;
+        }
+        while (left < right && !isalnum(s[right])) {
+            right--;
+        }
+#else
         while (left < right && !IsLegalCharater(s[left])) {
             left++;
         }
         while (left < right && !IsLegalCharater(s[right])) {
             right--;
         }
+#endif
         if (tolower(s[left]) != tolower(s[right])) {
             printf("left=%d, right=%d\n", left, right);
             return false;
