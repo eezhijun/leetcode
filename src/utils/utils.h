@@ -345,14 +345,6 @@ int cmp(const void *pa, const void *pb);
 /**
  * @brief
  *
- * @param data
- * @param len
- */
-void dump_x(const uint8_t *data, size_t len);
-
-/**
- * @brief
- *
  * @param elem
  */
 void print_int(void *elem);
