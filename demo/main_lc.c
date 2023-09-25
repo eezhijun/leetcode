@@ -42,6 +42,7 @@ extern void judgeCircleTest(void);
 extern void validPalindromeTest(void);
 extern void countBinarySubstringsTest(void);
 extern void toLowerCaseTest(void);
+extern void shortestCompletingWordTest(void);
 
 int main_lc(void)
 {
@@ -95,7 +96,8 @@ int main_lc(void)
     // judgeCircleTest();
     // validPalindromeTest();
     // countBinarySubstringsTest();
-    toLowerCaseTest();
+    // toLowerCaseTest();
+    shortestCompletingWordTest();
 
     /* stack */
 
