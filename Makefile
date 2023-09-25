@@ -1,6 +1,6 @@
 # only test demo
-CC                := gcc
-BIN               := main
+CC                    := gcc
+EXEC                  := main
 
 MK_PATH               := $(abspath $(lastword $(MAKEFILE_LIST)))
 ROOT_DIR              := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
@@ -52,12 +52,12 @@ endif
 OBJ_FILES             = $(SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
 DEP_FILE              = $(OBJ_FILES:%.o=%.d)
 
-${BIN} : $(BUILD_DIR)/$(BIN)
+$(EXEC) : $(BUILD_DIR)/$(EXEC)
 
-$(BUILD_DIR)/$(BIN) : $(OBJ_FILES)
+$(BUILD_DIR)/$(EXEC) : $(OBJ_FILES)
 	@-mkdir -p $(@D)
 	@$(CC) $^ $(LDFLAGS) -o $@
-	@echo "BIN $@"
+	@echo "EXEC $@"
 	@echo "MAKE DONE!"
 
 -include $(DEP_FILE)
@@ -67,7 +67,11 @@ $(BUILD_DIR)/%.o : %.c Makefile
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -c $< -o $@
 	@echo "CC $<"
 
-.PHONY : clean
+.PHONY: all
+all: $(BUILD_DIR)/$(EXEC)
+
+# Clean build and bin directories for all platforms
+.PHONY: clean
 clean:
 	-rm -rf $(BUILD_DIR)
 
@@ -79,3 +83,9 @@ format:
 	$(wildcard demo/*.c) \
 	$(wildcard src/test/*.c) \
 	$(wildcard src/utils/*.c)
+
+# Build and run
+.PHONY: run
+run: all
+	@echo "Starting program: $(BUILD_DIR)/$(EXEC)"
+	@cd $(BUILD_DIR) && ./$(EXEC)
