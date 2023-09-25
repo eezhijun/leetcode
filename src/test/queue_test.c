@@ -75,7 +75,8 @@ int queue_dequeue(queue_t *q)
     return val;
 }
 
-void queue_display(queue_t *q) {
+void queue_display(queue_t *q)
+{
     if (queue_is_empty(q)) {
         printf("queue is empty\n");
         return;
@@ -86,7 +87,6 @@ void queue_display(queue_t *q) {
     }
     printf("\n");
 }
-
 
 void queue_test(void)
 {

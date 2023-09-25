@@ -18,7 +18,6 @@
 
 #include "gnu/libc-version.h"
 
-
 #include "utils.h"
 
 extern void stack_test(void);
@@ -27,11 +26,11 @@ extern int memory_layout_test(void);
 extern int hash_table_test(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
-extern int g_a, g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
+extern int g_a,
+    g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
 
 void extern_test(void)
 {
-
     printf("EXTERN TEST\n");
     /* int g_x, g_y; 定义局部变量*/
     extern int g_x, g_y; // 声明外部全局变量，下面才可以使用
@@ -76,7 +75,7 @@ void memset_test(void)
 
 void hex2dec_test(void)
 {
-    char hex[128] = {0};
+    char hex[128] = { 0 };
 
     printf("please input hex:\n");
     scanf("%s", hex);
@@ -189,7 +188,6 @@ void sizeof_test(void)
     printf("%s=%d\n", STR(sizeof t1), sizeof t1);
     printf("%s=%d\n", STR(sizeof *t1), sizeof *t1);
     printf("%s=%d\n", STR(sizeof(testa_t)), sizeof(testa_t));
-
 }
 
 void scanf_gets_fgets_test(void)
@@ -257,5 +255,4 @@ void main_test(void)
     // hash_table_test();
     scanf_gets_fgets_test();
     // toupper_tolower_test();
-
 }

@@ -29,9 +29,9 @@ int memory_layout_test(void)
     const int i_l_c_var_h = 10;
     char *l_var_s = "Hello World";
     char l_var_arr[] = "Hello World";
-    const int *l_p_a =  &l_var_a;   /* 常量指针 */
-    int * const l_p_b = &l_var_b;       /* 指针常量 */
-    const int * const l_p_c =  &i_l_c_var_h;    /* 指向常量的常指针 */
+    const int *l_p_a = &l_var_a; /* 常量指针 */
+    int *const l_p_b = &l_var_b; /* 指针常量 */
+    const int *const l_p_c = &i_l_c_var_h; /* 指向常量的常指针 */
     int *l_var_aa = (int *)alloca(sizeof(int) * 4); /* 从栈分配内存 */
 
     printf("-----------------------------------------------------\n");
@@ -48,7 +48,6 @@ int memory_layout_test(void)
     printf("%s\t\t\t%p\n", STR(&l_p_b), &l_p_b);
     printf("%s\t\t\t%p\n", STR(&l_p_c), &l_p_c);
     printf("%s\t\t%p\n", STR(l_var_arr), l_var_arr);
-
 
     l_var_c = (int *)malloc(sizeof(int) * 4);
     l_var_d = (int *)malloc(sizeof(int) * 4);
@@ -84,5 +83,4 @@ int memory_layout_test(void)
     l_var_c = NULL;
     free(l_var_d);
     l_var_d = NULL;
-
 }

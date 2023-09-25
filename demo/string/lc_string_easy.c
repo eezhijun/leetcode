@@ -52,14 +52,12 @@ licensePlate 由数字、大小写字母或空格 ' ' 组成
 1 <= words.length <= 1000
 1 <= words[i].length <= 15
 words[i] 由小写英文字母组成 */
-char * shortestCompletingWord(char * licensePlate, char ** words, int wordsSize)
+char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 {
-
 }
 
 void shortestCompletingWordTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/to-lower-case/ */
@@ -83,7 +81,7 @@ void shortestCompletingWordTest(void)
 
 1 <= s.length <= 100
 s 由 ASCII 字符集中的可打印字符组成 */
-char * toLowerCase(char * s)
+char *toLowerCase(char *s)
 {
     /* 'A'=65 'a'=97 */
     for (int i = 0; s[i] != '\0'; i++) {
@@ -129,14 +127,12 @@ void toLowerCaseTest(void)
 
 1 <= s.length <= 105
 s[i] 为 '0' 或 '1' */
-int countBinarySubstrings(char * s)
+int countBinarySubstrings(char *s)
 {
-
 }
 
 void countBinarySubstringsTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/robot-return-to-origin/ */
@@ -1452,7 +1448,7 @@ void fizzBuzzTest(void)
 
 1 <= s.length <= 105
 s 由小写英文字母组成 */
-bool validPalindrome(char * s)
+bool validPalindrome(char *s)
 {
     /* abcxnyynmxcbea axbccbea */
     int l = 0, r = strlen(s) - 1;
@@ -1502,7 +1498,7 @@ bool validPalindrome(char * s)
 /* uupucxxucupuu */
 void validPalindromeTest(void)
 {
-    char s[128] = {0};
+    char s[128] = { 0 };
 
     printf("please input string <s>:\n");
 
@@ -1512,7 +1508,8 @@ void validPalindromeTest(void)
         s[size - 1] = '\0';
     }
     printf("size=%d\n", size - 1);
-    validPalindrome(s) == true ? printf("output:true\n") : printf("output:false\n");
+    validPalindrome(s) == true ? printf("output:true\n") :
+                                 printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/longest-palindrome/ */

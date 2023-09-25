@@ -68,6 +68,14 @@ $(BUILD_DIR)/%.o : %.c Makefile
 	@echo "CC $<"
 
 .PHONY : clean
-
 clean:
 	-rm -rf $(BUILD_DIR)
+
+# Run clang-format on source code
+.PHONY: format
+format:
+	@echo "Running clang-format"
+	@clang-format -i \
+	$(wildcard demo/*.c) \
+	$(wildcard src/test/*.c) \
+	$(wildcard src/utils/*.c)

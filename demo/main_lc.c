@@ -10,7 +10,6 @@
  */
 #include "stdio.h"
 
-
 extern void romanToIntTest(void);
 extern void isValidTest(void);
 extern void lengthOfLastWordTest(void);

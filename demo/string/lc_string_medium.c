@@ -14,7 +14,6 @@
 #include "math.h"
 #include "stdbool.h"
 
-
 /* https://leetcode.cn/problems/string-to-integer-atoi/ */
 /* 请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。
 
@@ -77,7 +76,7 @@
 
 0 <= s.length <= 200
 s 由英文字母（大写和小写）、数字（0-9）、' '、'+'、'-' 和 '.' 组成 */
-int myAtoi(char * s)
+int myAtoi(char *s)
 {
     if (s == NULL) {
         return 0;
@@ -129,7 +128,7 @@ void myAtoiTest(void)
 }
 
 /* https://leetcode.cn/problems/count-and-say/ */
-char * countAndSay(int n)
+char *countAndSay(int n)
 {
     if (n == 1) {
         return "1";
@@ -193,7 +192,7 @@ void countAndSayTest(void)
 
 0 <= s.length <= 5 * 104
 s 由英文字母、数字、符号和空格组成 */
-int lengthOfLongestSubstring(char * s)
+int lengthOfLongestSubstring(char *s)
 {
     if (!s[0]) {
         return 0;
@@ -214,5 +213,4 @@ int lengthOfLongestSubstring(char * s)
     }
 
     return max;
-
 }
