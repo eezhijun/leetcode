@@ -38,6 +38,7 @@ extern void findLUSlengthTest(void);
 extern void reverseStrTest(void);
 extern void checkRecordTest(void);
 extern void findRestaurantTest(void);
+extern void judgeCircleTest(void);
 
 int main_lc(void)
 {
@@ -87,7 +88,8 @@ int main_lc(void)
     // findLUSlengthTest();
     // reverseStrTest();
     // checkRecordTest();
-    findRestaurantTest();
+    // findRestaurantTest();
+    judgeCircleTest();
 
     /* stack */
 
