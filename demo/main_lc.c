@@ -40,6 +40,8 @@ extern void checkRecordTest(void);
 extern void findRestaurantTest(void);
 extern void judgeCircleTest(void);
 extern void validPalindromeTest(void);
+extern void countBinarySubstringsTest(void);
+extern void toLowerCaseTest(void);
 
 int main_lc(void)
 {
@@ -91,7 +93,9 @@ int main_lc(void)
     // checkRecordTest();
     // findRestaurantTest();
     // judgeCircleTest();
-    validPalindromeTest();
+    // validPalindromeTest();
+    // countBinarySubstringsTest();
+    toLowerCaseTest();
 
     /* stack */
 

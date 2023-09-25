@@ -19,6 +19,82 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* https://leetcode.cn/problems/to-lower-case/ */
+/* 给你一个字符串 s ，将该字符串中的大写字母转换成相同的小写字母，返回新的字符串。
+
+示例 1：
+
+输入：s = "Hello"
+输出："hello"
+示例 2：
+
+输入：s = "here"
+输出："here"
+示例 3：
+
+输入：s = "LOVELY"
+输出："lovely"
+
+
+提示：
+
+1 <= s.length <= 100
+s 由 ASCII 字符集中的可打印字符组成 */
+char * toLowerCase(char * s)
+{
+    /* 'A'=65 'a'=97 */
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (s[i] >= 'A' && s[i] <= 'Z') {
+            s[i] += 32;
+        }
+    }
+    return s;
+}
+
+void toLowerCaseTest(void)
+{
+    char s[128] = "LOVELY";
+
+    printf("input:%s\n", s);
+
+    char *ret = toLowerCase(s);
+
+    printf("output:%s\n", s);
+}
+
+/* https://leetcode.cn/problems/count-binary-substrings/ */
+/* 给定一个字符串 s，统计并返回具有相同数量 0 和 1 的非空（连续）子字符串的数量，并且这些子字符串中的所有 0 和所有 1 都是成组连续的。
+
+重复出现（不同位置）的子串也要统计它们出现的次数。
+
+
+示例 1：
+
+输入：s = "00110011"
+输出：6
+解释：6 个子串满足具有相同数量的连续 1 和 0 ："0011"、"01"、"1100"、"10"、"0011" 和 "01" 。
+注意，一些重复出现的子串（不同位置）要统计它们出现的次数。
+另外，"00110011" 不是有效的子串，因为所有的 0（还有 1 ）没有组合在一起。
+示例 2：
+
+输入：s = "10101"
+输出：4
+解释：有 4 个子串："10"、"01"、"10"、"01" ，具有相同数量的连续 1 和 0 。
+
+
+提示：
+
+1 <= s.length <= 105
+s[i] 为 '0' 或 '1' */
+int countBinarySubstrings(char * s)
+{
+
+}
+
+void countBinarySubstringsTest(void)
+{
+
+}
 
 /* https://leetcode.cn/problems/robot-return-to-origin/ */
 /* 在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。
