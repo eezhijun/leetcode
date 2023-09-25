@@ -4,7 +4,7 @@ BIN               := main
 
 MK_PATH               := $(abspath $(lastword $(MAKEFILE_LIST)))
 ROOT_DIR              := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-BUILD_DIR             := $(ROOT_DIR)/output
+BUILD_DIR             := $(ROOT_DIR)/out
 BUILD_ABS_DIR         := $(abspath $(BUILD_DIR))
 
 
@@ -34,12 +34,7 @@ LDFLAGS               += -lm # to link againt the math library (libm)
 LDFLAGS               += -m32
 
 
-
-
-
 # user choose demo
-
-
 ifeq ($(demo),?)
 run:
 	@echo "tt"
