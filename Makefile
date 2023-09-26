@@ -81,8 +81,8 @@ format:
 	@echo "Running clang-format"
 	@clang-format -i \
 	$(shell find demo -name "*.c") \
-	$(wildcard src/test/*.c) \
-	$(wildcard src/utils/*.c) \
+	$(shell find src/test -name "*.c") \
+	$(shell find src/utils -name "*.c")
 
 # Build and run
 .PHONY: run
