@@ -10,7 +10,6 @@
  */
 #include "stdio.h"
 
-
 /* https://leetcode.cn/problems/next-greater-element-i/ */
 /* nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
 
@@ -51,12 +50,11 @@ nums1 中的所有整数同样出现在 nums2 中
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* nextGreaterElement(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize)
+int *nextGreaterElement(int *nums1, int nums1Size, int *nums2, int nums2Size,
+                        int *returnSize)
 {
-
 }
 
 void nextGreaterElementTest(void)
 {
-
 }

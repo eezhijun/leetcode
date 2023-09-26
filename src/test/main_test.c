@@ -40,6 +40,7 @@ void extern_test(void)
 // 定义全局变量g_x, g_y，但是上面main_test函数想使用全局变量必须使用extern进行声明才能引用
 int g_x = 0;
 int g_y = 1;
+
 void test(void)
 {
     printf("test, g_x=%d, g_y=%d\n", g_x, g_y);

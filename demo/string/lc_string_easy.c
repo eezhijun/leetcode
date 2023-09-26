@@ -58,6 +58,17 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 
 void shortestCompletingWordTest(void)
 {
+    char license_plate[7] = "1s3 PSt";
+    char *words[] = { "step", "steps", "stripe", "stepple" };
+    int wordsSize = ARRAY_SIZE(words);
+
+    printf("input:\n");
+    printf("license_plate:%s\n", license_plate);
+    printf("wordsSize=%d\n", wordsSize);
+    PRINT_ARRAY(words, wordsSize, "%s ");
+    char *ret = shortestCompletingWord(license_plate, words, wordsSize);
+
+    printf("output:%s\n", ret);
 }
 
 /* https://leetcode.cn/problems/to-lower-case/ */
@@ -321,35 +332,21 @@ void findRestaurantTest(void)
 {
     char *list1[] = {
 #if defined(FINDR1)
-        "Shogun",
-        "Tapioca Express",
-        "Burger King",
-        "KFC"
+        "Shogun", "Tapioca Express", "Burger King", "KFC"
 #elif defined(FINDR2)
-        "Shogun",
-        "Tapioca Express",
-        "Burger King",
-        "KFC"
+        "Shogun", "Tapioca Express", "Burger King", "KFC"
 #else
-        "happy",
-        "sad",
-        "good"
+        "happy", "sad", "good"
 #endif
     };
     char *list2[] = {
 #if defined(FINDR1)
-        "Piatti",
-        "The Grill at Torrey Pines",
-        "Hungry Hunter Steakhouse",
+        "Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse",
         "Shogun"
 #elif defined(FINDR2)
-        "KFC",
-        "Shogun",
-        "Burger King"
+        "KFC", "Shogun", "Burger King"
 #else
-        "sad",
-        "happy",
-        "good"
+        "sad", "happy", "good"
 #endif
     };
 
@@ -431,6 +428,7 @@ bool checkRecord(char *s)
             return false;
         }
     }
+
     return true;
 }
 
@@ -747,6 +745,7 @@ char **findWords(char **words, int wordsSize, int *returnSize)
 #define STR0 "Hello", "Alaska", "Dad", "Peace"
 #define STR1 "omk"
 #define STR2 "adsdf", "sfd"
+
 void findWordsTest(void)
 {
     char *s[] = { STR2 };

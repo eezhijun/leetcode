@@ -8,6 +8,7 @@
 #   https://clang.llvm.org/docs/ClangFormat.html
 #   https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 #
+# clang-format version 18.0.0
 ---
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
@@ -105,7 +106,6 @@ SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
-# SpaceBeforeParens: ControlStatementsExceptForEachMacros
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
@@ -114,6 +114,10 @@ SpacesInContainerLiterals: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
+
+SpaceBeforeParens: ControlStatementsExceptForEachMacros
+SeparateDefinitionBlocks: Always
+
 Standard: Cpp03
 TabWidth: 4
 UseTab: Never

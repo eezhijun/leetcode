@@ -22,6 +22,7 @@
     |______|
 */
 #define STACK_SIZE 10
+
 typedef struct {
     int data[STACK_SIZE];
     int top;

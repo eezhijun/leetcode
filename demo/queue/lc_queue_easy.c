@@ -43,32 +43,30 @@ myStack.empty(); // 返回 False
 
 进阶：你能否仅用一个队列来实现栈。*/
 typedef struct {
-
 } MyStack;
 
-
-MyStack* myStackCreate() {
-
+MyStack *myStackCreate()
+{
 }
 
-void myStackPush(MyStack* obj, int x) {
-
+void myStackPush(MyStack *obj, int x)
+{
 }
 
-int myStackPop(MyStack* obj) {
-
+int myStackPop(MyStack *obj)
+{
 }
 
-int myStackTop(MyStack* obj) {
-
+int myStackTop(MyStack *obj)
+{
 }
 
-bool myStackEmpty(MyStack* obj) {
-
+bool myStackEmpty(MyStack *obj)
+{
 }
 
-void myStackFree(MyStack* obj) {
-
+void myStackFree(MyStack *obj)
+{
 }
 
 /**

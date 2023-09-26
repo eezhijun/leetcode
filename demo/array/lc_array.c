@@ -34,7 +34,7 @@ int arrayPairSum(int *nums, int numsSize)
 
 /* https://leetcode.cn/problems/contains-duplicate/ */
 
-bool containsDuplicate(int* nums, int numsSize)
+bool containsDuplicate(int *nums, int numsSize)
 {
     qsort(nums, numsSize, sizeof(int), cmp);
     for (int i = 0; i < numsSize - 1; i++) {
@@ -47,7 +47,8 @@ bool containsDuplicate(int* nums, int numsSize)
 
 /* https://leetcode.cn/problems/divide-two-integers/ */
 
-int divide(int dividend, int divisor){
+int divide(int dividend, int divisor)
+{
     // -2^32 / -1 = 2^32 -- 2^32-1
     if (dividend == INT_MIN && divisor == -1) {
         return INT_MAX;
@@ -98,7 +99,8 @@ void divideTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* findDiagonalOrder(int** mat, int matSize, int* matColSize, int* returnSize){
+int *findDiagonalOrder(int **mat, int matSize, int *matColSize, int *returnSize)
+{
     if (mat == NULL) {
         return NULL;
     }
@@ -161,8 +163,9 @@ int findMaxConsecutiveOnes(int *nums, int numsSize)
 
 /* https://leetcode.cn/problems/median-of-two-sorted-arrays/ */
 
-double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size){
-
+double findMedianSortedArrays(int *nums1, int nums1Size, int *nums2,
+                              int nums2Size)
+{
     int size = nums1Size + nums2Size;
     int arr[size];
 
@@ -180,13 +183,12 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
         return (double)arr[(size - 1) / 2];
     }
     return (double)(arr[size / 2] + arr[size / 2 - 1]) / 2;
-
 }
 
 void findMedianSortedArraysTest(void)
 {
-    int nums1[2] = {1, 3};
-    int nums2[1] = {2};
+    int nums1[2] = { 1, 3 };
+    int nums2[1] = { 2 };
     int nums1Size = sizeof(nums1) / sizeof(int);
     int nums2Size = sizeof(nums2) / sizeof(int);
 
@@ -197,10 +199,10 @@ void findMedianSortedArraysTest(void)
 
 /* https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/ */
 
-int findMin(int* nums, int numsSize)
+int findMin(int *nums, int numsSize)
 {
     int min = nums[0];
-    for (int i = 1; i < numsSize; i++){
+    for (int i = 1; i < numsSize; i++) {
         if (nums[i] < min) {
             min = nums[i];
         }
@@ -210,7 +212,8 @@ int findMin(int* nums, int numsSize)
 
 /* https://leetcode.cn/problems/intersection-of-two-arrays-ii/ */
 
-int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize)
+int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
+               int *returnSize)
 {
     bubble_sort(nums1, nums1Size);
     bubble_sort(nums2, nums2Size);
@@ -240,7 +243,8 @@ int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* return
 
 /* https://leetcode.cn/problems/valid-sudoku/ */
 
-bool isValidSudoku(char** board, int boardSize, int* boardColSize){
+bool isValidSudoku(char **board, int boardSize, int *boardColSize)
+{
     int cnt[9];
     int i, j;
 
@@ -283,7 +287,8 @@ bool isValidSudoku(char** board, int boardSize, int* boardColSize){
         int tempi, tempj;
         for (tempi = 0; tempi < 3; tempi++) {
             for (tempj = 0; tempj < 3; tempj++) {
-                if (board[i + tempi][j + tempj] >= '1' && board[i + tempi][j + tempj] <= '9') {
+                if (board[i + tempi][j + tempj] >= '1' &&
+                    board[i + tempi][j + tempj] <= '9') {
                     int value = board[i + tempi][j + tempj] - '0' - 1;
                     if (cnt[value]) {
                         return false;
@@ -298,9 +303,9 @@ bool isValidSudoku(char** board, int boardSize, int* boardColSize){
 
 /* https://leetcode.cn/problems/majority-element/ */
 
-int majorityElement(int* nums, int numsSize){
-    if (numsSize <= 2)
-    {
+int majorityElement(int *nums, int numsSize)
+{
+    if (numsSize <= 2) {
         return nums[0];
     }
     bubble_sort(nums, numsSize);
@@ -309,13 +314,10 @@ int majorityElement(int* nums, int numsSize){
     int i;
     int cond = numsSize / 2;
 
-    for (i = 0; i < numsSize - 1; i++)
-    {
-        if (nums[i] == nums[i + 1])
-        {
+    for (i = 0; i < numsSize - 1; i++) {
+        if (nums[i] == nums[i + 1]) {
             count++;
-            if (count > cond)
-            {
+            if (count > cond) {
                 return nums[i];
             }
         }
@@ -325,7 +327,7 @@ int majorityElement(int* nums, int numsSize){
 
 void majorityElementTest(void)
 {
-    int nums[] = {3,2,3};
+    int nums[] = { 3, 2, 3 };
     // int nums[] = {2,2,1,1,1,2,2};
     int numsSize = sizeof(nums) / sizeof(int);
 
@@ -336,7 +338,8 @@ void majorityElementTest(void)
 
 /* https://leetcode.cn/problems/container-with-most-water/ */
 
-int maxArea(int* height, int heightSize){
+int maxArea(int *height, int heightSize)
+{
     int l = 0, r = heightSize - 1;
     int maxA = 0;
 
@@ -354,7 +357,7 @@ int maxArea(int* height, int heightSize){
 
 void maxAreaTest(void)
 {
-    int height[] = {1,8,6,2,5,4,8,3,7};
+    int height[] = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
     int heightSize = sizeof(height) / sizeof(int);
 
     int ans = maxArea(height, heightSize);
@@ -364,7 +367,8 @@ void maxAreaTest(void)
 
 /* https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/ */
 
-int maxProfit2(int* prices, int pricesSize){
+int maxProfit2(int *prices, int pricesSize)
+{
     if (prices == NULL || pricesSize < 2) {
         return 0;
     }
@@ -387,19 +391,16 @@ int maxProfit2(int* prices, int pricesSize){
 
 /* https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/ */
 
-int maxProfit(int* prices, int pricesSize){
+int maxProfit(int *prices, int pricesSize)
+{
     int tmp = prices[0];
     int diff = 0;
     int i;
 
-    for (i = 1; i < pricesSize; i++)
-    {
-        if (tmp >= prices[i])
-        {
+    for (i = 1; i < pricesSize; i++) {
+        if (tmp >= prices[i]) {
             tmp = prices[i];
-        }
-        else if (diff < (prices[i] - tmp))
-        {
+        } else if (diff < (prices[i] - tmp)) {
             diff = prices[i] - tmp;
         }
     }
@@ -410,7 +411,7 @@ int maxProfit(int* prices, int pricesSize){
 void maxProfitTest(void)
 {
     // int nums[] = {7,1,5,3,6,4};
-    int nums[] = {7,6,4,3,1};
+    int nums[] = { 7, 6, 4, 3, 1 };
     int numsSize = sizeof(nums) / sizeof(int);
 
     int ans = maxProfit(nums, numsSize);
@@ -426,23 +427,24 @@ void maxProfitTest(void)
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
 
-int** merge_intervals(int** intervals, int intervalsSize, int* intervalsColSize, int* returnSize, int** returnColumnSizes){
+int **merge_intervals(int **intervals, int intervalsSize, int *intervalsColSize,
+                      int *returnSize, int **returnColumnSizes)
+{
     if (intervalsSize == 1) {
         *returnSize = 1;
         return intervals;
     }
-    qsort(intervals, intervalsSize,sizeof(int*), cmp);
-    int** result = (int**)malloc(sizeof(int*) * intervalsSize);
+    qsort(intervals, intervalsSize, sizeof(int *), cmp);
+    int **result = (int **)malloc(sizeof(int *) * intervalsSize);
     for (int i = 0; i < intervalsSize; i++) {
-        result[i] = (int*)malloc(sizeof(int) * 2);
+        result[i] = (int *)malloc(sizeof(int) * 2);
     }
     *returnSize = 0;
-    int temp[2] = {intervals[0][0],intervals[0][1]};
+    int temp[2] = { intervals[0][0], intervals[0][1] };
     for (int i = 1; i < intervalsSize; i++) {
         if (intervals[i][0] <= temp[1]) { //如果遍历到的为重叠的区间，进行合并
-            temp[1] = fmax(temp[1],intervals[i][1]);
-        }
-        else { //不重叠
+            temp[1] = fmax(temp[1], intervals[i][1]);
+        } else { //不重叠
             result[*returnSize][0] = temp[0];
             result[*returnSize][1] = temp[1];
             temp[0] = intervals[i][0];
@@ -453,8 +455,8 @@ int** merge_intervals(int** intervals, int intervalsSize, int* intervalsColSize,
     result[*returnSize][0] = temp[0];
     result[*returnSize][1] = temp[1];
     *returnSize += 1;
-    *returnColumnSizes = (int*)malloc(sizeof(int)*(*returnSize));
-    for (int i = 0; i < *returnSize; i++){
+    *returnColumnSizes = (int *)malloc(sizeof(int) * (*returnSize));
+    for (int i = 0; i < *returnSize; i++) {
         (*returnColumnSizes)[i] = 2;
     }
     return result;
@@ -469,7 +471,8 @@ void arr_right_shift(int *nums, int len, int s, int e)
     }
 }
 
-void merge_stored_array(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+void merge_stored_array(int *nums1, int nums1Size, int m, int *nums2,
+                        int nums2Size, int n)
 {
     if (nums2 == NULL || n == 0) {
         return;
@@ -536,7 +539,8 @@ int minSubArrayLen(int target, int *nums, int numsSize)
 
 /* https://leetcode.cn/problems/move-zeroes/ */
 
-void moveZeroes(int* nums, int numsSize){
+void moveZeroes(int *nums, int numsSize)
+{
     if (nums == NULL) {
         return;
     }
@@ -559,7 +563,7 @@ void moveZeroes(int* nums, int numsSize){
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
-int** generate(int numRows, int* returnSize, int** returnColumnSizes)
+int **generate(int numRows, int *returnSize, int **returnColumnSizes)
 {
     if (returnSize == NULL || returnColumnSizes == NULL) {
         return NULL;
@@ -580,7 +584,8 @@ int** generate(int numRows, int* returnSize, int** returnColumnSizes)
             if (j == 0 || j == i) {
                 ret[*returnSize][j] = 1;
             } else {
-                ret[*returnSize][j] = ret[*returnSize - 1][j - 1] + ret[*returnSize - 1][j];
+                ret[*returnSize][j] =
+                    ret[*returnSize - 1][j - 1] + ret[*returnSize - 1][j];
                 //printf("*returnSize=%d, j=%d, retret[*returnSize][j]=%d\n", *returnSize, j, ret[*returnSize][j]);
             }
         }
@@ -598,7 +603,7 @@ int** generate(int numRows, int* returnSize, int** returnColumnSizes)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* getRow(int rowIndex, int* returnSize)
+int *getRow(int rowIndex, int *returnSize)
 {
     if (returnSize == NULL) {
         return NULL;
@@ -626,7 +631,8 @@ int* getRow(int rowIndex, int* returnSize)
 
 /* https://leetcode.cn/problems/find-pivot-index/ */
 
-int pivotIndex(int* nums, int numsSize){
+int pivotIndex(int *nums, int numsSize)
+{
     int i;
     int sum = 0;
     int left = 0;
@@ -646,7 +652,8 @@ int pivotIndex(int* nums, int numsSize){
 
 /* https://leetcode.cn/problems/plus-one/ */
 
-int* plusOne(int* digits, int digitsSize, int* returnSize){
+int *plusOne(int *digits, int digitsSize, int *returnSize)
+{
     for (int i = digitsSize - 1; i >= 0; i--) {
         if (digits[i] != 9) {
             digits[i]++;
@@ -671,7 +678,7 @@ int* plusOne(int* digits, int digitsSize, int* returnSize){
 
 /* https://leetcode.cn/problems/remove-duplicates-from-sorted-array/ */
 
-int removeDuplicates(int* nums, int numsSize)
+int removeDuplicates(int *nums, int numsSize)
 {
     int s = 0, f = 1;
     while (s < f && f < numsSize) {
@@ -705,7 +712,8 @@ int removeElement(int *nums, int numsSize, int val)
 
 /* https://leetcode.cn/problems/rotate-image/ */
 
-void rotate_image(int** matrix, int matrixSize, int* matrixColSize){
+void rotate_image(int **matrix, int matrixSize, int *matrixColSize)
+{
     int i, j, temp;
 
     // 上下换
@@ -725,13 +733,12 @@ void rotate_image(int** matrix, int matrixSize, int* matrixColSize){
             matrix[i][j] = temp;
         }
     }
-
 }
 
 /* https://leetcode.cn/problems/rotate-matrix-lcci/submissions/ */
 
-
-void rotate(int** matrix, int matrixSize, int* matrixColSize) {
+void rotate(int **matrix, int matrixSize, int *matrixColSize)
+{
     // 水平翻转
     for (int i = 0; i < matrixSize / 2; ++i) {
         for (int j = 0; j < matrixSize; ++j) {
@@ -748,7 +755,8 @@ void rotate(int** matrix, int matrixSize, int* matrixColSize) {
 
 /* https://leetcode.cn/problems/search-insert-position/ */
 
-int searchInsert(int* nums, int numsSize, int target){
+int searchInsert(int *nums, int numsSize, int target)
+{
     int i;
 
     for (i = 0; i < numsSize; i++) {
@@ -761,7 +769,8 @@ int searchInsert(int* nums, int numsSize, int target){
 
 /* https://leetcode.cn/problems/zero-matrix-lcci/ */
 
-void setZeroes(int** matrix, int matrixSize, int* matrixColSize){
+void setZeroes(int **matrix, int matrixSize, int *matrixColSize)
+{
     int M = matrixSize;
     int N = *matrixColSize;
     int *rowRecord = (int *)malloc(sizeof(int *) * M);
@@ -796,12 +805,12 @@ void setZeroes(int** matrix, int matrixSize, int* matrixColSize){
 
     free(rowRecord);
     free(colRecord);
-
 }
 
 /* https://leetcode.cn/problems/single-number/ */
 
-int singleNumber(int* nums, int numsSize){
+int singleNumber(int *nums, int numsSize)
+{
     int i, result = 0;
     for (i = 0; i < numsSize; i++) {
         result ^= nums[i];
@@ -811,7 +820,8 @@ int singleNumber(int* nums, int numsSize){
 
 /* https://leetcode.cn/problems/3sum-closest/ */
 
-int threeSumClosest(int* nums, int numsSize, int target){
+int threeSumClosest(int *nums, int numsSize, int target)
+{
     int sum = 0;
     int i;
     int left;
@@ -823,32 +833,22 @@ int threeSumClosest(int* nums, int numsSize, int target){
     qsort(nums, numsSize, sizeof(int), cmp);
     PRINT_ARRAY(nums, numsSize, "%d ");
 
-    for (i = 0; i < numsSize - 2; i++)
-    {
-        for (left = i + 1, right = numsSize - 1; left != right;)
-        {
+    for (i = 0; i < numsSize - 2; i++) {
+        for (left = i + 1, right = numsSize - 1; left != right;) {
             sum = nums[i] + nums[left] + nums[right];
-            if (sum == target)
-            {
+            if (sum == target) {
                 return sum;
-            }
-            else if (sum > target)
-            {
+            } else if (sum > target) {
                 right--;
-            }
-            else
-            {
+            } else {
                 left++;
             }
 
-            if (!flag)
-            {
+            if (!flag) {
                 flag = true;
                 tmp = abs(target - sum);
                 closest = sum;
-            }
-            else if (tmp > abs(target - sum))
-            {
+            } else if (tmp > abs(target - sum)) {
                 tmp = abs(target - sum);
                 closest = sum;
             }
@@ -869,7 +869,7 @@ void threeSumClosestTest(void)
     // int nums[] = {-1,2,1,-4};
     // int nums[] = {4,0,5,-5,3,3,0,-4,-5};
     // int nums[] = {1,1,1,0};
-    int nums[] = {2,3,8,9,10};
+    int nums[] = { 2, 3, 8, 9, 10 };
     int numsSize = sizeof(nums) / sizeof(int);
     int target = 16;
 
@@ -885,8 +885,9 @@ void threeSumClosestTest(void)
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
-int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
-
+int **threeSum(int *nums, int numsSize, int *returnSize,
+               int **returnColumnSizes)
+{
     bubble_sort(nums, numsSize);
 
     *returnSize = 0;
@@ -897,22 +898,15 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
     *returnColumnSizes = malloc(sizeof(int) * (numsSize + 1) * 6);
     ret[*returnSize] = malloc(sizeof(int) * 3);
 
-    while (left + 1 < right)
-    {
+    while (left + 1 < right) {
         int i = left + 1;
         int j = right;
-        while (i < j)
-        {
-            if (nums[i] + nums[j] + nums[left] < 0)
-            {
+        while (i < j) {
+            if (nums[i] + nums[j] + nums[left] < 0) {
                 i++;
-            }
-            else if (nums[i] + nums[j] + nums[left] > 0)
-            {
+            } else if (nums[i] + nums[j] + nums[left] > 0) {
                 j--;
-            }
-            else
-            {
+            } else {
                 ret[*returnSize][0] = nums[left];
                 ret[*returnSize][1] = nums[i];
                 ret[*returnSize][2] = nums[j];
@@ -920,28 +914,22 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
                 (*returnSize)++;
                 ret[*returnSize] = malloc(sizeof(int) * 3);
 
-                do
-                {
-                    if (nums[i] == nums[i + 1])
-                    {
+                do {
+                    if (nums[i] == nums[i + 1]) {
                         i++;
                     }
                 } while (i < j);
 
-                do
-                {
-                    if (nums[j] == nums[j - 1])
-                    {
+                do {
+                    if (nums[j] == nums[j - 1]) {
                         j--;
                     }
                 } while (i < j);
             }
         }
 
-        do
-        {
-            if (nums[left] == nums[left + 1])
-            {
+        do {
+            if (nums[left] == nums[left + 1]) {
                 left++;
             }
         } while (left + 1 < right);
@@ -955,10 +943,11 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
- #define MAX_LEN 100
+#define MAX_LEN 100
 
-int* twoOutOfThree(int* nums1, int nums1Size, int* nums2, int nums2Size, int* nums3, int nums3Size, int* returnSize){
-
+int *twoOutOfThree(int *nums1, int nums1Size, int *nums2, int nums2Size,
+                   int *nums3, int nums3Size, int *returnSize)
+{
     int mp[MAX_LEN + 1];
     memset(mp, 0, sizeof(int) * (MAX_LEN + 1));
     int i;
@@ -985,8 +974,6 @@ int* twoOutOfThree(int* nums1, int nums1Size, int* nums2, int nums2Size, int* nu
     }
     *returnSize = pos;
     return res;
-
-
 }
 
 /* https://leetcode.cn/problems/two-sum/ */
@@ -994,7 +981,8 @@ int* twoOutOfThree(int* nums1, int nums1Size, int* nums2, int nums2Size, int* nu
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* twoSum(int* nums, int numsSize, int target, int* returnSize){
+int *twoSum(int *nums, int numsSize, int target, int *returnSize)
+{
     for (int i = 0; i < numsSize - 1; ++i) {
         for (int j = 0; j < numsSize - i - 1; ++j) {
             if (nums[i] + nums[j + i + 1] == target) {
@@ -1012,11 +1000,10 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 
 void twoSumTest(void)
 {
-    int nums[4] = {2, 7, 11, 15};
+    int nums[4] = { 2, 7, 11, 15 };
     int target = 9;
     int numsSize = sizeof(nums) / sizeof(int);
     int returnSize;
-
 
     int *ans = twoSum(nums, numsSize, target, &returnSize);
 

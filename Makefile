@@ -80,9 +80,9 @@ clean:
 format:
 	@echo "Running clang-format"
 	@clang-format -i \
-	$(wildcard demo/*.c) \
+	$(shell find demo -name "*.c") \
 	$(wildcard src/test/*.c) \
-	$(wildcard src/utils/*.c)
+	$(wildcard src/utils/*.c) \
 
 # Build and run
 .PHONY: run

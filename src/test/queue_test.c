@@ -21,6 +21,7 @@
 */
 
 #define QUEUE_SIZE 10
+
 typedef struct {
     int data[QUEUE_SIZE];
     int front;
