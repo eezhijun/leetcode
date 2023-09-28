@@ -242,6 +242,7 @@ void main_test(void)
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
     // memory_layout_test();
     // memset_test();
 
@@ -254,6 +255,6 @@ void main_test(void)
     // limits_test();
     // sizeof_test();
     // hash_table_test();
-    scanf_gets_fgets_test();
+    // scanf_gets_fgets_test();
     // toupper_tolower_test();
 }
