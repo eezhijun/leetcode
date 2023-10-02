@@ -25,6 +25,7 @@ extern void stack_test(void);
 extern void queue_test(void);
 extern int memory_layout_test(void);
 extern int hash_table_test(void);
+extern int hash_table_test1(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a,
@@ -258,4 +259,5 @@ void main_test(void)
     // hash_table_test();
     // scanf_gets_fgets_test();
     // toupper_tolower_test();
+    hash_table_test1();
 }
