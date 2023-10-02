@@ -54,12 +54,51 @@ licensePlate 由数字、大小写字母或空格 ' ' 组成
 words[i] 由小写英文字母组成 */
 char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 {
+    char s[26] = {0};
+    int i, j, k;
+    bool found = true;
+    int minlen = INT_MAX;
+    int ans = 0;
+
+    for (i = 0; licensePlate[i] != '\0'; i++) {
+        if (isalpha(licensePlate[i])) {
+            s[tolower(licensePlate[i]) - 'a']++;
+        }
+    }
+
+    for (i = 0; i < wordsSize; i++) {
+        size_t len = strlen(words[i]);
+        char tmp[26] = {0};
+        memcpy(tmp, s, 26);
+        for (j = 0; j < len; j++) {
+            char ch = words[i][j] - 'a';
+            if (tmp[ch]) {
+                tmp[ch]--;
+            }
+        }
+
+        for (k = 0; k < 26; k++) {
+            if (tmp[k] != 0) {
+                found = false;
+                break;
+            }
+        }
+
+        if (found) {
+            if (len < minlen) {
+                minlen = len;
+                ans = i;
+            }
+        }
+        found = true;
+    }
+    return words[ans];
 }
 
 void shortestCompletingWordTest(void)
 {
-    char license_plate[7] = "1s3 PSt";
-    char *words[] = { "step", "steps", "stripe", "stepple" };
+    char license_plate[7] = "1s3 456";
+    char *words[] = { "looks", "pest", "stew", "show" };
     int wordsSize = ARRAY_SIZE(words);
 
     printf("input:\n");

@@ -17,6 +17,7 @@
 #include "ctype.h"
 
 #include "gnu/libc-version.h"
+#include "pthread.h"
 
 #include "utils.h"
 
