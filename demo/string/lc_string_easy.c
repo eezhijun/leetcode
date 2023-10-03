@@ -19,6 +19,86 @@
 #include "uthash.h"
 #include "utils.h"
 
+/* 双指针 哈希表 栈 贪心 库函数 */
+
+/* https://leetcode.cn/problems/rotate-string/ */
+/* 给定两个字符串, s 和 goal。如果在若干次旋转操作之后，s 能变成 goal ，那么返回 true 。
+
+s 的 旋转操作 就是将 s 最左边的字符移动到最右边。
+
+例如, 若 s = 'abcde'，在旋转一次之后结果就是'bcdea' 。
+
+
+示例 1:
+
+输入: s = "abcde", goal = "cdeab"
+输出: true
+示例 2:
+
+输入: s = "abcde", goal = "abced"
+输出: false
+
+
+提示:
+
+1 <= s.length, goal.length <= 100
+s 和 goal 由小写英文字母组成 */
+bool rotateString(char * s, char * goal)
+{
+#if defined(WAY1)
+    size_t len = strlen(s);
+    int i;
+
+    if (len != strlen(goal)) {
+        return false;
+    }
+
+    size_t tmplen = len;
+    while (tmplen) {
+        if (strcmp(s, goal) == 0) {
+            return true;
+        }
+        tmplen--;
+        char tmp = s[0];
+        for (i = 0; i < len - 1; i++) {
+            s[i] = s[i + 1];
+        }
+        s[len - 1] = tmp;
+    }
+    return false;
+
+#else
+    int m = strlen(s), n = strlen(goal);
+    if (m != n) {
+        return false;
+    }
+    char * str = (char *)malloc(sizeof(char) * (m + n + 1));
+    sprintf(str, "%s%s", goal, goal);
+    printf("str=%s\n", str);
+    return strstr(str, s) != NULL;
+#endif
+}
+
+void rotateStringTest(void)
+{
+    char s[128], goal[128];
+    size_t tmplen = 0;
+
+    printf("please input <s> and <goal>\n");
+    fgets(s, 128, stdin);
+    tmplen = strlen(s);
+    if (tmplen > 0 && s[tmplen - 1] == '\n') {
+        s[tmplen - 1] = '\0';
+    }
+    fgets(goal, 128, stdin);
+    tmplen = strlen(goal);
+    if (tmplen > 0 && goal[tmplen - 1] == '\n') {
+        goal[tmplen - 1] = '\0';
+    }
+
+    rotateString(s, goal) == true ? printf("output:true\n") : printf("output:false\n");
+}
+
 /* https://leetcode.cn/problems/jewels-and-stones/ */
 /*  给你一个字符串 jewels 代表石头中宝石的类型，另有一个字符串 stones 代表你拥有的石头。 stones 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。
 

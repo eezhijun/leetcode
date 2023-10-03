@@ -43,6 +43,7 @@ extern void countBinarySubstringsTest(void);
 extern void toLowerCaseTest(void);
 extern void shortestCompletingWordTest(void);
 extern void numJewelsInStonesTest(void);
+extern void rotateStringTest(void);
 
 int main_lc(void)
 {
@@ -98,7 +99,8 @@ int main_lc(void)
     // countBinarySubstringsTest();
     // toLowerCaseTest();
     // shortestCompletingWordTest();
-    numJewelsInStonesTest();
+    // numJewelsInStonesTest();
+    rotateStringTest();
 
     /* stack */
 
