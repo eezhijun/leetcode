@@ -21,6 +21,95 @@
 
 /* 双指针 哈希表 栈 贪心 库函数 */
 
+/* https://leetcode.cn/problems/unique-morse-code-words/ */
+/* 国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如:
+
+'a' 对应 ".-" ，
+'b' 对应 "-..." ，
+'c' 对应 "-.-." ，以此类推。
+为了方便，所有 26 个英文字母的摩尔斯密码表如下：
+
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+给你一个字符串数组 words ，每个单词可以写成每个字母对应摩尔斯密码的组合。
+
+例如，"cab" 可以写成 "-.-..--..." ，(即 "-.-." + ".-" + "-..." 字符串的结合)。我们将这样一个连接过程称作 单词翻译 。
+对 words 中所有单词进行单词翻译，返回不同 单词翻译 的数量。
+
+
+
+示例 1：
+
+输入: words = ["gin", "zen", "gig", "msg"]
+输出: 2
+解释:
+各单词翻译如下:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+
+共有 2 种不同翻译, "--...-." 和 "--...--.".
+示例 2：
+
+输入：words = ["a"]
+输出：1
+
+
+提示：
+
+1 <= words.length <= 100
+1 <= words[i].length <= 12
+words[i] 由小写英文字母组成 */
+#define MAX_STR_LEN 64
+typedef struct {
+    char key[MAX_STR_LEN];
+    UT_hash_handle hh;
+} hashitem_t;
+
+const static char * MORSE[26] = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", \
+                                 "....", "..", ".---", "-.-", ".-..", "--", "-.", \
+                                 "---", ".--.", "--.-", ".-.", "...", "-", "..-", \
+                                 "...-", ".--", "-..-", "-.--", "--.."};
+
+int uniqueMorseRepresentations(char **words, int wordsSize)
+{
+    hashitem_t * seen = NULL;
+    for (int i = 0; i < wordsSize; i++) {
+        hashitem_t * pEntry = NULL;
+        int len = strlen(words[i]);
+        int pos = 0;
+        char code[MAX_STR_LEN];
+        for (int j = 0; j < len; j++) {
+            pos += sprintf(code + pos, "%s", MORSE[words[i][j] - 'a']);
+        }
+        HASH_FIND_STR(seen, code, pEntry);
+        if (NULL == pEntry) {
+            pEntry = (hashitem_t *)malloc(sizeof(hashitem_t));
+            strcpy(pEntry->key, code);
+            HASH_ADD_STR(seen, key, pEntry);
+        }
+    }
+    int ans = HASH_COUNT(seen);
+    hashitem_t * curr = NULL, * tmp = NULL;
+    HASH_ITER(hh, seen, curr, tmp) {
+        HASH_DEL(seen, curr);
+        free(curr);
+    }
+    return ans;
+}
+
+void uniqueMorseRepresentationsTest(void)
+{
+    char *words[] = { "gin", "zen", "gig", "msg" };
+    int wordsSize = ARRAY_SIZE(words);
+
+    printf("input:size=%d\n", wordsSize);
+    PRINT_ARRAY(words, wordsSize, "%s ");
+
+    int ret = uniqueMorseRepresentations(words, wordsSize);
+    printf("output:%d\n", ret);
+}
+
 /* https://leetcode.cn/problems/rotate-string/ */
 /* 给定两个字符串, s 和 goal。如果在若干次旋转操作之后，s 能变成 goal ，那么返回 true 。
 
@@ -43,7 +132,7 @@ s 的 旋转操作 就是将 s 最左边的字符移动到最右边。
 
 1 <= s.length, goal.length <= 100
 s 和 goal 由小写英文字母组成 */
-bool rotateString(char * s, char * goal)
+bool rotateString(char *s, char *goal)
 {
 #if defined(WAY1)
     size_t len = strlen(s);
@@ -72,7 +161,7 @@ bool rotateString(char * s, char * goal)
     if (m != n) {
         return false;
     }
-    char * str = (char *)malloc(sizeof(char) * (m + n + 1));
+    char *str = (char *)malloc(sizeof(char) * (m + n + 1));
     sprintf(str, "%s%s", goal, goal);
     printf("str=%s\n", str);
     return strstr(str, s) != NULL;
@@ -96,7 +185,8 @@ void rotateStringTest(void)
         goal[tmplen - 1] = '\0';
     }
 
-    rotateString(s, goal) == true ? printf("output:true\n") : printf("output:false\n");
+    rotateString(s, goal) == true ? printf("output:true\n") :
+                                    printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/jewels-and-stones/ */
@@ -121,7 +211,7 @@ void rotateStringTest(void)
 1 <= jewels.length, stones.length <= 50
 jewels 和 stones 仅由英文字母组成
 jewels 中的所有字符都是 唯一的 */
-int numJewelsInStones(char * jewels, char * stones)
+int numJewelsInStones(char *jewels, char *stones)
 {
     int cnt = 0;
     int i, j;
@@ -192,7 +282,7 @@ licensePlate 由数字、大小写字母或空格 ' ' 组成
 words[i] 由小写英文字母组成 */
 char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 {
-    char s[26] = {0};
+    char s[26] = { 0 };
     int i, j, k;
     bool found = true;
     int minlen = INT_MAX;
@@ -206,7 +296,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 
     for (i = 0; i < wordsSize; i++) {
         size_t len = strlen(words[i]);
-        char tmp[26] = {0};
+        char tmp[26] = { 0 };
         memcpy(tmp, s, 26);
         for (j = 0; j < len; j++) {
             char ch = words[i][j] - 'a';

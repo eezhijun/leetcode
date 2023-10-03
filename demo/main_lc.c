@@ -44,6 +44,7 @@ extern void toLowerCaseTest(void);
 extern void shortestCompletingWordTest(void);
 extern void numJewelsInStonesTest(void);
 extern void rotateStringTest(void);
+extern void uniqueMorseRepresentationsTest(void);
 
 int main_lc(void)
 {
@@ -100,7 +101,8 @@ int main_lc(void)
     // toLowerCaseTest();
     // shortestCompletingWordTest();
     // numJewelsInStonesTest();
-    rotateStringTest();
+    // rotateStringTest();
+    uniqueMorseRepresentationsTest();
 
     /* stack */
 
