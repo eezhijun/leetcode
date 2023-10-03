@@ -9,6 +9,8 @@
  *
  */
 #include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 
 /* https://leetcode.cn/problems/next-greater-element-i/ */
 /* nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
@@ -57,4 +59,122 @@ int *nextGreaterElement(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void nextGreaterElementTest(void)
 {
+}
+
+/* https://leetcode.cn/leetbook/read/queue-stack/g5l7d/ */
+/* 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
+
+实现 MinStack 类:
+
+MinStack() 初始化堆栈对象。
+void push(int val) 将元素val推入堆栈。
+void pop() 删除堆栈顶部的元素。
+int top() 获取堆栈顶部的元素。
+int getMin() 获取堆栈中的最小元素。
+输入：
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+
+输出：
+[null,null,null,null,-3,null,0,-2]
+
+解释：
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --> 返回 -3.
+minStack.pop();
+minStack.top();      --> 返回 0.
+minStack.getMin();   --> 返回 -2.
+
+提示：
+
+-231 <= val <= 231 - 1
+pop、top 和 getMin 操作总是在 非空栈 上调用
+push, pop, top, and getMin最多被调用 3 * 104 次
+*/
+
+#define STACK_SIZE 30000
+typedef struct {
+    int data[STACK_SIZE];
+    int top;
+} MinStack;
+
+MinStack *minStackCreate(void)
+{
+    MinStack *obj = (MinStack *)malloc(sizeof(MinStack));
+    if (obj == NULL) {
+        printf("malloc failed\n");
+        return NULL;
+    }
+    memset(obj->data, 0, STACK_SIZE);
+    obj->top = -1;
+    return obj;
+}
+
+void minStackPush(MinStack *obj, int val)
+{
+    obj->top++;
+    obj->data[obj->top] = val;
+}
+
+void minStackPop(MinStack *obj)
+{
+    obj->top--;
+}
+
+int minStackTop(MinStack *obj)
+{
+    return obj->data[obj->top];
+}
+
+int minStackGetMin(MinStack *obj)
+{
+    int min = obj->data[obj->top];
+    for (int i = obj->top; i >= 0; i--) {
+        if (obj->data[i] < min) {
+            min = obj->data[i];
+        }
+    }
+    return min;
+}
+
+void minStackFree(MinStack *obj)
+{
+    if (obj != NULL) {
+        free(obj);
+        obj = NULL;
+    }
+}
+
+/**
+ * Your MinStack struct will be instantiated and called as such:
+ * MinStack* obj = minStackCreate();
+ * minStackPush(obj, val);
+
+ * minStackPop(obj);
+
+ * int param_3 = minStackTop(obj);
+
+ * int param_4 = minStackGetMin(obj);
+
+ * minStackFree(obj);
+*/
+void minStackTest(void)
+{
+    int ret = 0;
+    MinStack* obj = minStackCreate();
+
+    minStackPush(obj, -2);
+    minStackPush(obj, 0);
+    minStackPush(obj, -3);
+    ret = minStackGetMin(obj);
+    printf("min=%d\n", ret);
+    minStackPop(obj);
+    ret = minStackTop(obj);
+    printf("top=%d\n", ret);
+    ret = minStackGetMin(obj);
+    printf("min=%d\n", ret);
+    minStackFree(obj);
 }

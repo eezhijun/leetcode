@@ -10,6 +10,7 @@
  */
 #include "stdio.h"
 
+/* string */
 extern void romanToIntTest(void);
 extern void isValidTest(void);
 extern void lengthOfLastWordTest(void);
@@ -45,6 +46,9 @@ extern void shortestCompletingWordTest(void);
 extern void numJewelsInStonesTest(void);
 extern void rotateStringTest(void);
 extern void uniqueMorseRepresentationsTest(void);
+
+/* stack */
+extern void minStackTest(void);
 
 int main_lc(void)
 {
@@ -102,9 +106,10 @@ int main_lc(void)
     // shortestCompletingWordTest();
     // numJewelsInStonesTest();
     // rotateStringTest();
-    uniqueMorseRepresentationsTest();
+    // uniqueMorseRepresentationsTest();
 
     /* stack */
+    minStackTest();
 
     return 0;
 }

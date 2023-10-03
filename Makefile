@@ -20,6 +20,7 @@ SOURCE_FILES          := $(wildcard *.c)
 SOURCE_FILES          += $(wildcard demo/*.c)
 SOURCE_FILES          += $(wildcard demo/array/*.c)
 SOURCE_FILES          += $(wildcard demo/string/*.c)
+SOURCE_FILES          += $(wildcard demo/stack/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 SOURCE_FILES          += $(wildcard src/test/*.c)
 
