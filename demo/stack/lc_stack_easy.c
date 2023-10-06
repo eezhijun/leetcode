@@ -12,6 +12,8 @@
 #include "stdlib.h"
 #include "string.h"
 
+#include "utils.h"
+
 /* https://leetcode.cn/problems/next-greater-element-i/ */
 /* nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
 
@@ -61,6 +63,73 @@ void nextGreaterElementTest(void)
 {
 }
 
+/* https://leetcode.cn/leetbook/read/queue-stack/genw3/ */
+/* 给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+
+示例 1:
+
+输入: temperatures = [73,74,75,71,69,72,76,73]
+输出: [1,1,4,2,1,1,0,0]
+示例 2:
+
+输入: temperatures = [30,40,50,60]
+输出: [1,1,1,0]
+示例 3:
+
+输入: temperatures = [30,60,90]
+输出: [1,1,0]
+ 
+
+提示：
+
+1 <= temperatures.length <= 105
+30 <= temperatures[i] <= 100
+*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
+{
+    int i, j;
+    int idx = 0;
+    int cnt = 0;
+
+    *returnSize = temperaturesSize;
+    int *ans = (int *)malloc(sizeof(int) * (*returnSize));
+    memset(ans, 0, sizeof(int) * (*returnSize));
+
+    for (i = 0; i < temperaturesSize; i++) {
+        for (j = i + 1; j < temperaturesSize; j++) {
+            if (temperatures[i] >= temperatures[j]) {
+                cnt++;
+            } else {
+                ans[idx++] = cnt + 1;
+                cnt = 0;
+                break;
+            }
+        }
+        if (j == temperaturesSize) {
+            cnt = 0;
+            ans[idx++] = 0;
+        }
+    }
+    return ans;
+}
+
+void dailyTemperaturesTest(void)
+{
+    int temperatures[] = {89,62,70,58,47,47,46,76,100,70};
+    int temperaturesSize = ARRAY_SIZE(temperatures);
+    int returnSize;
+
+    printf("input:\n");
+    PRINT_ARRAY(temperatures, temperaturesSize, "%d ");
+    int *ret = dailyTemperatures(temperatures, temperaturesSize, &returnSize);
+    printf("output:\n");
+    PRINT_ARRAY(ret, returnSize, "%d ");
+    free(ret);
+}
+
 /* https://leetcode.cn/leetbook/read/queue-stack/g5l7d/ */
 /* 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
 
@@ -96,6 +165,7 @@ push, pop, top, and getMin最多被调用 3 * 104 次
 */
 
 #define STACK_SIZE 30000
+
 typedef struct {
     int data[STACK_SIZE];
     int top;
@@ -164,7 +234,7 @@ void minStackFree(MinStack *obj)
 void minStackTest(void)
 {
     int ret = 0;
-    MinStack* obj = minStackCreate();
+    MinStack *obj = minStackCreate();
 
     minStackPush(obj, -2);
     minStackPush(obj, 0);

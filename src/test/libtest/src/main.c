@@ -17,7 +17,7 @@ int main(void)
 {
     int m, n;
 
-    printf("MIAN ENTRY\n");
+    printf("MAIN ENTRY\n");
     printf("please input m and n:\n");
     scanf("%d %d", &m, &n);
 

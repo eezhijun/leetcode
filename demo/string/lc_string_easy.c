@@ -61,21 +61,23 @@
 1 <= words[i].length <= 12
 words[i] 由小写英文字母组成 */
 #define MAX_STR_LEN 64
+
 typedef struct {
     char key[MAX_STR_LEN];
     UT_hash_handle hh;
 } hashitem_t;
 
-const static char * MORSE[26] = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", \
-                                 "....", "..", ".---", "-.-", ".-..", "--", "-.", \
-                                 "---", ".--.", "--.-", ".-.", "...", "-", "..-", \
-                                 "...-", ".--", "-..-", "-.--", "--.."};
+const static char *MORSE[26] = { ".-",   "-...", "-.-.", "-..",  ".",    "..-.",
+                                 "--.",  "....", "..",   ".---", "-.-",  ".-..",
+                                 "--",   "-.",   "---",  ".--.", "--.-", ".-.",
+                                 "...",  "-",    "..-",  "...-", ".--",  "-..-",
+                                 "-.--", "--.." };
 
 int uniqueMorseRepresentations(char **words, int wordsSize)
 {
-    hashitem_t * seen = NULL;
+    hashitem_t *seen = NULL;
     for (int i = 0; i < wordsSize; i++) {
-        hashitem_t * pEntry = NULL;
+        hashitem_t *pEntry = NULL;
         int len = strlen(words[i]);
         int pos = 0;
         char code[MAX_STR_LEN];
@@ -90,8 +92,9 @@ int uniqueMorseRepresentations(char **words, int wordsSize)
         }
     }
     int ans = HASH_COUNT(seen);
-    hashitem_t * curr = NULL, * tmp = NULL;
-    HASH_ITER(hh, seen, curr, tmp) {
+    hashitem_t *curr = NULL, *tmp = NULL;
+    HASH_ITER(hh, seen, curr, tmp)
+    {
         HASH_DEL(seen, curr);
         free(curr);
     }

@@ -92,7 +92,7 @@ int find(struct hash_table *hash_table, const char *key)
 }
 
 // 从哈希表中删除键值对
-void delete(struct hash_table *hash_table, const char *key)
+void delete (struct hash_table *hash_table, const char *key)
 {
     size_t index = hash(key, hash_table->size);
     struct key_value *current = hash_table->table[index];
