@@ -90,6 +90,24 @@ void nextGreaterElementTest(void)
  */
 int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
 {
+
+#if !defined(WAY1)
+    int i;
+    int stk[temperaturesSize];
+    int top = -1;
+
+    *returnSize = temperaturesSize;
+    int *ans = (int *)malloc(sizeof(int) * (*returnSize));
+    memset(ans, 0, sizeof(int) * (*returnSize));
+
+    for (i = 0; i < temperaturesSize; i++) {
+        while (top >= 0 && temperatures[i] > temperatures[stk[top]]) {
+            int idx = stk[top--];
+            ans[idx] = i - idx;
+        }
+        stk[++top] = i;
+    }
+#else
     int i, j;
     int idx = 0;
     int cnt = 0;
@@ -113,6 +131,7 @@ int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
             ans[idx++] = 0;
         }
     }
+#endif
     return ans;
 }
 
