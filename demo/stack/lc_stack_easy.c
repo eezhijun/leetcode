@@ -11,6 +11,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "stdbool.h"
 
 #include "utils.h"
 
@@ -63,6 +64,123 @@ void nextGreaterElementTest(void)
 {
 }
 
+/* https://leetcode.cn/leetbook/read/queue-stack/gomvm/ */
+/* 给你一个字符串数组 tokens ，表示一个根据 逆波兰表示法 表示的算术表达式。
+
+请你计算该表达式。返回一个表示表达式值的整数。
+
+注意：
+
+有效的算符为 '+'、'-'、'*' 和 '/' 。
+每个操作数（运算对象）都可以是一个整数或者另一个表达式。
+两个整数之间的除法总是 向零截断 。
+表达式中不含除零运算。
+输入是一个根据逆波兰表示法表示的算术表达式。
+答案及所有中间计算结果可以用 32 位 整数表示。
+ 
+
+示例 1：
+
+输入：tokens = ["2","1","+","3","*"]
+输出：9
+解释：该算式转化为常见的中缀算术表达式为：((2 + 1) * 3) = 9
+示例 2：
+
+输入：tokens = ["4","13","5","/","+"]
+输出：6
+解释：该算式转化为常见的中缀算术表达式为：(4 + (13 / 5)) = 6
+示例 3：
+
+输入：tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+输出：22
+解释：该算式转化为常见的中缀算术表达式为：
+  ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22
+ 
+
+提示：
+
+1 <= tokens.length <= 104
+tokens[i] 是一个算符（"+"、"-"、"*" 或 "/"），或是在范围 [-200, 200] 内的一个整数
+ 
+
+逆波兰表达式：
+
+逆波兰表达式是一种后缀表达式，所谓后缀就是指算符写在后面。
+
+平常使用的算式则是一种中缀表达式，如 ( 1 + 2 ) * ( 3 + 4 ) 。
+该算式的逆波兰表达式写法为 ( ( 1 2 + ) ( 3 4 + ) * ) 。
+逆波兰表达式主要有以下两个优点：
+
+去掉括号后表达式无歧义，上式即便写成 1 2 + 3 4 + * 也可以依据次序计算出正确结果。
+适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中 */
+int evalRPN(char **tokens, int tokensSize)
+{
+    int i, m, n;
+    int stk[tokensSize];
+    int top = -1;
+    bool sign = false;
+
+    memset(stk, 0, sizeof(int) * tokensSize);
+
+    for (i = 0; i < tokensSize; i++) {
+        if (top >= 1) {
+            if (strcmp(tokens[i], "+") == 0) {
+                sign = true;
+                m = stk[top--];
+                n = stk[top--];
+                stk[++top] = n + m;
+            }
+
+            if (strcmp(tokens[i], "-") == 0) {
+                sign = true;
+                m = stk[top--];
+                n = stk[top--];
+                stk[++top] = n - m;
+            }
+
+            if (strcmp(tokens[i], "*") == 0) {
+                sign = true;
+                m = stk[top--];
+                n = stk[top--];
+                stk[++top] = n * m;
+            }
+
+            if (strcmp(tokens[i], "/") == 0) {
+                sign = true;
+                m = stk[top--];
+                n = stk[top--];
+                stk[++top] = n / m;
+            }
+        }
+        if (!sign) {
+            stk[++top] = atoi(tokens[i]);
+        }
+        sign = false;
+
+        printf("top=%d\n", top);
+        PRINT_ARRAY(stk, tokensSize, "%d ");
+    }
+    return stk[0];
+}
+
+void evalRPNTest(void)
+{
+    char *tokens[] = { "10","6","9","3","+","-11","*","/","*","17","+","5","+" };
+    int tokensSize = ARRAY_SIZE(tokens);
+
+    printf("input:\n");
+    printf("tokensSize=%d\n", tokensSize);
+    PRINT_ARRAY(tokens, tokensSize, "%s ");
+    int ret = evalRPN(tokens, tokensSize);
+    printf("output:%d\n", ret);
+}
+
 /* https://leetcode.cn/leetbook/read/queue-stack/genw3/ */
 /* 给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替。
 
@@ -90,7 +208,6 @@ void nextGreaterElementTest(void)
  */
 int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
 {
-
 #if !defined(WAY1)
     int i;
     int stk[temperaturesSize];
@@ -137,7 +254,7 @@ int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
 
 void dailyTemperaturesTest(void)
 {
-    int temperatures[] = {89,62,70,58,47,47,46,76,100,70};
+    int temperatures[] = { 89, 62, 70, 58, 47, 47, 46, 76, 100, 70 };
     int temperaturesSize = ARRAY_SIZE(temperatures);
     int returnSize;
 

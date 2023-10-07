@@ -50,6 +50,7 @@ extern void uniqueMorseRepresentationsTest(void);
 /* stack */
 extern void minStackTest(void);
 extern void dailyTemperaturesTest(void);
+extern void evalRPNTest(void);
 
 int main_lc(void)
 {
@@ -111,7 +112,8 @@ int main_lc(void)
 
     /* stack */
     // minStackTest();
-    dailyTemperaturesTest();
+    // dailyTemperaturesTest();
+    evalRPNTest();
 
     return 0;
 }
