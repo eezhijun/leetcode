@@ -16,7 +16,6 @@ extern void isValidTest(void);
 extern void lengthOfLastWordTest(void);
 extern void titleToNumberTest(void);
 extern void isIsomorphicTest(void);
-extern void nextGreaterElementTest(void);
 extern void reverseStringTest(void);
 extern void convertToTitleTest(void);
 extern void reverseWordsTest3(void);
@@ -51,6 +50,7 @@ extern void uniqueMorseRepresentationsTest(void);
 extern void minStackTest(void);
 extern void dailyTemperaturesTest(void);
 extern void evalRPNTest(void);
+extern void nextGreaterElementTest(void);
 
 int main_lc(void)
 {
@@ -113,7 +113,9 @@ int main_lc(void)
     /* stack */
     // minStackTest();
     // dailyTemperaturesTest();
-    evalRPNTest();
+    // evalRPNTest();
+    nextGreaterElementTest();
+
 
     return 0;
 }
