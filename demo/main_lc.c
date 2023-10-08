@@ -106,7 +106,7 @@ int main_lc(void)
     // maxProfitTest();
     // singleNumberTest();
     // majorityElementTest();
-    // containsDuplicateTest();
+    containsDuplicateTest();
     // moveZeroesTest();
     // findMedianSortedArraysTest();
     // divideTest();

@@ -370,20 +370,51 @@ void moveZeroesTest(void)
 
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109 */
+#if defined(HASH_TABLE_WAY)
+struct hashTable {
+    int key;
+    UT_hash_handle hh;
+};
+#endif
 bool containsDuplicate(int *nums, int numsSize)
 {
+#if defined(HASH_TABLE_WAY)
+    struct hashTable* set = NULL;
+    for (int i = 0; i < numsSize; i++) {
+        struct hashTable* tmp;
+        HASH_FIND_INT(set, nums + i, tmp);
+        if (tmp == NULL) {
+            tmp = malloc(sizeof(struct hashTable));
+            tmp->key = nums[i];
+            HASH_ADD_INT(set, key, tmp);
+        } else {
+            return true;
+        }
+    }
+#else
     qsort(nums, numsSize, sizeof(int), cmp);
     for (int i = 0; i < numsSize - 1; i++) {
         if (nums[i] == nums[i + 1]) {
             return true;
         }
     }
+#endif
     return false;
 }
 
 void containsDuplicateTest(void)
 {
+    int numsSize;
+    printf("please input numsSize:\n");
+    scanf("%d", &numsSize);
+    int nums[numsSize];
 
+    printf("please input nums:\n");
+    for (int i = 0; i < numsSize; i++) {
+        scanf("%d", &nums[i]);
+    }
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    containsDuplicate(nums, numsSize) == true ? printf("ouput:true\n") : printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/majority-element/ */
