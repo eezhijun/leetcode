@@ -16,6 +16,7 @@
 #include <limits.h>
 
 #include "utils.h"
+#include "uthash.h"
 
 /* https://leetcode.cn/problems/two-out-of-three/ */
 /* 给你三个整数数组 nums1、nums2 和 nums3 ，请你构造并返回一个 元素各不相同的 数组，且由 至少 在 两个 数组中出现的所有值组成。数组中的元素可以按 任意 顺序排列。
@@ -346,6 +347,101 @@ void moveZeroes(int *nums, int numsSize)
 void moveZeroesTest(void)
 {
 
+}
+
+/* https://leetcode.cn/problems/contains-duplicate-ii/ */
+/* 给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。
+如果存在，返回 true ；否则，返回 false 。
+
+示例 1：
+
+输入：nums = [1,2,3,1], k = 3
+输出：true
+示例 2：
+
+输入：nums = [1,0,1,1], k = 1
+输出：true
+示例 3：
+
+输入：nums = [1,2,3,1,2,3], k = 2
+输出：false
+
+提示：
+
+1 <= nums.length <= 105
+-109 <= nums[i] <= 109
+0 <= k <= 105 */
+#if defined(HASH_TABLE_WAY)
+struct HashEntry {
+    int key;
+    int val;
+    UT_hash_handle hh;
+};
+
+void hashAddItem(struct HashEntry **obj, int key, int val) {
+    struct HashEntry *pEntry;
+    pEntry = malloc(sizeof(struct HashEntry));
+    pEntry->key = key;
+    pEntry->val = val;
+    HASH_ADD_INT(*obj, key, pEntry);
+}
+
+struct HashEntry *hashFindItem(const struct HashEntry **obj, int key)
+{
+    struct HashEntry *pEntry = NULL;
+    HASH_FIND_INT(*obj, &key, pEntry);
+    return pEntry;
+}
+
+void hashFreeAll(struct HashEntry **obj)
+{
+    struct HashEntry *curr, *next;
+    HASH_ITER(hh, *obj, curr, next)
+    {
+        HASH_DEL(*obj,curr);
+        free(curr);
+    }
+}
+#endif
+
+bool containsNearbyDuplicate(int* nums, int numsSize, int k)
+{
+#if defined(HASH_TABLE_WAY)
+    struct HashEntry *dictionary = NULL;
+    for (int i = 0; i < numsSize; i++) {
+        struct HashEntry * pEntry = hashFindItem(&dictionary, nums[i]);
+        if (NULL != pEntry && i - pEntry->val <= k) {
+            hashFreeAll(&dictionary);
+            return true;
+        }
+        hashAddItem(&dictionary, nums[i], i);
+    }
+    hashFreeAll(&dictionary);
+#else
+    int i, j;
+    for (i = 0; i < numsSize; i++) {
+        for (j = i + 1; j < numsSize; j++) {
+            if (nums[i] == nums[j]) {
+                int tmp = abs(i - j);
+                if (tmp <= k) {
+                    return true;
+                }
+            }
+        }
+    }
+#endif
+    return false;
+}
+
+void containsNearbyDuplicateTest(void)
+{
+    int nums[] = {1,2,3,1,2,3};
+    int numsSize = ARRAY_SIZE(nums);
+    int k = 2;
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    containsNearbyDuplicate(nums, numsSize, k) == true ? printf("output:true\n") : printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/contains-duplicate/ */

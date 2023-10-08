@@ -43,6 +43,7 @@ extern void setZeroesTest(void);
 extern void threeSumTest(void);
 extern void twoOutOfThreeTest(void);
 extern void twoSum2Test(void);
+extern void containsNearbyDuplicateTest(void);
 
 /* string */
 extern void romanToIntTest(void);
@@ -106,7 +107,7 @@ int main_lc(void)
     // maxProfitTest();
     // singleNumberTest();
     // majorityElementTest();
-    containsDuplicateTest();
+    // containsDuplicateTest();
     // moveZeroesTest();
     // findMedianSortedArraysTest();
     // divideTest();
@@ -128,6 +129,7 @@ int main_lc(void)
     // threeSumTest();
     // twoOutOfThreeTest();
     // twoSum2Test();
+    containsNearbyDuplicateTest();
 
     /* string */
     // longestPalindromeTest();
