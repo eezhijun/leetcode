@@ -1,6 +1,6 @@
 /**
  * @file main_test.c
- * @author eehongzhijun (eehongzhijun@outlook.com)
+ * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1
  * @date 2023-09-16
@@ -27,6 +27,7 @@ extern int circular_queue_test(void);
 extern int memory_layout_test(void);
 extern int hash_table_test(void);
 extern int hash_table_test1(void);
+extern int list_test(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a,
@@ -252,7 +253,9 @@ void main_test(void)
     // stack_test();
 
     // queue_test();
-    circular_queue_test();
+    // circular_queue_test();
+
+    list_test();
 
     // hex2dec_test();
     // dec2hex_test();

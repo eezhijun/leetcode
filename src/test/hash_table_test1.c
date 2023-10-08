@@ -1,3 +1,13 @@
+/**
+ * @file hash_table_test1.c
+ * @author hongzhijun (eehongzhijun@outlook.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-10-08
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

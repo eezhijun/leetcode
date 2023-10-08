@@ -1,5 +1,5 @@
 /**
- * @file lc_hash_table.c
+ * @file lc_list_easy.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1

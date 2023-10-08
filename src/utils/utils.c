@@ -1,6 +1,6 @@
 /**
  * @file utils.c
- * @author eehongzhijun (eehongzhijun@outlook.com)
+ * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.0.1
  * @date 2023-08-24
