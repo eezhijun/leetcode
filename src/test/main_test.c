@@ -23,6 +23,7 @@
 
 extern void stack_test(void);
 extern void queue_test(void);
+extern int circular_queue_test(void);
 extern int memory_layout_test(void);
 extern int hash_table_test(void);
 extern int hash_table_test1(void);
@@ -249,7 +250,9 @@ void main_test(void)
     // memset_test();
 
     // stack_test();
+
     // queue_test();
+    circular_queue_test();
 
     // hex2dec_test();
     // dec2hex_test();
@@ -259,5 +262,5 @@ void main_test(void)
     // hash_table_test();
     // scanf_gets_fgets_test();
     // toupper_tolower_test();
-    hash_table_test1();
+    // hash_table_test1();
 }
