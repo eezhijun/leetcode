@@ -28,6 +28,7 @@ extern int memory_layout_test(void);
 extern int hash_table_test(void);
 extern int hash_table_test1(void);
 extern int list_test(void);
+extern int doubly_list_test(void);
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a,
@@ -255,7 +256,8 @@ void main_test(void)
     // queue_test();
     // circular_queue_test();
 
-    list_test();
+    // list_test();
+    doubly_list_test();
 
     // hex2dec_test();
     // dec2hex_test();
