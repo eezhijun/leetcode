@@ -52,6 +52,9 @@ extern void dailyTemperaturesTest(void);
 extern void evalRPNTest(void);
 extern void nextGreaterElementTest(void);
 
+/* queue */
+extern void myCircularQueueTest(void);
+
 int main_lc(void)
 {
     printf("LEETCODE ENTRY\n");
@@ -114,7 +117,10 @@ int main_lc(void)
     // minStackTest();
     // dailyTemperaturesTest();
     // evalRPNTest();
-    nextGreaterElementTest();
+    // nextGreaterElementTest();
+
+    /* queue */
+    myCircularQueueTest();
 
 
     return 0;
