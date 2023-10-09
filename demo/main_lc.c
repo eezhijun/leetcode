@@ -45,6 +45,9 @@ extern void twoOutOfThreeTest(void);
 extern void twoSum2Test(void);
 extern void containsNearbyDuplicateTest(void);
 extern void summaryRangesTest(void);
+extern void missingNumberTest(void);
+extern void numArrayTest(void);
+extern void intersectionTest(void);
 
 /* string */
 extern void romanToIntTest(void);
@@ -131,7 +134,10 @@ int main_lc(void)
     // twoOutOfThreeTest();
     // twoSum2Test();
     // containsNearbyDuplicateTest();
-    summaryRangesTest();
+    // summaryRangesTest();
+    // missingNumberTest();
+    // numArrayTest();
+    intersectionTest();
 
     /* string */
     // longestPalindromeTest();

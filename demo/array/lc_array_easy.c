@@ -18,6 +18,233 @@
 #include "utils.h"
 #include "uthash.h"
 
+/* 双指针 哈希表 数学 计数 排序 */
+
+/* https://leetcode.cn/problems/intersection-of-two-arrays/ */
+/* 给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。
+
+示例 1：
+
+输入：nums1 = [1,2,2,1], nums2 = [2,2]
+输出：[2]
+示例 2：
+
+输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+输出：[9,4]
+解释：[4,9] 也是可通过的
+
+
+提示：
+
+1 <= nums1.length, nums2.length <= 1000
+0 <= nums1[i], nums2[i] <= 1000 */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize)
+{
+    bubble_sort(nums1, nums1Size);
+    bubble_sort(nums2, nums2Size);
+    int i, j;
+    int idx = 0;
+    int size = nums1Size > nums2Size ? nums1Size : nums2Size;
+    int *ans = (int *)malloc(sizeof(int) * size);
+
+    for (i = 0; i < nums1Size; i++) {
+        for (j = 0; j < nums2Size; j++) {
+            if (nums1[i] == nums2[j]) {
+                ans[idx++] = nums1[i];
+                break;
+            }
+        }
+    }
+    // PRINT_ARRAY(ans, idx, ">%d ");
+    if (!idx) {
+        return NULL;
+    }
+    int s = 0, f = 1;
+    while (s < f && f < idx) {
+        if (ans[s] != ans[f]) {
+            s++;
+        }
+        f++;
+        if (f - s > 1) {
+            ans[s] = ans[f - 1];
+        }
+    }
+    *returnSize = s + 1;
+    return ans;
+}
+
+void intersectionTest(void)
+{
+    int nums1[] = {1,2,2,1};
+    int nums1Size = ARRAY_SIZE(nums1);
+    int nums2[] = {1, 2};
+    int nums2Size = ARRAY_SIZE(nums2);
+    int returnSize;
+
+    printf("input nums1 and nums2:\n");
+    PRINT_ARRAY(nums1, nums1Size, "%d ");
+    PRINT_ARRAY(nums2, nums2Size, "%d ");
+    int *ret = intersection(nums1, nums1Size, nums2, nums2Size, &returnSize);
+    if (!ret) {
+        printf("ret is NULL\n");
+        return;
+    }
+    PRINT_ARRAY(ret, returnSize, "%d ");
+    free(ret);
+}
+
+/* https://leetcode.cn/problems/range-sum-query-immutable/ */
+/* 给定一个整数数组  nums，处理以下类型的多个查询:
+
+计算索引 left 和 right （包含 left 和 right）之间的 nums 元素的 和 ，其中 left <= right
+实现 NumArray 类：
+
+NumArray(int[] nums) 使用数组 nums 初始化对象
+int sumRange(int i, int j) 返回数组 nums 中索引 left 和 right 之间的元素的 总和 ，
+包含 left 和 right 两点（也就是 nums[left] + nums[left + 1] + ... + nums[right] )
+
+示例 1：
+
+输入：
+["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+输出：
+[null, 1, -1, -3]
+
+解释：
+NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); // return 1 ((-2) + 0 + 3)
+numArray.sumRange(2, 5); // return -1 (3 + (-5) + 2 + (-1))
+numArray.sumRange(0, 5); // return -3 ((-2) + 0 + 3 + (-5) + 2 + (-1))
+
+
+提示：
+
+1 <= nums.length <= 104
+-105 <= nums[i] <= 105
+0 <= i <= j < nums.length
+最多调用 104 次 sumRange 方法 */
+typedef struct {
+    int *nums;
+    int numsSize;
+} NumArray;
+
+NumArray *numArrayCreate(int *nums, int numsSize)
+{
+    NumArray *obj = (NumArray *)malloc(sizeof(NumArray));
+    obj->nums = nums;
+    obj->numsSize = numsSize;
+    return obj;
+}
+
+int numArraySumRange(NumArray *obj, int left, int right)
+{
+    int sum = 0;
+    int i;
+
+    for (i = left; i <= right; i++) {
+        sum += obj->nums[i];
+    }
+    return sum;
+}
+
+void numArrayFree(NumArray *obj)
+{
+    free(obj);
+}
+
+/**
+ * Your NumArray struct will be instantiated and called as such:
+ * NumArray* obj = numArrayCreate(nums, numsSize);
+ * int param_1 = numArraySumRange(obj, left, right);
+
+ * numArrayFree(obj);
+*/
+void numArrayTest(void)
+{
+    int nums[] = {-2, 0, 3, -5, 2, -1};
+    int numsSize = ARRAY_SIZE(nums);
+    int ret;
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    NumArray *obj = numArrayCreate(nums, numsSize);
+    ret = numArraySumRange(obj, 0, 2);
+    printf("output:ret=%d\n", ret);
+    ret = numArraySumRange(obj, 2, 5);
+    printf("output:ret=%d\n", ret);
+    ret = numArraySumRange(obj, 0, 5);
+    printf("output:ret=%d\n", ret);
+    numArrayFree(obj);
+}
+
+
+/* https://leetcode.cn/problems/missing-number/ */
+/* 给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+
+示例 1：
+
+输入：nums = [3,0,1]
+输出：2
+解释：n = 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 2：
+
+输入：nums = [0,1]
+输出：2
+解释：n = 2，因为有 2 个数字，所以所有的数字都在范围 [0,2] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 3：
+
+输入：nums = [9,6,4,2,3,5,7,0,1]
+输出：8
+解释：n = 9，因为有 9 个数字，所以所有的数字都在范围 [0,9] 内。8 是丢失的数字，因为它没有出现在 nums 中。
+示例 4：
+
+输入：nums = [0]
+输出：1
+解释：n = 1，因为有 1 个数字，所以所有的数字都在范围 [0,1] 内。1 是丢失的数字，因为它没有出现在 nums 中。
+
+
+提示：
+
+n == nums.length
+1 <= n <= 104
+0 <= nums[i] <= n
+nums 中的所有数字都 独一无二
+
+
+进阶：你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题? */
+int missingNumber(int *nums, int numsSize)
+{
+    int i = 0;
+    bubble_sort(nums, numsSize);
+    // PRINT_ARRAY(nums, numsSize, "%d ");
+
+    if (nums[0] != 0) {
+        return nums[0] - 1;
+    }
+    while (i < numsSize - 1) {
+        if (nums[i] + 1 == nums[i + 1]) {
+            i++;
+        } else {
+            return nums[i] + 1;
+        }
+    }
+    return nums[i] + 1;
+}
+
+void missingNumberTest(void)
+{
+    int nums[] = { 1, 2, 3, 4 };
+    int numsSize = ARRAY_SIZE(nums);
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int ret = missingNumber(nums, numsSize);
+    printf("output:%d\n", ret);
+}
+
 /* https://leetcode.cn/problems/summary-ranges/ */
 /* 给定一个  无重复元素 的 有序 整数数组 nums 。
 
@@ -58,9 +285,9 @@ nums 按升序排列 */
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-char ** summaryRanges(int* nums, int numsSize, int* returnSize)
+char **summaryRanges(int *nums, int numsSize, int *returnSize)
 {
-    char** ret = malloc(sizeof(char*) * numsSize);
+    char **ret = malloc(sizeof(char *) * numsSize);
     *returnSize = 0;
     int i = 0;
     while (i < numsSize) {
@@ -70,7 +297,7 @@ char ** summaryRanges(int* nums, int numsSize, int* returnSize)
             i++;
         }
         int high = i - 1;
-        char* temp = malloc(sizeof(char) * 25);
+        char *temp = malloc(sizeof(char) * 25);
         sprintf(temp, "%d", nums[low]);
         if (low < high) {
             sprintf(temp + strlen(temp), "->");
@@ -83,7 +310,7 @@ char ** summaryRanges(int* nums, int numsSize, int* returnSize)
 
 void summaryRangesTest(void)
 {
-    int nums[] = {-1,0,2,3,4,6,8,9};
+    int nums[] = { -1, 0, 2, 3, 4, 6, 8, 9 };
     int numsSize = ARRAY_SIZE(nums);
     int returnSize;
 
@@ -170,7 +397,6 @@ int *twoOutOfThree(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void twoOutOfThreeTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/find-pivot-index/ */
@@ -236,7 +462,6 @@ int pivotIndex(int *nums, int numsSize)
 
 void pivotIndexTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/intersection-of-two-arrays-ii/ */
@@ -296,7 +521,6 @@ int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void intersectTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/max-consecutive-ones/ */
@@ -338,7 +562,6 @@ int findMaxConsecutiveOnes(int *nums, int numsSize)
 
 void findMaxConsecutiveOnesTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/array-partition/ */
@@ -384,7 +607,6 @@ int arrayPairSum(int *nums, int numsSize)
 
 void arrayPairSumTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/move-zeroes/ */
@@ -430,7 +652,6 @@ void moveZeroes(int *nums, int numsSize)
 
 void moveZeroesTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/contains-duplicate-ii/ */
@@ -462,7 +683,8 @@ struct HashEntry {
     UT_hash_handle hh;
 };
 
-void hashAddItem(struct HashEntry **obj, int key, int val) {
+void hashAddItem(struct HashEntry **obj, int key, int val)
+{
     struct HashEntry *pEntry;
     pEntry = malloc(sizeof(struct HashEntry));
     pEntry->key = key;
@@ -482,18 +704,18 @@ void hashFreeAll(struct HashEntry **obj)
     struct HashEntry *curr, *next;
     HASH_ITER(hh, *obj, curr, next)
     {
-        HASH_DEL(*obj,curr);
+        HASH_DEL(*obj, curr);
         free(curr);
     }
 }
 #endif
 
-bool containsNearbyDuplicate(int* nums, int numsSize, int k)
+bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 {
 #if defined(HASH_TABLE_WAY)
     struct HashEntry *dictionary = NULL;
     for (int i = 0; i < numsSize; i++) {
-        struct HashEntry * pEntry = hashFindItem(&dictionary, nums[i]);
+        struct HashEntry *pEntry = hashFindItem(&dictionary, nums[i]);
         if (NULL != pEntry && i - pEntry->val <= k) {
             hashFreeAll(&dictionary);
             return true;
@@ -519,13 +741,15 @@ bool containsNearbyDuplicate(int* nums, int numsSize, int k)
 
 void containsNearbyDuplicateTest(void)
 {
-    int nums[] = {1,2,3,1,2,3};
+    int nums[] = { 1, 2, 3, 1, 2, 3 };
     int numsSize = ARRAY_SIZE(nums);
     int k = 2;
 
     printf("input:\n");
     PRINT_ARRAY(nums, numsSize, "%d ");
-    containsNearbyDuplicate(nums, numsSize, k) == true ? printf("output:true\n") : printf("output:false\n");
+    containsNearbyDuplicate(nums, numsSize, k) == true ?
+        printf("output:true\n") :
+        printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/contains-duplicate/ */
@@ -559,9 +783,9 @@ struct hashTable {
 bool containsDuplicate(int *nums, int numsSize)
 {
 #if defined(HASH_TABLE_WAY)
-    struct hashTable* set = NULL;
+    struct hashTable *set = NULL;
     for (int i = 0; i < numsSize; i++) {
-        struct hashTable* tmp;
+        struct hashTable *tmp;
         HASH_FIND_INT(set, nums + i, tmp);
         if (tmp == NULL) {
             tmp = malloc(sizeof(struct hashTable));
@@ -594,7 +818,8 @@ void containsDuplicateTest(void)
         scanf("%d", &nums[i]);
     }
     PRINT_ARRAY(nums, numsSize, "%d ");
-    containsDuplicate(nums, numsSize) == true ? printf("ouput:true\n") : printf("output:false\n");
+    containsDuplicate(nums, numsSize) == true ? printf("ouput:true\n") :
+                                                printf("output:false\n");
 }
 
 /* https://leetcode.cn/problems/majority-element/ */
@@ -687,7 +912,6 @@ int singleNumber(int *nums, int numsSize)
 
 void singleNumberTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/ */
@@ -776,7 +1000,6 @@ int *getRow(int rowIndex, int *returnSize)
 
 void getRowTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/pascals-triangle/ */
@@ -822,7 +1045,6 @@ int **generate(int numRows, int *returnSize, int **returnColumnSizes)
 
 void generateTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/merge-sorted-array/ */
@@ -897,7 +1119,6 @@ void merge_stored_array(int *nums1, int nums1Size, int m, int *nums2,
 
 void mergeTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/plus-one/ */
@@ -955,7 +1176,6 @@ int *plusOne(int *digits, int digitsSize, int *returnSize)
 
 void plusOneTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/search-insert-position/ */
@@ -999,7 +1219,6 @@ int searchInsert(int *nums, int numsSize, int target)
 
 void searchInsertTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/remove-element/ */
@@ -1063,7 +1282,6 @@ int removeElement(int *nums, int numsSize, int val)
 
 void removeElementTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/remove-duplicates-from-sorted-array/ */
@@ -1122,7 +1340,14 @@ int removeDuplicates(int *nums, int numsSize)
 
 void removeDuplicatesTest(void)
 {
+    int nums[] = {1,1,2};
+    int numsSize = ARRAY_SIZE(nums);
 
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int ret = removeDuplicates(nums, numsSize);
+    printf("output:%d\n", ret);
+    PRINT_ARRAY(nums, ret, "%d ");
 }
 
 /* https://leetcode.cn/problems/two-sum/ */
