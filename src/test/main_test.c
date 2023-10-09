@@ -107,11 +107,19 @@ void dec2hex_test(void)
 
 void sprintf_test(void)
 {
-    char *s = (char *)malloc(sizeof(char) * (4 + 1));
+    int idx = 0;
+    int size = 12;
+    char *s = (char *)malloc(sizeof(char) * size);
+    memset(s, 0, sizeof(char) * size);
 
-    sprintf(s, "%d", 1234);
+    idx += sprintf(s + idx, "%d", 123);
+    PRINT_ARRAY(s, size, "%d ");
 
-    PRINT_ARRAY(s, 5, "%d ");
+    idx += sprintf(s + idx, "%d", -1234);
+    PRINT_ARRAY(s, size, "%d ");
+
+    idx += sprintf(s + idx, "%s", "-->");
+    PRINT_ARRAY(s, size, "%c ");
 }
 
 void limits_test(void)
@@ -257,7 +265,7 @@ void main_test(void)
     // circular_queue_test();
 
     // list_test();
-    doubly_list_test();
+    // doubly_list_test();
 
     // hex2dec_test();
     // dec2hex_test();

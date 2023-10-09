@@ -18,6 +18,90 @@
 #include "utils.h"
 #include "uthash.h"
 
+/* https://leetcode.cn/problems/summary-ranges/ */
+/* 给定一个  无重复元素 的 有序 整数数组 nums 。
+
+返回 恰好覆盖数组中所有数字 的 最小有序 区间范围列表 。也就是说，nums 的每个元素都恰好被某个区间范围所覆盖，
+并且不存在属于某个范围但不属于 nums 的数字 x 。
+
+列表中的每个区间范围 [a,b] 应该按如下格式输出：
+
+"a->b" ，如果 a != b
+"a" ，如果 a == b
+
+
+示例 1：
+
+输入：nums = [0,1,2,4,5,7]
+输出：["0->2","4->5","7"]
+解释：区间范围是：
+[0,2] --> "0->2"
+[4,5] --> "4->5"
+[7,7] --> "7"
+示例 2：
+
+输入：nums = [0,2,3,4,6,8,9]
+输出：["0","2->4","6","8->9"]
+解释：区间范围是：
+[0,0] --> "0"
+[2,4] --> "2->4"
+[6,6] --> "6"
+[8,9] --> "8->9"
+
+
+提示：
+
+0 <= nums.length <= 20
+-231 <= nums[i] <= 231 - 1
+nums 中的所有值都 互不相同
+nums 按升序排列 */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char ** summaryRanges(int* nums, int numsSize, int* returnSize)
+{
+    char** ret = malloc(sizeof(char*) * numsSize);
+    *returnSize = 0;
+    int i = 0;
+    while (i < numsSize) {
+        int low = i;
+        i++;
+        while (i < numsSize && nums[i] == nums[i - 1] + 1) {
+            i++;
+        }
+        int high = i - 1;
+        char* temp = malloc(sizeof(char) * 25);
+        sprintf(temp, "%d", nums[low]);
+        if (low < high) {
+            sprintf(temp + strlen(temp), "->");
+            sprintf(temp + strlen(temp), "%d", nums[high]);
+        }
+        ret[(*returnSize)++] = temp;
+    }
+    return ret;
+}
+
+void summaryRangesTest(void)
+{
+    int nums[] = {-1,0,2,3,4,6,8,9};
+    int numsSize = ARRAY_SIZE(nums);
+    int returnSize;
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    char **ret = summaryRanges(nums, numsSize, &returnSize);
+    printf("output:\n");
+    if (ret == NULL) {
+        printf("ret is NULL\n");
+        return;
+    }
+    PRINT_ARRAY(ret, returnSize, "%s ");
+    for (int i = 0; i < returnSize; i++) {
+        free(ret[i]);
+    }
+    free(ret);
+}
+
 /* https://leetcode.cn/problems/two-out-of-three/ */
 /* 给你三个整数数组 nums1、nums2 和 nums3 ，请你构造并返回一个 元素各不相同的 数组，且由 至少 在 两个 数组中出现的所有值组成。数组中的元素可以按 任意 顺序排列。
 

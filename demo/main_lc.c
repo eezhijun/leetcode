@@ -44,6 +44,7 @@ extern void threeSumTest(void);
 extern void twoOutOfThreeTest(void);
 extern void twoSum2Test(void);
 extern void containsNearbyDuplicateTest(void);
+extern void summaryRangesTest(void);
 
 /* string */
 extern void romanToIntTest(void);
@@ -129,7 +130,8 @@ int main_lc(void)
     // threeSumTest();
     // twoOutOfThreeTest();
     // twoSum2Test();
-    containsNearbyDuplicateTest();
+    // containsNearbyDuplicateTest();
+    summaryRangesTest();
 
     /* string */
     // longestPalindromeTest();
