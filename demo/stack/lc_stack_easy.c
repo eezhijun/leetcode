@@ -88,8 +88,8 @@ int *nextGreaterElement(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void nextGreaterElementTest(void)
 {
-    int nums1[] = {1,3,5,2,4};
-    int nums2[] = {6,5,4,3,2,1,7};
+    int nums1[] = { 1, 3, 5, 2, 4 };
+    int nums2[] = { 6, 5, 4, 3, 2, 1, 7 };
     int nums1Size = ARRAY_SIZE(nums1);
     int nums2Size = ARRAY_SIZE(nums2);
     int returnSize;
@@ -97,7 +97,8 @@ void nextGreaterElementTest(void)
     printf("input nums1 and nums2:\n");
     PRINT_ARRAY(nums1, nums1Size, "%d ");
     PRINT_ARRAY(nums2, nums2Size, "%d ");
-    int *ret = nextGreaterElement(nums1, nums1Size, nums2, nums2Size, &returnSize);
+    int *ret =
+        nextGreaterElement(nums1, nums1Size, nums2, nums2Size, &returnSize);
     printf("ouput:\n");
     PRINT_ARRAY(ret, returnSize, "%d ");
 }
@@ -209,7 +210,8 @@ int evalRPN(char **tokens, int tokensSize)
 
 void evalRPNTest(void)
 {
-    char *tokens[] = { "10","6","9","3","+","-11","*","/","*","17","+","5","+" };
+    char *tokens[] = { "10", "6", "9",  "3", "+", "-11", "*",
+                       "/",  "*", "17", "+", "5", "+" };
     int tokensSize = ARRAY_SIZE(tokens);
 
     printf("input:\n");

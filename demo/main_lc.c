@@ -135,9 +135,9 @@ int main_lc(void)
     // twoSum2Test();
     // containsNearbyDuplicateTest();
     // summaryRangesTest();
-    // missingNumberTest();
+    missingNumberTest();
     // numArrayTest();
-    intersectionTest();
+    // intersectionTest();
 
     /* string */
     // longestPalindromeTest();
@@ -191,7 +191,6 @@ int main_lc(void)
 
     /* queue */
     // myCircularQueueTest();
-
 
     return 0;
 }

@@ -267,13 +267,15 @@ void main_test(void)
     // list_test();
     // doubly_list_test();
 
+    // hash_table_test();
+    // hash_table_test1();
+
     // hex2dec_test();
     // dec2hex_test();
     // sprintf_test();
     // limits_test();
     // sizeof_test();
-    // hash_table_test();
+
     // scanf_gets_fgets_test();
     // toupper_tolower_test();
-    // hash_table_test1();
 }

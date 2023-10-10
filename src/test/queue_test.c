@@ -110,6 +110,7 @@ void queue_test(void)
 }
 
 #define CIRCULAR_QUEUE_SIZE 10
+
 typedef struct {
     int *array;
     int front;
@@ -154,11 +155,9 @@ void enqueue(circular_queue *queue, int data)
 
     if (is_empty(queue)) {
         queue->front = queue->rear = 0;
-    }
-    else if (queue->rear == queue->size - 1) {
+    } else if (queue->rear == queue->size - 1) {
         queue->rear = 0;
-    }
-    else {
+    } else {
         queue->rear++;
     }
     queue->array[queue->rear] = data;
@@ -175,11 +174,9 @@ int dequeue(circular_queue *queue)
 
     if (queue->front == queue->rear) {
         queue->front = queue->rear = -1;
-    }
-    else if (queue->front == queue->size - 1) {
+    } else if (queue->front == queue->size - 1) {
         queue->front = 0;
-    }
-    else {
+    } else {
         queue->front++;
     }
     return data;

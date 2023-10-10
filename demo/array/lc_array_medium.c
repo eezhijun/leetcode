@@ -80,7 +80,6 @@ int *twoSum2(int *numbers, int numbersSize, int target, int *returnSize)
 
 void twoSum2Test(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/3sum/ */
@@ -176,7 +175,6 @@ int **threeSum(int *nums, int numsSize, int *returnSize,
 
 void threeSumTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/zero-matrix-lcci/ */
@@ -250,7 +248,6 @@ void setZeroes(int **matrix, int matrixSize, int *matrixColSize)
 
 void setZeroesTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/rotate-matrix-lcci/submissions/ */
@@ -308,7 +305,6 @@ void rotate(int **matrix, int matrixSize, int *matrixColSize)
 
 void rotateTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/rotate-image/ */
@@ -337,7 +333,6 @@ void rotate_image(int **matrix, int matrixSize, int *matrixColSize)
 
 void rotateImageTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/minimum-size-subarray-sum/ */
@@ -415,7 +410,6 @@ int minSubArrayLen(int target, int *nums, int numsSize)
 
 void minSubArrayLenTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/merge-intervals/ */
@@ -483,7 +477,6 @@ int **merge_intervals(int **intervals, int intervalsSize, int *intervalsColSize,
 
 void merge2Test(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/ */
@@ -543,7 +536,6 @@ int maxProfit2(int *prices, int pricesSize)
 
 void maxProfit2Test(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/valid-sudoku/ */
@@ -607,7 +599,6 @@ bool isValidSudoku(char **board, int boardSize, int *boardColSize)
 
 void isValidSudokuTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/ */
@@ -659,7 +650,6 @@ int findMin(int *nums, int numsSize)
 
 void findMinTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/diagonal-traverse/ */
@@ -711,7 +701,6 @@ int *findDiagonalOrder(int **mat, int matSize, int *matColSize, int *returnSize)
 
 void findDiagonalOrderTest(void)
 {
-
 }
 
 /* https://leetcode.cn/problems/3sum-closest/ */

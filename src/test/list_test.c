@@ -118,7 +118,6 @@ int list_test(void)
     return 0;
 }
 
-
 // Define a structure for a doubly linked list node
 struct Node {
     int data;

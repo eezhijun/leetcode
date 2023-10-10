@@ -41,7 +41,8 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize)
+int *intersection(int *nums1, int nums1Size, int *nums2, int nums2Size,
+                  int *returnSize)
 {
     bubble_sort(nums1, nums1Size);
     bubble_sort(nums2, nums2Size);
@@ -78,9 +79,9 @@ int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* ret
 
 void intersectionTest(void)
 {
-    int nums1[] = {1,2,2,1};
+    int nums1[] = { 1, 2, 2, 1 };
     int nums1Size = ARRAY_SIZE(nums1);
-    int nums2[] = {1, 2};
+    int nums2[] = { 1, 2 };
     int nums2Size = ARRAY_SIZE(nums2);
     int returnSize;
 
@@ -165,7 +166,7 @@ void numArrayFree(NumArray *obj)
 */
 void numArrayTest(void)
 {
-    int nums[] = {-2, 0, 3, -5, 2, -1};
+    int nums[] = { -2, 0, 3, -5, 2, -1 };
     int numsSize = ARRAY_SIZE(nums);
     int ret;
     printf("input:\n");
@@ -179,7 +180,6 @@ void numArrayTest(void)
     printf("output:ret=%d\n", ret);
     numArrayFree(obj);
 }
-
 
 /* https://leetcode.cn/problems/missing-number/ */
 /* 给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
@@ -217,6 +217,15 @@ nums 中的所有数字都 独一无二
 进阶：你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题? */
 int missingNumber(int *nums, int numsSize)
 {
+#define MATH_WAY
+#if defined(MATH_WAY)
+    int sum = (numsSize * (numsSize + 1)) / 2;
+    int tmpsum = 0;
+    for (int i = 0; i < numsSize; i++) {
+        tmpsum += nums[i];
+    }
+    return (sum - tmpsum);
+#else
     int i = 0;
     bubble_sort(nums, numsSize);
     // PRINT_ARRAY(nums, numsSize, "%d ");
@@ -232,11 +241,12 @@ int missingNumber(int *nums, int numsSize)
         }
     }
     return nums[i] + 1;
+#endif
 }
 
 void missingNumberTest(void)
 {
-    int nums[] = { 1, 2, 3, 4 };
+    int nums[] = { 1, 0 };
     int numsSize = ARRAY_SIZE(nums);
 
     printf("input:\n");
@@ -1340,7 +1350,7 @@ int removeDuplicates(int *nums, int numsSize)
 
 void removeDuplicatesTest(void)
 {
-    int nums[] = {1,1,2};
+    int nums[] = { 1, 1, 2 };
     int numsSize = ARRAY_SIZE(nums);
 
     printf("input:\n");
