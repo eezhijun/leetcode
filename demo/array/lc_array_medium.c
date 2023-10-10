@@ -887,3 +887,12 @@ void divideTest(void)
 
     printf("output: %d\n", ans);
 }
+
+void lc_array_medium_test(void)
+{
+    // divideTest();
+    // maxAreaTest();
+    // threeSumClosestTest();
+    // findDiagonalOrderTest();
+    // findMinTest();
+}

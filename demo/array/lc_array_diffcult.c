@@ -71,3 +71,8 @@ void findMedianSortedArraysTest(void)
 
     printf("output: %fd\n", ans);
 }
+
+void lc_array_diffcult_test(void)
+{
+    // findMedianSortedArraysTest();
+}

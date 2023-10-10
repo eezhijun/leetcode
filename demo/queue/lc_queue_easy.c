@@ -267,3 +267,8 @@ void myCircularQueueTest(void)
 
  * myCircularQueueFree(obj);
 */
+
+void lc_queue_easy_test(void)
+{
+    // myCircularQueueTest();
+}

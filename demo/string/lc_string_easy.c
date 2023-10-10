@@ -3092,3 +3092,7 @@ void romanToIntTest(void)
     int ret = romanToInt(s);
     printf("output=%d\n", ret);
 }
+
+void lc_string_easy_test(void)
+{
+}

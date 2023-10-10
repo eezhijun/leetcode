@@ -20,6 +20,51 @@
 
 /* 双指针 哈希表 数学 计数 排序 */
 
+/* https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/ */
+/* 给你一个含 n 个整数的数组 nums ，其中 nums[i] 在区间 [1, n] 内。请你找出所有在 [1, n] 范围内但没有出现在 nums 中的数字，
+并以数组的形式返回结果。
+
+示例 1：
+
+输入：nums = [4,3,2,7,8,2,3,1]
+输出：[5,6]
+示例 2：
+
+输入：nums = [1,1]
+输出：[2]
+
+
+提示：
+
+n == nums.length
+1 <= n <= 105
+1 <= nums[i] <= n
+进阶：你能在不使用额外空间且时间复杂度为 O(n) 的情况下解决这个问题吗? 你可以假定返回的数组不算在额外空间内。*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int *findDisappearedNumbers(int *nums, int numsSize, int *returnSize)
+{
+}
+
+void findDisappearedNumbersTest(void)
+{
+    int nums[] = { 1, 0 };
+    int numsSize = ARRAY_SIZE(nums);
+    int returnSize;
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int *ret = findDisappearedNumbers(nums, numsSize, &returnSize);
+    if (ret == NULL) {
+        printf("ret is NULL\n");
+        return;
+    }
+    printf("output:\n");
+    PRINT_ARRAY(ret, returnSize, "%d ");
+    free(ret);
+}
+
 /* https://leetcode.cn/problems/intersection-of-two-arrays/ */
 /* 给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。
 
@@ -1421,4 +1466,22 @@ void twoSumTest(void)
     int *ans = twoSum(nums, numsSize, target, &returnSize);
 
     printf("output: [%d,%d]\n", ans[0], ans[1]);
+}
+
+void lc_array_easy_test(void)
+{
+    // twoSumTest();
+    // removeDuplicatesTest();
+    // removeElementTest();
+    // searchInsertTest();
+    // plusOneTest();
+    // mergeTest();
+    // generateTest();
+    // getRowTest();
+    // maxProfitTest();
+    // singleNumberTest();
+    // majorityElementTest();
+    // containsDuplicateTest();
+    // moveZeroesTest();
+    // arrayPairSumTest();
 }

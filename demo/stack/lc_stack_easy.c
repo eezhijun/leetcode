@@ -425,3 +425,11 @@ void minStackTest(void)
     printf("min=%d\n", ret);
     minStackFree(obj);
 }
+
+void lc_stack_easy_test(void)
+{
+    // minStackTest();
+    // dailyTemperaturesTest();
+    // evalRPNTest();
+    // nextGreaterElementTest();
+}

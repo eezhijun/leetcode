@@ -8,3 +8,7 @@
  * @copyright Copyright (c) 2023
  *
  */
+
+void lc_string_diffcult_test(void)
+{
+}

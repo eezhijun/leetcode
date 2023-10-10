@@ -214,3 +214,7 @@ int lengthOfLongestSubstring(char *s)
 
     return max;
 }
+
+void lc_string_medium_test(void)
+{
+}
