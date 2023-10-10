@@ -89,6 +89,7 @@
 #ifndef PRINT_ARRAY
 #define PRINT_ARRAY(arr, size, format)      \
     do {                                    \
+        printf("size=%d\n", size);          \
         for (size_t i = 0; i < size; i++) { \
             printf(format, arr[i]);         \
         }                                   \

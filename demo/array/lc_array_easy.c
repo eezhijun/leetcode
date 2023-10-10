@@ -45,11 +45,25 @@ n == nums.length
  */
 int *findDisappearedNumbers(int *nums, int numsSize, int *returnSize)
 {
+    int i;
+    int *ans = (int *)malloc(sizeof(int) * (numsSize + 1));
+    *returnSize = 0;
+    memset(ans, 0, sizeof(int) * (numsSize + 1));
+    for (i = 0; i < numsSize; i++) {
+        ans[nums[i]] = 1;
+    }
+    // PRINT_ARRAY(ans, numsSize, "%d ");
+    for (i = 1; i <= numsSize; i++) {
+        if (ans[i] != 1) {
+            ans[(*returnSize)++] = i;
+        }
+    }
+    return ans;
 }
 
 void findDisappearedNumbersTest(void)
 {
-    int nums[] = { 1, 0 };
+    int nums[] = { 2, 1, 1, 2 };
     int numsSize = ARRAY_SIZE(nums);
     int returnSize;
 
@@ -1484,4 +1498,5 @@ void lc_array_easy_test(void)
     // containsDuplicateTest();
     // moveZeroesTest();
     // arrayPairSumTest();
+    findDisappearedNumbersTest();
 }
