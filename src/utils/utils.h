@@ -109,7 +109,18 @@
         for (size_t i = 0; i < size; i++) { \
             printf(format, arr[i]);         \
         }                                   \
-        printf("\n");                       \
+    } while (0)
+#endif
+
+#ifndef PRINT_2DARRAY
+#define PRINT_2DARRAY(arr, row, col, format)   \
+    do {                                       \
+        for (size_t i = 0; i < row; i++) {     \
+            for (size_t j = 0; j < col; j++) { \
+                printf(format, arr[i][j]);     \
+            }                                  \
+            printf("\n");                      \
+        }                                      \
     } while (0)
 #endif
 

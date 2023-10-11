@@ -251,6 +251,16 @@ void toupper_tolower_test(void)
     printf("%s\n", table);
 }
 
+void array_process2(int **a, int row, int col)
+{
+    PRINT_2DARRAY(a, row, col, "%d ");
+}
+
+void array_process(int a[][4], int row, int col)
+{
+    PRINT_2DARRAY(a, row, col, "%d ");
+}
+
 void array_test(void)
 {
     int arr[3][4] = { { 0, 1, 1, 0 }, { 1, 1, 1, 1 }, { 1, 0, 0, 1 } };
@@ -260,6 +270,31 @@ void array_test(void)
 
     printf("size=%d, row_size=%d, col_size=%d\n", size, row_size, col_size);
     printf("ptr arr=%p, ptr arr[0]=%p, ptr arr[0][0]=%p\n", arr, arr[0], &arr[0][0]);
+
+    array_process(arr, row_size, col_size);
+
+    int row = 3;
+    int col = 4;
+    int **arr2 = (int **)malloc(sizeof(int *) * row);
+    if (!arr2) {
+        printf("arr2 malloc failed\n");
+        exit(-1);
+    }
+    memset(arr2, 0, sizeof(int *) * row);
+    for (int i = 0; i < row; i++) {
+        arr2[i] = (int *)malloc(sizeof(int) * col);
+        if (!arr2[i]) {
+            printf("arr2[%d] malloc failed\n", i);
+            exit(-1);
+        }
+        memset(arr2[i], 0, sizeof(int) * col);
+    }
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            arr2[i][j] = i * j;
+        }
+    }
+    array_process2(arr2, row, col);
 }
 
 void main_test(void)
