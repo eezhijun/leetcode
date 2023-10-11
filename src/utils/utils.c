@@ -388,3 +388,36 @@ int count_digits(int num)
 
     return count;
 }
+
+int **create_2darray(int row, int col)
+{
+    int **a = (int **)malloc(sizeof(int *) * row);
+    if (!a) {
+        printf("a malloc failed\n");
+        exit(-1);
+    }
+    memset(a, 0, sizeof(int *) * row);
+    for (int i = 0; i < row; i++) {
+        a[i] = (int *)malloc(sizeof(int) * col);
+        if (!a[i]) {
+            printf("a[%d] malloc failed\n", i);
+            exit(-1);
+        }
+        memset(a[i], 0, sizeof(int) * col);
+    }
+    return a;
+}
+
+void destroy_2darray(int **a)
+{
+    if (!a) {
+        printf("destroy failed\n");
+        exit(-1);
+    }
+    int row = sizeof(a) / sizeof(a[0]);
+    int col = sizeof(a[0]) / sizeof(a[0][0]);
+    for (int i = 0; i < row; i++) {
+        free(a[i]);
+    }
+    free(a);
+}

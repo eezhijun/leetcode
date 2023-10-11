@@ -81,7 +81,7 @@ void memset_test(void)
 
 void hex2dec_test(void)
 {
-    char hex[128] = { 0 };
+    char hex[128] = {0};
 
     printf("please input hex:\n");
     scanf("%s", hex);
@@ -251,30 +251,57 @@ void toupper_tolower_test(void)
     printf("%s\n", table);
 }
 
+void array_process3(int (*a)[5], int row, int col)
+{
+    PRINT_2DARRAY(a, row, col, "%d ");
+}
+
 void array_process2(int **a, int row, int col)
 {
     PRINT_2DARRAY(a, row, col, "%d ");
 }
 
-void array_process(int a[][4], int row, int col)
+void array_process(int a[][5], int row, int col)
 {
     PRINT_2DARRAY(a, row, col, "%d ");
 }
 
+/*
+            实参            所匹配的形参
+数组的数组    char a[3][5]   char (*)[5]  数组指针
+指针数组      char *a[5]     char **a     指针的指针
+数组指针      char (*a)[5]   char (*)[5]  数组指针
+指针的指针     char **a      char **a     指针的指针
+*/
 void array_test(void)
 {
-    int arr[3][4] = { { 0, 1, 1, 0 }, { 1, 1, 1, 1 }, { 1, 0, 0, 1 } };
+    /* 注意二级指针和二维数组不要混用 */
+    int arr[3][5] = {{0, 1, 1, 0, 1}, {1, 1, 1, 1, 1}, {1, 0, 0, 1, 0}};
     int size = XARRAY_SIZE(arr);
     int row_size = ROW_SIZE(arr);
     int col_size = COL_SIZE(arr);
 
-    printf("size=%d, row_size=%d, col_size=%d\n", size, row_size, col_size);
-    printf("ptr arr=%p, ptr arr[0]=%p, ptr arr[0][0]=%p\n", arr, arr[0], &arr[0][0]);
-
+    printf("arr test\n");
+    printf("total_size=%d\n",
+           sizeof(arr)); // 3x5x4 计算整个数组占大小，以字节为单位
+    printf("size=%d\n", size); // 3x5 计算二维数组元素个数
+    printf("row_size=%d\n", row_size); // 3 计算二维数组行数
+    printf("col_size=%d\n", col_size); // 5 计算二维数组列数
+    printf("ptr arr=%p, ptr arr[0]=%p, ptr arr[0][0]=%p\n", arr, arr[0],
+           &arr[0][0]);
     array_process(arr, row_size, col_size);
+    printf("print arr element address\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%p ", &arr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 
+    printf("arr2 test\n");
     int row = 3;
-    int col = 4;
+    int col = 5;
     int **arr2 = (int **)malloc(sizeof(int *) * row);
     if (!arr2) {
         printf("arr2 malloc failed\n");
@@ -291,10 +318,64 @@ void array_test(void)
     }
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            arr2[i][j] = i * j;
+            arr2[i][j] = (i + 1) * j;
         }
     }
     array_process2(arr2, row, col);
+    printf("print arr2 element address\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%p ", &arr2[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+
+/*
+    如下使用会发生段错误，首先arr是一个二维数组，内存是连续的，但上面arr2申请内存不是连续的，
+    另外arr2是一个指针的指针类型，arr一个是数组指针类型
+    memcpy(arr2, arr, sizeof(int) * 3 * 5);
+    array_process2(arr2, row, col);
+*/
+
+    printf("arr3 test\n");
+    int **arr3 = create_2darray(3, 5);
+    printf("arr3 before copy\n");
+    array_process2(arr3, 3, 5);
+    printf("arr3 after copy\n");
+    memcpy(arr3, arr2, sizeof(int) * row * col);
+    array_process2(arr3, 3, 5);
+    destroy_2darray(arr3);
+
+    printf("arr4 test\n");
+    int (*arr4)[5] = NULL;
+    arr4 = arr;
+    array_process3(arr4, 3, 5);
+
+    printf("arr5, test\n");
+    int (*arr5)[5] = (int (*)[5])malloc(sizeof(int) * 3 * 5);
+    memset(arr5, 0, sizeof(int) * 3 * 5);
+    array_process(arr5, 3, 5);
+    // arr5 = arr;
+    memcpy(arr5, arr, sizeof(int) * 3 * 5);
+    array_process(arr5, 3, 5);
+    printf("----------------------\n");
+
+    int a[5] = {1, 2, 3, 4, 5};
+    int a_size = ARRAY_SIZE(a);
+    PRINT_ARRAY(a, a_size, "%d ");
+    printf("\n");
+
+    int *b = (int *)malloc(sizeof(int) * 5);
+    int b_size = 5;
+    PRINT_ARRAY(b, b_size, "%d ");
+    printf("\n");
+
+    memcpy(b, a, sizeof(int) * 5);
+    PRINT_ARRAY(b, b_size, "%d ");
+    printf("\n");
+    printf("----------------------\n");
 }
 
 void main_test(void)
