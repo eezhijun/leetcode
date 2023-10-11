@@ -360,6 +360,20 @@ void array_test(void)
     // arr5 = arr;
     memcpy(arr5, arr, sizeof(int) * 3 * 5);
     array_process(arr5, 3, 5);
+
+    printf("arr6, test\n");
+    int *arr6[3] = {0};
+    for (int i = 0; i < 3; i++) {
+        arr6[i] = arr[i];
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%p ", &arr6[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    array_process2(arr6, 3, 5);
     printf("----------------------\n");
 
     int a[5] = {1, 2, 3, 4, 5};
