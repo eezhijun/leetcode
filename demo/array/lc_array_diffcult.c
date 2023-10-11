@@ -62,8 +62,8 @@ double findMedianSortedArrays(int *nums1, int nums1Size, int *nums2,
 
 void findMedianSortedArraysTest(void)
 {
-    int nums1[2] = { 1, 3 };
-    int nums2[1] = { 2 };
+    int nums1[2] = {1, 3};
+    int nums2[1] = {2};
     int nums1Size = sizeof(nums1) / sizeof(int);
     int nums2Size = sizeof(nums2) / sizeof(int);
 

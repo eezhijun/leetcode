@@ -453,7 +453,7 @@ int **merge_intervals(int **intervals, int intervalsSize, int *intervalsColSize,
         result[i] = (int *)malloc(sizeof(int) * 2);
     }
     *returnSize = 0;
-    int temp[2] = { intervals[0][0], intervals[0][1] };
+    int temp[2] = {intervals[0][0], intervals[0][1]};
     for (int i = 1; i < intervalsSize; i++) {
         if (intervals[i][0] <= temp[1]) { //如果遍历到的为重叠的区间，进行合并
             temp[1] = fmax(temp[1], intervals[i][1]);
@@ -777,7 +777,7 @@ void threeSumClosestTest(void)
     // int nums[] = {-1,2,1,-4};
     // int nums[] = {4,0,5,-5,3,3,0,-4,-5};
     // int nums[] = {1,1,1,0};
-    int nums[] = { 2, 3, 8, 9, 10 };
+    int nums[] = {2, 3, 8, 9, 10};
     int numsSize = sizeof(nums) / sizeof(int);
     int target = 16;
 
@@ -806,7 +806,7 @@ int maxArea(int *height, int heightSize)
 
 void maxAreaTest(void)
 {
-    int height[] = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+    int height[] = {1, 8, 6, 2, 5, 4, 8, 3, 7};
     int heightSize = sizeof(height) / sizeof(int);
 
     int ans = maxArea(height, heightSize);

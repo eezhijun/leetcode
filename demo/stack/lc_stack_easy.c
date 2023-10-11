@@ -88,8 +88,8 @@ int *nextGreaterElement(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void nextGreaterElementTest(void)
 {
-    int nums1[] = { 1, 3, 5, 2, 4 };
-    int nums2[] = { 6, 5, 4, 3, 2, 1, 7 };
+    int nums1[] = {1, 3, 5, 2, 4};
+    int nums2[] = {6, 5, 4, 3, 2, 1, 7};
     int nums1Size = ARRAY_SIZE(nums1);
     int nums2Size = ARRAY_SIZE(nums2);
     int returnSize;
@@ -210,8 +210,8 @@ int evalRPN(char **tokens, int tokensSize)
 
 void evalRPNTest(void)
 {
-    char *tokens[] = { "10", "6", "9",  "3", "+", "-11", "*",
-                       "/",  "*", "17", "+", "5", "+" };
+    char *tokens[] = {"10", "6", "9",  "3", "+", "-11", "*",
+                      "/",  "*", "17", "+", "5", "+"};
     int tokensSize = ARRAY_SIZE(tokens);
 
     printf("input:\n");
@@ -295,7 +295,7 @@ int *dailyTemperatures(int *temperatures, int temperaturesSize, int *returnSize)
 
 void dailyTemperaturesTest(void)
 {
-    int temperatures[] = { 89, 62, 70, 58, 47, 47, 46, 76, 100, 70 };
+    int temperatures[] = {89, 62, 70, 58, 47, 47, 46, 76, 100, 70};
     int temperaturesSize = ARRAY_SIZE(temperatures);
     int returnSize;
 

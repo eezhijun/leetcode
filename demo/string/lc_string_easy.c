@@ -67,11 +67,11 @@ typedef struct {
     UT_hash_handle hh;
 } hashitem_t;
 
-const static char *MORSE[26] = { ".-",   "-...", "-.-.", "-..",  ".",    "..-.",
-                                 "--.",  "....", "..",   ".---", "-.-",  ".-..",
-                                 "--",   "-.",   "---",  ".--.", "--.-", ".-.",
-                                 "...",  "-",    "..-",  "...-", ".--",  "-..-",
-                                 "-.--", "--.." };
+const static char *MORSE[26] = {".-",   "-...", "-.-.", "-..",  ".",    "..-.",
+                                "--.",  "....", "..",   ".---", "-.-",  ".-..",
+                                "--",   "-.",   "---",  ".--.", "--.-", ".-.",
+                                "...",  "-",    "..-",  "...-", ".--",  "-..-",
+                                "-.--", "--.."};
 
 int uniqueMorseRepresentations(char **words, int wordsSize)
 {
@@ -103,7 +103,7 @@ int uniqueMorseRepresentations(char **words, int wordsSize)
 
 void uniqueMorseRepresentationsTest(void)
 {
-    char *words[] = { "gin", "zen", "gig", "msg" };
+    char *words[] = {"gin", "zen", "gig", "msg"};
     int wordsSize = ARRAY_SIZE(words);
 
     printf("input:size=%d\n", wordsSize);
@@ -285,7 +285,7 @@ licensePlate 由数字、大小写字母或空格 ' ' 组成
 words[i] 由小写英文字母组成 */
 char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 {
-    char s[26] = { 0 };
+    char s[26] = {0};
     int i, j, k;
     bool found = true;
     int minlen = INT_MAX;
@@ -299,7 +299,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 
     for (i = 0; i < wordsSize; i++) {
         size_t len = strlen(words[i]);
-        char tmp[26] = { 0 };
+        char tmp[26] = {0};
         memcpy(tmp, s, 26);
         for (j = 0; j < len; j++) {
             char ch = words[i][j] - 'a';
@@ -329,7 +329,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 void shortestCompletingWordTest(void)
 {
     char license_plate[7] = "1s3 456";
-    char *words[] = { "looks", "pest", "stew", "show" };
+    char *words[] = {"looks", "pest", "stew", "show"};
     int wordsSize = ARRAY_SIZE(words);
 
     printf("input:\n");
@@ -471,7 +471,7 @@ bool judgeCircle(char *moves)
 
 void judgeCircleTest(void)
 {
-    char moves[128] = { 0 };
+    char moves[128] = {0};
 
     printf("please input string >moves<:\n");
     fgets(moves, 128, stdin);
@@ -849,8 +849,8 @@ int findLUSlength(char *a, char *b)
 
 void findLUSlengthTest(void)
 {
-    char a[128] = { 0 };
-    char b[128] = { 0 };
+    char a[128] = {0};
+    char b[128] = {0};
 
     /*"aaaabcd" "aaaaacd"*/
     printf("please input string a:\n");
@@ -911,7 +911,7 @@ bool detectCapitalUse(char *word)
 
 void detectCapitalUseTest(void)
 {
-    char word[128] = { 0 };
+    char word[128] = {0};
 
     printf("please input string word by scanf:\n");
     scanf("%s", word);
@@ -956,8 +956,8 @@ wordis_keyboard_row_wordss[i] 由英文字母（小写和大写字母）组成
 
 bool is_keyboard_row_words(char *s)
 {
-    char *table[] = { "qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL",
-                      "zxcvbnmZXCVBNM" };
+    char *table[] = {"qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL",
+                     "zxcvbnmZXCVBNM"};
     size_t len = ARRAY_SIZE(table);
     size_t lt[len];
     size_t ls = strlen(s);
@@ -1032,12 +1032,12 @@ char **findWords(char **words, int wordsSize, int *returnSize)
 
 void findWordsTest(void)
 {
-    char *s[] = { STR2 };
+    char *s[] = {STR2};
 
     size_t len = ARRAY_SIZE(s);
     int return_size = 0;
 
-    char buf[100] = { 0 };
+    char buf[100] = {0};
 
     strncpy(buf, s[0], 3);
     PRINT_ARRAY(buf, 10, "%d ");
@@ -1362,7 +1362,7 @@ char *longestCommonPrefix(char **strs, int strsSize)
 
 void longestCommonPrefixTest(void)
 {
-    char *s[] = { "flower", "flow", "flight" };
+    char *s[] = {"flower", "flow", "flight"};
     int strsSize = sizeof(s) / sizeof(char *);
 
     printf("%d\n", strsSize);
@@ -1781,7 +1781,7 @@ bool validPalindrome(char *s)
 /* uupucxxucupuu */
 void validPalindromeTest(void)
 {
-    char s[128] = { 0 };
+    char s[128] = {0};
 
     printf("please input string <s>:\n");
 
@@ -2114,8 +2114,8 @@ char findTheDifference(char *s, char *t)
 #else
 char findTheDifference(char *s, char *t)
 {
-    int a[26] = { 0 };
-    int b[26] = { 0 };
+    int a[26] = {0};
+    int b[26] = {0};
     size_t ls = strlen(s);
     size_t lt = strlen(t);
 
@@ -2180,8 +2180,8 @@ ransomNote 和 magazine 由小写英文字母组成 */
 #if 1
 bool canConstruct(char *ransomNote, char *magazine)
 {
-    int a[26] = { 0 };
-    int b[26] = { 0 };
+    int a[26] = {0};
+    int b[26] = {0};
     size_t lr = strlen(ransomNote);
     size_t lm = strlen(magazine);
 
@@ -2571,8 +2571,8 @@ bool wordPattern(char *pattern, char *s)
 
 void wordPatternTest(void)
 {
-    char pattern[128] = { 0 };
-    char s[128] = { 0 };
+    char pattern[128] = {0};
+    char s[128] = {0};
     int len = 0;
 
     printf("please input string pattern:\n");
@@ -2667,8 +2667,8 @@ bool isIsomorphic(char *s, char *t)
 #else
 bool isIsomorphic(char *s, char *t)
 {
-    char mapping_s2t[128] = { 0 }; /* 用于存储字符映射关系 s->t */
-    char mapping_t2s[128] = { 0 }; /* 用于存储字符映射关系 t->s */
+    char mapping_s2t[128] = {0}; /* 用于存储字符映射关系 s->t */
+    char mapping_t2s[128] = {0}; /* 用于存储字符映射关系 t->s */
 
     for (int i = 0; s[i] != '\0'; i++) {
         /* check s->t */

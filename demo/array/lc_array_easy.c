@@ -27,11 +27,10 @@ int islandPerimeter(int **grid, int gridSize, int *gridColSize)
 
 void islandPerimeterTest(void)
 {
-    int grid[4][4] = {
-        { 0, 1, 0, 0 }, { 1, 1, 1, 0 }, { 0, 1, 0, 0 }, { 1, 1, 0, 0 }
-    };
+    int grid[4][4] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};
     int gridSize = ARRAY_SIZE(grid);
     int gridColSize = 4;
+
     printf("input gridSize=%d:\n", gridSize);
 }
 
@@ -74,9 +73,9 @@ int findContentChildren(int *g, int gSize, int *s, int sSize)
 
 void findContentChildrenTest(void)
 {
-    int g[] = { 1, 2, 3 };
+    int g[] = {1, 2, 3};
     int gSize = ARRAY_SIZE(g);
-    int s[] = { 1, 1 };
+    int s[] = {1, 1};
     int sSize = ARRAY_SIZE(s);
 
     printf("input:\n");
@@ -129,7 +128,7 @@ int *findDisappearedNumbers(int *nums, int numsSize, int *returnSize)
 
 void findDisappearedNumbersTest(void)
 {
-    int nums[] = { 2, 1, 1, 2 };
+    int nums[] = {2, 1, 1, 2};
     int numsSize = ARRAY_SIZE(nums);
     int returnSize;
 
@@ -204,9 +203,9 @@ int *intersection(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 void intersectionTest(void)
 {
-    int nums1[] = { 1, 2, 2, 1 };
+    int nums1[] = {1, 2, 2, 1};
     int nums1Size = ARRAY_SIZE(nums1);
-    int nums2[] = { 1, 2 };
+    int nums2[] = {1, 2};
     int nums2Size = ARRAY_SIZE(nums2);
     int returnSize;
 
@@ -291,7 +290,7 @@ void numArrayFree(NumArray *obj)
 */
 void numArrayTest(void)
 {
-    int nums[] = { -2, 0, 3, -5, 2, -1 };
+    int nums[] = {-2, 0, 3, -5, 2, -1};
     int numsSize = ARRAY_SIZE(nums);
     int ret;
     printf("input:\n");
@@ -371,7 +370,7 @@ int missingNumber(int *nums, int numsSize)
 
 void missingNumberTest(void)
 {
-    int nums[] = { 1, 0 };
+    int nums[] = {1, 0};
     int numsSize = ARRAY_SIZE(nums);
 
     printf("input:\n");
@@ -445,7 +444,7 @@ char **summaryRanges(int *nums, int numsSize, int *returnSize)
 
 void summaryRangesTest(void)
 {
-    int nums[] = { -1, 0, 2, 3, 4, 6, 8, 9 };
+    int nums[] = {-1, 0, 2, 3, 4, 6, 8, 9};
     int numsSize = ARRAY_SIZE(nums);
     int returnSize;
 
@@ -876,7 +875,7 @@ bool containsNearbyDuplicate(int *nums, int numsSize, int k)
 
 void containsNearbyDuplicateTest(void)
 {
-    int nums[] = { 1, 2, 3, 1, 2, 3 };
+    int nums[] = {1, 2, 3, 1, 2, 3};
     int numsSize = ARRAY_SIZE(nums);
     int k = 2;
 
@@ -1003,7 +1002,7 @@ int majorityElement(int *nums, int numsSize)
 
 void majorityElementTest(void)
 {
-    int nums[] = { 3, 2, 3 };
+    int nums[] = {3, 2, 3};
     // int nums[] = {2,2,1,1,1,2,2};
     int numsSize = sizeof(nums) / sizeof(int);
 
@@ -1095,7 +1094,7 @@ int maxProfit(int *prices, int pricesSize)
 void maxProfitTest(void)
 {
     // int nums[] = {7,1,5,3,6,4};
-    int nums[] = { 7, 6, 4, 3, 1 };
+    int nums[] = {7, 6, 4, 3, 1};
     int numsSize = sizeof(nums) / sizeof(int);
 
     int ans = maxProfit(nums, numsSize);
@@ -1475,7 +1474,7 @@ int removeDuplicates(int *nums, int numsSize)
 
 void removeDuplicatesTest(void)
 {
-    int nums[] = { 1, 1, 2 };
+    int nums[] = {1, 1, 2};
     int numsSize = ARRAY_SIZE(nums);
 
     printf("input:\n");
@@ -1538,7 +1537,7 @@ int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 
 void twoSumTest(void)
 {
-    int nums[4] = { 2, 7, 11, 15 };
+    int nums[4] = {2, 7, 11, 15};
     int target = 9;
     int numsSize = sizeof(nums) / sizeof(int);
     int returnSize;
