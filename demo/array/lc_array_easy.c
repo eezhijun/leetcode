@@ -25,13 +25,22 @@ int islandPerimeter(int **grid, int gridSize, int *gridColSize)
 {
 }
 
+#define ROW 3
+#define COL 4
 void islandPerimeterTest(void)
 {
-    int grid[4][4] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};
-    int gridSize = ARRAY_SIZE(grid);
-    int gridColSize = 4;
+    int a[ROW][COL] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}};
 
-    printf("input gridSize=%d:\n", gridSize);
+    int *grid[ROW] = {0};
+    for (int i = 0; i < ROW; i++) {
+        grid[i] = a[i];
+    }
+    printf("input:\n");
+    int gridSize = ROW;
+    int gridColSize = COL;
+
+    int ret = islandPerimeter(grid, gridSize, &gridColSize);
+    printf("output:%d\n", ret);
 }
 
 /* https://leetcode.cn/problems/assign-cookies/ */
