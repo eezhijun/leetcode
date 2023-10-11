@@ -8,8 +8,7 @@
  * @copyright Copyright (c) 2023
  *
  */
-#include "stdio.h"
-#include "errno.h"
+#include <errno.h>
 
 #if defined(LC_DEMO)
 #define MAIN_SELECTED_APP LC_DEMO

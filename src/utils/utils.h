@@ -2,7 +2,7 @@
  * @file utils.h
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
- * @version 0.0.1
+ * @version 0.1
  * @date 2023-08-24
  *
  * @copyright Copyright (c) 2023
@@ -82,8 +82,24 @@
 #define BIT64(x) ((uint64_t)1u << (x))
 #endif
 
+// calculate the total size of the array
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0])
+#endif
+
+// calculate the total size of the 2D array
+#ifndef XARRAY_SIZE
+#define XARRAY_SIZE(a) (sizeof(a) / sizeof(a[0][0]))
+#endif
+
+// calculate the number of rows in the 2D array
+#ifndef ROW_SIZE
+#define ROW_SIZE(a) (sizeof(a) / sizeof(a[0]))
+#endif
+
+// calculate the number of columns in the 2D array
+#ifndef COL_SIZE
+#define COL_SIZE(a) (sizeof(a[0]) / sizeof(a[0][0]))
 #endif
 
 #ifndef PRINT_ARRAY
@@ -97,6 +113,11 @@
     } while (0)
 #endif
 
+/*
+    Limit a value between an upper and lower limit.
+    When the value exceeds the range of the minimum and maximum values,
+    select a value between the minimum and maximum values.
+*/
 #ifndef CLAMP
 #define CLAMP(value, min, max)                                  \
     ({                                                          \
@@ -144,10 +165,12 @@
     })
 #endif
 
+// Round a value up
 #ifndef ROUNDUP
 #define ROUNDUP(x) ((x) < 0 ? (int)(x) : (int)((x) + 1))
 #endif
 
+// Round a value down
 #ifndef ROUNDDOWN
 #define ROUNDDOWN(x) ((x) < 0 ? (int)((x)-1) : (int)(x))
 #endif

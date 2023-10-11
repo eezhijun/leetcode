@@ -251,10 +251,23 @@ void toupper_tolower_test(void)
     printf("%s\n", table);
 }
 
+void array_test(void)
+{
+    int arr[3][4] = { { 0, 1, 1, 0 }, { 1, 1, 1, 1 }, { 1, 0, 0, 1 } };
+    int size = XARRAY_SIZE(arr);
+    int row_size = ROW_SIZE(arr);
+    int col_size = COL_SIZE(arr);
+
+    printf("size=%d, row_size=%d, col_size=%d\n", size, row_size, col_size);
+    printf("ptr arr=%p, ptr arr[0]=%p, ptr arr[0][0]=%p\n", arr, arr[0], &arr[0][0]);
+}
+
 void main_test(void)
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
+    array_test();
 
     // memory_layout_test();
     // memset_test();

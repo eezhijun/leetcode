@@ -2,7 +2,7 @@
  * @file log.h
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
- * @version 0.0.1
+ * @version 0.1
  * @date 2023-08-24
  *
  * @copyright Copyright (c) 2023
