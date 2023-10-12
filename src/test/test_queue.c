@@ -188,7 +188,7 @@ void free_queue(circular_queue *queue)
     free(queue);
 }
 
-int circular_queue_test(void)
+int test_circular_queue(void)
 {
     circular_queue *queue = create_queue();
 

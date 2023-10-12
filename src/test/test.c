@@ -393,27 +393,4 @@ int main(int argc, char *argv[])
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
 
     array_test();
-
-    // memory_layout_test();
-    // memset_test();
-
-    // stack_test();
-
-    // queue_test();
-    // circular_queue_test();
-
-    // list_test();
-    // doubly_list_test();
-
-    // hash_table_test();
-    // hash_table_test1();
-
-    // hex2dec_test();
-    // dec2hex_test();
-    // sprintf_test();
-    // limits_test();
-    // sizeof_test();
-
-    // scanf_gets_fgets_test();
-    // toupper_tolower_test();
 }

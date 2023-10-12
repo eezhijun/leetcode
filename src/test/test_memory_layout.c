@@ -27,7 +27,7 @@ void func_test(void)
     printf("func\n");
 }
 
-int memory_layout_test(void)
+int test_memory_layout(void)
 {
     int l_var_a;
     int l_var_b = 10;
@@ -86,7 +86,7 @@ int memory_layout_test(void)
     printf("%s\t\t\t%p\n", STR(l_var_s), l_var_s);
 
     printf("代码\n");
-    printf("%s\t%p\n", STR(memory_layout_test), memory_layout_test);
+    printf("%s\t%p\n", STR(test_memory_layout), test_memory_layout);
     printf("%s\t\t%p\n", STR(func_test), func_test);
 
     free(l_var_c);

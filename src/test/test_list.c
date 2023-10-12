@@ -207,7 +207,7 @@ void printList(struct Node *head)
     printf("\n");
 }
 
-int doubly_list_test(void)
+int test_doubly_list(void)
 {
     struct Node *head = NULL;
 

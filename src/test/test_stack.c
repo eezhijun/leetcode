@@ -75,7 +75,7 @@ int stack_top(stack_t *s)
     return s->data[s->top - 1];
 }
 
-void stack_test(void)
+void test_stack(void)
 {
     stack_t stack;
 
