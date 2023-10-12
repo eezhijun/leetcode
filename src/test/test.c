@@ -392,5 +392,10 @@ int main(int argc, char *argv[])
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
 
-    array_test();
+    // array_test();
+
+    // test_traffic_light();
+    // test_light_switch();
+    // test_door();
+    test_state();
 }
