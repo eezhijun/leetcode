@@ -56,7 +56,7 @@
 1 <= timeSeries.length <= 104
 0 <= timeSeries[i], duration <= 107
 timeSeries 按 非递减 顺序排列 */
-int findPoisonedDuration(int* timeSeries, int timeSeriesSize, int duration)
+int findPoisonedDuration(int *timeSeries, int timeSeriesSize, int duration)
 {
     int ans = 0;
     int expired = 0;
@@ -73,7 +73,7 @@ int findPoisonedDuration(int* timeSeries, int timeSeriesSize, int duration)
 
 void findPoisonedDurationTest(void)
 {
-    int timeSeries[] = {1,3,5,7,9,11,13,15};
+    int timeSeries[] = {1, 3, 5, 7, 9, 11, 13, 15};
     int timeSeriesSize = ARRAY_SIZE(timeSeries);
     int duration = 4;
     printf("input:duration=%d\n", duration);
@@ -107,7 +107,7 @@ void findPoisonedDurationTest(void)
 -231 <= nums[i] <= 231 - 1
 
 进阶：你能设计一个时间复杂度 O(n) 的解决方案吗？*/
-int thirdMax(int* nums, int numsSize)
+int thirdMax(int *nums, int numsSize)
 {
     bubble_sort(nums, numsSize);
     int cnt = 0;
@@ -148,7 +148,7 @@ int islandPerimeter(int **grid, int gridSize, int *gridColSize)
 
 void islandPerimeterTest(void)
 {
-    int a[ROW][COL] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1,1,0,0}};
+    int a[ROW][COL] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};
 
     int *grid[ROW] = {0};
     for (int i = 0; i < ROW; i++) {
