@@ -8,23 +8,10 @@
  * @copyright Copyright (c) 2023
  *
  */
-#include "stdio.h"
+#include <stdio.h>
 
-/* array */
-extern void lc_array_easy_test(void);
-extern void lc_array_medium_test(void);
-extern void lc_array_diffcult_test(void);
+#include "lc.h"
 
-/* string */
-extern void lc_string_easy_test(void);
-extern void lc_string_medium_test(void);
-extern void lc_string_diffcult_test(void);
-
-/* stack */
-extern void lc_stack_easy_test(void);
-
-/* queue */
-extern void lc_queue_easy_test(void);
 
 int main_lc(void)
 {

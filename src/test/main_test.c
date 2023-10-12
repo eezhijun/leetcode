@@ -20,15 +20,7 @@
 #include "pthread.h"
 
 #include "utils.h"
-
-extern void stack_test(void);
-extern void queue_test(void);
-extern int circular_queue_test(void);
-extern int memory_layout_test(void);
-extern int hash_table_test(void);
-extern int hash_table_test1(void);
-extern int list_test(void);
-extern int doubly_list_test(void);
+#include "test.h"
 
 int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a,
