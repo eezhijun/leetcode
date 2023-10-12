@@ -330,11 +330,9 @@ void array_test(void)
         printf("\n");
     }
     printf("\n");
-
-
 /*
     如下使用会发生段错误，首先arr是一个二维数组，内存是连续的，但上面arr2申请内存不是连续的，
-    另外arr2是一个指针的指针类型，arr一个是数组指针类型
+    另外arr2是一个指针的指针类型，它是一维的，而arr一个是数组指针类型，它是二维的。
     memcpy(arr2, arr, sizeof(int) * 3 * 5);
     array_process2(arr2, row, col);
 */
@@ -345,6 +343,11 @@ void array_test(void)
     array_process2(arr3, 3, 5);
     printf("arr3 after copy\n");
     memcpy(arr3, arr2, sizeof(int) * row * col);
+    array_process2(arr3, 3, 5);
+
+    for (int i = 0; i < 3; i++) {
+        memcpy(arr3[i], arr[i], sizeof(int) * col);
+    }
     array_process2(arr3, 3, 5);
     destroy_2darray(arr3);
 
