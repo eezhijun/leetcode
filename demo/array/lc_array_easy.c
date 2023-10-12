@@ -56,29 +56,17 @@
 1 <= timeSeries.length <= 104
 0 <= timeSeries[i], duration <= 107
 timeSeries 按 非递减 顺序排列 */
-/*
-    d=2 1 4 2+2=4
-    d=2 1 2 2+2-1=3
-    d=3 1 2 3+(2-1)
-*/
 int findPoisonedDuration(int* timeSeries, int timeSeriesSize, int duration)
 {
-    int low = 0, high = INT_MIN;
     int ans = 0;
-    int i = 0;
-
-    for (i = 0; i < timeSeriesSize; i++) {
-        low = timeSeries[i];
-        if (low > high) {
-            high = low + duration - 1;
+    int expired = 0;
+    for (int i = 0; i < timeSeriesSize; ++i) {
+        if (timeSeries[i] >= expired) {
             ans += duration;
-        } else if (low == high) {
-            high = low + duration - 1;
-            ans += duration - 1;
         } else {
-            high = low + duration - 1;
-            ans += timeSeries[i] - timeSeries[i - 1];
+            ans += timeSeries[i] + duration - expired;
         }
+        expired = timeSeries[i] + duration;
     }
     return ans;
 }
