@@ -1,5 +1,5 @@
 /**
- * @file memory_layout_test.c
+ * @file test_memory_layout.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1

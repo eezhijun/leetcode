@@ -1,5 +1,5 @@
 /**
- * @file main.c
+ * @file lc.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1

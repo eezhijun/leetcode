@@ -1,5 +1,5 @@
 /**
- * @file queue_test.c
+ * @file test_queue.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1

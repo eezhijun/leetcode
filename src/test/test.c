@@ -1,5 +1,5 @@
 /**
- * @file main_test.c
+ * @file test.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1
@@ -26,7 +26,7 @@ int g_m, g_n; // 表示定义该文件全局变量
 extern int g_a,
     g_b; // 表示外部已经定义好的全局变量，这里是该文件对其声明，不是定义。
 
-void extern_test(void)
+void test_extern(void)
 {
     printf("EXTERN TEST\n");
     /* int g_x, g_y; 定义局部变量*/
@@ -44,7 +44,7 @@ void test(void)
 }
 
 /* string.h */
-void memset_test(void)
+void test_memset(void)
 {
     int arr[10];
     int len = 10;
@@ -71,7 +71,7 @@ void memset_test(void)
     PRINT_ARRAY(arr, len, "%d ");
 }
 
-void hex2dec_test(void)
+void test_hex2dec(void)
 {
     char hex[128] = {0};
 
@@ -84,7 +84,7 @@ void hex2dec_test(void)
     printf("output:%d\n", ret);
 }
 
-void dec2hex_test(void)
+void test_dec2hex(void)
 {
     int dec;
 
@@ -97,7 +97,7 @@ void dec2hex_test(void)
     free(ret);
 }
 
-void sprintf_test(void)
+void test_sprintf(void)
 {
     int idx = 0;
     int size = 12;
@@ -114,7 +114,7 @@ void sprintf_test(void)
     PRINT_ARRAY(s, size, "%c ");
 }
 
-void limits_test(void)
+void test_limits(void)
 {
     /* limits.h */
     /* bit */
@@ -167,7 +167,7 @@ typedef struct {
     int b;
 } testa_t;
 
-void sizeof_test(void)
+void test_sizeof(void)
 {
     char *s;
     char *t[4];
@@ -196,7 +196,7 @@ void sizeof_test(void)
     printf("%s=%d\n", STR(sizeof(testa_t)), sizeof(testa_t));
 }
 
-void scanf_gets_fgets_test(void)
+void test_scanf_gets_fgets(void)
 {
     char s[128];
     size_t len = 0;
@@ -224,7 +224,7 @@ void scanf_gets_fgets_test(void)
     PRINT_ARRAY(s, len, "%d ");
 }
 
-void toupper_tolower_test(void)
+void test_toupper_tolower(void)
 {
     char table[] = "asdfghjkl";
     size_t len = strlen(table);

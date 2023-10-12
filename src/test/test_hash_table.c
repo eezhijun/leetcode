@@ -1,5 +1,5 @@
 /**
- * @file hash_table_test.c
+ * @file test_hash_table.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1
