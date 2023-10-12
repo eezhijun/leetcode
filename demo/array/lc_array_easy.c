@@ -27,6 +27,7 @@ int islandPerimeter(int **grid, int gridSize, int *gridColSize)
 
 #define ROW 3
 #define COL 4
+
 void islandPerimeterTest(void)
 {
     int a[ROW][COL] = {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}};

@@ -8,7 +8,6 @@ BUILD_DIR             := $(ROOT_DIR)/out
 BUILD_ABS_DIR         := $(abspath $(BUILD_DIR))
 
 
-
 INCLUDE_DIRS          := -I.
 INCLUDE_DIRS          += -I$(ROOT_DIR)/demo
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src
@@ -23,7 +22,6 @@ SOURCE_FILES          += $(wildcard demo/string/*.c)
 SOURCE_FILES          += $(wildcard demo/stack/*.c)
 SOURCE_FILES          += $(wildcard demo/queue/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
-SOURCE_FILES          += $(wildcard src/test/*.c)
 
 
 CFLAGS                += -m32 # gcc 32bit
@@ -34,21 +32,6 @@ CPPFLAGS              += -ggdb3
 LDFLAGS               := -pthread
 LDFLAGS               += -lm # to link againt the math library (libm)
 LDFLAGS               += -m32
-
-
-# user choose demo
-ifeq ($(demo),?)
-run:
-	@echo "tt"
-	@echo "lc"
-endif
-
-ifeq ($(demo),tt)
-  CPPFLAGS            += -DTEST_DEMO
-else ifeq ($(demo),lc)
-  CPPFLAGS            += -DLC_DEMO
-endif
-
 
 
 OBJ_FILES             = $(SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)

@@ -322,7 +322,7 @@ void array_test(void)
         printf("\n");
     }
     printf("\n");
-/*
+    /*
     如下使用会发生段错误，首先arr是一个二维数组，内存是连续的，但上面arr2申请内存不是连续的，
     另外arr2是一个指针的指针类型，它是一维的，而arr一个是数组指针类型，它是二维的。
     memcpy(arr2, arr, sizeof(int) * 3 * 5);
@@ -344,12 +344,12 @@ void array_test(void)
     destroy_2darray(arr3);
 
     printf("arr4 test\n");
-    int (*arr4)[5] = NULL;
+    int(*arr4)[5] = NULL;
     arr4 = arr;
     array_process3(arr4, 3, 5);
 
     printf("arr5, test\n");
-    int (*arr5)[5] = (int (*)[5])malloc(sizeof(int) * 3 * 5);
+    int(*arr5)[5] = (int(*)[5])malloc(sizeof(int) * 3 * 5);
     memset(arr5, 0, sizeof(int) * 3 * 5);
     array_process(arr5, 3, 5);
     // arr5 = arr;
@@ -387,7 +387,7 @@ void array_test(void)
     printf("----------------------\n");
 }
 
-void main_test(void)
+int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
