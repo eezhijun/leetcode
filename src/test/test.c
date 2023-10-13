@@ -245,17 +245,17 @@ void test_toupper_tolower(void)
 
 void array_process3(int (*a)[5], int row, int col)
 {
-    PRINT_2DARRAY(a, row, col, "%d ");
+    PRINT_ARRAY2D(a, row, col, "%d ");
 }
 
 void array_process2(int **a, int row, int col)
 {
-    PRINT_2DARRAY(a, row, col, "%d ");
+    PRINT_ARRAY2D(a, row, col, "%d ");
 }
 
 void array_process(int a[][5], int row, int col)
 {
-    PRINT_2DARRAY(a, row, col, "%d ");
+    PRINT_ARRAY2D(a, row, col, "%d ");
 }
 
 /*
