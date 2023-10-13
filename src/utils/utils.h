@@ -339,7 +339,7 @@ void clrscr(void);
 int kbhit(void);
 
 /**
- * @brief
+ * @brief wait key check
  *
  * @return char
  */
@@ -358,20 +358,20 @@ void set_terminal_attributes(void);
 void restore_terminal_attributes(void);
 
 /**
- * @brief
+ * @brief show cursor
  *
  */
 void show_cursor(void);
 
 /**
- * @brief
+ * @brief hide cursor
  *
  */
 void hide_cursor(void);
 
 /* sort */
 /**
- * @brief
+ * @brief bubble sort
  *
  * @param arr
  * @param len
@@ -379,7 +379,7 @@ void hide_cursor(void);
 void bubble_sort(int arr[], int len);
 
 /**
- * @brief
+ * @brief quick sort
  *
  * @param pa
  * @param pb
