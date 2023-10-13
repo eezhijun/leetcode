@@ -9,18 +9,18 @@ BUILD_ABS_DIR         := $(abspath $(BUILD_DIR))
 
 
 INCLUDE_DIRS          := -I.
-INCLUDE_DIRS          += -I$(ROOT_DIR)/demo
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src
+INCLUDE_DIRS          += -I$(ROOT_DIR)/src/demo
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src/utils
 INCLUDE_DIRS          += -I$(ROOT_DIR)/src/lib/uthash/include
 
 
 SOURCE_FILES          := $(wildcard *.c)
-SOURCE_FILES          += $(wildcard demo/*.c)
-SOURCE_FILES          += $(wildcard demo/array/*.c)
-SOURCE_FILES          += $(wildcard demo/string/*.c)
-SOURCE_FILES          += $(wildcard demo/stack/*.c)
-SOURCE_FILES          += $(wildcard demo/queue/*.c)
+SOURCE_FILES          += $(wildcard src/demo/*.c)
+SOURCE_FILES          += $(wildcard src/demo/array/*.c)
+SOURCE_FILES          += $(wildcard src/demo/string/*.c)
+SOURCE_FILES          += $(wildcard src/demo/stack/*.c)
+SOURCE_FILES          += $(wildcard src/demo/queue/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 
