@@ -1105,10 +1105,57 @@ n == nums.length
 1 <= n <= 5 * 104
 -109 <= nums[i] <= 109
 
-
 进阶：尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。*/
+#define majorityElement_HAST_TABLE
+#if defined(majorityElement_HAST_TABLE)
+
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t *ht = NULL;
+
+ht_t *find(int key)
+{
+    ht_t *tmp;
+    HASH_FIND_INT(ht, &key, tmp);
+    return tmp;
+}
+
+ht_t *insert(int key)
+{
+    ht_t *it = find(key);
+    if (it == NULL) {
+        ht_t *tmp = (ht_t *)malloc(sizeof *tmp);
+        tmp->key = key;
+        tmp->val = 1;
+        HASH_ADD_INT(ht, key, tmp);
+    } else {
+        it->val++;
+    }
+    return it;
+}
+
+#endif
 int majorityElement(int *nums, int numsSize)
 {
+#if defined(majorityElement_HAST_TABLE)
+    if (numsSize <= 2) {
+        return nums[0];
+    }
+    ht = NULL;
+    for (int i = 0; i < numsSize; i++) {
+        ht_t *it = insert(nums[i]);
+        if (it != NULL) {
+            if (it->val > (numsSize / 2)) {
+                return it->key;
+            }
+        }
+    }
+    return 0;
+#else
     if (numsSize <= 2) {
         return nums[0];
     }
@@ -1127,17 +1174,20 @@ int majorityElement(int *nums, int numsSize)
         }
     }
     return 0;
+#endif
 }
 
 void majorityElementTest(void)
 {
-    int nums[] = {3, 2, 3};
-    // int nums[] = {2,2,1,1,1,2,2};
-    int numsSize = sizeof(nums) / sizeof(int);
+    // int nums[] = {3, 2, 3};
+    int nums[] = {2, 2, 1, 1, 1, 2, 2};
+    int numsSize = ARRAY_SIZE(nums);
 
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    printf("\n");
     int ans = majorityElement(nums, numsSize);
-
-    printf("output: ans=%d\n", ans);
+    printf("output:%d\n", ans);
 }
 
 /* https://leetcode.cn/problems/single-number/ */
@@ -1647,7 +1697,7 @@ void removeDuplicatesTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-#define TWO_SUM_HASH_TABLE
+// #define TWO_SUM_HASH_TABLE
 #if defined(TWO_SUM_HASH_TABLE)
 typedef struct {
     int key;
@@ -1730,11 +1780,12 @@ void twoSumTest(void)
         printf("%d ", ans[i]);
     }
     printf("\n");
+    free(ans);
 }
 
 void lc_array_easy_test(void)
 {
-    twoSumTest();
+    // twoSumTest();
     // removeDuplicatesTest();
     // removeElementTest();
     // searchInsertTest();
@@ -1744,7 +1795,7 @@ void lc_array_easy_test(void)
     // getRowTest();
     // maxProfitTest();
     // singleNumberTest();
-    // majorityElementTest();
+    majorityElementTest();
     // containsDuplicateTest();
     // moveZeroesTest();
     // arrayPairSumTest();
