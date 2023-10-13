@@ -117,8 +117,8 @@ extern "C"
     } while (0)
 #endif
 
-#ifndef PRINT_2DARRAY
-#define PRINT_2DARRAY(arr, row, col, format)   \
+#ifndef PRINT_ARRAY2D
+#define PRINT_ARRAY2D(arr, row, col, format)   \
     do {                                       \
         for (size_t i = 0; i < row; i++) {     \
             for (size_t j = 0; j < col; j++) { \
