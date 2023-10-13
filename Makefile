@@ -29,6 +29,7 @@ CFLAGS                += -m32 # gcc 32bit
 CPPFLAGS              := $(INCLUDE_DIRS) -DBUILD_DIR=\"$(BUILD_ABS_DIR)\"
 CPPFLAGS              += -ggdb3
 CPPFLAGS              += -Wall
+CPPFLAGS              += -O0
 
 LDFLAGS               := -pthread
 LDFLAGS               += -lm # to link againt the math library (libm)
