@@ -434,5 +434,7 @@ int main(int argc, char *argv[])
 
     // test_bin();
     // test_bit();
-    test_bit();
+    // test_bit();
+
+    test_hash_table();
 }
