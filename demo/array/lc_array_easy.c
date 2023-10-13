@@ -1654,10 +1654,11 @@ typedef struct {
     UT_hash_handle hh;
 } ht_t;
 
-ht_t* ht = NULL;
+ht_t *ht = NULL;
 
-ht_t* find(int ikey) {
-    ht_t* tmp;
+ht_t *find(int ikey)
+{
+    ht_t *tmp;
     HASH_FIND_INT(ht, &ikey, tmp);
     return tmp;
 }
