@@ -215,7 +215,8 @@ int max(int a, int b);
 int min(int a, int b);
 
 /**
- * @brief
+ * @brief round up
+ * roundup(5.3) = 6
  *
  * @param num
  * @return double
@@ -223,7 +224,8 @@ int min(int a, int b);
 double roundup(double num);
 
 /**
- * @brief
+ * @brief round down
+ * rounddown(5.3) 5
  *
  * @param num
  * @return double
@@ -234,6 +236,9 @@ double rounddown(double num);
  * @brief Limit a value between an upper and lower limit,
  * when the value exceeds the range of the minimum and maximum values,
  * choose a value between the minimum and maximum values to use
+ * min=1, max=5
+ * value=2, clamp(2, 1, 5)=2
+ * value=6, clamp(6, 1, 5)=5
  *
  * @param value
  * @param min
@@ -255,33 +260,33 @@ int clamp(int value, int min, int max);
 /**
  * @brief
  *
- * @param lhs
- * @param rhs
- * @param size
+ * @param lhs left hand side
+ * @param rhs right hand side
+ * @param size need to malloc swap value type size
  */
 void swap(void *lhs, void *rhs, size_t size);
 
 /**
  * @brief
  *
- * @param lhs
- * @param rhs
+ * @param lhs left hand side
+ * @param rhs right hand side
  */
 void swap_by_temp(int *lhs, int *rhs);
 
 /**
  * @brief
  *
- * @param lhs
- * @param rhs
+ * @param lhs left hand side
+ * @param rhs right hand side
  */
 void swap_by_sum(int *lhs, int *rhs);
 
 /**
- * @brief
+ * @brief xor means logical operation
  *
- * @param lhs
- * @param rhs
+ * @param lhs left hand side
+ * @param rhs right hand side
  */
 void swap_by_xor(int *lhs, int *rhs);
 
