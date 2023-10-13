@@ -305,7 +305,7 @@ void startTimer(int seconds, Event event, void (*callback)())
     while (difftime(time(NULL), startTime) < seconds) {
         // Waiting for the timer to expire
     }
-    if (event = EVENT_TIMEOUT) {
+    if (event == EVENT_TIMEOUT) {
         if (callback) {
             callback(); // Execute the callback function if provided
         }

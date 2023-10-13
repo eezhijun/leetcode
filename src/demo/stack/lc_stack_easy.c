@@ -355,7 +355,7 @@ MinStack *minStackCreate(void)
         printf("malloc failed\n");
         return NULL;
     }
-    memset(obj->data, 0, STACK_SIZE);
+    memset(obj->data, 0, sizeof(int) * STACK_SIZE);
     obj->top = -1;
     return obj;
 }

@@ -197,6 +197,7 @@ int findContentChildren(int *g, int gSize, int *s, int sSize)
     if (s == NULL || sSize == 0) {
         return 0;
     }
+    return 0;
 }
 
 void findContentChildrenTest(void)

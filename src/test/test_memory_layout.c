@@ -93,4 +93,5 @@ int test_memory_layout(void)
     l_var_c = NULL;
     free(l_var_d);
     l_var_d = NULL;
+    return 0;
 }

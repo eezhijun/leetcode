@@ -60,6 +60,7 @@ typedef struct {
 
 MyStack *myStackCreate()
 {
+    return 0;
 }
 
 void myStackPush(MyStack *obj, int x)
@@ -68,14 +69,17 @@ void myStackPush(MyStack *obj, int x)
 
 int myStackPop(MyStack *obj)
 {
+    return 0;
 }
 
 int myStackTop(MyStack *obj)
 {
+    return 0;
 }
 
 bool myStackEmpty(MyStack *obj)
 {
+    return 0;
 }
 
 void myStackFree(MyStack *obj)

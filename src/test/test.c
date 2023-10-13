@@ -330,25 +330,11 @@ void array_test(void)
 */
 
     printf("arr3 test\n");
-    int **arr3 = create_2darray(3, 5);
-    printf("arr3 before copy\n");
-    array_process2(arr3, 3, 5);
-    printf("arr3 after copy\n");
-    memcpy(arr3, arr2, sizeof(int) * row * col);
-    array_process2(arr3, 3, 5);
-
-    for (int i = 0; i < 3; i++) {
-        memcpy(arr3[i], arr[i], sizeof(int) * col);
-    }
-    array_process2(arr3, 3, 5);
-    destroy_2darray(arr3);
-
-    printf("arr4 test\n");
     int(*arr4)[5] = NULL;
     arr4 = arr;
     array_process3(arr4, 3, 5);
 
-    printf("arr5, test\n");
+    printf("arr4, test\n");
     int(*arr5)[5] = (int(*)[5])malloc(sizeof(int) * 3 * 5);
     memset(arr5, 0, sizeof(int) * 3 * 5);
     array_process(arr5, 3, 5);
@@ -356,7 +342,7 @@ void array_test(void)
     memcpy(arr5, arr, sizeof(int) * 3 * 5);
     array_process(arr5, 3, 5);
 
-    printf("arr6, test\n");
+    printf("arr5, test\n");
     int *arr6[3] = {0};
     for (int i = 0; i < 3; i++) {
         arr6[i] = arr[i];
@@ -425,7 +411,7 @@ int main(int argc, char *argv[])
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
 
-    // array_test();
+    array_test();
 
     // test_traffic_light();
     // test_light_switch();
@@ -436,5 +422,5 @@ int main(int argc, char *argv[])
     // test_bit();
     // test_bit();
 
-    test_hash_table();
+    // test_hash_table();
 }

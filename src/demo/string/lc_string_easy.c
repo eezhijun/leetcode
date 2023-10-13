@@ -302,7 +302,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
         char tmp[26] = {0};
         memcpy(tmp, s, 26);
         for (j = 0; j < len; j++) {
-            char ch = words[i][j] - 'a';
+            uint8_t ch = words[i][j] - 'a';
             if (tmp[ch]) {
                 tmp[ch]--;
             }
@@ -381,7 +381,7 @@ void toLowerCaseTest(void)
 
     char *ret = toLowerCase(s);
 
-    printf("output:%s\n", s);
+    printf("output:%s\n", ret);
 }
 
 /* https://leetcode.cn/problems/count-binary-substrings/ */
@@ -410,6 +410,7 @@ void toLowerCaseTest(void)
 s[i] 为 '0' 或 '1' */
 int countBinarySubstrings(char *s)
 {
+    return 0;
 }
 
 void countBinarySubstringsTest(void)
@@ -1165,6 +1166,7 @@ void licenseKeyFormattingTest(void)
 s 由小写英文字母组成 */
 bool repeatedSubstringPattern(char *s)
 {
+    return 0;
 }
 
 void repeatedSubstringPatternTest(void)
@@ -1637,8 +1639,6 @@ answer[i] == i （以字符串形式）如果上述条件全不满足。
 char **fizzBuzz(int n, int *returnSize)
 {
     int i;
-    int size = 0;
-
     char **s = (char **)malloc(sizeof(char *) * n);
     if (s == NULL) {
         return NULL;
@@ -1824,6 +1824,7 @@ void validPalindromeTest(void)
 s 只由小写 和/或 大写英文字母组成 */
 int longestPalindromex(char *s)
 {
+    return 0;
 }
 
 void longestPalindromexTest(void)
@@ -2810,9 +2811,8 @@ char *convertToTitle(int columnNumber)
         26^1+26^0 -             26^1*26+26^0*26
         26^2+26^1+26^0 -        26^2*26+26^1*26+26^0*26
     */
-    char *table = "ZABCDEFGHIJKLMNOPQRSTUVWXY";
     size_t size = 1;
-    int n = 0, m = 0, sum = 26;
+    int sum = 26;
 
     while (columnNumber > sum) {
         size++;

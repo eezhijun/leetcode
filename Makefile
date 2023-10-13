@@ -28,6 +28,7 @@ CFLAGS                += -m32 # gcc 32bit
 
 CPPFLAGS              := $(INCLUDE_DIRS) -DBUILD_DIR=\"$(BUILD_ABS_DIR)\"
 CPPFLAGS              += -ggdb3
+CPPFLAGS              += -Wall
 
 LDFLAGS               := -pthread
 LDFLAGS               += -lm # to link againt the math library (libm)
@@ -65,7 +66,7 @@ clean:
 format:
 	@echo "Running clang-format"
 	@clang-format -i \
-	$(shell find demo -name "*.c") \
+	$(shell find src/demo -name "*.c") \
 	$(shell find src/test -name "*.c") \
 	$(shell find src/utils -name "*.c")
 
