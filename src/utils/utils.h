@@ -15,6 +15,12 @@
 #include "stdint.h"
 #include "stddef.h"
 #include "limits.h"
+#include "stdbool.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #ifndef UNUSED
 #define UNUSED(x) (void)(x)
@@ -490,5 +496,80 @@ int **create_2darray(int row, int col);
  * @param a
  */
 void destroy_2darray(int **a);
+
+/**
+ * @brief
+ *
+ * @param num
+ */
+void printf_bin(int num);
+
+typedef unsigned long Uint;
+
+/**
+ * @brief Setting a bit
+ *
+ * @param number
+ * @param n
+ * @return Uint
+ */
+static inline Uint bit_set(Uint number, Uint n)
+{
+    return number | ((Uint)1 << n);
+}
+
+/**
+ * @brief Clearing a bit
+ *
+ * @param number
+ * @param n
+ * @return Uint
+ */
+static inline Uint bit_clear(Uint number, Uint n)
+{
+    return number & ~((Uint)1 << n);
+}
+
+/**
+ * @brief Toggling a bit
+ *
+ * @param number
+ * @param n
+ * @return Uint
+ */
+static inline Uint bit_toggle(Uint number, Uint n)
+{
+    return number ^ ((Uint)1 << n);
+}
+
+/**
+ * @brief Checking a bit
+ *
+ * @param number
+ * @param n
+ * @return true
+ * @return false
+ */
+static inline bool bit_check(Uint number, Uint n)
+{
+    return (number >> n) & (Uint)1;
+}
+
+/**
+ * @brief Changing the nth bit to x
+ *
+ * @param number
+ * @param n
+ * @param x
+ * @return Uint
+ */
+static inline Uint bit_set_to(Uint number, Uint n, bool x)
+{
+    return (number & ~((Uint)1 << n)) | ((Uint)x << n);
+}
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

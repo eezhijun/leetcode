@@ -310,7 +310,6 @@ void startTimer(int seconds, Event event, void (*callback)())
             callback(); // Execute the callback function if provided
         }
     }
-
 }
 
 int test_state(void)

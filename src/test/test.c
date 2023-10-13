@@ -387,6 +387,39 @@ void array_test(void)
     printf("----------------------\n");
 }
 
+void test_bin(void)
+{
+    int n = 10;
+    printf_bin(n);
+}
+
+void test_bit(void)
+{
+    uint32_t n = 0x0A;
+    printf("0x%X=\n", n);
+    printf_bin(n);
+
+    n = bit_set(n, 2);
+    printf("bit_set(0x%X, 2)=\n", n);
+    printf_bin(n);
+
+    n = bit_clear(n, 2);
+    printf("bit_clear(0x%X, 2)=\n", n);
+    printf_bin(n);
+
+    n = bit_toggle(n, 2);
+    printf("bit_toggle(0x%X, 2)=\n", n);
+    printf_bin(n);
+
+    bool ret = bit_check(n, 0);
+    printf("bit_check(0x%X, 0)=%d\n", n, ret);
+    printf_bin(n);
+
+    n = bit_set_to(n, 2, 0);
+    printf("bit_set_to(0x%X, 2, 0)\n", n);
+    printf_bin(n);
+}
+
 int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
@@ -397,5 +430,9 @@ int main(int argc, char *argv[])
     // test_traffic_light();
     // test_light_switch();
     // test_door();
-    test_state();
+    // test_state();
+
+    // test_bin();
+    // test_bit();
+    test_bit();
 }

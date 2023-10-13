@@ -421,3 +421,23 @@ void destroy_2darray(int **a)
     }
     free(a);
 }
+
+void printf_bin(int num)
+{
+    int i, j, k;
+    unsigned char *p = (unsigned char *)&num + 3;
+
+    for (i = 0; i < 4; i++) //处理4个字节(32位）
+    {
+        j = *(p - i); //取每个字节的首地址
+        for (int k = 7; k >= 0; k--) //处理每个字节的8个位
+        {
+            if (j & (1 << k))
+                printf("1");
+            else
+                printf("0");
+        }
+        printf(" ");
+    }
+    printf("\r\n");
+}
