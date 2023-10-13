@@ -1646,8 +1646,53 @@ void removeDuplicatesTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
+#define TWO_SUM_HASH_TABLE
+#if defined(TWO_SUM_HASH_TABLE)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t* ht = NULL;
+
+ht_t* find(int ikey) {
+    ht_t* tmp;
+    HASH_FIND_INT(ht, &ikey, tmp);
+    return tmp;
+}
+
+void insert(int key, int val)
+{
+    ht_t *it = find(key);
+    if (it == NULL) {
+        ht_t *tmp = (ht_t *)malloc(sizeof *tmp);
+        tmp->key = key;
+        tmp->val = val;
+        HASH_ADD_INT(ht, key, tmp);
+    } else {
+        it->val = val;
+    }
+}
+
+#endif
+
 int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 {
+#if defined(TWO_SUM_HASH_TABLE)
+    ht = NULL;
+    for (int i = 0; i < numsSize; i++) {
+        ht_t *it = find(target - nums[i]);
+        if (it != NULL) {
+            int *ans = (int *)malloc(sizeof(int) * 2);
+            ans[0] = it->val;
+            ans[1] = i;
+            *returnSize = 2;
+            return ans;
+        }
+        insert(nums[i], i);
+    }
+#else
     for (int i = 0; i < numsSize - 1; ++i) {
         for (int j = 0; j < numsSize - i - 1; ++j) {
             if (nums[i] + nums[j + i + 1] == target) {
@@ -1659,6 +1704,7 @@ int *twoSum(int *nums, int numsSize, int target, int *returnSize)
             }
         }
     }
+#endif
     *returnSize = 0;
     return NULL;
 }
@@ -1670,14 +1716,23 @@ void twoSumTest(void)
     int numsSize = sizeof(nums) / sizeof(int);
     int returnSize;
 
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    printf("\n");
     int *ans = twoSum(nums, numsSize, target, &returnSize);
-
-    printf("output: [%d,%d]\n", ans[0], ans[1]);
+    if (ans == NULL) {
+        return;
+    }
+    printf("output:\n");
+    for (int i = 0; i < returnSize; i++) {
+        printf("%d ", ans[i]);
+    }
+    printf("\n");
 }
 
 void lc_array_easy_test(void)
 {
-    // twoSumTest();
+    twoSumTest();
     // removeDuplicatesTest();
     // removeElementTest();
     // searchInsertTest();
@@ -1695,5 +1750,5 @@ void lc_array_easy_test(void)
     // findContentChildrenTest();
     // islandPerimeterTest();
     // thirdMaxTest();
-    findPoisonedDurationTest();
+    // findPoisonedDurationTest();
 }
