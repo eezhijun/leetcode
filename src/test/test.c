@@ -412,7 +412,7 @@ void test_bit(void)
     printf_bin(n);
 
     bool ret = bit_check(n, 0);
-    printf("bit_check(0x%X, 0)=%d\n", n, ret);
+    printf("bit_check(0x%X, 0)=%s\n", n, ret ? "true" : "false");
     printf_bin(n);
 
     n = bit_set_to(n, 2, 0);
