@@ -1144,14 +1144,14 @@ ht_t *insert(int key)
 
 void delete_all(void)
 {
-    ht_t *current_user;
+    ht_t *it;
     ht_t *tmp;
 
-    HASH_ITER(hh, ht, current_user, tmp)
+    HASH_ITER(hh, ht, it, tmp)
     {
-        printf("free current_user->key=%d\n", current_user->key);
-        HASH_DEL(ht, current_user); /* delete it (users advances to next) */
-        free(current_user); /* free it */
+        printf("free it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
     }
 }
 #endif
@@ -1747,14 +1747,14 @@ void insert(int key, int val)
 
 void delete_all(void)
 {
-    ht_t *current_user;
+    ht_t *it;
     ht_t *tmp;
 
-    HASH_ITER(hh, ht, current_user, tmp)
+    HASH_ITER(hh, ht, it, tmp)
     {
-        printf("free current_user->key=%d\n", current_user->key);
-        HASH_DEL(ht, current_user); /* delete it (users advances to next) */
-        free(current_user); /* free it */
+        printf("free it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
     }
 }
 #endif

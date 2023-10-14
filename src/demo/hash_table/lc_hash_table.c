@@ -40,13 +40,82 @@
 提示：
 
 1 <= n <= 231 - 1 */
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t *ht = NULL;
+
+ht_t *find(int key)
+{
+    ht_t *tmp;
+    HASH_FIND_INT(ht, &key, tmp);
+    return tmp;
+}
+
+ht_t* insert(int key)
+{
+    ht_t *it;
+    HASH_FIND_INT(ht, &key, it);
+    if (it == NULL) {
+        it = (ht_t *)malloc(sizeof *it);
+        it->key = key;
+        it->val = 0;
+        HASH_ADD_INT(ht, key, it);
+    } else {
+        it->val = 1;
+    }
+    return it;
+}
+
+void deelte_all(void)
+{
+    ht_t *it;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+}
+
 bool isHappy(int n)
 {
+    int sum = 0;
+    int m = 0;
+    ht = NULL;
+    insert(n);
+    while (1) {
+        while (n != 0) {
+            m = n % 10;
+            n /= 10;
+            sum += pow(m, 2);
+        }
+        printf("sum=%d\n", sum);
+        if (sum == 1) {
+            return true;
+        }
+        n = sum;
+        sum = 0;
+        ht_t *it = insert(n);
+        printf("it->val=%d\n", it->val);
+        if (it->val) {
+            return false;
+        }
+    }
     return 0;
 }
 
 void isHappyTest(void)
 {
+    int n = 13;
+    printf("input:%d\n", n);
+    printf("output:%s\n", (isHappy(n) == 1) ? "true" : "false");
+    deelte_all();
 }
 
 void lc_hash_table_test(void)
