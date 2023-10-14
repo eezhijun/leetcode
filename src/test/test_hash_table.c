@@ -159,6 +159,43 @@ int test_hash_table(void)
     return 0;
 }
 
+typedef struct {
+    char a;
+    int b;
+} record_key_t;
+
+typedef struct {
+    record_key_t key;
+    /* ... other data ... */
+    UT_hash_handle hh;
+} record_t;
+
+int test_hash_find(void)
+{
+    record_t l, *p, *r, *tmp, *records = NULL;
+
+    r = (record_t *)malloc(sizeof *r);
+    memset(r, 0, sizeof *r);
+    r->key.a = 'a';
+    r->key.b = 1;
+    HASH_ADD(hh, records, key, sizeof(record_key_t), r);
+
+    memset(&l, 0, sizeof(record_t));
+    l.key.a = 'a';
+    l.key.b = 1;
+    HASH_FIND(hh, records, &l.key, sizeof(record_key_t), p);
+
+    if (p)
+        printf("found %c %d\n", p->key.a, p->key.b);
+
+    HASH_ITER(hh, records, p, tmp)
+    {
+        HASH_DEL(records, p);
+        free(p);
+    }
+    return 0;
+}
+
 // 定义键值对结构
 struct key_value {
     char *key;
@@ -249,7 +286,7 @@ int find(struct hash_table *hash_table, const char *key)
 }
 
 // 从哈希表中删除键值对
-void delete (struct hash_table *hash_table, const char *key)
+void delete(struct hash_table *hash_table, const char *key)
 {
     size_t index = hash(key, hash_table->size);
     struct key_value *current = hash_table->table[index];
@@ -289,7 +326,7 @@ void destroy_hash_table(struct hash_table *hash_table)
     free(hash_table);
 }
 
-int test_hash_table1(void)
+int test_hash_table_customize(void)
 {
     struct hash_table *hash_table = create_hash_table(100);
 
