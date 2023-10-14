@@ -1400,8 +1400,7 @@ s 和 t 仅包含小写字母
 进阶: 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？ */
 bool isAnagram(char *s, char *t)
 {
-    int *ss = (int *)malloc(sizeof(int) * 26);
-    memset(ss, 0, sizeof(int) * 26);
+    int table[26] = {0};
 
     int i;
     int ls = strlen(s);
@@ -1412,11 +1411,11 @@ bool isAnagram(char *s, char *t)
         return false;
     }
     for (i = 0; i < ls; i++) {
-        ss[s[i] - 'a']++;
-        ss[t[i] - 'a']--;
+        table[s[i] - 'a']++;
+        table[t[i] - 'a']--;
     }
     for (i = 0; i < 26; i++) {
-        if (ss[i] != 0) {
+        if (table[i] != 0) {
             count++;
         }
     }

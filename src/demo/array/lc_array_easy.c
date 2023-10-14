@@ -475,8 +475,8 @@ nums 中的所有数字都 独一无二
 进阶：你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题? */
 int missingNumber(int *nums, int numsSize)
 {
-#define MATH_WAY
-#if defined(MATH_WAY)
+#define missingNumberTest_MATH
+#if defined(missingNumberTest_MATH)
     int sum = (numsSize * (numsSize + 1)) / 2;
     int tmpsum = 0;
     for (int i = 0; i < numsSize; i++) {
@@ -1042,15 +1042,27 @@ void containsNearbyDuplicateTest(void)
 
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109 */
-#if defined(HASH_TABLE_WAY)
+#if defined(containsDuplicate_HASH_TABLE)
 struct hashTable {
     int key;
     UT_hash_handle hh;
 };
+
+void delete_all(void)
+{
+    ht_t *it;
+    ht_t *tmp;
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+}
 #endif
 bool containsDuplicate(int *nums, int numsSize)
 {
-#if defined(HASH_TABLE_WAY)
+#if defined(containsDuplicate_HASH_TABLE)
     struct hashTable *set = NULL;
     for (int i = 0; i < numsSize; i++) {
         struct hashTable *tmp;
@@ -1088,6 +1100,9 @@ void containsDuplicateTest(void)
     PRINT_ARRAY(nums, numsSize, "%d ");
     containsDuplicate(nums, numsSize) == true ? printf("ouput:true\n") :
                                                 printf("output:false\n");
+#if defined(containsDuplicate_HASH_TABLE)
+    delete_all();
+#endif
 }
 
 /* https://leetcode.cn/problems/majority-element/ */
