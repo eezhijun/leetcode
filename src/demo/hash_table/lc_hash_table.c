@@ -55,7 +55,7 @@ ht_t *find(int key)
     return tmp;
 }
 
-ht_t* insert(int key)
+ht_t *insert(int key)
 {
     ht_t *it;
     HASH_FIND_INT(ht, &key, it);

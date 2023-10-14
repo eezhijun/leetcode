@@ -286,7 +286,7 @@ int find(struct hash_table *hash_table, const char *key)
 }
 
 // 从哈希表中删除键值对
-void delete(struct hash_table *hash_table, const char *key)
+void delete_key(struct hash_table *hash_table, const char *key)
 {
     size_t index = hash(key, hash_table->size);
     struct key_value *current = hash_table->table[index];
@@ -337,7 +337,7 @@ int test_hash_table_customize(void)
     printf("apple: %d\n", find(hash_table, "apple")); // 输出 5
     printf("banana: %d\n", find(hash_table, "banana")); // 输出 10
 
-    delete (hash_table, "banana");
+    delete_key(hash_table, "banana");
     printf("banana: %d\n", find(hash_table, "banana")); // 输出 -1，因为已删除
 
     destroy_hash_table(hash_table);
