@@ -21,6 +21,7 @@ SOURCE_FILES          += $(wildcard src/demo/array/*.c)
 SOURCE_FILES          += $(wildcard src/demo/string/*.c)
 SOURCE_FILES          += $(wildcard src/demo/stack/*.c)
 SOURCE_FILES          += $(wildcard src/demo/queue/*.c)
+SOURCE_FILES          += $(wildcard src/demo/hash_table/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 

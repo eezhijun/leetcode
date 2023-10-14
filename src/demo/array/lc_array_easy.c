@@ -18,6 +18,11 @@
 #include "utils.h"
 #include "uthash.h"
 
+#if 0
+#define majorityElement_HAST_TABLE
+#define twoSum_HASH_TABLE
+#endif
+
 /* 双指针 哈希表 数学 计数 排序 */
 /* https://leetcode.cn/problems/teemo-attacking/ */
 /* 在《英雄联盟》的世界中，有一个叫 “提莫” 的英雄。他的攻击可以让敌方英雄艾希（编者注：寒冰射手）进入中毒状态。
@@ -1106,7 +1111,6 @@ n == nums.length
 -109 <= nums[i] <= 109
 
 进阶：尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。*/
-#define majorityElement_HAST_TABLE
 #if defined(majorityElement_HAST_TABLE)
 
 typedef struct {
@@ -1138,6 +1142,18 @@ ht_t *insert(int key)
     return it;
 }
 
+void delete_all(void)
+{
+    ht_t *current_user;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, current_user, tmp)
+    {
+        printf("free current_user->key=%d\n", current_user->key);
+        HASH_DEL(ht, current_user); /* delete it (users advances to next) */
+        free(current_user); /* free it */
+    }
+}
 #endif
 int majorityElement(int *nums, int numsSize)
 {
@@ -1188,6 +1204,9 @@ void majorityElementTest(void)
     printf("\n");
     int ans = majorityElement(nums, numsSize);
     printf("output:%d\n", ans);
+#if defined(majorityElement_HAST_TABLE)
+    delete_all();
+#endif
 }
 
 /* https://leetcode.cn/problems/single-number/ */
@@ -1697,8 +1716,7 @@ void removeDuplicatesTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-// #define TWO_SUM_HASH_TABLE
-#if defined(TWO_SUM_HASH_TABLE)
+#if defined(twoSum_HASH_TABLE)
 typedef struct {
     int key;
     int val;
@@ -1727,11 +1745,23 @@ void insert(int key, int val)
     }
 }
 
+void delete_all(void)
+{
+    ht_t *current_user;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, current_user, tmp)
+    {
+        printf("free current_user->key=%d\n", current_user->key);
+        HASH_DEL(ht, current_user); /* delete it (users advances to next) */
+        free(current_user); /* free it */
+    }
+}
 #endif
 
 int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 {
-#if defined(TWO_SUM_HASH_TABLE)
+#if defined(twoSum_HASH_TABLE)
     ht = NULL;
     for (int i = 0; i < numsSize; i++) {
         ht_t *it = find(target - nums[i]);
@@ -1781,6 +1811,9 @@ void twoSumTest(void)
     }
     printf("\n");
     free(ans);
+#if defined(twoSum_HASH_TABLE)
+    delete_all();
+#endif
 }
 
 void lc_array_easy_test(void)
@@ -1795,7 +1828,7 @@ void lc_array_easy_test(void)
     // getRowTest();
     // maxProfitTest();
     // singleNumberTest();
-    majorityElementTest();
+    // majorityElementTest();
     // containsDuplicateTest();
     // moveZeroesTest();
     // arrayPairSumTest();

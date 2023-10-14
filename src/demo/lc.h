@@ -21,6 +21,9 @@ void lc_string_easy_test(void);
 void lc_string_medium_test(void);
 void lc_string_diffcult_test(void);
 
+/* hash table */
+void lc_hash_table_test(void);
+
 /* stack */
 void lc_stack_easy_test(void);
 

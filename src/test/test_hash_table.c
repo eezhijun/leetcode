@@ -44,7 +44,7 @@ struct my_struct *find_user(int user_id)
 
 void delete_user(struct my_struct *user)
 {
-    HASH_DEL(users, user); /* user: pointer to deletee */
+    HASH_DEL(users, user); /* user: pointer to delete */
     free(user);
 }
 
@@ -55,6 +55,7 @@ void delete_all(void)
 
     HASH_ITER(hh, users, current_user, tmp)
     {
+        printf("current_user->id=%d\n", current_user->id);
         HASH_DEL(users, current_user); /* delete it (users advances to next) */
         free(current_user); /* free it */
     }
