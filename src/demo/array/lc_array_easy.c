@@ -14,14 +14,10 @@
 #include <math.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <assert.h>
 
 #include "utils.h"
 #include "uthash.h"
-
-#if 0
-#define majorityElement_HAST_TABLE
-#define twoSum_HASH_TABLE
-#endif
 
 /* 双指针 哈希表 数学 计数 排序 */
 /* https://leetcode.cn/problems/teemo-attacking/ */
@@ -299,9 +295,86 @@ void findDisappearedNumbersTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
+#undef HASH_TABLE_intersection
+#if defined(HASH_TABLE_intersection)
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t *ht = NULL;
+
+ht_t *find(int key)
+{
+    ht_t *tmp;
+    HASH_FIND_INT(ht, &key, tmp);
+    return tmp;
+}
+
+void insert(int key)
+{
+    ht_t *it;
+    HASH_FIND_INT(ht, &key, it);
+    if (it == NULL) {
+        it = (ht_t *)malloc(sizeof *it);
+        it->key = key;
+        HASH_ADD_INT(ht, key, it);
+    }
+}
+
+void delete_key(ht_t *it)
+{
+    HASH_DEL(ht, it);
+    free(it);
+}
+
+void deelte_all(void)
+{
+    ht_t *it;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+}
+
+void print_users(void)
+{
+    ht_t *it;
+
+    for (it = ht; it != NULL; it = (ht_t *)(it->hh.next)) {
+        printf("key:%d\n", it->key);
+    }
+}
+
+#endif
+
 int *intersection(int *nums1, int nums1Size, int *nums2, int nums2Size,
                   int *returnSize)
 {
+#if defined(HASH_TABLE_intersection)
+    ht = NULL;
+    int i;
+    int size = nums1Size > nums2Size ? nums1Size : nums2Size;
+    int *ans = (int *)malloc(sizeof(int) * size);
+    *returnSize = 0;
+
+    for (i = 0; i < nums1Size; i++) {
+        insert(nums1[i]);
+    }
+
+    for (i = 0; i < nums2Size; i++) {
+        ht_t *tmp = find(nums2[i]);
+        if (tmp) {
+            ans[(*returnSize)++] = nums2[i];
+            delete_key(tmp);
+        }
+    }
+    return ans;
+#else
     bubble_sort(nums1, nums1Size);
     bubble_sort(nums2, nums2Size);
     int i, j;
@@ -333,6 +406,7 @@ int *intersection(int *nums1, int nums1Size, int *nums2, int nums2Size,
     }
     *returnSize = s + 1;
     return ans;
+#endif
 }
 
 void intersectionTest(void)
@@ -351,8 +425,12 @@ void intersectionTest(void)
         printf("ret is NULL\n");
         return;
     }
+    printf("output:\n");
     PRINT_ARRAY(ret, returnSize, "%d ");
     free(ret);
+#if defined(HASH_TABLE_intersection)
+    deelte_all();
+#endif
 }
 
 /* https://leetcode.cn/problems/range-sum-query-immutable/ */
@@ -471,12 +549,67 @@ n == nums.length
 0 <= nums[i] <= n
 nums 中的所有数字都 独一无二
 
-
 进阶：你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题? */
+#define MATH_missingNumber
+#if defined(HASH_TABLE_missingNumber)
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t *ht = NULL;
+
+ht_t *find(int key)
+{
+    ht_t *tmp;
+    HASH_FIND_INT(ht, &key, tmp);
+    return tmp;
+}
+
+ht_t *insert(int key)
+{
+    ht_t *it;
+    HASH_FIND_INT(ht, &key, it);
+    if (it == NULL) {
+        it = (ht_t *)malloc(sizeof *it);
+        it->key = key;
+        HASH_ADD_INT(ht, key, it);
+    }
+    return it;
+}
+
+void deelte_all(void)
+{
+    ht_t *it;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+}
+#endif
+
 int missingNumber(int *nums, int numsSize)
 {
-#define missingNumberTest_MATH
-#if defined(missingNumberTest_MATH)
+#if defined(HASH_TABLE_missingNumber)
+    ht = NULL;
+    int i;
+
+    for (i = 0; i < numsSize; i++) {
+        insert(nums[i]);
+    }
+
+    for (i = 0; i <= numsSize; i++) {
+        ht_t *tmp = find(i);
+        if (tmp == NULL) {
+            return i;
+        }
+    }
+    return 0;
+#elif defined(MATH_missingNumber)
     int sum = (numsSize * (numsSize + 1)) / 2;
     int tmpsum = 0;
     for (int i = 0; i < numsSize; i++) {
@@ -511,6 +644,9 @@ void missingNumberTest(void)
     PRINT_ARRAY(nums, numsSize, "%d ");
     int ret = missingNumber(nums, numsSize);
     printf("output:%d\n", ret);
+#if defined(HASH_TABLE_missingNumber)
+    deelte_all();
+#endif
 }
 
 /* https://leetcode.cn/problems/summary-ranges/ */
@@ -1042,7 +1178,8 @@ void containsNearbyDuplicateTest(void)
 
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109 */
-#if defined(containsDuplicate_HASH_TABLE)
+#undef HASH_TABLE_containsDuplicate
+#if defined(HASH_TABLE_containsDuplicate)
 struct hashTable {
     int key;
     UT_hash_handle hh;
@@ -1062,7 +1199,7 @@ void delete_all(void)
 #endif
 bool containsDuplicate(int *nums, int numsSize)
 {
-#if defined(containsDuplicate_HASH_TABLE)
+#if defined(HASH_TABLE_containsDuplicate)
     struct hashTable *set = NULL;
     for (int i = 0; i < numsSize; i++) {
         struct hashTable *tmp;
@@ -1100,7 +1237,7 @@ void containsDuplicateTest(void)
     PRINT_ARRAY(nums, numsSize, "%d ");
     containsDuplicate(nums, numsSize) == true ? printf("ouput:true\n") :
                                                 printf("output:false\n");
-#if defined(containsDuplicate_HASH_TABLE)
+#if defined(HASH_TABLE_containsDuplicate)
     delete_all();
 #endif
 }
@@ -1126,8 +1263,8 @@ n == nums.length
 -109 <= nums[i] <= 109
 
 进阶：尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。*/
-#if defined(majorityElement_HAST_TABLE)
-
+#undef HASH_TABLE_majorityElement
+#if defined(HASH_TABLE_majorityElement)
 typedef struct {
     int key;
     int val;
@@ -1172,7 +1309,7 @@ void delete_all(void)
 #endif
 int majorityElement(int *nums, int numsSize)
 {
-#if defined(majorityElement_HAST_TABLE)
+#if defined(HASH_TABLE_majorityElement)
     if (numsSize <= 2) {
         return nums[0];
     }
@@ -1219,7 +1356,7 @@ void majorityElementTest(void)
     printf("\n");
     int ans = majorityElement(nums, numsSize);
     printf("output:%d\n", ans);
-#if defined(majorityElement_HAST_TABLE)
+#if defined(HASH_TABLE_majorityElement)
     delete_all();
 #endif
 }
@@ -1731,7 +1868,8 @@ void removeDuplicatesTest(void)
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-#if defined(twoSum_HASH_TABLE)
+#undef HASH_TABLE_twoSum
+#if defined(HASH_TABLE_twoSum)
 typedef struct {
     int key;
     int val;
@@ -1776,7 +1914,7 @@ void delete_all(void)
 
 int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 {
-#if defined(twoSum_HASH_TABLE)
+#if defined(HASH_TABLE_twoSum)
     ht = NULL;
     for (int i = 0; i < numsSize; i++) {
         ht_t *it = find(target - nums[i]);
@@ -1826,7 +1964,7 @@ void twoSumTest(void)
     }
     printf("\n");
     free(ans);
-#if defined(twoSum_HASH_TABLE)
+#if defined(HASH_TABLE_twoSum)
     delete_all();
 #endif
 }
@@ -1852,4 +1990,6 @@ void lc_array_easy_test(void)
     // islandPerimeterTest();
     // thirdMaxTest();
     // findPoisonedDurationTest();
+    // missingNumberTest();
+    // intersectionTest();
 }

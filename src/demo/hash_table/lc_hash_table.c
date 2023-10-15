@@ -40,6 +40,7 @@
 提示：
 
 1 <= n <= 231 - 1 */
+#if defined HASH_TABLE_isHappy
 typedef struct {
     int key;
     int val;
@@ -83,6 +84,15 @@ void deelte_all(void)
     }
 }
 
+void print_users(void)
+{
+    ht_t *it;
+
+    for (it = ht; it != NULL; it = (ht_t *)(it->hh.next)) {
+        printf("key:%d\n", it->key);
+    }
+}
+
 bool isHappy(int n)
 {
     int sum = 0;
@@ -117,8 +127,9 @@ void isHappyTest(void)
     printf("output:%s\n", (isHappy(n) == 1) ? "true" : "false");
     deelte_all();
 }
+#endif
 
 void lc_hash_table_test(void)
 {
-    isHappyTest();
+    // isHappyTest();
 }

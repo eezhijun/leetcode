@@ -114,6 +114,7 @@ extern "C"
         for (size_t i = 0; i < size; i++) { \
             printf(format, arr[i]);         \
         }                                   \
+        printf("\n");                       \
     } while (0)
 #endif
 
