@@ -34,5 +34,8 @@ int main(void)
 
     /* queue */
     lc_queue_easy_test();
+
+    /* binary search */
+    lc_bin_search_easy_test();
     return 0;
 }
