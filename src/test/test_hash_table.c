@@ -61,7 +61,7 @@ void delete_all(void)
     }
 }
 
-void print_users()
+void print_users(void)
 {
     struct my_struct *s;
 
