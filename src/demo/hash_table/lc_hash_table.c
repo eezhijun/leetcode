@@ -16,6 +16,95 @@
 #include "uthash.h"
 
 /* 查找元素 元素去重 存储元素 */
+
+/* https://leetcode.cn/problems/longest-harmonious-subsequence/ */
+/* 和谐数组是指一个数组里元素的最大值和最小值之间的差别 正好是 1 。
+
+现在，给你一个整数数组 nums ，请你在所有可能的子序列中找到最长的和谐子序列的长度。
+
+数组的子序列是一个由数组派生出来的序列，它可以通过删除一些元素或不删除元素、且不改变其余元素的顺序而得到。
+
+示例 1：
+
+输入：nums = [1,3,2,2,5,2,3,7]
+输出：5
+解释：最长的和谐子序列是 [3,2,2,2,3]
+示例 2：
+
+输入：nums = [1,2,3,4]
+输出：2
+示例 3：
+
+输入：nums = [1,1,1,1]
+输出：0
+
+
+提示：
+
+1 <= nums.length <= 2 * 104
+-109 <= nums[i] <= 109 */
+#define HASH_TABLE_findLHS
+#if defined(HASH_TABLE_findLHS)
+
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+int findLHS(int *nums, int numsSize)
+{
+    ht_t *ht = NULL;
+    ht_t *tmp;
+    int ans = 0;
+    int i;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], tmp);
+        if (tmp == NULL) {
+            tmp = (ht_t *)malloc(sizeof *tmp);
+            tmp->key = nums[i];
+            tmp->val = 1;
+            HASH_ADD_INT(ht, key, tmp);
+        } else {
+            tmp->val++;
+        }
+    }
+
+    ht_t *it, *tmp1;
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        if (it) {
+            int next_key = it->key + 1;
+            HASH_FIND_INT(ht, &next_key, tmp1);
+            if (tmp1) {
+                ans = (it->val + tmp1->val > ans) ? (it->val + tmp1->val) : ans;
+            }
+        }
+    }
+
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+
+    return ans;
+}
+
+void findLHSTest(void)
+{
+    int nums[] = {1, 3, 2, 2, 5, 2, 3, 7};
+    int numsSize = ARRAY_SIZE(nums);
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int ret = findLHS(nums, numsSize);
+    printf("output:%d\n", ret);
+}
+#endif
+
 /* Alice 有 n 枚糖，其中第 i 枚糖的类型为 candyType[i] 。Alice 注意到她的体重正在增长，所以前去拜访了一位医生。
 
 医生建议 Alice 要少摄入糖分，只吃掉她所有糖的 n / 2 即可（n 是一个偶数）。Alice 非常喜欢这些糖，她想要在遵循医生建议的情况下，
@@ -48,7 +137,7 @@ n 是一个偶数
 -105 <= candyType[i] <= 105 */
 
 /* https://leetcode.cn/problems/distribute-candies/ */
-#define HASH_TABLE_distributeCandies
+#undef HASH_TABLE_distributeCandies
 #if defined(HASH_TABLE_distributeCandies)
 typedef struct {
     int key;
@@ -297,5 +386,6 @@ void lc_hash_table_test(void)
 {
     // isHappyTest();
     // xlongestPalindromeTest();
-    distributeCandiesTest();
+    // distributeCandiesTest();
+    findLHSTest();
 }
