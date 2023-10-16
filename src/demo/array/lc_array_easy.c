@@ -2155,5 +2155,5 @@ void lc_array_easy_test(void)
     // findPoisonedDurationTest();
     // missingNumberTest();
     // intersectionTest();
-    nextGreaterElementTest();
+    // nextGreaterElementTest();
 }

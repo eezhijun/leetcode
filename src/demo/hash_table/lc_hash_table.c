@@ -15,6 +15,100 @@
 #include "utils.h"
 #include "uthash.h"
 
+/* 查找元素 元素去重 存储元素 */
+/* Alice 有 n 枚糖，其中第 i 枚糖的类型为 candyType[i] 。Alice 注意到她的体重正在增长，所以前去拜访了一位医生。
+
+医生建议 Alice 要少摄入糖分，只吃掉她所有糖的 n / 2 即可（n 是一个偶数）。Alice 非常喜欢这些糖，她想要在遵循医生建议的情况下，
+尽可能吃到最多不同种类的糖。
+
+给你一个长度为 n 的整数数组 candyType ，返回： Alice 在仅吃掉 n / 2 枚糖的情况下，可以吃到糖的 最多 种类数。
+
+示例 1：
+
+输入：candyType = [1,1,2,2,3,3]
+输出：3
+解释：Alice 只能吃 6 / 2 = 3 枚糖，由于只有 3 种糖，她可以每种吃一枚。
+示例 2：
+
+输入：candyType = [1,1,2,3]
+输出：2
+解释：Alice 只能吃 4 / 2 = 2 枚糖，不管她选择吃的种类是 [1,2]、[1,3] 还是 [2,3]，她只能吃到两种不同类的糖。
+示例 3：
+
+输入：candyType = [6,6,6,6]
+输出：1
+解释：Alice 只能吃 4 / 2 = 2 枚糖，尽管她能吃 2 枚，但只能吃到 1 种糖。
+
+
+提示：
+
+n == candyType.length
+2 <= n <= 104
+n 是一个偶数
+-105 <= candyType[i] <= 105 */
+
+/* https://leetcode.cn/problems/distribute-candies/ */
+#define HASH_TABLE_distributeCandies
+#if defined(HASH_TABLE_distributeCandies)
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+ht_t *ht = NULL;
+
+void insert(int key)
+{
+    ht_t *it;
+    HASH_FIND_INT(ht, &key, it);
+    if (it == NULL) {
+        it = (ht_t *)malloc(sizeof *it);
+        it->key = key;
+        HASH_ADD_INT(ht, key, it);
+    }
+}
+
+void deelte_all(void)
+{
+    ht_t *it;
+    ht_t *tmp;
+
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        printf("it->key=%d\n", it->key);
+        HASH_DEL(ht, it); /* delete it */
+        free(it); /* free it */
+    }
+}
+
+int distributeCandies(int *candyType, int candyTypeSize)
+{
+    ht = NULL;
+    int ans;
+    for (int i = 0; i < candyTypeSize; i++) {
+        insert(candyType[i]);
+    }
+    if (candyTypeSize / 2 >= HASH_COUNT(ht)) {
+        ans = HASH_COUNT(ht);
+    } else {
+        ans = candyTypeSize / 2;
+    }
+    return ans;
+}
+
+void distributeCandiesTest(void)
+{
+    int candyType[] = {6, 6, 6, 6};
+    int candyTypeSize = ARRAY_SIZE(candyType);
+
+    printf("input:\n");
+    PRINT_ARRAY(candyType, candyTypeSize, "%d ");
+    int ret = distributeCandies(candyType, candyTypeSize);
+    printf("output:%d\n", ret);
+    deelte_all();
+}
+#endif
+
 /* https://leetcode.cn/problems/longest-palindrome/ */
 /* 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
 
@@ -203,4 +297,5 @@ void lc_hash_table_test(void)
 {
     // isHappyTest();
     // xlongestPalindromeTest();
+    distributeCandiesTest();
 }
