@@ -513,17 +513,17 @@ list2 中的所有字符串都是 唯一 的。*/
  * Note: The returned array must be malloced, assume caller calls free().
  */
 
-#define WAY1
-#if defined(WAY1)
+#undef HASH_TABLE_findRestaurant
+#if defined(HASH_TABLE_findRestaurant)
 typedef struct {
     char *key;
     int val;
     UT_hash_handle hh;
-} HashItem;
+} ht_t;
 
-void freeHash(HashItem **obj)
+void freeHash(ht_t **obj)
 {
-    HashItem *curr = NULL, *next = NULL;
+    ht_t *curr, *next;
     HASH_ITER(hh, *obj, curr, next)
     {
         HASH_DEL(*obj, curr);
@@ -534,15 +534,15 @@ void freeHash(HashItem **obj)
 char **findRestaurant(char **list1, int list1Size, char **list2, int list2Size,
                       int *returnSize)
 {
-    HashItem *index = NULL;
-    HashItem *pEntry = NULL;
+    ht_t *ht = NULL;
+    ht_t *tmp;
     for (int i = 0; i < list1Size; i++) {
-        HASH_FIND_STR(index, list1[i], pEntry);
-        if (NULL == pEntry) {
-            pEntry = (HashItem *)malloc(sizeof(HashItem));
-            pEntry->key = list1[i];
-            pEntry->val = i;
-            HASH_ADD_STR(index, key, pEntry);
+        HASH_FIND_STR(ht, list1[i], tmp);
+        if (NULL == tmp) {
+            tmp = (ht_t *)malloc(sizeof(ht_t));
+            tmp->key = list1[i];
+            tmp->val = i;
+            HASH_ADD_STR(ht, key, tmp);
         }
     }
 
@@ -550,9 +550,9 @@ char **findRestaurant(char **list1, int list1Size, char **list2, int list2Size,
     int pos = 0;
     int indexSum = INT_MAX;
     for (int i = 0; i < list2Size; i++) {
-        HASH_FIND_STR(index, list2[i], pEntry);
-        if (NULL != pEntry) {
-            int j = pEntry->val;
+        HASH_FIND_STR(ht, list2[i], tmp);
+        if (NULL != tmp) {
+            int j = tmp->val;
             if (i + j < indexSum) {
                 pos = 0;
                 ret[pos++] = list2[i];
@@ -562,7 +562,8 @@ char **findRestaurant(char **list1, int list1Size, char **list2, int list2Size,
             }
         }
     }
-    freeHash(&index);
+
+    freeHash(&ht);
     *returnSize = pos;
     return ret;
 }
