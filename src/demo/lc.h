@@ -22,12 +22,15 @@ void lc_string_medium_test(void);
 void lc_string_diffcult_test(void);
 
 /* hash table */
-void lc_hash_table_test(void);
+int lc_hash_table_easy_test(void);
 
 /* stack */
 void lc_stack_easy_test(void);
 
 /* queue */
 void lc_queue_easy_test(void);
+
+/* binary search */
+int lc_bin_search_easy_test(void);
 
 #endif

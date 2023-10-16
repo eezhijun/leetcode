@@ -1648,7 +1648,6 @@ char **fizzBuzz(int n, int *returnSize)
     memset(s, 0, sizeof(char *) * n);
     *returnSize = n;
 
-#if defined(WAY1)
     for (i = 0; i < n; i++) {
         s[i] = (char *)malloc(sizeof(char) * 9);
         memset(s[i], 0, sizeof(char) * 9);
@@ -1665,24 +1664,6 @@ char **fizzBuzz(int n, int *returnSize)
             sprintf(s[i - 1], "%d", i);
         }
     }
-#else
-    for (i = 1; i <= n; i++) {
-        if (i % 15 == 0) {
-            s[i - 1] = (char *)malloc(sizeof(char) * 9);
-            strncpy(s[i - 1], "FizzBuzz", 9);
-        } else if (i % 3 == 0) {
-            s[i - 1] = (char *)malloc(sizeof(char) * 5);
-            strncpy(s[i - 1], "Fizz", 5);
-        } else if (i % 5 == 0) {
-            s[i - 1] = (char *)malloc(sizeof(char) * 5);
-            strncpy(s[i - 1], "Buzz", 5);
-        } else {
-            size = COUNT_DIGITS(i);
-            s[i - 1] = (char *)malloc(sizeof(char) * (size + 1));
-            sprintf(s[i - 1], "%d", i);
-        }
-    }
-#endif
     return s;
 }
 

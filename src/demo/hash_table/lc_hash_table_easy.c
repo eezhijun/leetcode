@@ -1,5 +1,5 @@
 /**
- * @file lc_hash_table.c
+ * @file lc_hash_table_easy.c
  * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1
@@ -382,10 +382,11 @@ void isHappyTest(void)
 }
 #endif
 
-void lc_hash_table_test(void)
+int lc_hash_table_easy_test(void)
 {
     // isHappyTest();
     // xlongestPalindromeTest();
     // distributeCandiesTest();
-    findLHSTest();
+    // findLHSTest();
+    return 0;
 }
