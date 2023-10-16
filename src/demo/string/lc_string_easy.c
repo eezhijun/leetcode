@@ -60,12 +60,13 @@
 1 <= words.length <= 100
 1 <= words[i].length <= 12
 words[i] 由小写英文字母组成 */
+#if defined(HASH_TABLE_uniqueMorseRepresentations)
 #define MAX_STR_LEN 64
 
 typedef struct {
     char key[MAX_STR_LEN];
     UT_hash_handle hh;
-} hashitem_t;
+} ht_t;
 
 const static char *MORSE[26] = {".-",   "-...", "-.-.", "-..",  ".",    "..-.",
                                 "--.",  "....", "..",   ".---", "-.-",  ".-..",
@@ -75,28 +76,28 @@ const static char *MORSE[26] = {".-",   "-...", "-.-.", "-..",  ".",    "..-.",
 
 int uniqueMorseRepresentations(char **words, int wordsSize)
 {
-    hashitem_t *seen = NULL;
+    ht_t *ht = NULL;
     for (int i = 0; i < wordsSize; i++) {
-        hashitem_t *pEntry = NULL;
+        ht_t *tmp = NULL;
         int len = strlen(words[i]);
         int pos = 0;
         char code[MAX_STR_LEN];
         for (int j = 0; j < len; j++) {
             pos += sprintf(code + pos, "%s", MORSE[words[i][j] - 'a']);
         }
-        HASH_FIND_STR(seen, code, pEntry);
-        if (NULL == pEntry) {
-            pEntry = (hashitem_t *)malloc(sizeof(hashitem_t));
-            strcpy(pEntry->key, code);
-            HASH_ADD_STR(seen, key, pEntry);
+        HASH_FIND_STR(ht, code, tmp);
+        if (NULL == tmp) {
+            tmp = (ht_t *)malloc(sizeof(ht_t));
+            strcpy(tmp->key, code);
+            HASH_ADD_STR(ht, key, tmp);
         }
     }
-    int ans = HASH_COUNT(seen);
-    hashitem_t *curr = NULL, *tmp = NULL;
-    HASH_ITER(hh, seen, curr, tmp)
+    int ans = HASH_COUNT(ht);
+    ht_t *it, *tmp;
+    HASH_ITER(hh, ht, it, tmp)
     {
-        HASH_DEL(seen, curr);
-        free(curr);
+        HASH_DEL(ht, it);
+        free(it);
     }
     return ans;
 }
@@ -112,6 +113,7 @@ void uniqueMorseRepresentationsTest(void)
     int ret = uniqueMorseRepresentations(words, wordsSize);
     printf("output:%d\n", ret);
 }
+#endif
 
 /* https://leetcode.cn/problems/rotate-string/ */
 /* 给定两个字符串, s 和 goal。如果在若干次旋转操作之后，s 能变成 goal ，那么返回 true 。
