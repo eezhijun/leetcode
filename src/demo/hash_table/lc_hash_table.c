@@ -10,10 +10,80 @@
  */
 #include <stdio.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "utils.h"
 #include "uthash.h"
 
+/* https://leetcode.cn/problems/longest-palindrome/ */
+/* 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
+
+在构造过程中，请注意 区分大小写 。比如 "Aa" 不能当做一个回文字符串。
+
+示例 1:
+
+输入:s = "abccccdd"
+输出:7
+解释:
+我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
+示例 2:
+
+输入:s = "a"
+输出:1
+示例 3：
+
+输入:s = "aaaaaccc"
+输出:7
+
+
+提示:
+
+1 <= s.length <= 2000
+s 只由小写 和/或 大写英文字母组成 */
+#if defined(HASH_TABLE_xlongestPalindrome)
+int xlongestPalindrome(char *s)
+{
+    int t1[26] = {0}; // lower
+    int t2[26] = {0}; // upper
+    int ans = 0;
+    int i;
+
+    for (i = 0; s[i] != 0; i++) {
+        if (islower(s[i])) {
+            t1[s[i] - 'a']++;
+        } else {
+            t2[s[i] - 'A']++;
+        }
+    }
+
+    int flag = 0;
+    for (i = 0; i < 26; i++) {
+        if (t1[i] % 2 == 0) {
+            ans += t1[i];
+        } else {
+            flag = 1;
+            ans += (t1[i] - 1);
+        }
+
+        if (t2[i] % 2 == 0) {
+            ans += t2[i];
+        } else {
+            flag = 1;
+            ans += (t2[i] - 1);
+        }
+    }
+    return ans + flag;
+}
+
+void xlongestPalindromeTest(void)
+{
+    char s[] = "abccccdd";
+
+    printf("input:%s\n", s);
+    int ret = xlongestPalindrome(s);
+    printf("output:%d\n", ret);
+}
+#endif
 /* https://leetcode.cn/problems/happy-number/ */
 /* 编写一个算法来判断一个数 n 是不是快乐数。
 
@@ -132,4 +202,5 @@ void isHappyTest(void)
 void lc_hash_table_test(void)
 {
     // isHappyTest();
+    // xlongestPalindromeTest();
 }
