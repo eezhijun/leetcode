@@ -17,6 +17,100 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/x-of-a-kind-in-a-deck-of-cards/ */
+/* 给定一副牌，每张牌上都写着一个整数。
+
+此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：
+
+每组都有 X 张牌。
+组内所有的牌上都写着相同的整数。
+仅当你可选的 X >= 2 时返回 true。
+
+示例 1：
+
+输入：deck = [1,2,3,4,4,3,2,1]
+输出：true
+解释：可行的分组是 [1,1]，[2,2]，[3,3]，[4,4]
+示例 2：
+
+输入：deck = [1,1,1,2,2,2,3,3]
+输出：false
+解释：没有满足要求的分组。
+
+提示：
+
+1 <= deck.length <= 104
+0 <= deck[i] < 104 */
+/*
+    [0,0,0,1,1,1,2,2,2] 0<3> 1<3> 2<3> -- 3 3 3
+    [1,1,2,2,2,2] 2 4 -- 3 3
+    [1,1,1,1,2,2,2,2,2,2] 4 6 -- 5 5
+    [0,0,0,0,0,0,0,1,2,3,3,3,4,5,6] 7 1 1 3 1 1 1
+    [1,2,2,3,3,3] 1 2 3
+*/
+#undef HASH_TABLE_hasGroupsSizeX
+#if defined(HASH_TABLE_hasGroupsSizeX)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+bool hasGroupsSizeX(int *deck, int deckSize)
+{
+    ht_t *ht = NULL;
+    ht_t *it, *tmp;
+    int i;
+
+    if (deckSize < 2) {
+        return 0;
+    }
+    for (i = 0; i < deckSize; i++) {
+        HASH_FIND_INT(ht, &deck[i], tmp);
+        if (tmp == NULL) {
+            tmp = (ht_t *)malloc(sizeof *tmp);
+            tmp->key = deck[i];
+            tmp->val = 1;
+            HASH_ADD_INT(ht, key, tmp);
+        } else {
+            tmp->val++;
+        }
+    }
+
+    int max, flag;
+    for (i = deckSize; i > 0; i--) {
+        flag = 1;
+        for (tmp = ht; tmp != NULL; tmp = tmp->hh.next) {
+            if ((tmp->val) % i != 0) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag == 1) {
+            max = i;
+            break;
+        }
+    }
+
+    if (max >= 2)
+        return true;
+    else
+        return false;
+}
+
+int hasGroupsSizeXTest(void)
+{
+    int deck[] = {1, 1, 2, 2, 2, 2};
+    int deckSize = ARRAY_SIZE(deck);
+
+    printf("intput:\n");
+    PRINT_ARRAY(deck, deckSize, "%d ");
+    printf("output:%s\n",
+           (hasGroupsSizeX(deck, deckSize) == 1) ? "true" : "false");
+    return 0;
+}
+#endif
+
 /* https://leetcode.cn/problems/set-mismatch/ */
 /* 集合 s 包含从 1 到 n 的整数。不幸的是，因为数据错误，导致集合里面某一个数字复制了成了集合里面的另外一个数字的值，
 导致集合 丢失了一个数字 并且 有一个数字重复 。
@@ -470,6 +564,117 @@ void isHappyTest(void)
 }
 #endif
 
+/* https://leetcode.cn/problems/design-hashset/solutions/652778/she-ji-ha-xi-ji-he-by-leetcode-solution-xp4t/ */
+struct List {
+    int val;
+    struct List *next;
+};
+
+void listPush(struct List *head, int x)
+{
+    struct List *tmp = malloc(sizeof(struct List));
+    tmp->val = x;
+    tmp->next = head->next;
+    head->next = tmp;
+}
+
+void listDelete(struct List *head, int x)
+{
+    for (struct List *it = head; it->next; it = it->next) {
+        if (it->next->val == x) {
+            struct List *tmp = it->next;
+            it->next = tmp->next;
+            free(tmp);
+            break;
+        }
+    }
+}
+
+bool listContains(struct List *head, int x)
+{
+    for (struct List *it = head; it->next; it = it->next) {
+        if (it->next->val == x) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void listFree(struct List *head)
+{
+    while (head->next) {
+        struct List *tmp = head->next;
+        head->next = tmp->next;
+        free(tmp);
+    }
+}
+
+const int base = 769;
+
+int hash(int key)
+{
+    return key % base;
+}
+
+typedef struct {
+    struct List *data;
+} MyHashSet;
+
+MyHashSet *myHashSetCreate()
+{
+    MyHashSet *ret = malloc(sizeof(MyHashSet));
+    ret->data = malloc(sizeof(struct List) * base);
+    for (int i = 0; i < base; i++) {
+        ret->data[i].val = 0;
+        ret->data[i].next = NULL;
+    }
+    return ret;
+}
+
+void myHashSetAdd(MyHashSet *obj, int key)
+{
+    int h = hash(key);
+    if (!listContains(&(obj->data[h]), key)) {
+        listPush(&(obj->data[h]), key);
+    }
+}
+
+void myHashSetRemove(MyHashSet *obj, int key)
+{
+    int h = hash(key);
+    listDelete(&(obj->data[h]), key);
+}
+
+bool myHashSetContains(MyHashSet *obj, int key)
+{
+    int h = hash(key);
+    return listContains(&(obj->data[h]), key);
+}
+
+void myHashSetFree(MyHashSet *obj)
+{
+    for (int i = 0; i < base; i++) {
+        listFree(&(obj->data[i]));
+    }
+    free(obj->data);
+}
+
+/**
+ * Your MyHashSet struct will be instantiated and called as such:
+ * MyHashSet* obj = myHashSetCreate();
+ * myHashSetAdd(obj, key);
+
+ * myHashSetRemove(obj, key);
+
+ * bool param_3 = myHashSetContains(obj, key);
+
+ * myHashSetFree(obj);
+*/
+int myHashTest(void)
+{
+    return 0;
+}
+
 int lc_hash_table_easy_test(void)
 {
     int ret = -1;
@@ -478,5 +683,7 @@ int lc_hash_table_easy_test(void)
     // distributeCandiesTest();
     // findLHSTest();
     // ret = findErrorNumsTest();
+    // ret = myHashTest();
+    // ret = hasGroupsSizeXTest();
     return ret;
 }

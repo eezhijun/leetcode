@@ -2572,7 +2572,7 @@ void wordPatternTest(void)
 t.length == s.length
 s 和 t 由任意有效的 ASCII 字符组成 */
 
-#if 1
+#if defined(HASH_TABLE_isIsomorphic)
 struct HashTable {
     char key;
     char val;
@@ -2620,16 +2620,18 @@ bool isIsomorphic(char *s, char *t)
 
     for (int i = 0; s[i] != '\0'; i++) {
         /* check s->t */
-        if (mapping_s2t[s[i]] == 0) {
-            mapping_s2t[s[i]] = t[i];
-        } else if (mapping_s2t[s[i]] != t[i]) {
+        int t1 = s[i];
+        int t2 = t[i];
+        if (mapping_s2t[t1] == 0) {
+            mapping_s2t[t1] = t[i];
+        } else if (mapping_s2t[t1] != t[i]) {
             return false;
         }
 
         /* check t->s */
-        if (mapping_t2s[t[i]] == 0) {
-            mapping_t2s[t[i]] = s[i];
-        } else if (mapping_t2s[t[i]] != s[i]) {
+        if (mapping_t2s[t2] == 0) {
+            mapping_t2s[t2] = s[i];
+        } else if (mapping_t2s[t2] != s[i]) {
             return false;
         }
     }
@@ -2970,11 +2972,11 @@ s 仅含字符 ('I', 'V', 'X', 'L', 'C', 'D', 'M')
 题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。
 IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。
 关于罗马数字的详尽书写规则，可以参考 罗马数字 - Mathematics 。*/
-#define ROMAN_TO_INT_HASH_TABLE
+#define HASH_TABLE_romanToInt
 
 int romanToInt(char *s)
 {
-#if defined(ROMAN_TO_INT_HASH_TABLE)
+#if defined(HASH_TABLE_romanToInt)
     int table[26] = {0};
     table['I' - 'A'] = 1;
     table['V' - 'A'] = 5;
