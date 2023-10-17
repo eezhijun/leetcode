@@ -17,6 +17,94 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/set-mismatch/ */
+/* 集合 s 包含从 1 到 n 的整数。不幸的是，因为数据错误，导致集合里面某一个数字复制了成了集合里面的另外一个数字的值，
+导致集合 丢失了一个数字 并且 有一个数字重复 。
+
+给定一个数组 nums 代表了集合 S 发生错误后的结果。
+
+请你找出重复出现的整数，再找到丢失的整数，将它们以数组的形式返回。
+
+示例 1：
+
+输入：nums = [1,2,2,4]
+输出：[2,3]
+示例 2：
+
+输入：nums = [1,1]
+输出：[1,2]
+
+
+提示：
+
+2 <= nums.length <= 104
+1 <= nums[i] <= 104 */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+#undef HASH_TABLE_findErrorNums
+#if defined(HASH_TABLE_findErrorNums)
+
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+int *findErrorNums(int *nums, int numsSize, int *returnSize)
+{
+    int i;
+    int *ans = (int *)malloc(sizeof(int) * 2);
+    *returnSize = 2;
+    ht_t *ht = NULL;
+    ht_t *tmp;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], tmp);
+        if (tmp == NULL) {
+            tmp = (ht_t *)malloc(sizeof *tmp);
+            tmp->key = nums[i];
+            HASH_ADD_INT(ht, key, tmp);
+        } else {
+            ans[0] = nums[i];
+        }
+    }
+
+    ht_t *tmp1;
+    for (i = 1; i <= numsSize; i++) {
+        HASH_FIND_INT(ht, &i, tmp1);
+        if (tmp1 == NULL) {
+            ans[1] = i;
+            break;
+        }
+    }
+
+    HASH_ITER(hh, ht, tmp, tmp1)
+    {
+        // printf("del tmp->key=%d\n", tmp->key);
+        HASH_DEL(ht, tmp);
+        free(tmp);
+    }
+    return ans;
+}
+
+int findErrorNumsTest(void)
+{
+    int nums[] = {1, 2, 2, 4};
+    int numsSize = ARRAY_SIZE(nums);
+    int returnSize;
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int *ret = findErrorNums(nums, numsSize, &returnSize);
+    if (ret == NULL) {
+        return -1;
+    }
+    printf("output:\n");
+    PRINT_ARRAY(ret, returnSize, "%d ");
+    return 0;
+}
+#endif
+
 /* https://leetcode.cn/problems/longest-harmonious-subsequence/ */
 /* 和谐数组是指一个数组里元素的最大值和最小值之间的差别 正好是 1 。
 
@@ -43,7 +131,7 @@
 
 1 <= nums.length <= 2 * 104
 -109 <= nums[i] <= 109 */
-#define HASH_TABLE_findLHS
+#undef HASH_TABLE_findLHS
 #if defined(HASH_TABLE_findLHS)
 
 typedef struct {
@@ -384,9 +472,11 @@ void isHappyTest(void)
 
 int lc_hash_table_easy_test(void)
 {
+    int ret = -1;
     // isHappyTest();
     // xlongestPalindromeTest();
     // distributeCandiesTest();
     // findLHSTest();
-    return 0;
+    // ret = findErrorNumsTest();
+    return ret;
 }

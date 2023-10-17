@@ -127,6 +127,6 @@ int searchTest(void)
 
 int lc_bin_search_easy_test(void)
 {
-    searchTest();
+    // searchTest();
     return 0;
 }
