@@ -17,6 +17,79 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/ */
+/* 给你一个整数数组 nums ，该数组具有以下属性：
+
+nums.length == 2 * n.
+nums 包含 n + 1 个 不同的 元素
+nums 中恰有一个元素重复 n 次
+找出并返回重复了 n 次的那个元素。
+
+示例 1：
+
+输入：nums = [1,2,3,3]
+输出：3
+示例 2：
+
+输入：nums = [2,1,2,5,3,2]
+输出：2
+示例 3：
+
+输入：nums = [5,1,5,2,5,3,5,4]
+输出：5
+
+提示：
+
+2 <= n <= 5000
+nums.length == 2 * n
+0 <= nums[i] <= 104
+nums 由 n + 1 个 不同的 元素组成，且其中一个元素恰好重复 n 次 */
+#undef HASH_TABLE_repeatedNTimes
+#if defined(HASH_TABLE_repeatedNTimes)
+
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+int repeatedNTimes(int *nums, int numsSize)
+{
+    ht_t *ht = NULL;
+    ht_t *tmp, *it;
+    int i;
+    int ans;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], tmp);
+        if (tmp == NULL) {
+            tmp = (ht_t *)malloc(sizeof *tmp);
+            tmp->key = nums[i];
+            HASH_ADD_INT(ht, key, tmp);
+        } else {
+            ans = nums[i];
+        }
+    }
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return ans;
+}
+
+int repeatedNTimesTest(void)
+{
+    int nums[] = {5, 1, 5, 2, 5, 3, 5, 4};
+    int numsSize = ARRAY_SIZE(nums);
+
+    printf("input:\n");
+    PRINT_ARRAY(nums, numsSize, "%d ");
+    int ret = repeatedNTimes(nums, numsSize);
+    printf("output:%d\n", ret);
+    return 0;
+}
+#endif
+
 /* https://leetcode.cn/problems/x-of-a-kind-in-a-deck-of-cards/ */
 /* 给定一副牌，每张牌上都写着一个整数。
 
@@ -59,7 +132,7 @@ typedef struct {
 bool hasGroupsSizeX(int *deck, int deckSize)
 {
     ht_t *ht = NULL;
-    ht_t *it, *tmp;
+    ht_t *it, *tmp, *it;
     int i;
 
     if (deckSize < 2) {
@@ -92,6 +165,11 @@ bool hasGroupsSizeX(int *deck, int deckSize)
         }
     }
 
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
     if (max >= 2)
         return true;
     else
@@ -685,5 +763,6 @@ int lc_hash_table_easy_test(void)
     // ret = findErrorNumsTest();
     // ret = myHashTest();
     // ret = hasGroupsSizeXTest();
+    // ret = repeatedNTimesTest();
     return ret;
 }
