@@ -560,12 +560,20 @@ static inline Uint bit_set_to(Uint number, Uint n, bool x)
 }
 
 /**
- * @brief
+ * @brief str to lower
  *
  * @param s
  * @return char*
  */
 char *str2lower(char *s);
+
+/**
+ * @brief str to upper
+ *
+ * @param s
+ * @return char*
+ */
+char *str2upper(char *s);
 
 #ifdef __cplusplus
 }

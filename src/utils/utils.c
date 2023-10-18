@@ -418,3 +418,12 @@ char *str2lower(char *s)
     }
     return origin;
 }
+
+char *str2upper(char *s)
+{
+    char *origin = s;
+    for (; *s != '\0'; s++) {
+        *s = toupper(*s);
+    }
+    return origin;
+}
