@@ -42,11 +42,10 @@ int guessNumber(int n)
             break;
         } else if (guess(n) == -1) {
             r = n;
-            n = l + (r - l) / 2;
         } else {
             l = n;
-            n = l + (r - l) / 2;
         }
+        n = l + (r - l) / 2;
     }
     return n;
 }
