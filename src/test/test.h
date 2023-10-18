@@ -16,6 +16,5 @@ int test_light_switch(void);
 int test_state(void);
 
 int test_hash_table(void);
-int test_hash_find(void);
 
 #endif

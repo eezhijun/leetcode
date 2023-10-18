@@ -445,7 +445,6 @@ int main(int argc, char *argv[])
     // test_bit();
 
     // test_hash_table();
-    // test_hash_find();
 
     gcd_lcm_test();
 }

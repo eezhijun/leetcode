@@ -17,6 +17,57 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/degree-of-an-array/description/ */
+#if defined(HASH_TABLE_findShortestSubArray)
+typedef struct {
+    int key;
+    int val;
+    int start;
+    int end;
+    UT_hash_handle hh;
+} ht_t;
+
+int findShortestSubArray(int *nums, int numsSize)
+{
+    ht_t *ht = NULL;
+    ht_t *tmp, *it;
+    int i;
+    int max = 1;
+    int ans = INT_MAX;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], tmp);
+        if (tmp == NULL) {
+            tmp = (ht_t *)malloc(sizeof *tmp);
+            tmp->key = nums[i];
+            tmp->start = i;
+            tmp->end = i;
+            tmp->val = 1;
+            HASH_ADD_INT(ht, key, tmp);
+        } else {
+            tmp->end = i;
+            tmp->val++;
+            if (tmp->val >= max) {
+                max = tmp->val;
+            }
+        }
+    }
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        if (it->val == max) {
+            int t = it->end - it->start + 1;
+            ans = (t < ans) ? t : ans;
+        }
+    }
+    HASH_ITER(hh, ht, it, tmp)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/ */
 /* 给你一个整数数组 nums ，该数组具有以下属性：
 
