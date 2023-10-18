@@ -16,6 +16,9 @@
 static int u_s_g_var_a; /* 未初始化静态全局变量a 存放在bss段 */
 static int i_s_g_var_b = 10; /* 已初始化静态全局变量b 存在在data段 */
 
+static int *u_s_g_var_p;
+static int *i_s_g_val_p = &u_s_g_var_a;
+
 int u_g_var_c; /* 未初始化全局变量c */
 int i_g_var_d = 10; /* 已初始化全局变量d */
 
@@ -43,6 +46,7 @@ int test_memory_layout(void)
     int *const l_p_b = &l_var_b; /* 指针常量 */
     const int *const l_p_c = &i_l_c_var_h; /* 指向常量的常指针 */
     int *l_var_aa = (int *)alloca(sizeof(int) * 4); /* 从栈分配内存 */
+    static int *i_s_l_var_p = &u_g_var_c;
 
     printf("-----------------------------------------------------\n");
     printf("栈区\n");
@@ -72,6 +76,10 @@ int test_memory_layout(void)
     printf("%s\t\t%p\n", STR(u_g_var_c), &u_g_var_c);
     printf("%s\t\t%p\n", STR(u_s_l_var_e), &u_s_l_var_e);
     printf("%s\t\t%p\n", STR(u_g_c_var_e), &u_g_c_var_e);
+    printf("%s\t\t%p\n", STR(i_s_l_var_p), i_s_l_var_p);
+    printf("%s\t\t%p\n", STR(&i_s_l_var_p), &i_s_l_var_p);
+    printf("%s\t\t%p\n", STR(&u_s_g_var_p), &u_s_g_var_p);
+    printf("%s\t\t%p\n", STR(&i_s_g_val_p), &i_s_g_val_p);
 
     printf("-----------------------------------------------------\n");
     printf("data区\n");

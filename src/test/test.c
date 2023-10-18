@@ -428,10 +428,39 @@ void gcd_lcm_test(void)
     printf("最小公倍数是:\n%d\n", m / b);
 }
 
+int test_strtok(void)
+{
+    char str[128] = "pc hello world";
+    char s[] = " ";
+    char *token = NULL;
+
+    printf("str=%s addr=%p\n", str, str);
+    token = strtok(str, s);
+
+    while (token != NULL) {
+        printf("token=%s addr=%p\n", token, token);
+        token = strtok(NULL, s);
+    }
+    printf("\n");
+    for (int i = 0; i < 128; i++) {
+        printf("%c ", str[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < 32; i++) {
+        printf("%d ", str[i]);
+    }
+    printf("\n");
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
+    // test_memory_layout();
+
+    test_limits();
 
     // array_test();
 
@@ -446,5 +475,7 @@ int main(int argc, char *argv[])
 
     // test_hash_table();
 
-    gcd_lcm_test();
+    // gcd_lcm_test();
+
+    // test_strtok();
 }

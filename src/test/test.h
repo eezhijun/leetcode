@@ -11,6 +11,8 @@
 #ifndef _TEST_H_
 #define _TEST_H_
 
+int test_memory_layout(void);
+
 int test_traffic_light(void);
 int test_light_switch(void);
 int test_state(void);
