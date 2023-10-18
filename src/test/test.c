@@ -460,7 +460,7 @@ int main(int argc, char *argv[])
 
     // test_memory_layout();
 
-    test_limits();
+    // test_limits();
 
     // array_test();
 

@@ -17,6 +17,72 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/uncommon-words-from-two-sentences/submissions/ */
+#if defined(HASH_TABLE_uncommonFromSentences)
+typedef struct {
+    char *key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+bool insert(char *s, ht_t **obj)
+{
+    ht_t *t = NULL;
+    char *token = NULL;
+
+    token = strtok(s, " ");
+    while (token != NULL) {
+        HASH_FIND_STR(*obj, token, t);
+        if (t == NULL) {
+            t = (ht_t *)malloc(sizeof *t);
+            t->key = (char *)malloc(sizeof(char) * (strlen(token) + 1));
+            strcpy(t->key, token);
+            t->val = 1;
+            HASH_ADD_STR(*obj, key, t);
+        } else {
+            t->val++;
+        }
+        token = strtok(NULL, " ");
+    }
+    return true;
+}
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char **uncommonFromSentences(char *s1, char *s2, int *returnSize)
+{
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int len = 0;
+
+    insert(s1, &ht);
+    insert(s2, &ht);
+
+    len = HASH_COUNT(ht);
+    char **ans = (char **)malloc(sizeof(char *) * len);
+    int idx = 0;
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if (curr->val == 1) {
+            ans[idx] = (char *)malloc(sizeof(char) * (strlen(curr->key) + 1));
+            strcpy(ans[idx], curr->key);
+            idx++;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+
+    *returnSize = idx;
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/degree-of-an-array/description/ */
 #if defined(HASH_TABLE_findShortestSubArray)
 typedef struct {
