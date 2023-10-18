@@ -13,6 +13,44 @@
 
 #include "utils.h"
 
+/* https://leetcode.cn/leetbook/read/binary-search/xee4ev/ */
+/**
+ * Forward declaration of guess API.
+ * @param  num   your guess
+ * @return 	     -1 if num is higher than the picked number
+ *			      1 if num is lower than the picked number
+ *               otherwise return 0
+ * int guess(int num);
+ */
+int guess(int n)
+{
+    int pick = 6;
+    if (pick < n) {
+        return -1;
+    } else if (pick > n) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int guessNumber(int n)
+{
+    int l = 1, r = n;
+    while (1) {
+        if (guess(n) == 0) {
+            break;
+        } else if (guess(n) == -1) {
+            r = n;
+            n = l + (r - l) / 2;
+        } else {
+            l = n;
+            n = l + (r - l) / 2;
+        }
+    }
+    return n;
+}
+
 /* https://leetcode.cn/leetbook/read/binary-search/xe9cog/ */
 /* 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
 
