@@ -9,18 +9,19 @@
  *
  */
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "stdint.h"
-#include "string.h"
-#include "math.h"
-#include "unistd.h"
-#include "limits.h"
-#include "assert.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <math.h>
+#include <unistd.h>
+#include <limits.h>
+
+#include <ctype.h>
 
 /* linux lib */
-#include "fcntl.h"
-#include "termios.h"
+#include <fcntl.h>
+#include <termios.h>
 
 #include "utils.h"
 
@@ -407,4 +408,13 @@ void printf_bin(int num)
         printf(" ");
     }
     printf("\r\n");
+}
+
+char *str2lower(char *s)
+{
+    char *origin = s;
+    for (; *s != '\0'; s++) {
+        *s = tolower(*s);
+    }
+    return origin;
 }

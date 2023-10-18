@@ -430,23 +430,26 @@ void gcd_lcm_test(void)
 
 int test_strtok(void)
 {
-    char str[128] = "pc hello world";
-    char s[] = " ";
+    // char str[128] = "pc hello world";
+    char str[] = "Bob ,!hit a ball, the hit BALL flew far after it was hit.";
+    int len = strlen(str) + 1;
+    char s[] = " !?',;.";
     char *token = NULL;
 
     printf("str=%s addr=%p\n", str, str);
     token = strtok(str, s);
 
     while (token != NULL) {
+        token = str2lower(token);
         printf("token=%s addr=%p\n", token, token);
         token = strtok(NULL, s);
     }
     printf("\n");
-    for (int i = 0; i < 128; i++) {
+    for (int i = 0; i < len; i++) {
         printf("%c ", str[i]);
     }
     printf("\n");
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 64; i++) {
         printf("%d ", str[i]);
     }
     printf("\n");

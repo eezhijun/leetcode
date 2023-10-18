@@ -12,10 +12,11 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#include "stdint.h"
-#include "stddef.h"
-#include "limits.h"
-#include "stdbool.h"
+#include <stdint.h>
+#include <stddef.h>
+#include <limits.h>
+#include <stdbool.h>
+#include <assert.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -557,6 +558,14 @@ static inline Uint bit_set_to(Uint number, Uint n, bool x)
 {
     return (number & ~((Uint)1 << n)) | ((Uint)x << n);
 }
+
+/**
+ * @brief
+ *
+ * @param s
+ * @return char*
+ */
+char *str2lower(char *s);
 
 #ifdef __cplusplus
 }
