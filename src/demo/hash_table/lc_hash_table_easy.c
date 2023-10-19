@@ -17,6 +17,109 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/unique-email-addresses/ */
+/* 每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 '@' 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 '.' 或 '+' 。
+
+例如，在 alice@leetcode.com中， alice 是 本地名 ，而 leetcode.com 是 域名 。
+如果在电子邮件地址的 本地名 部分中的某些字符之间添加句点（'.'），则发往那里的邮件将会转发到本地名中没有点的同一地址。请注意，
+此规则 不适用于域名 。
+
+例如，"alice.z@leetcode.com” 和 “alicez@leetcode.com” 会转发到同一电子邮件地址。
+如果在 本地名 中添加加号（'+'），则会忽略第一个加号后面的所有内容。这允许过滤某些电子邮件。同样，此规则 不适用于域名 。
+
+例如 m.y+name@email.com 将转发到 my@email.com。
+可以同时使用这两个规则。
+
+给你一个字符串数组 emails，我们会向每个 emails[i] 发送一封电子邮件。返回实际收到邮件的不同地址数目。
+
+示例 1：
+
+输入：emails = ["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]
+输出：2
+解释：实际收到邮件的是 "testemail@leetcode.com" 和 "testemail@lee.tcode.com"。
+示例 2：
+
+输入：emails = ["a@leetcode.com","b@leetcode.com","c@leetcode.com"]
+输出：3
+
+提示：
+
+1 <= emails.length <= 100
+1 <= emails[i].length <= 100
+emails[i] 由小写英文字母、'+'、'.' 和 '@' 组成
+每个 emails[i] 都包含有且仅有一个 '@' 字符
+所有本地名和域名都不为空
+本地名不会以 '+' 字符作为开头 */
+#if defined(HASH_TABLE_numUniqueEmails)
+typedef struct {
+    char *word;
+    UT_hash_handle hh;
+} ht_t;
+
+int numUniqueEmails(char **emails, int emailsSize)
+{
+    ht_t *ht = NULL;
+    ht_t *t, *it;
+    int i, j;
+
+    for (i = 0; i < emailsSize; i++) {
+        char local[101];
+        int pos = 0;
+        for (j = 0; emails[i][j] != 0; j++) {
+            if (emails[i][j] == '+' || emails[i][j] == '@') {
+                break;
+            }
+            if (emails[i][j] != '.') {
+                local[pos++] = emails[i][j];
+            }
+        }
+        sprintf(local + pos, "%s", strchr(emails[i], '@'));
+        HASH_FIND_STR(ht, local, t);
+        if (t == NULL) {
+            t = (ht_t *)malloc(sizeof *t);
+            t->word = (char *)malloc(strlen(local) + 1);
+            strcpy(t->word, local);
+            HASH_ADD_STR(ht, word, t);
+        }
+    }
+    int ans = HASH_COUNT(ht);
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_DEL(ht, it);
+        /* valgrind --tool=memcheck --leak-check=full ./out/main */
+        free(it->word);
+        free(it);
+    }
+    return ans;
+}
+
+int numUniqueEmailsTest(void)
+{
+    // char *s[] = {"test.email+alex@leetcode.com",
+    //              "test.e.mail+bob.cathy@leetcode.com",
+    //              "testemail+david@lee.tcode.com"};
+    // char *s[] = {"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"};
+    char *s[] = {"test.email+alex@leetcode.com", "test.email@leetcode.com"};
+    int size = ARRAY_SIZE(s);
+
+    char **emails = (char **)malloc(sizeof(char *) * size);
+    for (int i = 0; i < size; i++) {
+        emails[i] = (char *)malloc(128);
+        strcpy(emails[i], s[i]);
+    }
+
+    printf("input:\n");
+    PRINT_ARRAY(s, size, "%s ");
+    int ret = numUniqueEmails(emails, size);
+    printf("output=%d\n", ret);
+    for (int i = 0; i < size; i++) {
+        free(emails[i]);
+    }
+    free(emails);
+    return 0;
+}
+#endif
+
 /* https://leetcode.cn/problems/most-common-word/description/ */
 /* 给定一个段落 (paragraph) 和一个禁用单词列表 (banned)。返回出现次数最多，同时不在禁用列表中的单词。
 
@@ -107,6 +210,7 @@ char *mostCommonWord(char *paragraph, char **banned, int bannedSize)
     {
         // printf("word=%s, cnt=%d\n", it->word, it->cnt);
         HASH_DEL(ht, it);
+        free(it->word);
         free(it);
     }
     return ans;
@@ -994,5 +1098,6 @@ int lc_hash_table_easy_test(void)
     // ret = hasGroupsSizeXTest();
     // ret = repeatedNTimesTest();
     // ret = mostCommonWordTest();
+    // ret = numUniqueEmailsTest();
     return ret;
 }
