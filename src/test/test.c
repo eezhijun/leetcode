@@ -431,9 +431,10 @@ void gcd_lcm_test(void)
 int test_strtok(void)
 {
     // char str[128] = "pc hello world";
-    char str[] = "Bob ,!hit a ball, the hit BALL flew far after it was hit.";
+    char str[] = "B@ob ,!hit a ball, the hit BALL flew far after it was hit.";
     int len = strlen(str) + 1;
-    char s[] = " !?',;.";
+    // char s[] = " !?',;.";
+    char s[] = "@";
     char *token = NULL;
 
     printf("str=%s addr=%p\n", str, str);
@@ -453,6 +454,24 @@ int test_strtok(void)
         printf("%d ", str[i]);
     }
     printf("\n");
+    return 0;
+}
+
+int test_delete_ch(void)
+{
+    char word[] = "abcdef";
+    int idxToDel = 2;
+
+    char *pos = NULL;
+
+    pos = strchr(word, 'c');
+    printf("pos=%d\n", pos - word);
+
+    printf("input:word=%s, idxToDel=%d\n", word, idxToDel);
+    PRINT_ARRAY(word, strlen(word) + 1, "%d ");
+    memmove(&word[idxToDel], &word[idxToDel + 1], strlen(word) - idxToDel);
+    printf("output:%s\n", word);
+    PRINT_ARRAY(word, strlen(word) + 1, "%d ");
     return 0;
 }
 
@@ -481,4 +500,6 @@ int main(int argc, char *argv[])
     // gcd_lcm_test();
 
     // test_strtok();
+
+    test_delete_ch();
 }
