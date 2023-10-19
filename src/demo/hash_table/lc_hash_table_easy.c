@@ -17,6 +17,38 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/is-unique-lcci/submissions/ */
+#if defined(HASH_TABLE_isUnique)
+typedef struct {
+    char key;
+    UT_hash_handle hh;
+} ht_t;
+
+bool isUnique(char *astr)
+{
+    ht_t *ht = NULL;
+    ht_t *t, *it;
+    bool ans = true;
+    for (int i = 0; astr[i] != '\0'; i++) {
+        HASH_FIND(hh, ht, &astr[i], sizeof(char), t);
+        if (t == NULL) {
+            t = (ht_t *)malloc(sizeof(ht_t));
+            t->key = astr[i];
+            HASH_ADD(hh, ht, key, sizeof(char), t);
+        } else {
+            ans = false;
+            break;
+        }
+    }
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/unique-email-addresses/ */
 /* 每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 '@' 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个 '.' 或 '+' 。
 
