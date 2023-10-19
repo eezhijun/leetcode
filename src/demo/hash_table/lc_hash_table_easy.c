@@ -17,6 +17,24 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/check-if-the-sentence-is-pangram/ */
+bool checkIfPangram(char *sentence)
+{
+    char s[26] = {0};
+    int i;
+
+    for (i = 0; sentence[i] != 0; i++) {
+        s[sentence[i] - 'a']++;
+    }
+
+    for (i = 0; i < 26; i++) {
+        if (!s[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 /* https://leetcode.cn/problems/is-unique-lcci/submissions/ */
 #if defined(HASH_TABLE_isUnique)
 typedef struct {
