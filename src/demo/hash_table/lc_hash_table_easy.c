@@ -17,6 +17,47 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+
+/* https://leetcode.cn/problems/find-common-characters/submissions/ */
+/* 找重复，找最小值 */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char ** commonChars(char ** words, int wordsSize, int* returnSize){
+    char s[26] = {0};
+    char smin[26] = {0};
+    int i, j;
+
+    for (i = 0; i < wordsSize; i++) {
+        for (j = 0; words[i][j] != 0; j++) {
+            s[words[i][j] - 'a']++;
+        }
+
+        for (j = 0; j < 26; j++) {
+            if (i == 0 && smin[j] == 0) {
+                smin[j] = s[j];
+            } else {
+                smin[j] = s[j] < smin[j] ? s[j] : smin[j];
+            }
+        }
+        memset(s, 0, sizeof(char) * 26);
+    }
+
+    char **ans = (char **)malloc(sizeof(char*) * strlen(words[0]));
+    *returnSize = 0;
+    for (i = 0; i < 26; i++) {
+        if (smin[i]) {
+            for (j = 0; j < smin[i]; j++) {
+                ans[(*returnSize)] = (char *)malloc(sizeof(char) * 2);
+                ans[(*returnSize)][0] = i + 'a';
+                ans[(*returnSize)][1] = '\0';
+                (*returnSize)++;
+            }
+        }
+    }
+    return ans;
+}
+
 /* https://leetcode.cn/problems/check-if-the-sentence-is-pangram/ */
 bool checkIfPangram(char *sentence)
 {
