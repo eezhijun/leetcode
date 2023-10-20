@@ -17,6 +17,42 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/verifying-an-alien-dictionary/ */
+bool isAlienSorted(char **words, int wordsSize, char *order)
+{
+    int s[26];
+    int len = strlen(order);
+    int i, j;
+
+    for (i = 0; i < len; i++) {
+        s[order[i] - 'a'] = i;
+    }
+
+    for (i = 1; i < wordsSize; i++) {
+        bool valid = false;
+        int l1 = strlen(words[i - 1]);
+        int l2 = strlen(words[i]);
+        int lmin = l1 < l2 ? l1 : l2;
+
+        for (j = 0; j < lmin; j++) {
+            int prev = s[words[i - 1][j] - 'a'];
+            int curr = s[words[i][j] - 'a'];
+            if (prev < curr) {
+                valid = true;
+                break;
+            } else if (prev > curr) {
+                return false;
+            }
+        }
+        if (!valid) {
+            if (l1 > l2) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 /* https://leetcode.cn/problems/count-the-number-of-consistent-strings/ */
 int countConsistentStrings(char *allowed, char **words, int wordsSize)
 {
