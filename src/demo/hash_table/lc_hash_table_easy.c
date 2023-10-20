@@ -17,13 +17,45 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/count-the-number-of-consistent-strings/ */
+int countConsistentStrings(char *allowed, char **words, int wordsSize)
+{
+    char sa[26] = {0};
+    char sw[26] = {0};
+    int i, j;
+    int ans = 0;
+
+    for (i = 0; allowed[i] != 0; i++) {
+        sa[allowed[i] - 'a'] = 1;
+    }
+
+    for (i = 0; i < wordsSize; i++) {
+        for (j = 0; words[i][j] != 0; j++) {
+            sw[words[i][j] - 'a'] = 1;
+        }
+
+        for (j = 0; j < 26; j++) {
+            if (sw[j]) {
+                if (!sa[j]) {
+                    break;
+                }
+            }
+        }
+        if (j == 26) {
+            ans++;
+        }
+        memset(sw, 0, 26);
+    }
+    return ans;
+}
 
 /* https://leetcode.cn/problems/find-common-characters/submissions/ */
 /* 找重复，找最小值 */
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-char ** commonChars(char ** words, int wordsSize, int* returnSize){
+char **commonChars(char **words, int wordsSize, int *returnSize)
+{
     char s[26] = {0};
     char smin[26] = {0};
     int i, j;
@@ -43,7 +75,7 @@ char ** commonChars(char ** words, int wordsSize, int* returnSize){
         memset(s, 0, sizeof(char) * 26);
     }
 
-    char **ans = (char **)malloc(sizeof(char*) * strlen(words[0]));
+    char **ans = (char **)malloc(sizeof(char *) * strlen(words[0]));
     *returnSize = 0;
     for (i = 0; i < 26; i++) {
         if (smin[i]) {
