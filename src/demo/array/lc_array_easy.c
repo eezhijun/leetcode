@@ -21,6 +21,22 @@
 
 /* 双指针 哈希表 单调栈 数学 计数 排序 */
 
+int countKDifference(int *nums, int numsSize, int k)
+{
+    int i, j;
+    int ans = 0;
+
+    for (i = 0; i < numsSize; i++) {
+        for (j = i + 1; j < numsSize; j++) {
+            int tmp = nums[i] - nums[j];
+            if (abs(tmp) == k) {
+                ans++;
+            }
+        }
+    }
+    return ans;
+}
+
 /* https://leetcode.cn/problems/next-greater-element-i/ */
 /* nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
 
