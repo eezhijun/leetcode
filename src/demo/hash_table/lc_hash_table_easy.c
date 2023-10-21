@@ -17,6 +17,78 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+int maxNumberOfBalloons(char *text)
+{
+    int s[26] = {0};
+    int st[26] = {0};
+    int ans = INT_MAX;
+    int i;
+    char c[] = "balloon";
+
+    for (i = 0; c[i] != 0; i++) {
+        s[c[i] - 'a']++;
+    }
+
+    for (i = 0; text[i] != 0; i++) {
+        st[text[i] - 'a']++;
+    }
+
+    for (i = 0; i < 26; i++) {
+        if (!s[i]) {
+            continue;
+        }
+
+        if (!st[i]) {
+            ans = 0;
+            break;
+        }
+        if (i + 'a' == 'l' || i + 'a' == 'o') {
+            if (st[i] < 2) {
+                ans = 0;
+                break;
+            }
+            st[i] /= 2;
+        }
+        ans = st[i] < ans ? st[i] : ans;
+    }
+
+    return ans;
+}
+
+int countCharacters(char **words, int wordsSize, char *chars)
+{
+    int s[26] = {0};
+    int st[26] = {0};
+    int ans = 0;
+    int cnt = 0;
+    int i, j, k;
+
+    for (i = 0; chars[i] != 0; i++) {
+        s[chars[i] - 'a']++;
+    }
+
+    for (i = 0; i < wordsSize; i++) {
+        for (j = 0; words[i][j] != 0; j++) {
+            st[words[i][j] - 'a']++;
+        }
+
+        cnt = 0;
+        for (j = 0; j < 26; j++) {
+            if (st[j]) {
+                if (st[j] <= s[j]) {
+                    cnt += st[j];
+                } else {
+                    cnt = 0;
+                    break;
+                }
+            }
+        }
+        memset(st, 0, sizeof(int) * 26);
+        ans += cnt;
+    }
+    return ans;
+}
+
 /* https://leetcode.cn/problems/verifying-an-alien-dictionary/ */
 bool isAlienSorted(char **words, int wordsSize, char *order)
 {
