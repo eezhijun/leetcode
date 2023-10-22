@@ -495,11 +495,11 @@ int main(int argc, char *argv[])
     // test_bit();
     // test_bit();
 
-    // test_hash_table();
+    test_hash_table();
 
     // gcd_lcm_test();
 
     // test_strtok();
 
-    test_delete_ch();
+    // test_delete_ch();
 }

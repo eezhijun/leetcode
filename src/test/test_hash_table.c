@@ -77,7 +77,8 @@ int by_name(const struct my_struct *a, const struct my_struct *b)
 
 int by_id(const struct my_struct *a, const struct my_struct *b)
 {
-    return (a->id - b->id);
+    return (a->id - b->id); // 升序
+    // return (b->id - a->id); // 降序
 }
 
 const char *getl(const char *prompt)

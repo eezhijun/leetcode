@@ -17,6 +17,63 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+#if defined(HASH_TABLE_arrayRankTransform)
+typedef struct {
+    int key;
+    int idx;
+    UT_hash_handle hh;
+} ht_t;
+
+int key_cmp(const ht_t *a, const ht_t *b)
+{
+    return (a->key - b->key);
+}
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int *arrayRankTransform(int *arr, int arrSize, int *returnSize)
+{
+    if (arrSize == 0 || arrSize == NULL) {
+        *returnSize = 0;
+        return NULL;
+    }
+    ht_t *ht = NULL;
+    ht_t *it, *t;
+    int *ans = (int *)malloc(sizeof(int) * arrSize);
+    *returnSize = arrSize;
+    int i;
+
+    for (i = 0; i < arrSize; i++) {
+        t = NULL;
+        t = (ht_t *)malloc(sizeof *t);
+        t->key = arr[i];
+        t->idx = i;
+        HASH_ADD_INT(ht, key, t);
+    }
+
+    HASH_SORT(ht, key_cmp);
+
+    i = 1;
+    HASH_ITER(hh, ht, it, t)
+    {
+        ans[it->idx] = i;
+        if (it && t) {
+            if (it->key != t->key) {
+                i++;
+            }
+        }
+    }
+
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/find-winner-on-a-tic-tac-toe-game/ */
 char *tictactoe(int **moves, int movesSize, int *movesColSize)
 {
