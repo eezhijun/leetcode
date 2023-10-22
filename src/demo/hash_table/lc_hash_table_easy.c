@@ -17,6 +17,7 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/maximum-number-of-balloons/ */
 int maxNumberOfBalloons(char *text)
 {
     int s[26] = {0};
@@ -42,19 +43,14 @@ int maxNumberOfBalloons(char *text)
             ans = 0;
             break;
         }
-        if (i + 'a' == 'l' || i + 'a' == 'o') {
-            if (st[i] < 2) {
-                ans = 0;
-                break;
-            }
-            st[i] /= 2;
-        }
+        st[i] /= s[i];
         ans = st[i] < ans ? st[i] : ans;
     }
 
     return ans;
 }
 
+/* https://leetcode.cn/problems/find-words-that-can-be-formed-by-characters/ */
 int countCharacters(char **words, int wordsSize, char *chars)
 {
     int s[26] = {0};
