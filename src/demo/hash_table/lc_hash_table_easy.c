@@ -17,6 +17,58 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/unique-number-of-occurrences/ */
+#if defined(HASH_TABLE_uniqueOccurrences)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+bool uniqueOccurrences(int *arr, int arrSize)
+{
+    ht_t *ht = NULL, *ht1 = NULL;
+    ht_t *it, *t, *t1, *it1;
+    int i;
+
+    for (i = 0; i < arrSize; i++) {
+        HASH_FIND_INT(ht, &arr[i], t);
+        if (t == NULL) {
+            t = (ht_t *)malloc(sizeof *t);
+            t->key = arr[i];
+            t->val = 1;
+            HASH_ADD_INT(ht, key, t);
+        } else {
+            t->val++;
+        }
+    }
+
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_FIND_INT(ht1, &it->val, t1);
+        if (t1 == NULL) {
+            t1 = (ht_t *)malloc(sizeof *t1);
+            t1->key = it->val;
+            t1->val = 1;
+            HASH_ADD_INT(ht1, key, t1);
+        } else {
+            HASH_ITER(hh, ht1, it1, t1)
+            {
+                HASH_DEL(ht1, it1);
+                free(it1);
+            }
+            return false;
+        }
+    }
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return true;
+}
+#endif
+
 /* https://leetcode.cn/problems/maximum-number-of-balloons/ */
 int maxNumberOfBalloons(char *text)
 {
