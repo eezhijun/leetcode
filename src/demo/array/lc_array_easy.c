@@ -21,6 +21,30 @@
 
 /* 双指针 哈希表 单调栈 数学 计数 排序 */
 
+/* https://leetcode.cn/problems/how-many-numbers-are-smaller-than-the-current-number/ */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int *smallerNumbersThanCurrent(int *nums, int numsSize, int *returnSize)
+{
+    int *ans = (int *)malloc(sizeof(int) * numsSize);
+    int i, j;
+    int cnt = 0;
+
+    for (i = 0; i < numsSize; i++) {
+        for (j = 0; j < numsSize; j++) {
+            if (nums[i] > nums[j]) {
+                cnt++;
+            }
+        }
+        ans[i] = cnt;
+        cnt = 0;
+    }
+    *returnSize = numsSize;
+    return ans;
+}
+
+/* https://leetcode.cn/problems/count-number-of-pairs-with-absolute-difference-k/ */
 int countKDifference(int *nums, int numsSize, int k)
 {
     int i, j;
