@@ -17,6 +17,35 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+char *sortString(char *s)
+{
+    char t[26] = {0};
+    int len = strlen(s);
+    char *ans = (char *)malloc(sizeof(char) * (len + 1));
+    int pos = 0;
+    int i;
+
+    ans[len] = '\0';
+    for (i = 0; s[i] != 0; i++) {
+        t[s[i] - 'a']++;
+    }
+    while (pos < len) {
+        for (i = 0; i < 26; i++) {
+            if (t[i]) {
+                ans[pos++] = i + 'a';
+                t[i]--;
+            }
+        }
+        for (i = 25; i >= 0; i--) {
+            if (t[i]) {
+                ans[pos++] = i + 'a';
+                t[i]--;
+            }
+        }
+    }
+    return ans;
+}
+
 #if defined(HASH_TABLE_arrayRankTransform)
 typedef struct {
     int key;
@@ -198,7 +227,7 @@ int countCharacters(char **words, int wordsSize, char *chars)
     int st[26] = {0};
     int ans = 0;
     int cnt = 0;
-    int i, j, k;
+    int i, j;
 
     for (i = 0; chars[i] != 0; i++) {
         s[chars[i] - 'a']++;
