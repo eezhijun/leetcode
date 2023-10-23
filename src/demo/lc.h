@@ -17,7 +17,7 @@ void lc_array_medium_test(void);
 void lc_array_diffcult_test(void);
 
 /* string */
-void lc_string_easy_test(void);
+int lc_string_easy_test(void);
 void lc_string_medium_test(void);
 void lc_string_diffcult_test(void);
 

@@ -1401,38 +1401,90 @@ s 和 t 仅包含小写字母
 
 
 进阶: 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？ */
+#undef HASH_TABLE_isAnagram
+#if defined(HASH_TABLE_isAnagram)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+#endif
+
 bool isAnagram(char *s, char *t)
 {
-    int table[26] = {0};
-
-    int i;
+#if defined(HASH_TABLE_isAnagram)
     int ls = strlen(s);
     int lt = strlen(t);
-    int count = 0;
+    int i;
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int tmp;
 
     if (ls != lt) {
         return false;
     }
     for (i = 0; i < ls; i++) {
-        table[s[i] - 'a']++;
-        table[t[i] - 'a']--;
-    }
-    for (i = 0; i < 26; i++) {
-        if (table[i] != 0) {
-            count++;
+        tmp = s[i];
+        HASH_FIND_INT(ht, &tmp, curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = tmp;
+            curr->val = 1;
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            curr->val++;
         }
     }
-    return (count == 0) ? true : false;
+    for (i = 0; i < lt; i++) {
+        tmp = t[i];
+        HASH_FIND_INT(ht, &tmp, curr);
+        if (curr == NULL) {
+            return false;
+        } else {
+            if (curr->val) {
+                curr->val--;
+            } else {
+                return false;
+            }
+        }
+    }
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return true;
+#else
+    int h[26] = {0};
+    int i;
+    int ls = strlen(s);
+    int lt = strlen(t);
+
+    if (ls != lt) {
+        return false;
+    }
+    for (i = 0; i < ls; i++) {
+        h[s[i] - 'a']++;
+        h[t[i] - 'a']--;
+    }
+    for (i = 0; i < 26; i++) {
+        if (h[i]) {
+            return false;
+        }
+    }
+    return true;
+#endif
 }
 
-void isAnagramTest(void)
+int isAnagramTest(void)
 {
-    char s[] = "anagram";
-    char t[] = "nagaram";
+    char s[] = "anagr!am";
+    char t[] = "nagaram!";
 
     bool ans = isAnagram(s, t);
 
     printf("output: ans=%d\n", ans);
+    return 0;
 }
 
 /* https://leetcode.cn/problems/first-unique-character-in-a-string/ */
@@ -3062,7 +3114,10 @@ void romanToIntTest(void)
     printf("output=%d\n", ret);
 }
 
-void lc_string_easy_test(void)
+int lc_string_easy_test(void)
 {
+    int ret = -1;
     // romanToIntTest();
+    // ret = isAnagramTest();
+    return ret;
 }
