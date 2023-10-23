@@ -17,6 +17,47 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/increasing-decreasing-string/ */
+#if defined(HASH_TABLE_findLucky)
+typedef struct {
+    int key;
+    int cnt;
+    UT_hash_handle hh;
+} ht_t;
+
+int findLucky(int *arr, int arrSize)
+{
+    ht_t *ht = NULL;
+    ht_t *it, *t;
+    int ans = -1;
+    int i;
+
+    for (i = 0; i < arrSize; i++) {
+        HASH_FIND_INT(ht, &arr[i], t);
+        if (t == NULL) {
+            t = (ht_t *)malloc(sizeof *t);
+            t->key = arr[i];
+            t->cnt = 1;
+            HASH_ADD_INT(ht, key, t);
+        } else {
+            t->cnt++;
+        }
+    }
+    HASH_ITER(hh, ht, it, t)
+    {
+        if (it->key == it->cnt) {
+            ans = it->key > ans ? it->key : ans;
+        }
+    }
+    HASH_ITER(hh, ht, it, t)
+    {
+        HASH_DEL(ht, it);
+        free(it);
+    }
+    return ans;
+}
+#endif
+
 char *sortString(char *s)
 {
     char t[26] = {0};
@@ -46,6 +87,7 @@ char *sortString(char *s)
     return ans;
 }
 
+/* https://leetcode.cn/problems/rank-transform-of-an-array/ */
 #if defined(HASH_TABLE_arrayRankTransform)
 typedef struct {
     int key;
