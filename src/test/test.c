@@ -475,6 +475,34 @@ int test_delete_ch(void)
     return 0;
 }
 
+/* 三张面值为1、5、11，给定一个金额值，求凑齐这个金额尽量少的钞票 */
+int test_dp(void)
+{
+    int f[100]; // f[i] 表示需要凑齐金额i需要最少钞票f[i]
+    int i, n, cost;
+
+    printf("please input n:\n");
+    scanf("%d", &n);
+
+    f[0] = 0; // 初始值
+
+    for (i = 1; i <= n; i++) {
+        cost = INT_MAX;
+        if (i - 1 >= 0) {
+            cost = MIN(cost, f[i - 1] + 1);
+        }
+        if (i - 5 >= 0) {
+            cost = MIN(cost, f[i - 5] + 1);
+        }
+        if (i - 11 >= 0) {
+            cost = MIN(cost, f[i - 11] + 1);
+        }
+        f[i] = cost;
+        printf("f[%d]=%d\n", i, f[i]);
+    }
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
@@ -495,11 +523,13 @@ int main(int argc, char *argv[])
     // test_bit();
     // test_bit();
 
-    test_hash_table();
+    // test_hash_table();
 
     // gcd_lcm_test();
 
     // test_strtok();
 
     // test_delete_ch();
+
+    test_dp();
 }
