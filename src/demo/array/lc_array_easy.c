@@ -1697,10 +1697,39 @@ void getRowTest(void)
  */
 int **generate(int numRows, int *returnSize, int **returnColumnSizes)
 {
+#if defined(DP_generate)
+    int **dp = (int **)malloc(sizeof(int *) * numRows);
+    *returnColumnSizes = (int *)malloc(sizeof(int) * numRows);
+    *returnSize = numRows;
+    int i, j;
+
+    for (i = 0; i < numRows; i++) {
+        dp[i] = (int *)malloc(sizeof(int) * (i + 1));
+    }
+    if (numRows == 1) {
+        (*returnColumnSizes)[0] = 1;
+        dp[0][0] = 1;
+        return dp;
+    }
+
+    for (i = 0; i < numRows; i++) {
+        dp[i][0] = 1;
+        dp[i][i] = 1;
+    }
+
+    for (i = 2; i < numRows; i++) {
+        for (j = 1; j < i; j++) {
+            dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+        }
+    }
+    for (i = 0; i < numRows; i++) {
+        (*returnColumnSizes)[i] = i + 1;
+    }
+    return dp;
+#else
     if (returnSize == NULL || returnColumnSizes == NULL) {
         return NULL;
     }
-    // printf("%s\n", __func__);
     *returnSize = 0;
     *returnColumnSizes = (int *)malloc(sizeof(int) * numRows);
     int **ret = (int **)malloc(sizeof(int *) * numRows);
@@ -1718,20 +1747,12 @@ int **generate(int numRows, int *returnSize, int **returnColumnSizes)
             } else {
                 ret[*returnSize][j] =
                     ret[*returnSize - 1][j - 1] + ret[*returnSize - 1][j];
-                //printf("*returnSize=%d, j=%d, retret[*returnSize][j]=%d\n", *returnSize, j, ret[*returnSize][j]);
             }
         }
-        // if (i == 2) {
-        //     printf("i=%d\n", i);
-        //     return NULL;
-        // }
         (*returnSize)++;
     }
     return ret;
-}
-
-void generateTest(void)
-{
+#endif
 }
 
 /* https://leetcode.cn/problems/merge-sorted-array/ */
@@ -2180,7 +2201,6 @@ void lc_array_easy_test(void)
     // searchInsertTest();
     // plusOneTest();
     // mergeTest();
-    // generateTest();
     // getRowTest();
     // maxProfitTest();
     // singleNumberTest();
