@@ -37,5 +37,8 @@ int main(void)
 
     /* binary search */
     lc_bin_search_easy_test();
+
+    /* dynamic programming */
+    lc_dp_easy_test();
     return 0;
 }

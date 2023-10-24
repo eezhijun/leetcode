@@ -33,4 +33,7 @@ void lc_queue_easy_test(void);
 /* binary search */
 int lc_bin_search_easy_test(void);
 
+/* dynamic programming */
+int lc_dp_easy_test(void);
+
 #endif
