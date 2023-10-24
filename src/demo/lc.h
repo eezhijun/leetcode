@@ -35,5 +35,6 @@ int lc_bin_search_easy_test(void);
 
 /* dynamic programming */
 int lc_dp_easy_test(void);
+int lc_dp_medium_test(void);
 
 #endif

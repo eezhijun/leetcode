@@ -1,6 +1,6 @@
 /**
  * @file lc_dp_easy.c
- * @author your name (you@domain.com)
+ * @author hongzhijun (eehongzhijun@outlook.com)
  * @brief
  * @version 0.1
  * @date 2023-10-23
@@ -69,6 +69,6 @@ int climbStairsTest(void)
 int lc_dp_easy_test(void)
 {
     int ret = -1;
-    ret = climbStairsTest();
+    // ret = climbStairsTest();
     return ret;
 }
