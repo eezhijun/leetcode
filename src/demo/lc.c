@@ -41,5 +41,6 @@ int main(void)
     /* dynamic programming */
     lc_dp_easy_test();
     lc_dp_medium_test();
+    lc_dp_diffcult_test();
     return 0;
 }
