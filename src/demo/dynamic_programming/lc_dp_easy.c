@@ -15,6 +15,33 @@
 
 /* 数学归纳法 */
 
+/* https://leetcode.cn/problems/get-maximum-in-generated-array/ */
+int getMaximumGenerated(int n)
+{
+    if (n == 0) {
+        return 0;
+    }
+
+    if (n == 1) {
+        return 1;
+    }
+
+    int dp[n + 1];
+    int i;
+    int ans = 0;
+
+    dp[1] = 1;
+    for (i = 2; i <= n; i++) {
+        if ((i & 1) == 0) {
+            dp[i] = dp[i / 2];
+        } else {
+            dp[i] = dp[i / 2] + dp[(i / 2) + 1];
+        }
+        ans = (dp[i] > ans) ? dp[i] : ans;
+    }
+    return ans;
+}
+
 /* https://leetcode.cn/problems/n-th-tribonacci-number/ */
 int tribonacci(int n)
 {
