@@ -575,6 +575,15 @@ char *str2lower(char *s);
  */
 char *str2upper(char *s);
 
+/**
+ * @brief is_power_of_two
+ *
+ * @param n
+ * @return true
+ * @return false
+ */
+bool is_power_of_two(unsigned long n);
+
 #ifdef __cplusplus
 }
 #endif

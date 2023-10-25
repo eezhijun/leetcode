@@ -452,3 +452,8 @@ char *str2upper(char *s)
     }
     return origin;
 }
+
+bool is_power_of_two(unsigned long n)
+{
+    return (n != 0) && ((n & (n - 1)) == 0);
+}
