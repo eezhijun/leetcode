@@ -397,7 +397,7 @@ void test_bit(void)
     printf("bit_toggle(0x%X, 2)=\n", n);
     printf_bin(n);
 
-    bool ret = bit_check(n, 0);
+    bool ret = bit_check(n, 1);
     printf("bit_check(0x%X, 0)=%s\n", n, ret ? "true" : "false");
     printf_bin(n);
 
@@ -503,10 +503,64 @@ int test_dp(void)
     return 0;
 }
 
+int test_memcpy_memmove(void)
+{
+    /* T1、src 和 dst 内存完全不重叠 */
+    char s1[] = {'a', 'b', 'c', '\0'};
+    char s2[] = {'1', '2', '3', '\0'};
+
+    printf("T1--------------------------:\n");
+    printf("before s1 and s2:\n");
+    PRINT_ARRAY(s1, ARRAY_SIZE(s1), "%c");
+    PRINT_ARRAY(s2, ARRAY_SIZE(s1), "%c");
+    printf("after use memcpy s2:\n");
+    memcpy(s2, s1, 3);
+    PRINT_ARRAY(s2, ARRAY_SIZE(s1), "%c");
+
+    /* T2、src 和 dst 内存重叠，且dst所在区域在src区域前面 */
+    printf("T2--------------------------:\n");
+    char a[10] = {'a', 'b', 'c', 'd', 'e', 'f', '\0', '\0', '\0', '\0'};
+    char b[10] = {0};
+    memcpy(b, a, sizeof(char) * 10);
+    printf("before a and b:\n");
+    PRINT_ARRAY(a, ARRAY_SIZE(a), "%c");
+    PRINT_ARRAY(b, ARRAY_SIZE(b), "%c");
+
+    printf("after use memcpy a:\n");
+    memcpy(&a[0], &a[2], 3);
+    PRINT_ARRAY(a, ARRAY_SIZE(a), "%c"); // cdedef
+
+    printf("after use memmove b:\n");
+    memmove(&b[0], &b[2], 3);
+    PRINT_ARRAY(a, ARRAY_SIZE(a), "%c"); // cdedef
+
+    /* T3、!!! src 和 dst 内存重叠，且dst所在区域在src区域后面 */
+    printf("T3--------------------------:\n");
+    char c[10] = {'a', 'b', 'c', 'd', 'e', 'f', '\0', '\0', '\0', '\0'};
+    char d[10] = {0};
+    memcpy(d, c, sizeof(char) * 10);
+    printf("before c and d:\n");
+    PRINT_ARRAY(c, ARRAY_SIZE(c), "%c");
+    PRINT_ARRAY(d, ARRAY_SIZE(d), "%c");
+
+    printf("after use memcpy c:\n");
+    memcpy(&c[2], &c[0], 3);
+    PRINT_ARRAY(c, ARRAY_SIZE(c),
+                "%c"); // ababaf 使用memcpy覆盖原来预期要拷贝字符
+
+    printf("after use memmove d:\n");
+    memmove(&d[2], &d[0], 3);
+    PRINT_ARRAY(d, ARRAY_SIZE(d),
+                "%c"); // ababcf 使用memmove并没有覆盖要拷贝字符
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
+    // test_memcpy_memmove();
 
     // test_memory_layout();
 
@@ -520,7 +574,7 @@ int main(int argc, char *argv[])
     // test_state();
 
     // test_bin();
-    // test_bit();
+
     // test_bit();
 
     // test_hash_table();
@@ -531,5 +585,6 @@ int main(int argc, char *argv[])
 
     // test_delete_ch();
 
-    test_dp();
+    // test_dp();
+    return 0;
 }
