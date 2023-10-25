@@ -15,6 +15,28 @@
 
 /* 数学归纳法 */
 
+/* https://leetcode.cn/problems/n-th-tribonacci-number/ */
+int tribonacci(int n)
+{
+    if (n == 0) {
+        return 0;
+    }
+
+    if (n <= 2) {
+        return 1;
+    }
+
+    int p = 0, q = 0, r = 1, s = 1;
+    int i;
+    for (i = 3; i <= n; i++) {
+        p = q;
+        q = r;
+        r = s;
+        s = p + q + r;
+    }
+    return s;
+}
+
 /* https://leetcode.cn/problems/min-cost-climbing-stairs/ */
 int minCostClimbingStairs(int *cost, int costSize)
 {
