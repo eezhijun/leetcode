@@ -11,7 +11,33 @@
 
 #include "stdio.h"
 
+#include "utils.h"
+
 /* 数学归纳法 */
+
+/* https://leetcode.cn/problems/min-cost-climbing-stairs/ */
+int minCostClimbingStairs(int *cost, int costSize)
+{
+    int dp[costSize + 1];
+    int i;
+
+    dp[0] = dp[1] = 0;
+    for (i = 2; i <= costSize; i++) {
+        dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+    }
+    return dp[costSize];
+}
+
+int minCostClimbingStairsTest(void)
+{
+    int cost[] = {10, 15, 20};
+    int costSize = ARRAY_SIZE(cost);
+    printf("input:\n");
+    PRINT_ARRAY(cost, costSize, "%d ");
+    int ret = minCostClimbingStairs(cost, costSize);
+    printf("output:%d\n", ret);
+    return 0;
+}
 
 /* https://leetcode.cn/problems/fibonacci-number/description/ */
 /* 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
@@ -115,5 +141,6 @@ int lc_dp_easy_test(void)
 {
     int ret = -1;
     // ret = climbStairsTest();
+    // ret = minCostClimbingStairsTest();
     return ret;
 }
