@@ -3029,22 +3029,29 @@ IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 �
 int romanToInt(char *s)
 {
 #if defined(HASH_TABLE_romanToInt)
-    int table[26] = {0};
-    table['I' - 'A'] = 1;
-    table['V' - 'A'] = 5;
-    table['X' - 'A'] = 10;
-    table['L' - 'A'] = 50;
-    table['C' - 'A'] = 100;
-    table['D' - 'A'] = 500;
-    table['M' - 'A'] = 1000;
+    int h[26] = {0};
+    int i;
+    int val;
     int ans = 0;
-    for (int i = 0; s[i] != 0; i++) {
-        int val = table[s[i] - 'A'];
-        if (i < i - 1 && val < table[s[i + 1] - 'A']) {
-            ans -= val;
+
+    h['I' - 'A'] = 1;
+    h['V' - 'A'] = 5;
+    h['X' - 'A'] = 10;
+    h['L' - 'A'] = 50;
+    h['C' - 'A'] = 100;
+    h['D' - 'A'] = 500;
+    h['M' - 'A'] = 1000;
+
+    for (i = 0; s[i] != 0; i++) {
+        val = h[s[i] - 'A'];
+        // printf("i=%d, val=%d\n", i, val);
+        if (i + 1 < strlen(s) && val < h[s[i + 1] - 'A']) {
+            ans += h[s[i + 1] - 'A'] - val;
+            i++;
         } else {
             ans += val;
         }
+        // printf("ans=%d\n", ans);
     }
     return ans;
 #else
@@ -3107,7 +3114,7 @@ int romanToInt(char *s)
 
 void romanToIntTest(void)
 {
-    char s[] = "CMLII";
+    char s[] = "LVIII";
 
     printf("input=%s\n", s);
     int ret = romanToInt(s);

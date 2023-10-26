@@ -311,6 +311,6 @@ int lc_bin_search_easy_test(void)
     int ret = -1;
     // searchTest();
     // ret = firstBadVersionTest();
-    ret = findPeakElementTest();
+    // ret = findPeakElementTest();
     return ret;
 }
