@@ -100,7 +100,7 @@ void test_dec2hex(void)
 void test_sprintf(void)
 {
     int idx = 0;
-    int size = 12;
+    int size = 20;
     char *s = (char *)malloc(sizeof(char) * size);
     memset(s, 0, sizeof(char) * size);
 
@@ -111,6 +111,14 @@ void test_sprintf(void)
     PRINT_ARRAY(s, size, "%d ");
 
     idx += sprintf(s + idx, "%s", "-->");
+    PRINT_ARRAY(s, size, "%c ");
+
+    int tmp = 'A';
+    idx += sprintf(s + idx, "%c", tmp);
+    PRINT_ARRAY(s, size, "%c ");
+
+    tmp = 'B';
+    idx += sprintf(s + idx, "%c", tmp);
     PRINT_ARRAY(s, size, "%c ");
 }
 
@@ -559,6 +567,8 @@ int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
+    // test_sprintf();
 
     // test_memcpy_memmove();
 
