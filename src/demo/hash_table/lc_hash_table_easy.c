@@ -17,6 +17,49 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/divide-array-into-equal-pairs/ */
+#if defined(HASH_TABLE_divideArray)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+bool divideArray(int *nums, int numsSize)
+{
+    int k = numsSize / 2;
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int i;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = nums[i];
+            curr->val = 1;
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            curr->val++;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if ((curr->val & 1) == 1) {
+            return false;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return true;
+}
+#endif
+
 /* https://leetcode.cn/problems/increasing-decreasing-string/ */
 #if defined(HASH_TABLE_findLucky)
 typedef struct {
