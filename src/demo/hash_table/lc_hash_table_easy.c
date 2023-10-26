@@ -17,6 +17,84 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/find-the-difference-of-two-arrays/ */
+#if defined(HASH_TABLE_findDifference)
+typedef struct {
+    int key;
+    UT_hash_handle hh;
+} ht_t;
+
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int **findDifference(int *nums1, int nums1Size, int *nums2, int nums2Size,
+                     int *returnSize, int **returnColumnSizes)
+{
+    ht_t *ht1 = NULL, *ht2 = NULL;
+    ht_t *curr1, *next1, *curr2, *next2;
+    int i;
+    int idx1 = 0, idx2 = 0;
+    int **ans = (int **)malloc(sizeof(int *) * 2);
+
+    *returnSize = 2;
+    ans[0] = (int *)malloc(sizeof(int) * nums1Size);
+    ans[1] = (int *)malloc(sizeof(int) * nums2Size);
+
+    *returnColumnSizes = (int *)malloc(sizeof(int) * 2);
+
+    for (i = 0; i < nums1Size; i++) {
+        HASH_FIND_INT(ht1, &nums1[i], curr1);
+        if (curr1 == NULL) {
+            curr1 = (ht_t *)malloc(sizeof *curr1);
+            curr1->key = nums1[i];
+            HASH_ADD_INT(ht1, key, curr1);
+        }
+    }
+
+    for (i = 0; i < nums2Size; i++) {
+        HASH_FIND_INT(ht2, &nums2[i], curr2);
+        if (curr2 == NULL) {
+            curr2 = (ht_t *)malloc(sizeof *curr2);
+            curr2->key = nums2[i];
+            HASH_ADD_INT(ht2, key, curr2);
+        }
+    }
+
+    HASH_ITER(hh, ht1, curr1, next1)
+    {
+        HASH_FIND_INT(ht2, &curr1->key, curr2);
+        if (curr2 == NULL) {
+            ans[0][idx1++] = curr1->key;
+        }
+    }
+    (*returnColumnSizes)[0] = idx1;
+
+    HASH_ITER(hh, ht2, curr2, next2)
+    {
+        HASH_FIND_INT(ht1, &curr2->key, curr1);
+        if (curr1 == NULL) {
+            ans[1][idx2++] = curr2->key;
+        }
+    }
+    (*returnColumnSizes)[1] = idx2;
+
+    HASH_ITER(hh, ht1, curr1, next1)
+    {
+        HASH_DEL(ht1, curr1);
+        free(curr1);
+    }
+
+    HASH_ITER(hh, ht2, curr2, next2)
+    {
+        HASH_DEL(ht2, curr2);
+        free(curr2);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/divide-array-into-equal-pairs/ */
 #if defined(HASH_TABLE_divideArray)
 typedef struct {
