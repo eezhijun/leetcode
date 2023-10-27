@@ -12,7 +12,48 @@
 #include "stdio.h"
 #include "stdbool.h"
 
+/* https://leetcode.cn/problems/unique-paths-ii/ */
+int uniquePathsWithObstacles(int **obstacleGrid, int obstacleGridSize,
+                             int *obstacleGridColSize)
+{
+    if (obstacleGridSize <= 0 || *obstacleGridColSize <= 0) {
+        return 0;
+    }
+    int dp[obstacleGridSize][*obstacleGridColSize];
+    int i, j;
+    bool flag = false;
 
+    for (i = 0; i < obstacleGridSize; i++) {
+        if (obstacleGrid[i][0] || flag) {
+            dp[i][0] = 0;
+            flag = true;
+        } else {
+            dp[i][0] = 1;
+        }
+    }
+    flag = false;
+    for (i = 0; i < *obstacleGridColSize; i++) {
+        if (obstacleGrid[0][i] || flag) {
+            dp[0][i] = 0;
+            flag = true;
+        } else {
+            dp[0][i] = 1;
+        }
+    }
+
+    for (i = 1; i < obstacleGridSize; i++) {
+        for (j = 1; j < *obstacleGridColSize; j++) {
+            if (obstacleGrid[i][j]) {
+                dp[i][j] = 0;
+            } else {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+    }
+    return dp[obstacleGridSize - 1][*obstacleGridColSize - 1];
+}
+
+/* https://leetcode.cn/problems/jump-game/ */
 bool canJump(int *nums, int numsSize)
 {
     int i;
