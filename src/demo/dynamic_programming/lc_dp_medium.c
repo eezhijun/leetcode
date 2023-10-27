@@ -12,6 +12,30 @@
 #include "stdio.h"
 #include "stdbool.h"
 
+/* https://leetcode.cn/problems/maximum-subarray/ */
+int maxSubArray(int *nums, int numsSize)
+{
+    int dp[numsSize];
+    int i;
+    int ans;
+
+    dp[0] = nums[0];
+
+    for (i = 1; i < numsSize; i++) {
+        if (dp[i - 1] > 0) {
+            dp[i] = dp[i - 1] + nums[i];
+        } else {
+            dp[i] = nums[i];
+        }
+    }
+
+    ans = dp[0];
+    for (i = 1; i < numsSize; i++) {
+        ans = dp[i] > ans ? dp[i] : ans;
+    }
+    return ans;
+}
+
 /* https://leetcode.cn/problems/unique-paths-ii/ */
 int uniquePathsWithObstacles(int **obstacleGrid, int obstacleGridSize,
                              int *obstacleGridColSize)
