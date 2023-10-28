@@ -24,6 +24,8 @@ SOURCE_FILES          += $(wildcard src/demo/queue/*.c)
 SOURCE_FILES          += $(wildcard src/demo/hash_table/*.c)
 SOURCE_FILES          += $(wildcard src/demo/binary_search/*.c)
 SOURCE_FILES          += $(wildcard src/demo/dynamic_programming/*.c)
+SOURCE_FILES          += $(wildcard src/demo/sort/*.c)
+SOURCE_FILES          += $(wildcard src/demo/math/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
 

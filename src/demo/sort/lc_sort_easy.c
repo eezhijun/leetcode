@@ -8,20 +8,19 @@
  * @copyright Copyright (c) 2023
  *
  */
+#include "stdio.h"
+#include "stdlib.h"
+
+#include "utils.h"
 
 /* https://leetcode.cn/problems/assign-cookies/ */
-int cmp1(const int *a, const int *b)
-{
-    return (*a - *b);
-}
-
 int findContentChildren(int *g, int gSize, int *s, int sSize)
 {
     if (s == NULL || sSize == 0) {
         return 0;
     }
-    qsort(g, gSize, sizeof(int), cmp1);
-    qsort(s, sSize, sizeof(int), cmp1);
+    qsort(g, gSize, sizeof(int), cmp);
+    qsort(s, sSize, sizeof(int), cmp);
 
     int t1 = gSize - 1, t2 = sSize - 1;
     int ans = 0;
