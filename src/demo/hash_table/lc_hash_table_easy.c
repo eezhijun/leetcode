@@ -17,6 +17,7 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/number-of-good-pairs/ */
 #if defined(HASH_TABLE_numIdenticalPairs)
 typedef struct {
     int key;
@@ -66,8 +67,8 @@ int numIdenticalPairs(int *nums, int numsSize)
 }
 #endif
 
-#if defined(HASH_TABLE_countLargestGroup)
 /* https://leetcode.cn/problems/count-largest-group/ */
+#if defined(HASH_TABLE_countLargestGroup)
 typedef struct {
     int key;
     int cnt;
