@@ -17,6 +17,167 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+#if defined(HASH_TABLE_numIdenticalPairs)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+/*
+    1 1 -1
+    1 1 1 -3
+    1 1 1 1 -6
+    1 1 1 1 1 -10
+    (n*(n+1))/2
+*/
+int numIdenticalPairs(int *nums, int numsSize)
+{
+    int i;
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int ans = 0;
+
+    for (i = 0; i < numsSize; i++) {
+        HASH_FIND_INT(ht, &nums[i], curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = nums[i];
+            curr->val = 0;
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            curr->val++;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if (curr->val) {
+            ans += (curr->val * (curr->val + 1) / 2);
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return ans;
+}
+#endif
+
+#if defined(HASH_TABLE_countLargestGroup)
+/* https://leetcode.cn/problems/count-largest-group/ */
+typedef struct {
+    int key;
+    int cnt;
+    UT_hash_handle hh;
+} ht_t;
+
+int countLargestGroup(int n)
+{
+    int i;
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int x, y;
+    int sum = 0;
+    int tmp = 1;
+    int ans = 0;
+
+    for (i = 1; i <= n; i++) {
+        x = i;
+        while (x) {
+            y = x % 10;
+            x /= 10;
+            sum += y;
+        }
+        HASH_FIND_INT(ht, &sum, curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = sum;
+            curr->cnt = 1;
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            curr->cnt++;
+            tmp = (curr->cnt > tmp) ? curr->cnt : tmp;
+        }
+        sum = 0;
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if (curr->cnt == tmp) {
+            ans++;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return ans;
+}
+#endif
+
+/* https://leetcode.cn/problems/destination-city/ */
+#if defined(HASH_TABLE_destCity)
+typedef struct {
+    char *str;
+    int idx;
+    int cnt;
+    UT_hash_handle hh;
+} ht_t;
+
+char *destCity(char ***paths, int pathsSize, int *pathsColSize)
+{
+    int i, j;
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int tmp;
+    char *ans;
+
+    for (i = 0; i < pathsSize; i++) {
+        for (j = 0; j < *pathsColSize; j++) {
+            HASH_FIND_STR(ht, paths[i][j], curr);
+            if (curr == NULL) {
+                curr = (ht_t *)malloc(sizeof *curr);
+                tmp = strlen(paths[i][j]) + 1;
+                curr->str = (char *)malloc(tmp);
+                strcpy(curr->str, paths[i][j]);
+                if (j) {
+                    curr->idx = 1;
+                } else {
+                    curr->idx = 0;
+                }
+                curr->cnt = 1;
+                HASH_ADD_STR(ht, str, curr);
+            } else {
+                curr->cnt++;
+            }
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if (curr->cnt == 1 && curr->idx == 1) {
+            tmp = strlen(curr->str) + 1;
+            ans = (char *)malloc(tmp);
+            strcpy(ans, curr->str);
+            break;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr->str);
+        free(curr);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/find-the-difference-of-two-arrays/ */
 #if defined(HASH_TABLE_findDifference)
 typedef struct {
