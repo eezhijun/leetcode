@@ -35,6 +35,36 @@ int numDecodings(char *s)
     return dp[len];
 }
 
+/* https://leetcode.cn/problems/minimum-path-sum/ */
+int minPathSum(int **grid, int gridSize, int *gridColSize)
+{
+    if (gridSize <= 0 && gridColSize <= 0) {
+        return 0;
+    }
+    int dp[gridSize][*gridColSize];
+    int i, j;
+    int tmp = 0;
+
+    for (i = 0; i < *gridColSize; i++) {
+        tmp += grid[0][i];
+        dp[0][i] = tmp;
+    }
+    tmp = 0;
+    for (i = 0; i < gridSize; i++) {
+        tmp += grid[i][0];
+        dp[i][0] = tmp;
+    }
+
+    for (i = 1; i < gridSize; i++) {
+        for (j = 1; j < *gridColSize; j++) {
+            dp[i][j] =
+                (dp[i - 1][j] < dp[i][j - 1] ? dp[i - 1][j] : dp[i][j - 1]) +
+                grid[i][j];
+        }
+    }
+    return dp[gridSize - 1][*gridColSize - 1];
+}
+
 /* https://leetcode.cn/problems/maximum-subarray/ */
 int maxSubArray(int *nums, int numsSize)
 {
