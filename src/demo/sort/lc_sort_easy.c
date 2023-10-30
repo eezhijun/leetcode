@@ -13,6 +13,17 @@
 
 #include "utils.h"
 
+/* https://leetcode.cn/problems/maximum-product-of-three-numbers/ */
+int maximumProduct(int *nums, int numsSize)
+{
+    int n1, n2;
+
+    qsort(nums, numsSize, sizeof(int), cmp);
+    n1 = nums[0] * nums[1] * nums[numsSize - 1];
+    n2 = nums[numsSize - 1] * nums[numsSize - 2] * nums[numsSize - 3];
+    return (n1 > n2 ? n1 : n2);
+}
+
 /* https://leetcode.cn/problems/assign-cookies/ */
 int findContentChildren(int *g, int gSize, int *s, int sSize)
 {
