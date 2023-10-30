@@ -182,6 +182,7 @@ void test_sizeof(void)
     int *a;
     int arr[10];
     testa_t *t1;
+    int arr2[5][2] = {{1, 0}, {2, 1}, {3, 2}, {0, 3}, {5, 4}};
 
     printf("%s=%d\n", STR(sizeof s), sizeof s);
     printf("%s=%d\n", STR(sizeof *s), sizeof *s);
@@ -202,6 +203,11 @@ void test_sizeof(void)
     printf("%s=%d\n", STR(sizeof t1), sizeof t1);
     printf("%s=%d\n", STR(sizeof *t1), sizeof *t1);
     printf("%s=%d\n", STR(sizeof(testa_t)), sizeof(testa_t));
+
+    printf("二维数组:row=5,col=2\n");
+    printf("一个元素占用空间:sizeof(arr2[0][0]=%d)\n", sizeof(arr2[0][0]));
+    printf("一行元素占用空间:sizeof(arr2[0]=%d)\n", sizeof(arr2[0]));
+    printf("整个数组占用空间:sizeof(arr2=%d)\n", sizeof(arr2));
 }
 
 void test_scanf_gets_fgets(void)
@@ -567,6 +573,8 @@ int main(int argc, char *argv[])
 {
     printf("TEST ENTRY\n");
     printf("GNU libc version: %s %s\n", gnu_get_libc_version(), ENVIRONMENT);
+
+    // test_sizeof();
 
     // test_sprintf();
 
