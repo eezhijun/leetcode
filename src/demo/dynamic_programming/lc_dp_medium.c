@@ -12,6 +12,28 @@
 #include "stdio.h"
 #include "string.h"
 #include "stdbool.h"
+#include "math.h"
+
+#include "utils.h"
+
+/* https://leetcode.cn/problems/maximum-product-subarray/ */
+int maxProduct(int *nums, int numsSize)
+{
+    int ans = nums[0];
+    int curmax = nums[0];
+    int curmin = nums[0];
+    int i;
+
+    for (i = 1; i < numsSize; i++) {
+        if (nums[i] < 0) {
+            SWAP(int, &curmax, &curmin);
+        }
+        curmax = fmax(curmax * nums[i], nums[i]);
+        curmin = fmin(curmin * nums[i], nums[i]);
+        ans = fmax(ans, curmax);
+    }
+    return ans;
+}
 
 /* https://leetcode.cn/problems/decode-ways/ */
 int numDecodings(char *s)
