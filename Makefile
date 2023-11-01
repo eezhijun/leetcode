@@ -16,7 +16,6 @@ INCLUDE_DIRS          += -I$(ROOT_DIR)/src/lib/uthash/include
 
 
 SOURCE_FILES          := $(wildcard *.c)
-SOURCE_FILES          += $(wildcard src/demo/*.c)
 SOURCE_FILES          += $(wildcard src/demo/array/*.c)
 SOURCE_FILES          += $(wildcard src/demo/string/*.c)
 SOURCE_FILES          += $(wildcard src/demo/stack/*.c)
@@ -28,6 +27,11 @@ SOURCE_FILES          += $(wildcard src/demo/sort/*.c)
 SOURCE_FILES          += $(wildcard src/demo/math/*.c)
 SOURCE_FILES          += $(wildcard src/utils/*.c)
 
+ifdef T
+SOURCE_FILES          += $(wildcard src/test/*.c)
+else
+SOURCE_FILES          += $(wildcard src/demo/*.c)
+endif
 
 CFLAGS                += -m32 # gcc 32bit
 

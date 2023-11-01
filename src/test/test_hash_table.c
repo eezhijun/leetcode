@@ -199,7 +199,7 @@ struct hash_table *create_hash_table(size_t size)
 }
 
 // 哈希函数，简单地将字符串的字符相加，并取余哈希表大小
-size_t hash(const char *key, size_t size)
+size_t xhash(const char *key, size_t size)
 {
     size_t hash_value = 0;
     while (*key) {
@@ -212,7 +212,7 @@ size_t hash(const char *key, size_t size)
 // 插入键值对到哈希表
 void insert(struct hash_table *hash_table, const char *key, int value)
 {
-    size_t index = hash(key, hash_table->size);
+    size_t index = xhash(key, hash_table->size);
 
     struct key_value *new_key_value =
         (struct key_value *)malloc(sizeof(struct key_value));
@@ -235,7 +235,7 @@ void insert(struct hash_table *hash_table, const char *key, int value)
 // 查找键对应的值
 int find(struct hash_table *hash_table, const char *key)
 {
-    size_t index = hash(key, hash_table->size);
+    size_t index = xhash(key, hash_table->size);
     struct key_value *current = hash_table->table[index];
 
     while (current) {
@@ -252,7 +252,7 @@ int find(struct hash_table *hash_table, const char *key)
 // 从哈希表中删除键值对
 void delete_key(struct hash_table *hash_table, const char *key)
 {
-    size_t index = hash(key, hash_table->size);
+    size_t index = xhash(key, hash_table->size);
     struct key_value *current = hash_table->table[index];
     struct key_value *prev = NULL;
 
