@@ -9,6 +9,23 @@
  *
  */
 
+/* https://leetcode.cn/problems/gray-code/ */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int *grayCode(int n, int *returnSize)
+{
+    int size = 1 << n;
+    int *ans = (int *)malloc(sizeof(int) * size);
+    int i;
+
+    for (i = 0; i < size; i++) {
+        ans[i] = (i >> 1) ^ i;
+    }
+    *returnSize = size;
+    return ans;
+}
+
 /* https://leetcode.cn/problems/subsets/ */
 /* 给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
 

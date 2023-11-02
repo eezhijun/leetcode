@@ -17,6 +17,125 @@
 
 /* 查找元素 元素去重 存储元素 */
 
+/* https://leetcode.cn/problems/check-permutation-lcci/ */
+#if defined(HASH_TABLE_CheckPermutation)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+bool CheckPermutation(char *s1, char *s2)
+{
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int i;
+    int tmp;
+
+    for (i = 0; s1[i] != 0; i++) {
+        tmp = s1[i];
+        HASH_FIND_INT(ht, &tmp, curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = tmp;
+            curr->val = 1;
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            curr->val++;
+        }
+    }
+
+    for (i = 0; s2[i] != 0; i++) {
+        tmp = s2[i];
+        HASH_FIND_INT(ht, &tmp, curr);
+        if (curr == NULL) {
+            HASH_ITER(hh, ht, curr, next)
+            {
+                HASH_DEL(ht, curr);
+                free(curr);
+            }
+            return false;
+        } else {
+            curr->val--;
+        }
+    }
+
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if (curr->val) {
+            HASH_ITER(hh, ht, curr, next)
+            {
+                HASH_DEL(ht, curr);
+                free(curr);
+            }
+            return false;
+        }
+    }
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return true;
+}
+#endif
+
+/* https://leetcode.cn/problems/rings-and-rods/ */
+#if defined(HASH_TABLE_countPoints)
+typedef struct {
+    int key;
+    int val;
+    UT_hash_handle hh;
+} ht_t;
+
+int countPoints(char *rings)
+{
+    ht_t *ht = NULL;
+    ht_t *curr, *next;
+    int i;
+    int ans = 0;
+    int len = strlen(rings);
+    int tmp;
+
+    for (i = 1; i < len; i += 2) {
+        tmp = rings[i];
+        HASH_FIND_INT(ht, &tmp, curr);
+        if (curr == NULL) {
+            curr = (ht_t *)malloc(sizeof *curr);
+            curr->key = rings[i];
+            if (rings[i - 1] == 'R') {
+                curr->val = 1;
+            } else if (rings[i - 1] == 'G') {
+                curr->val = 2;
+            } else {
+                curr->val = 4;
+            }
+            HASH_ADD_INT(ht, key, curr);
+        } else {
+            if (rings[i - 1] == 'R') {
+                curr->val |= 1;
+            } else if (rings[i - 1] == 'G') {
+                curr->val |= 2;
+            } else {
+                curr->val |= 4;
+            }
+        }
+    }
+    HASH_ITER(hh, ht, curr, next)
+    {
+        if ((curr->val & 0x7) == 0x7) {
+            ans++;
+        }
+    }
+    HASH_ITER(hh, ht, curr, next)
+    {
+        HASH_DEL(ht, curr);
+        free(curr);
+    }
+    return ans;
+}
+#endif
+
 /* https://leetcode.cn/problems/number-of-good-pairs/ */
 #if defined(HASH_TABLE_numIdenticalPairs)
 typedef struct {
