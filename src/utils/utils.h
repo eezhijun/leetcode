@@ -584,6 +584,14 @@ char *str2upper(char *s);
  */
 bool is_power_of_two(unsigned long n);
 
+/**
+ * @brief
+ *
+ * @param x
+ * @return int
+ */
+int hamming_weight(int x);
+
 #ifdef __cplusplus
 }
 #endif

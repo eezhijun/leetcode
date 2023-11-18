@@ -457,3 +457,11 @@ bool is_power_of_two(unsigned long n)
 {
     return (n != 0) && ((n & (n - 1)) == 0);
 }
+
+int hamming_weight(int x)
+{
+    int count;
+    for (count = 0; x; count++)
+        x &= x - 1;
+    return count;
+}
