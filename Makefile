@@ -1,5 +1,6 @@
 # only test demo
-CC                    := gcc
+# CC                    := gcc
+CC                    := g++
 EXEC                  := main
 
 MK_PATH               := $(abspath $(lastword $(MAKEFILE_LIST)))

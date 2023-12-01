@@ -221,7 +221,7 @@ void show_cursor(void)
     printf("\e[?25h");
 }
 
-int ffs(int x)
+int xffs(int x)
 {
     if (x == 0)
         return 0;
@@ -233,7 +233,7 @@ int ffs(int x)
     return position;
 }
 
-int fls(int x)
+int xfls(int x)
 {
     if (x == 0)
         return 0;
@@ -244,7 +244,7 @@ int fls(int x)
     return position;
 }
 
-int clz(int x)
+int xclz(int x)
 {
     if (x == 0)
         return sizeof(x) * CHAR_BIT;
@@ -256,7 +256,7 @@ int clz(int x)
     return count;
 }
 
-int ctz(int x)
+int xctz(int x)
 {
     if (x == 0)
         return sizeof(x) * CHAR_BIT;
@@ -284,15 +284,6 @@ void print_string(void *elem)
 {
     char **str = (char **)elem;
     printf("%s\n", *str);
-}
-
-void print_arr(void *arr, size_t size, size_t elem_size,
-               void(*print_elem(void *)))
-{
-    for (size_t i = 0; i < size; i++) {
-        print_elem(arr + i * elem_size);
-    }
-    printf("\n");
 }
 
 char *int2string(int num, char *str)

@@ -130,8 +130,8 @@ int **threeSum(int *nums, int numsSize, int *returnSize,
     short right = numsSize - 1;
 
     int **ret = (int **)malloc(sizeof(int *) * (numsSize + 1) * 6);
-    *returnColumnSizes = malloc(sizeof(int) * (numsSize + 1) * 6);
-    ret[*returnSize] = malloc(sizeof(int) * 3);
+    *returnColumnSizes = (int *)malloc(sizeof(int) * (numsSize + 1) * 6);
+    ret[*returnSize] = (int *)malloc(sizeof(int) * 3);
 
     while (left + 1 < right) {
         int i = left + 1;
@@ -147,7 +147,7 @@ int **threeSum(int *nums, int numsSize, int *returnSize,
                 ret[*returnSize][2] = nums[j];
                 (*returnColumnSizes)[*returnSize] = 3;
                 (*returnSize)++;
-                ret[*returnSize] = malloc(sizeof(int) * 3);
+                ret[*returnSize] = (int *)malloc(sizeof(int) * 3);
 
                 do {
                     if (nums[i] == nums[i + 1]) {
@@ -865,7 +865,7 @@ int divide(int dividend, int divisor)
         int value = divisor;
         int k = 1;
 
-        while (value >= 0xC0000000 && dividend <= value + value) {
+        while ((unsigned)value >= 0xC0000000 && dividend <= value + value) {
             value += value;
             if (k > INT_MAX / 2) {
                 return INT_MIN;

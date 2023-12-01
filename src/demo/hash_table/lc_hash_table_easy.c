@@ -563,20 +563,20 @@ char *tictactoe(int **moves, int movesSize, int *movesColSize)
     int sumD1 = s[0][0] + s[1][1] + s[2][2];
     int sumD2 = s[0][2] + s[1][1] + s[2][0];
     if (sumD1 == 3 || sumD2 == 3)
-        return "B";
+        return (char *)"B";
     if (sumD1 == -3 || sumD2 == -3)
-        return "A";
+        return (char *)"A";
     // 横向、纵向判断
     for (int i = 0; i < 3; i++) {
         int sumR = s[i][0] + s[i][1] + s[i][2];
         int sumC = s[0][i] + s[1][i] + s[2][i];
         if (sumR == 3 || sumC == 3)
-            return "B";
+            return (char *)"B";
         if (sumR == -3 || sumC == -3)
-            return "A";
+            return (char *)"A";
     }
     // 无胜者情况
-    return movesSize < 9 ? "Pending" : "Draw";
+    return (movesSize < 9) ? (char *)"Pending" : (char *)"Draw";
 }
 
 /* https://leetcode.cn/problems/unique-number-of-occurrences/ */
@@ -1824,7 +1824,7 @@ struct List {
 
 void listPush(struct List *head, int x)
 {
-    struct List *tmp = malloc(sizeof(struct List));
+    struct List *tmp = (struct List*)malloc(sizeof(struct List));
     tmp->val = x;
     tmp->next = head->next;
     head->next = tmp;
@@ -1874,8 +1874,8 @@ typedef struct {
 
 MyHashSet *myHashSetCreate()
 {
-    MyHashSet *ret = malloc(sizeof(MyHashSet));
-    ret->data = malloc(sizeof(struct List) * base);
+    MyHashSet *ret = (MyHashSet *)malloc(sizeof(MyHashSet));
+    ret->data = (struct List *)malloc(sizeof(struct List) * base);
     for (int i = 0; i < base; i++) {
         ret->data[i].val = 0;
         ret->data[i].next = NULL;

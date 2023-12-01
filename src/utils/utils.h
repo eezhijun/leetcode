@@ -62,9 +62,9 @@ extern "C"
         count;                  \
     })
 
-#ifndef FFS
-#define FFS(x) ((x) ? __builtin_ffs(x) : 0)
-#endif
+// #ifndef FFS
+// #define FFS(x) ((x) ? __builtin_ffs(x) : 0)
+// #endif
 
 #ifndef FLS
 #define FLS(x) ((x) ? (sizeof(x) * CHAR_BIT - __builtin_clz(x)) : 0)
@@ -112,7 +112,7 @@ extern "C"
 #ifndef PRINT_ARRAY
 #define PRINT_ARRAY(arr, size, format)      \
     do {                                    \
-        for (size_t i = 0; i < size; i++) { \
+        for (int i = 0; i < size; i++) { \
             printf(format, arr[i]);         \
         }                                   \
         printf("\n");                       \
@@ -122,7 +122,7 @@ extern "C"
 #ifndef PRINT_ARRAY2D
 #define PRINT_ARRAY2D(arr, row, col, format)   \
     do {                                       \
-        for (size_t i = 0; i < row; i++) {     \
+        for (int i = 0; i < row; i++) {     \
             for (size_t j = 0; j < col; j++) { \
                 printf(format, arr[i][j]);     \
             }                                  \
@@ -397,8 +397,6 @@ int cmp(const void *pa, const void *pb);
 void print_int(void *elem);
 void print_float(void *elem);
 void print_string(void *elem);
-void print_arr(void *arr, size_t size, size_t elem_size,
-               void(*print_elem(void *)));
 
 /**
  * @brief Find First One, used to find the position (index) of
@@ -408,7 +406,7 @@ void print_arr(void *arr, size_t size, size_t elem_size,
  * @param x
  * @return int
  */
-int ffs(int x);
+int xffs(int x);
 
 /**
  * @brief Find Last Set, Used to find the position (index) of
@@ -418,7 +416,7 @@ int ffs(int x);
  * @param x
  * @return int
  */
-int fls(int x);
+int xfls(int x);
 
 /**
  * @brief Count Leading Zeros, used to count the number of
@@ -427,7 +425,7 @@ int fls(int x);
  * @param x
  * @return int
  */
-int clz(int x);
+int xclz(int x);
 
 /**
  * @brief Count Trailing Zeros, used to count the number of
@@ -436,7 +434,7 @@ int clz(int x);
  * @param x
  * @return int
  */
-int ctz(int x);
+int xctz(int x);
 
 /**
  * @brief int to string

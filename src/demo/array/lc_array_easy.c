@@ -842,7 +842,7 @@ nums 按升序排列 */
  */
 char **summaryRanges(int *nums, int numsSize, int *returnSize)
 {
-    char **ret = malloc(sizeof(char *) * numsSize);
+    char **ret = (char **)malloc(sizeof(char *) * numsSize);
     *returnSize = 0;
     int i = 0;
     while (i < numsSize) {
@@ -852,7 +852,7 @@ char **summaryRanges(int *nums, int numsSize, int *returnSize)
             i++;
         }
         int high = i - 1;
-        char *temp = malloc(sizeof(char) * 25);
+        char *temp = (char *)malloc(sizeof(char) * 25);
         sprintf(temp, "%d", nums[low]);
         if (low < high) {
             sprintf(temp + strlen(temp), "->");

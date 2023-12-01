@@ -60,7 +60,7 @@ int numDecodings(char *s)
 /* https://leetcode.cn/problems/minimum-path-sum/ */
 int minPathSum(int **grid, int gridSize, int *gridColSize)
 {
-    if (gridSize <= 0 && gridColSize <= 0) {
+    if (gridSize <= 0 && *gridColSize <= 0) {
         return 0;
     }
     int dp[gridSize][*gridColSize];

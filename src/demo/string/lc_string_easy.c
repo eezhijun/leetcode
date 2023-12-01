@@ -313,7 +313,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
     }
 
     for (i = 0; i < wordsSize; i++) {
-        size_t len = strlen(words[i]);
+        int len = strlen(words[i]);
         char tmp[26] = {0};
         memcpy(tmp, s, 26);
         for (j = 0; j < len; j++) {
@@ -343,7 +343,7 @@ char *shortestCompletingWord(char *licensePlate, char **words, int wordsSize)
 
 void shortestCompletingWordTest(void)
 {
-    char license_plate[7] = "1s3 456";
+    char license_plate[] = "1s3 456";
     char *words[] = {"looks", "pest", "stew", "show"};
     int wordsSize = ARRAY_SIZE(words);
 
@@ -770,8 +770,8 @@ s 仅由小写英文组成
 1 <= k <= 104 */
 char *reverseStr(char *s, int k)
 {
-    size_t rlen = strlen(s);
-    size_t idx = 0;
+    int rlen = strlen(s);
+    int idx = 0;
 
     while (rlen) {
         if (rlen < k) {
@@ -975,9 +975,9 @@ bool is_keyboard_row_words(char *s)
 {
     char *table[] = {"qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL",
                      "zxcvbnmZXCVBNM"};
-    size_t len = ARRAY_SIZE(table);
-    size_t lt[len];
-    size_t ls = strlen(s);
+    int len = ARRAY_SIZE(table);
+    int lt[len];
+    int ls = strlen(s);
     int i, j;
     int row = 0;
     bool is_found = false;
@@ -1043,15 +1043,11 @@ char **findWords(char **words, int wordsSize, int *returnSize)
     return ret;
 }
 
-#define STR0 "Hello", "Alaska", "Dad", "Peace"
-#define STR1 "omk"
-#define STR2 "adsdf", "sfd"
-
 void findWordsTest(void)
 {
-    char *s[] = {STR2};
+    char *s[] = {"adsdf", "sfd"};
 
-    size_t len = ARRAY_SIZE(s);
+    int len = ARRAY_SIZE(s);
     int return_size = 0;
 
     char buf[100] = {0};
@@ -2024,7 +2020,7 @@ void isPalindromeTest(void)
 bool isSubsequence(char *s, char *t)
 {
     int i, j, index = 0;
-    size_t lt = strlen(t);
+    int lt = strlen(t);
 
     for (i = 0; s[i] != '\0'; i++) {
         for (j = index; t[j] != '\0'; j++) {
@@ -2195,8 +2191,8 @@ bool canConstruct(char *ransomNote, char *magazine)
 {
     int a[26] = {0};
     int b[26] = {0};
-    size_t lr = strlen(ransomNote);
-    size_t lm = strlen(magazine);
+    int lr = strlen(ransomNote);
+    int lm = strlen(magazine);
 
     for (int i = 0; i < lr; i++) {
         a[ransomNote[i] - 'a']++;
@@ -2948,7 +2944,7 @@ char pairs(char a)
 
 bool isValid(char *s)
 {
-    size_t len = strlen(s);
+    int len = strlen(s);
 
     if (len % 2 == 1) {
         return false;
@@ -3058,7 +3054,7 @@ int romanToInt(char *s)
     for (i = 0; s[i] != 0; i++) {
         val = h[s[i] - 'A'];
         // printf("i=%d, val=%d\n", i, val);
-        if (i + 1 < strlen(s) && val < h[s[i + 1] - 'A']) {
+        if (i + 1 < (int)strlen(s) && val < h[s[i + 1] - 'A']) {
             ans += h[s[i + 1] - 'A'] - val;
             i++;
         } else {
