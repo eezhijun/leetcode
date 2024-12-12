@@ -22,7 +22,7 @@ static int *i_s_g_val_p = &u_s_g_var_a;
 int u_g_var_c; /* 未初始化全局变量c */
 int i_g_var_d = 10; /* 已初始化全局变量d */
 
-const int u_g_c_var_e; /* const 修饰未初始化全局常量 */
+const int u_g_c_var_e = 0; /* const 修饰未初始化全局常量 */
 const int i_g_c_var_f = 10; /* const 修饰初始化全局常量 */
 
 void func_test(void)
@@ -38,7 +38,7 @@ int test_memory_layout(void)
     int *l_var_d = NULL;
     static int u_s_l_var_e;
     static int i_s_l_var_f = 10;
-    const int u_l_c_var_g;
+    const int u_l_c_var_g = 0;
     const int i_l_c_var_h = 10;
     char *l_var_s = "Hello World";
     char l_var_arr[] = "Hello World";
