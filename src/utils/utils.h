@@ -47,6 +47,16 @@ extern "C"
 #endif
 #endif
 
+/**
+ * @brief
+ * myMethod
+ * * Important information is highlighteded 重要信息已突出显示
+ * ! Deprecated method, do not use 已弃用的方法，请勿使用
+ * ? Should this method be exposed in the pulic API? 此方法是否应在公共 API 中公开？
+ * TODO: refactor this method so that it conforms to the API 重构此方法，使其符合 API 规范
+ * @param myParm The parameter for this method 此方法的参数
+ */
+
 #define COUNT_DIGITS(num)       \
     ({                          \
         int count = 0;          \
